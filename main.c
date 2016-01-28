@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 14:57:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/28 23:24:39 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/01/29 00:24:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int main(int argc, char const *argv[]) {
             ft_bzero(info.term->cmd, BUFFER_SIZE);
         else
             free(command);
+        info.term->pos_c = 0;
     }
-
     return 0;
 }
