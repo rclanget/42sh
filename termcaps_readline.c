@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/28 23:22:07 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/01/30 15:39:55 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char        *termcaps_readline(t_info *info)
 
     if (isatty(0))
     {
+        termcaps_save(1);
         term = termcaps_activation(info->term->is_term);
         ft_putstr(info->term->prompt);
         return ((term) ? termcaps_loop(info) : getnextline(0, info));

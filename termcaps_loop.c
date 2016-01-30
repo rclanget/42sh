@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/28 21:24:14 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/01/30 15:43:47 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 char        *return_string(char *cmd)
 {
     ft_putstr("\n");
-    termcaps_save(0);
     return (cmd);
 }
 
@@ -40,5 +39,6 @@ char        *termcaps_loop(t_info *info)
             break;
         termcaps_handle_keyboard(info, chr);
     }
+    termcaps_save(0);
     return ((ret == -1) ? NULL : return_string(info->term->cmd));
 }
