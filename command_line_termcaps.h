@@ -53,8 +53,8 @@ typedef struct          s_capa
     char                *str_rc;
 }                       t_capa;
 
-// t_key g_key_tab[] = {{key, function}};
-
+void        move_cursor_left(t_info *info);
+void        move_cursor_right(t_info *info);
 char        *ft_getenv(char *var);
 char        *termcaps_readline(t_info *info);
 char        *termcaps_loop(t_info *info);

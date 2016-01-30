@@ -11,6 +11,13 @@
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
+#include "keyboard_keys.h"
+
+t_key g_key_tab[] =
+{
+  {MYKEY_RIGHT, move_cursor_right},
+  {MYKEY_LEFT, move_cursor_left}
+};
 
 int add_chr(t_info *info, long chr)
 {
@@ -42,11 +49,14 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    // while (g_key_tab[++i])
-    // {
-    //    if (g_key_tab[i].key == chr)
-    //        return (g_key_tab[i].f(info));
-    // }
+    while (++i < 2)
+    {
+       if (g_key_tab[i].key == chr)
+       {
+           g_key_tab[i].f(info);
+           return (1);
+       }
+    }
     if (!(ret = add_chr(info, chr)))
         return (0);
     return ((ret == 2) ? termcaps_print(info, info->term->cmd)
