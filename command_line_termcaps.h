@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/28 22:58:19 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/01/30 16:29:58 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,4 @@ char        *termcaps_loop(t_info *info);
 int         termcaps_activation(int is_term);
 int         termcaps_handle_keyboard(t_info *info, long chr);
 int         termcaps_print(t_info *info, char *cmd);
+t_capa      *termcap_capainit(void);
