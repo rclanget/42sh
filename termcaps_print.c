@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_print.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 23:36:35 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/28 23:23:17 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/01/31 19:36:15 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,36 @@
 #include <unistd.h>
 #include <termcap.h>
 
-void    move_cursor(int x, int y)
+void    move_cursor(t_capa *capa, int len, int plen, int pos_c)
 {
-    char    *cm;
-    char    *move;
+    int     x;
+    int     y;
 
-    if ((cm = tgetstr("cm", NULL)))
+    y = (((plen + len) / termcap_winsz_x()) + 1) -
+        (((plen + pos_c) / termcap_winsz_x()) + 1);
+    x = (((plen + len) % termcap_winsz_x()) + 1) -
+        (((plen + pos_c) % termcap_winsz_x()) + 1);
+    while (y)
     {
-        if ((move = tgoto(cm, x, y)))
-        {
-            ft_putstr(move);
-        }
+        ft_putstr(capa->str_up);
+        --y;
     }
-    return ;
-}
-
-void    clear_cmd(t_termcaps *term)
-{
-    move_cursor(term->init_x, term->init_y);
-    ft_putstr(term->capa->str_cd);
+    while (x)
+    {
+        ft_putstr((x > 0) ? capa->str_le : capa->str_ri);
+        x = (x > 0) ? x - 1 : x + 1;
+    }
 }
 
 int     termcaps_print(t_info *info, char *cmd)
 {
-    clear_cmd(info->term);
-    ft_putstr(info->term->cmd);
+    int len;
+    int plen;
+
+    len = ft_strlen(cmd);
+    plen = ft_strlen(info->term->prompt);
+    ft_putstr(info->term->capa->str_cd);
+    ft_putstr(&info->term->cmd[info->term->pos_c - 1]);
+    move_cursor(info->term->capa, len, plen, info->term->pos_c);
     return (1);
 }
