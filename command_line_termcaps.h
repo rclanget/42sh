@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_termcaps.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/30 16:29:58 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/01/31 19:45:02 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,3 +62,5 @@ int         termcaps_activation(int is_term);
 int         termcaps_handle_keyboard(t_info *info, long chr);
 int         termcaps_print(t_info *info, char *cmd);
 t_capa      *termcap_capainit(void);
+int         termcap_winsz_x(void);
+int         termcap_winsz_y(void);
