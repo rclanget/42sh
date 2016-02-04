@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_termcaps.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/31 19:45:02 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/05 00:55:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@ typedef struct          s_termcaps
     struct s_capa       *capa;
     char                *prompt;
     char                *cmd;
-    int                 init_x;
-    int                 init_y;
-    int                 x;
-    int                 y;
     int                 pos_c;
 }                       t_termcaps;
 
