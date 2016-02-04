@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/30 15:43:47 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/05 00:45:40 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 #include <unistd.h>
 
-char        *return_string(char *cmd)
+char        *return_string(t_termcaps *term)
 {
+    int len;
+
+    if ((len = ft_strlen(term->cmd)) != term->pos_c)
+        move_cursor(term->capa, term->pos_c, ft_strlen(term->prompt), len);
     ft_putstr("\n");
-    return (cmd);
+    return (term->cmd);
 }
 
 int         initial_postion_cursor(t_termcaps *term)
@@ -42,5 +46,5 @@ char        *termcaps_loop(t_info *info)
         chr = 0;
     }
     termcaps_save(0);
-    return ((ret == -1) ? NULL : return_string(info->term->cmd));
+    return ((ret == -1) ? NULL : return_string(info->term));
 }

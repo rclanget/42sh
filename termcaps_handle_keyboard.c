@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/30 17:34:43 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/04 23:33:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     }
     if (!(ret = add_chr(info, chr)))
         return (0);
-    return ((ret == 2) ? termcaps_print(info, info->term->cmd)
-        : write(1, (char*)&chr, 1));
+    return (termcaps_print(info, info->term->cmd));
 }

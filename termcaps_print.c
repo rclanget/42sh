@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_print.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 23:36:35 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/31 19:36:15 by zipo             ###   ########.fr       */
+/*   Updated: 2016/02/04 23:33:24 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@
 #include <unistd.h>
 #include <termcap.h>
 
-void    move_cursor(t_capa *capa, int len, int plen, int pos_c)
+void    move_cursor(t_capa *capa, int from, int plen, int to)
 {
     int     x;
     int     y;
 
-    y = (((plen + len) / termcap_winsz_x()) + 1) -
-        (((plen + pos_c) / termcap_winsz_x()) + 1);
-    x = (((plen + len) % termcap_winsz_x()) + 1) -
-        (((plen + pos_c) % termcap_winsz_x()) + 1);
+    y = (((plen + from) / termcap_winsz_x())) -
+        (((plen + to) / termcap_winsz_x()));
+    x = (((plen + from) % termcap_winsz_x())) -
+        (((plen + to) % termcap_winsz_x()));
     while (y)
     {
-        ft_putstr(capa->str_up);
-        --y;
+        ft_putstr((y > 0) ? capa->str_up : capa->str_do);
+        y = (y > 0) ? y - 1 : y + 1;
     }
     while (x)
     {
@@ -46,6 +46,7 @@ int     termcaps_print(t_info *info, char *cmd)
     plen = ft_strlen(info->term->prompt);
     ft_putstr(info->term->capa->str_cd);
     ft_putstr(&info->term->cmd[info->term->pos_c - 1]);
+    write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
     move_cursor(info->term->capa, len, plen, info->term->pos_c);
     return (1);
 }
