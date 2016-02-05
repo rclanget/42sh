@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 23:36:35 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/04 23:33:24 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/05 16:12:43 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,24 @@ void    move_cursor(t_capa *capa, int from, int plen, int to)
     }
 }
 
-int     termcaps_print(t_info *info, char *cmd)
+int     termcaps_print(t_info *info, char *cmd, long chr)
 {
     int len;
     int plen;
 
-    len = ft_strlen(cmd);
-    plen = ft_strlen(info->term->prompt);
-    ft_putstr(info->term->capa->str_cd);
-    ft_putstr(&info->term->cmd[info->term->pos_c - 1]);
-    write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
-    move_cursor(info->term->capa, len, plen, info->term->pos_c);
+    if (chr && info->term->capa->str_os
+        && ((char)chr != '\n' || !info->term->capa->str_eo))
+    {
+        write(1, (char *)&chr, 1);
+    }
+    else
+    {
+        len = ft_strlen(cmd);
+        plen = ft_strlen(info->term->prompt);
+        ft_putstr(info->term->capa->str_cd);
+        ft_putstr(&info->term->cmd[info->term->pos_c - 1]);
+        write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
+        move_cursor(info->term->capa, len, plen, info->term->pos_c);
+    }
     return (1);
 }

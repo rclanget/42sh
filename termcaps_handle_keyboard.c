@@ -6,17 +6,25 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/04 23:33:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/05 16:34:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
 #include "keyboard_keys.h"
 
+#include <unistd.h>
+
 t_key g_key_tab[] =
 {
   {MYKEY_RIGHT, move_cursor_right},
-  {MYKEY_LEFT, move_cursor_left}
+  {MYKEY_LEFT, move_cursor_left},
+  {CTRL_A, move_start},
+  {CTRL_E, move_end},
+  {KEY_END, move_end},
+  {KEY_START, move_start},
+  {KEY_DEL, move_delete},
+  {KEY_SUPP, move_supp}
 };
 
 int add_chr(t_info *info, long chr)
@@ -49,7 +57,7 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    while (++i < 2)
+    while (++i < 8)
     {
        if (g_key_tab[i].key == chr)
        {
@@ -59,5 +67,5 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     }
     if (!(ret = add_chr(info, chr)))
         return (0);
-    return (termcaps_print(info, info->term->cmd));
+    return (termcaps_print(info, info->term->cmd, chr));
 }

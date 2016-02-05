@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 00:55:08 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/05 16:33:06 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct          s_key
 
 typedef struct          s_capa
 {
+    char                *str_os;
+    char                *str_eo;
     char                *str_dc;
     char                *str_cl;
     char                *str_do;
@@ -45,18 +47,22 @@ typedef struct          s_capa
     char                *str_ri;
     char                *str_ce;
     char                *str_cd;
-    char                *str_sc;
-    char                *str_rc;
+    char                *str_bl;
 }                       t_capa;
 
 void        move_cursor_left(t_info *info);
 void        move_cursor_right(t_info *info);
+void        move_start(t_info *info);
+void        move_end(t_info *info);
+void        move_delete(t_info *info);
+void        move_supp(t_info *info);
+
 char        *ft_getenv(char *var);
 char        *termcaps_readline(t_info *info);
 char        *termcaps_loop(t_info *info);
 int         termcaps_activation(int is_term);
 int         termcaps_handle_keyboard(t_info *info, long chr);
-int         termcaps_print(t_info *info, char *cmd);
+int         termcaps_print(t_info *info, char *cmd, long chr);
 t_capa      *termcap_capainit(void);
 int         termcap_winsz_x(void);
 int         termcap_winsz_y(void);

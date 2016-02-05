@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyboard_move_cursor.c                             :+:      :+:    :+:   */
+/*   keyboard_del_sup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/30 18:34:42 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/05 15:12:59 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/05 03:36:03 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/05 16:47:13 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
 
-void move_cursor_left(t_info *info)
+void    move_delete(t_info *info)
 {
-    int         len;
     int         plen;
+    int         pos_c;
     t_termcaps  *term;
 
-    len = 0;
-    plen = 0;
     term = info->term;
-    if (term->pos_c > 0)
+    pos_c = term->pos_c;
+    plen = ft_strlen(term->prompt);
+    if (pos_c)
     {
-        len = ft_strlen(term->cmd);
-        plen = ft_strlen(term->prompt);
+        ft_memcpy(&term->cmd[pos_c - 1], &term->cmd[pos_c],
+            1 + ft_strlen(&term->cmd[pos_c]));
+        move_cursor(term->capa, term->pos_c , plen, term->pos_c - 1);
+        termcaps_print(info, term->cmd, 0);
         move_cursor(term->capa, term->pos_c , plen, term->pos_c - 1);
         --term->pos_c;
     }
@@ -32,21 +34,23 @@ void move_cursor_left(t_info *info)
         ft_putstr(term->capa->str_bl);
 }
 
-void move_cursor_right(t_info *info)
+void    move_supp(t_info *info)
 {
-    int         len;
     int         plen;
+    int         pos_c;
     t_termcaps  *term;
 
-    len = 0;
-    plen = 0;
     term = info->term;
-    if (term->cmd[term->pos_c])
+    pos_c = term->pos_c;
+    plen = ft_strlen(term->prompt);
+    if (term->cmd[pos_c])
     {
-        len = ft_strlen(term->cmd);
-        plen = ft_strlen(term->prompt);
-        move_cursor(term->capa, term->pos_c , plen, term->pos_c + 1);
+        ft_memcpy(&term->cmd[pos_c], &term->cmd[pos_c + 1],
+            1 + ft_strlen(&term->cmd[pos_c]));
         ++term->pos_c;
+        termcaps_print(info, term->cmd, 0);
+        move_cursor(term->capa, term->pos_c , plen, term->pos_c - 1);
+        --term->pos_c;
     }
     else
         ft_putstr(term->capa->str_bl);
