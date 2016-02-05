@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 03:36:03 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 16:47:13 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/05 20:37:55 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ void    move_delete(t_info *info)
         ft_memcpy(&term->cmd[pos_c - 1], &term->cmd[pos_c],
             1 + ft_strlen(&term->cmd[pos_c]));
         move_cursor(term->capa, term->pos_c , plen, term->pos_c - 1);
-        termcaps_print(info, term->cmd, 0);
-        move_cursor(term->capa, term->pos_c , plen, term->pos_c - 1);
         --term->pos_c;
+        ft_putstr(info->term->capa->str_cd);
+        ft_putstr(&info->term->cmd[info->term->pos_c]);
+        move_cursor(term->capa, ft_strlen(term->cmd) , plen, term->pos_c);
     }
     else
         ft_putstr(term->capa->str_bl);
@@ -47,10 +48,9 @@ void    move_supp(t_info *info)
     {
         ft_memcpy(&term->cmd[pos_c], &term->cmd[pos_c + 1],
             1 + ft_strlen(&term->cmd[pos_c]));
-        ++term->pos_c;
-        termcaps_print(info, term->cmd, 0);
-        move_cursor(term->capa, term->pos_c , plen, term->pos_c - 1);
-        --term->pos_c;
+        ft_putstr(info->term->capa->str_cd);
+        ft_putstr(&info->term->cmd[info->term->pos_c]);
+        move_cursor(info->term->capa, ft_strlen(term->cmd), plen, info->term->pos_c);
     }
     else
         ft_putstr(term->capa->str_bl);
