@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:34:55 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/05 15:22:02 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:47:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,6 @@
 
 #define KEY_DEL             127
 #define KEY_SUPP            2117294875
+
+#define CTRL_U              21
+#define CTRL_L              12

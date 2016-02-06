@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 23:36:35 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 16:12:43 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/06 16:46:40 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int     termcaps_print(t_info *info, char *cmd, long chr)
     int len;
     int plen;
 
-    if (chr && info->term->capa->str_os
-        && ((char)chr != '\n' || !info->term->capa->str_eo))
+    if (chr && info->term->capa->flg_os
+        && ((char)chr != '\n' || !info->term->capa->flg_eo))
     {
         write(1, (char *)&chr, 1);
     }

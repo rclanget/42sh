@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 16:34:10 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:56:20 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ t_key g_key_tab[] =
   {KEY_END, move_end},
   {KEY_START, move_start},
   {KEY_DEL, move_delete},
-  {KEY_SUPP, move_supp}
+  {KEY_SUPP, move_supp},
+  {CTRL_U, keyboard_clear_line},
+  {CTRL_L, keyboard_clear_screen}
 };
 
-int add_chr(t_info *info, long chr)
+int     add_chr(t_info *info, long chr)
 {
   int cmd_len;
   int i;
@@ -57,7 +59,7 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    while (++i < 8)
+    while (++i < 10)
     {
        if (g_key_tab[i].key == chr)
        {

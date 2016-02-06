@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 16:33:06 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:48:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ typedef struct          s_key
 
 typedef struct          s_capa
 {
-    char                *str_os;
-    char                *str_eo;
+    int                 flg_os;
+    int                 flg_eo;
     char                *str_dc;
     char                *str_cl;
     char                *str_do;
@@ -48,6 +48,7 @@ typedef struct          s_capa
     char                *str_ce;
     char                *str_cd;
     char                *str_bl;
+    char                *str_ho;
 }                       t_capa;
 
 void        move_cursor_left(t_info *info);
@@ -56,6 +57,8 @@ void        move_start(t_info *info);
 void        move_end(t_info *info);
 void        move_delete(t_info *info);
 void        move_supp(t_info *info);
+void        keyboard_clear_line(t_info *info);
+void        keyboard_clear_screen(t_info *info);
 
 char        *ft_getenv(char *var);
 char        *termcaps_readline(t_info *info);

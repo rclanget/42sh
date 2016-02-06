@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 03:36:03 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 20:37:55 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:35:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void    move_delete(t_info *info)
         --term->pos_c;
         ft_putstr(info->term->capa->str_cd);
         ft_putstr(&info->term->cmd[info->term->pos_c]);
+        write(1, "\n", ((plen + ft_strlen(term->cmd)) % termcap_winsz_x()) ? 0 : 1);
         move_cursor(term->capa, ft_strlen(term->cmd) , plen, term->pos_c);
     }
     else
@@ -50,6 +51,7 @@ void    move_supp(t_info *info)
             1 + ft_strlen(&term->cmd[pos_c]));
         ft_putstr(info->term->capa->str_cd);
         ft_putstr(&info->term->cmd[info->term->pos_c]);
+        write(1, "\n", ((plen + ft_strlen(term->cmd)) % termcap_winsz_x()) ? 0 : 1);
         move_cursor(info->term->capa, ft_strlen(term->cmd), plen, info->term->pos_c);
     }
     else

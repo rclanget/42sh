@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 15:57:06 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 15:58:40 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/06 17:44:20 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_capa *termcap_capainit(void)
     capa = NULL;
     if ((capa = malloc(sizeof(*capa))))
     {
-        capa->str_os = tgetstr("os", NULL);
-        capa->str_eo = tgetstr("eo", NULL);
+        capa->flg_os = tgetflag("os");
+        capa->flg_eo = tgetflag("eo");
         capa->str_dc = tgetstr("dc", NULL);
         capa->str_cl = tgetstr("cl", NULL);
         capa->str_do = tgetstr("do", NULL);
@@ -33,6 +33,7 @@ t_capa *termcap_capainit(void)
         capa->str_ce = tgetstr("ce", NULL);
         capa->str_cd = tgetstr("cd", NULL);
         capa->str_bl = tgetstr("bl", NULL);
+        capa->str_ho = tgetstr("ho", NULL);
     }
     return (capa);
 }
