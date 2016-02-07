@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_keys.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:34:55 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/07 16:55:07 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 20:14:36 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 
 #define CTRL_U              21
 #define CTRL_L              12
+
+#define CTRL_RIGHT          73895905418011
+#define CTRL_LEFT           74995417045787
 
 #define CTRL_UP             71696882162459
 #define CTRL_DOWN           72796393790235
