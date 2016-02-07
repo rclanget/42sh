@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 23:36:35 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/06 16:46:40 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 18:35:47 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,22 @@ void    move_cursor(t_capa *capa, int from, int plen, int to)
 {
     int     x;
     int     y;
+    int     rst_x;
+    int     cpy_y;
 
     y = (((plen + from) / termcap_winsz_x())) -
         (((plen + to) / termcap_winsz_x()));
     x = (((plen + from) % termcap_winsz_x())) -
         (((plen + to) % termcap_winsz_x()));
+    rst_x = (plen + from) % termcap_winsz_x();
+    cpy_y = y;
     while (y)
     {
         ft_putstr((y > 0) ? capa->str_up : capa->str_do);
         y = (y > 0) ? y - 1 : y + 1;
     }
+    while (cpy_y < 0 && rst_x--)
+        ft_putstr(capa->str_ri);
     while (x)
     {
         ft_putstr((x > 0) ? capa->str_le : capa->str_ri);
