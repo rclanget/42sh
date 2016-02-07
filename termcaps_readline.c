@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/30 15:39:55 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 18:50:15 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ char        *getnextline(int fd, t_info *info)
     int     ret;
 
     line = NULL;
-    ret = get_next_line(0, &line);
+    (void)info;
+    ret = get_next_line(fd, &line);
     return (ret ? line : NULL);
 }
 

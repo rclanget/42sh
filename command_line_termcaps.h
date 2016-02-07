@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/06 17:48:08 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 17:53:46 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void        move_delete(t_info *info);
 void        move_supp(t_info *info);
 void        keyboard_clear_line(t_info *info);
 void        keyboard_clear_screen(t_info *info);
+void        move_line_up(t_info *info);
+void        move_line_down(t_info *info);
+
+void        move_cursor(t_capa *capa, int from, int plen, int to);
+
+int         termcaps_save(int save_or_restore);
 
 char        *ft_getenv(char *var);
 char        *termcaps_readline(t_info *info);

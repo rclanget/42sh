@@ -6,11 +6,12 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/05 00:55:36 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 18:20:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
+#include "libft.h"
 
 #include <unistd.h>
 

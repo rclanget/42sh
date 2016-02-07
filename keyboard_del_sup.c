@@ -6,11 +6,12 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 03:36:03 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/06 17:35:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 17:47:37 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
+#include "libft.h"
 
 void    move_delete(t_info *info)
 {

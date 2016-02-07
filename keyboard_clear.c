@@ -6,11 +6,12 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 16:59:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/06 17:49:06 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 17:49:54 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
+#include "libft.h"
 
 void    keyboard_clear_line(t_info *info)
 {
@@ -22,6 +23,7 @@ void    keyboard_clear_line(t_info *info)
     term = info->term;
     pos_c = term->pos_c;
     len = ft_strlen(&term->cmd[pos_c]);
+    plen = ft_strlen(term->prompt);
     if (pos_c)
     {
         ft_memcpy(term->cmd, &term->cmd[pos_c], 1 +len);

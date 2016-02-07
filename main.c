@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/28 14:57:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/30 15:57:19 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 18:49:42 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int termcap_available(void)
     return (ret);
 }
 
-int main(int argc, char const *argv[]) {
+int main(void) {
     t_info info;
     t_termcaps term;
 
