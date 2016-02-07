@@ -6,12 +6,13 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/06 17:56:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/07 17:54:39 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
 #include "keyboard_keys.h"
+#include "libft.h"
 
 #include <unistd.h>
 
@@ -26,7 +27,9 @@ t_key g_key_tab[] =
   {KEY_DEL, move_delete},
   {KEY_SUPP, move_supp},
   {CTRL_U, keyboard_clear_line},
-  {CTRL_L, keyboard_clear_screen}
+  {CTRL_L, keyboard_clear_screen},
+  {CTRL_UP, move_line_up},
+  {CTRL_DOWN, move_line_down}
 };
 
 int     add_chr(t_info *info, long chr)
@@ -45,7 +48,10 @@ int     add_chr(t_info *info, long chr)
       {
           info->term->cmd[cmd_len + 1] = 0;
           while (i >= 0 && info->term->cmd[info->term->pos_c])
-              info->term->cmd[info->term->pos_c + i + 1] = info->term->cmd[info->term->pos_c + i--];
+          {
+              info->term->cmd[info->term->pos_c + i + 1] = info->term->cmd[info->term->pos_c + i];
+              --i;
+          }
           info->term->cmd[info->term->pos_c] = chr;
           ++info->term->pos_c;
       }
@@ -59,7 +65,7 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    while (++i < 10)
+    while (++i < 12)
     {
        if (g_key_tab[i].key == chr)
        {
