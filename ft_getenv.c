@@ -14,13 +14,15 @@
 
 #include <unistd.h>
 
+extern char **environ;
+
 char        *ft_getenv(char *var)
 {
     char    **env;
     int     len;
 
     len = ft_strlen(var);
-    env = __environ;
+    env = environ;
     while (env && *env)
     {
         if ((!ft_strncmp(var, *env, len)) && ((*env)[len] == '='))

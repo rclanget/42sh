@@ -31,7 +31,8 @@ void    keyboard_clear_line(t_info *info)
         move_cursor(term->capa, term->pos_c , plen, 0);
         ft_putstr(term->capa->str_cd);
         ft_putstr(term->cmd);
-        write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
+        if (plen + len)
+          write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
         move_cursor(term->capa, len , plen, 0);
         term->pos_c = 0;
     }
