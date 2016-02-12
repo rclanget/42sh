@@ -10,22 +10,52 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#define MYKEY_RIGHT			4414235
-#define MYKEY_LEFT			4479771
+#ifndef KEYBOARD_KEYS_H
+# define KEYBOARD_KEYS_H
 
-#define CTRL_A              1
-#define CTRL_E              5
-#define KEY_END             4607771
-#define KEY_START           4738843
+# define MYKEY_RIGHT		4414235
+# define MYKEY_LEFT			4479771
 
-#define KEY_DEL             127
-#define KEY_SUPP            2117294875
+# define CTRL_A				1
+# define CTRL_E				5
 
-#define CTRL_U              21
-#define CTRL_L              12
+# ifdef __APPLE__
 
-#define CTRL_RIGHT          73895905418011
-#define CTRL_LEFT           74995417045787
+#  define KEY_END			4610843
+#  define KEY_START			4741915
 
-#define CTRL_UP             71696882162459
-#define CTRL_DOWN           72796393790235
+# endif
+
+# ifdef __linux__
+
+#  define KEY_END			4607771
+#  define KEY_START			4738843
+
+# endif
+
+# define KEY_DEL			127
+# define KEY_SUPP			2117294875
+
+# define CTRL_U				21
+# define CTRL_L				12
+
+# ifdef __APPLE__
+/*
+** Apple Control replaced by the combinaison of alt+shift
+*/
+#  define CTRL_UP			18348861490813723
+#  define CTRL_DOWN			18630336467524379
+#  define CTRL_RIGHT		18911811444235035
+#  define CTRL_LEFT			19193286420945691
+
+# endif
+
+# ifdef __linux__
+#  define CTRL_UP			71696882162459
+#  define CTRL_DOWN			72796393790235
+#  define CTRL_RIGHT		73895905418011
+#  define CTRL_LEFT			74995417045787
+
+# endif
+
+#endif
