@@ -6,14 +6,14 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 16:59:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/07 17:49:54 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/02/17 17:58:49 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
 #include "libft.h"
 
-void    keyboard_clear_line(t_info *info)
+void    move_clear_left(t_info *info)
 {
     int         len;
     int         plen;
@@ -40,11 +40,38 @@ void    keyboard_clear_line(t_info *info)
         ft_putstr(term->capa->str_bl);
 }
 
-void    keyboard_clear_screen(t_info *info)
+void    move_clear_right(t_info *info)
 {
-    ft_putstr(info->term->capa->str_ho);
-    ft_putstr(info->term->capa->str_cd);
-    ft_putstr(info->term->prompt);
-    ft_bzero(info->term->cmd, BUFFER_SIZE);
-    info->term->pos_c = 0;
+	int			len;
+	int			pos_c;
+	t_termcaps 	*term;
+
+	term = info->term;
+	pos_c = term->pos_c;
+	len = ft_strlen(term->cmd) - ft_strlen(&term->cmd[pos_c]);
+	if (pos_c)
+	{
+		ft_bzero(&term->cmd[pos_c], BUFFER_SIZE - len);
+		ft_putstr(term->capa->str_cd);
+	}
+	else
+		ft_putstr(term->capa->str_bl);
+}
+
+void    move_clear_screen(t_info *info)
+{
+	int			len;
+	int			plen;
+	t_termcaps	*term;
+
+	term = info->term;
+	ft_putstr(term->capa->str_ho);
+	ft_putstr(term->capa->str_cd);
+	ft_putstr(term->prompt);
+	ft_putstr(term->cmd);
+	if (plen + len)
+	  write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
+	len = ft_strlen(term->cmd);
+	plen = ft_strlen(term->prompt);
+	move_cursor(term->capa, len, plen, term->pos_c);
 }
