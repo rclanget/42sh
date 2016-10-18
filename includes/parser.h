@@ -13,6 +13,8 @@
 #ifndef PARSER_H
 # define PARSER_H
 
+# define PARENTHESES_VAL 9
+
 typedef struct			s_tree
 {
 	int					type;
@@ -64,6 +66,8 @@ int						check_op_rightfd(char *str);
 char					**parse_op_rightfd(char *str, int pos);
 
 void					*parser_free_cmd(t_tree *cmd);
+
+char					*clean_parentheses(char *str, int *value);
 
 extern t_parse g_parse[];
 
