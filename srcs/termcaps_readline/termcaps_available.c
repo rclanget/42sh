@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   termcaps_available.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/26 11:02:30 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/26 11:32:14 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "command_line_termcaps.h"
 
-int	ft_isdigit(int c)
+#include <stdlib.h>
+#include <termcap.h>
+
+int termcap_available(void)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	int		ret;
+	char	*term;
+
+	ret = 0;
+	if ((term = ft_getenv("TERM")))
+	{
+		if ((tgetent(NULL, term) > 0))
+			++ret;
+		free(term);
+	}
+	return (ret);
 }

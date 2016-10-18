@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   execution_search.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/29 10:03:37 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/29 10:04:06 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shell.h"
 #include "libft.h"
 
-int	ft_isdigit(int c)
+char    *executable_search(t_info *info, char *exec)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	t_hashmap    *tmp;
+
+	tmp = info->hash;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->key, exec))
+		break;
+		tmp = tmp->next;
+	}
+	return (tmp ? ft_strdup(tmp->value) : NULL);
 }

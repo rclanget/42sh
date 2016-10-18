@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   redirection_left.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/28 15:34:26 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/29 11:25:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "shell.h"
+#include "operator.h"
 
-int	ft_isdigit(int c)
+#include <unistd.h>
+#include <fcntl.h>
+
+int			redirection_left(t_info *info, t_tree *cmd)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	int		fd;
+	int		ret;
+
+	fd = -1;
+	ret = 0;
+	save_fd(1);
+	if (cmd->right && cmd->right->cmd)
+		fd = open(cmd->right->cmd[0], O_RDONLY);
+	if (fd != -1)
+	{
+		dup2(fd, 0);
+		close(fd);
+		ret = execution_motor(info, cmd->left, 1);
+		save_fd(0);
+		return (ret);
+	}
+	return (1);
 }

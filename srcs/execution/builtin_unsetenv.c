@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/19 15:06:26 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/29 10:28:44 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shell.h"
+#include "env.h"
+#include "tools.h"
 #include "libft.h"
 
-int	ft_isdigit(int c)
+int			builtin_unsetenv(t_info *info, t_tree *cmd)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	int		len;
+	int		stat;
+	char	**tmp;
+
+	stat = 1;
+	tmp = cmd->cmd;
+	len = ft_tablen(cmd->cmd);
+	if (len == 1 && stat--)
+		ft_fdprint(2, "unsetenv: Too few arguments.\n");
+	else
+	{
+		while (++tmp && *tmp)
+			env_remove_var(info, *tmp);
+	}
+	return (stat);
 }

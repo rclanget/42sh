@@ -1,18 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   env_add_var.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/16 13:44:06 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/26 12:26:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "env.h"
 
-int	ft_isdigit(int c)
+#include <stdlib.h>
+
+void		env_add_var(t_info *info, char *var, char *content)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	t_env	*elem;
+	t_env	*last;
+
+	elem = (t_env *)malloc(sizeof(t_env));
+	elem->var = var;
+	elem->content = content;
+	elem->next = NULL;
+	if ((last = info->env))
+	{
+		while (last && last->next)
+			last = last->next;
+		last->next = elem;
+	}
+	else
+		info->env = elem;
 }

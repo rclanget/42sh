@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/03/23 16:32:19 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/03/23 17:38:17 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+int			count_words(char *s)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	int		i;
+
+	i = 0;
+	while (s && *s)
+	{
+		
+	}
+}
+
+char		**ft_split(char *s)
+{
+	char	**tab;
+
+	tab = (char **)malloc(sizeof(char *) * count_words(s));
+	return (tab);
 }

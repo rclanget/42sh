@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   execution_status.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/26 16:33:30 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/29 10:28:17 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <sys/wait.h>
 
-int	ft_isdigit(int c)
+int				execution_status(int status)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	return (!(WIFEXITED(status) && !WIFSIGNALED(status) && !WEXITSTATUS(status)));
 }

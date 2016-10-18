@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:34:55 by zipo              #+#    #+#             */
-/*   Updated: 2016/02/17 23:53:41 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/03/03 13:02:36 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@
 
 # endif
 
-#  define CTRL_I           9
-#  define CTRL_O           15
-#  define CTRL_P           16
+# define CTRL_I           9
+# define CTRL_O           15
+# define CTRL_P           16
 
 #endif

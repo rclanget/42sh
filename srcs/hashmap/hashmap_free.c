@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   hashmap_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/11/23 17:34:34 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/26 15:00:31 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "hashmap_struct.h"
 
-int	ft_isdigit(int c)
+#include <stdlib.h>
+
+void hashmap_free(t_hashmap *map)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+  if (map)
+  {
+    hashmap_free(map->next);
+    free(map->key);
+    free(map->value);
+    free(map);
+  }
 }

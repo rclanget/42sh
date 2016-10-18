@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/18 10:50:31 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/29 10:24:20 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shell.h"
 #include "libft.h"
 
-int	ft_isdigit(int c)
+#define OPT_N	0x001
+
+int			builtin_echo(t_info *info, t_tree *cmd)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	int		i;
+	int		option;
+	char	**tab;
+
+	i = 0;
+	(void)info;
+	tab = cmd->cmd;
+	if ((i = ft_option(0, tab, "n", &option)) < 0)
+		return (1);
+	tab += i;
+	i = -1;
+	while (tab[++i])
+		ft_print(i ? " %s" : "%s", tab[i]);
+	if (!(option & OPT_N))
+		ft_print("\n");
+	return (0);
 }

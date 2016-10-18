@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 16:59:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/17 17:58:49 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/03/03 14:16:47 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ void    move_clear_screen(t_info *info)
 	ft_putstr(term->capa->str_cd);
 	ft_putstr(term->prompt);
 	ft_putstr(term->cmd);
-	if (plen + len)
-	  write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
 	len = ft_strlen(term->cmd);
 	plen = ft_strlen(term->prompt);
+	if (plen + len)
+	  write(1, "\n", ((plen + len) % termcap_winsz_x()) ? 0 : 1);
 	move_cursor(term->capa, len, plen, term->pos_c);
 }

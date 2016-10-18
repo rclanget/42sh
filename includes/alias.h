@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   alias.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/26 15:55:13 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/03/03 12:51:26 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ALIAS_H
+# define ALIAS_H
 
-int	ft_isdigit(int c)
-{
-	return ((c >= '0' && c <= '9') ? 1 : 0);
-}
+# include "shell.h"
+# include "alias_struct.h"
+
+void		add_alias(t_info *info, char *var, char *content);
+void		remove_alias(t_info *info, char *var);
+t_alias		*search_alias(t_info *info, char *var);
+void		update_alias(t_info *info, char *init, char *replace);
+char		*check_alias(t_info *info, char *init);
+
+#endif

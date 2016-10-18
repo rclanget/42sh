@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   parser_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/03/02 15:17:13 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/03/02 15:19:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <unistd.h>
+#include <stdlib.h>
 
-int	ft_isdigit(int c)
+#include "parser.h"
+#include "hashmap.h"
+
+void				*parser_free_cmd(t_tree *cmd)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	if (cmd)
+	{
+		parser_free_cmd(cmd->right);
+		parser_free_cmd(cmd->left);
+		free_tab(cmd->cmd);
+		free(cmd->elem);
+		free(cmd);
+	}
+	return (NULL);
 }

@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   search_env_var.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/16 13:12:32 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/26 12:30:49 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "libft.h"
 
-int	ft_isdigit(int c)
+t_env		*search_env_var(t_info *info, char *var)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	t_env	*cpy;
+
+	cpy = info->env;
+	while (cpy)
+	{
+		if (!ft_strcmp(cpy->var, var))
+			break ;
+		cpy = cpy->next;
+	}
+	return (cpy);
 }

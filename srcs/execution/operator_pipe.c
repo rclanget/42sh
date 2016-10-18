@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   operator_pipe.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/27 16:29:30 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/03/04 15:06:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "shell.h"
 
-int	ft_isdigit(int c)
+#include <stdlib.h>
+#include <unistd.h>
+
+int                operator_pipe(t_info *info, t_tree *cmd)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	int			fdp[2];
+	pid_t		pid;
+
+	pipe(fdp);
+	if (cmd->right && !(pid = fork()))
+	{
+		dup2(fdp[0], 0);
+		close(fdp[0]);
+		close(fdp[1]);
+		execution_motor(info, cmd->right, 0);
+		exit(0);
+	}
+	dup2(fdp[1], 1);
+	close(fdp[1]);
+	close(fdp[0]);
+	execution_motor(info, cmd->left, 1);
+	return (0);
 }

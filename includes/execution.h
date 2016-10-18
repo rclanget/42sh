@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/26 15:30:49 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/03/03 12:59:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef EXECUTION_H
+# define EXECUTION_H
 
-int	ft_isdigit(int c)
-{
-	return ((c >= '0' && c <= '9') ? 1 : 0);
-}
+# include "shell.h"
+
+int		execution_motor(t_info *info, t_tree *cmd, int wait);
+int		execution_command(t_info *info, t_tree *cmd, int wait);
+int		execution_status(int status);
+char	*executable_search(t_info *info, char *exec);
+
+#endif

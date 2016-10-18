@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   env_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/02/26 12:31:53 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/03/03 13:00:26 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ENV_STRUCT_H
+# define ENV_STRUCT_H
 
-int	ft_isdigit(int c)
+# include "shell.h"
+
+typedef struct			s_env
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
-}
+	char				*var;
+	char				*content;
+	struct s_env		*next;
+}						t_env;
+
+#endif

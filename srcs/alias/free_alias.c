@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   free_alias.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/21 13:44:54 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/29 10:19:16 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "alias_struct.h"
 
-int	ft_isdigit(int c)
+#include <stdlib.h>
+
+void		free_alias(t_alias *alias)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	if (alias)
+	{
+		free_alias(alias->next);
+		free(alias->init);
+		free(alias->replace);
+		free(alias);
+	}
 }

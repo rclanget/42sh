@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   update_alias.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 19:23:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 15:49:43 by ulefebvr         ###   ########.fr       */
+/*   Created: 2015/10/20 15:04:38 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/02/29 10:20:16 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "shell.h"
+#include "alias.h"
+#include "alias_struct.h"
 #include "libft.h"
 
-int	ft_isdigit(int c)
+#include <stdlib.h>
+
+void	update_alias(t_info *info, char *init, char *replace)
 {
-	return ((c >= '0' && c <= '9') ? 1 : 0);
+	t_alias	*alias;
+
+	if ((alias = search_alias(info, init)))
+	{
+		free(alias->replace);
+		alias->replace = ft_strdup(replace);
+	}
+	else
+		add_alias(info, ft_strdup(init), ft_strdup(replace));
 }
