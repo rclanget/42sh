@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/19 16:17:41 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:37:51 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,19 @@ char				**cust_split(char *str)
 	int				nword;
 	char			*tmp;
 	char			**tab;
-	char			*tmptab[ft_strlen(str)];
+	char			*tmptab[ft_strlen(str) / 2 + 1];
 
 	nword = 0;
+	tab = NULL;
 	get_next_word(str);
 	while ((tmp = get_next_word(NULL)))
 		tmptab[nword++] = tmp;
-	tab = (char **)ft_memalloc(sizeof(char *) * (nword + 1));
-	tab[nword] = 0;
-	while (nword--)
+	if (nword)
+	{
+		tab = (char **)ft_memalloc(sizeof(char *) * (nword + 1));
+		tab[nword] = 0;
+		while (nword--)
 		tab[nword] = tmptab[nword];
+	}
 	return (tab);
 }
