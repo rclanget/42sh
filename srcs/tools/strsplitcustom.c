@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/19 16:37:51 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:58:32 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,29 @@ char				*ft_strtrim(char const *s)
 	return ret;
 }
 
+static char			*remove_quote(char *str)
+{
+	char *tmp;
+	char *tmp2;
+
+	tmp = str;
+	tmp2 = str;
+	while (tmp && *tmp)
+	{
+		if (*tmp == '\'' || *tmp == '\"')
+		{
+			tmp++;
+		}
+		else
+		{
+			*tmp2 = *tmp;
+			tmp2++;
+			tmp++;
+		}
+	}
+	*tmp2 = *tmp;
+	return str;
+}
 
 static char			*seek_next_delimiter(char *str)
 {
@@ -70,10 +93,11 @@ static char			*get_next_word(char *str)
 		del = seek_next_delimiter(content);
 		tmp = ft_memalloc(sizeof(char) * (del - content + 1));
 		tmp = ft_memcpy(tmp, content, (del - content));
-		ret = ft_strtrim(tmp);
+		ret = remove_quote(ft_strtrim(tmp));
 		free(tmp);
-		if (!*del)
-			del = NULL;
+		del = (!*del) ? NULL : del;
+		if (!*ret)
+			ft_memdel((void **)&ret);
 		content = del;
 	}
 	return ret;
