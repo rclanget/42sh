@@ -30,6 +30,7 @@ char	*clean_parentheses(char *str, int *value)
 			str_new = ft_memalloc(i);
 			ft_memcpy(str_new,  str + 1, i - 1);
 			*value = PARENTHESES_VAL;
+			free(str);
 			return (str_new);
 		}
 	}

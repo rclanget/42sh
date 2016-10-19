@@ -40,5 +40,5 @@ int main(void)
 	printf("[%s] : [%s] | i : %d\n", str, str, 0);
 	printf("-------------------\n\n");
 
-	return 0;
+	return (1);
 }

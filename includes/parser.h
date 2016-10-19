@@ -68,6 +68,7 @@ char					**parse_op_rightfd(char *str, int pos);
 void					*parser_free_cmd(t_tree *cmd);
 
 char					*clean_parentheses(char *str, int *value);
+char					*clean_backslash(char *str);
 
 extern t_parse g_parse[];
 
