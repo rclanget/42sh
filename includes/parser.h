@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/03 13:00:14 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/19 22:03:03 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 # define PARSER_H
 
 # define PARENTHESES_VAL 9
+
+# define C_SPACE 		 1
+# define C_CMD 			 2
+# define C_ARG 			 3
+# define C_FILE 		 4
+# define C_CHEV_R 		 5
+# define C_CHEV_L 		 6
+# define C_PARENTHESE 	 7
+# define C_BRACKET 		 8
+# define C_PIPE 		 9
+# define C_AMP 			 10
+# define C_SEMICOL 		 11
 
 typedef struct			s_tree
 {
@@ -69,6 +81,16 @@ void					*parser_free_cmd(t_tree *cmd);
 
 char					*clean_parentheses(char *str, int *value);
 char					*clean_backslash(char *str);
+
+int						is_operator(char cmd);
+void					skip_space(char *cmd, int *i);
+int						*definition_code(char *cmd);
+
+int						*get_operator(char *cmd);
+int						*get_cmd(char *cmd, int *codes);
+int						*get_arg(char *cmd, int *codes);
+int						*get_file(char *cmd, int *codes);
+int						*get_quote(char *cmd, int *codes);
 
 extern t_parse g_parse[];
 
