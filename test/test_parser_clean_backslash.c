@@ -5,35 +5,52 @@
 
 int main(void)
 {
+    int check = 0;
+
     char *str = ft_strdup("\\test bonjour");
     char *result = "test bonjour";
     char *tmp = NULL;
-    printf("[%s] : [%s]", str, tmp = clean_backslash(str));
-    printf(" [%c]\n", ft_strcmp(tmp, result) ? 'X' : 'V');
+
+    tmp = clean_backslash(str);
+    check += ft_strcmp(tmp, result);
+    // printf("[%s] : [%s]", str, tmp);
+    // printf(" [%c]\n", check ? 'X' : 'V');
     free(tmp);
 
     str = ft_strdup("\\test \\bonjour");
-    printf("[%s] : [%s]", str, tmp = clean_backslash(str));
-    printf(" [%c]\n", ft_strcmp(tmp, result) ? 'X' : 'V');
+    tmp = clean_backslash(str);
+    check += ft_strcmp(tmp, result);
+
+    // printf("[%s] : [%s]", str, tmp);
+    // printf(" [%c]\n", check ? 'X' : 'V');
     free(tmp);
 
     str = ft_strdup("\\");
     result = &""[0];
-    printf("[%s] : [%s]", str, tmp = clean_backslash(str));
-    printf(" [%c]\n", ft_strcmp(tmp, result) ? 'X' : 'V');
+    tmp = clean_backslash(str);
+    check += ft_strcmp(tmp, result);
+    
+    // printf("[%s] : [%s]", str, tmp);
+    // printf(" [%c]\n", check ? 'X' : 'V');
     free(tmp);
 
     str = ft_strdup("\\\\");
     result = &""[0];
-    printf("[%s] : [%s]", str, tmp = clean_backslash(str));
-    printf(" [%c]\n", ft_strcmp(tmp, result) ? 'X' : 'V');
+    tmp = clean_backslash(str);
+    check += ft_strcmp(tmp, result);
+
+    // printf("[%s] : [%s]", str, tmp);
+    // printf(" [%c]\n", check ? 'X' : 'V');
     free(tmp);
 
     str = ft_strdup("\\test\\ \\bonjour\\");
     result = &"test bonjour"[0];
-    printf("[%s] : [%s]", str, tmp = clean_backslash(str));
-    printf(" [%c]\n", ft_strcmp(tmp, result) ? 'X' : 'V');
+    tmp = clean_backslash(str);
+    check += ft_strcmp(tmp, result);
+
+    // printf("[%s] : [%s]", str, tmp);
+    // printf(" [%c]\n", check ? 'X' : 'V');
     free(tmp);
 
-    return (1);
+    exit (check ? 1 : 0);
 } 
