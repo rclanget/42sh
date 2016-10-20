@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/20 10:12:22 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/20 10:38:19 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define C_PIPE 		 9
 # define C_AMP 			 10
 # define C_SEMICOL 		 11
+# define C_QUOTE 		 12
+# define C_DQUOTE 		 13
 
 typedef struct			s_tree
 {
@@ -85,6 +87,7 @@ char					*clean_backslash(char *str);
 int						is_operator(char cmd);
 void					skip_space(char *cmd, int *i);
 int						*definition_code(char *cmd);
+int 					ft_isspace(char c);
 
 int						*get_operator(char *cmd, int *codes);
 int						*get_cmd(char *cmd, int *codes);

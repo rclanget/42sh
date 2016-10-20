@@ -177,7 +177,7 @@ int main(void)
 	printf("\n\n");
 	free(str);
 
-	str = ft_strdup("(ls >> > myFile");
+	str = ft_strdup("|ls >> > myFile");
 	printf("%s\n", str);
 	i = definition_code(str);
 	len = ft_strlen(str);

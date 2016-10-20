@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 19:51:35 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/20 10:16:58 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/20 10:38:47 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,21 @@ int		is_operator(char cmd)
 		ret = C_AMP;
 	else if (cmd == ';')
 		ret = C_SEMICOL;
+	else if (cmd == '\'')
+		ret = C_QUOTE;
+	else if (cmd == '\"')
+		ret = C_DQUOTE;
 	return (ret);
+}
+
+int 	ft_isspace(char c)
+{
+	return (c == ' ' || c == '\t');
 }
 
 void	skip_space(char *cmd, int *i)
 {
-	while (cmd[*i] && cmd[*i] == ' ')
+	while (cmd[*i] && ft_isspace(cmd[*i]))
 		*i += 1;
 }
 
@@ -51,7 +60,6 @@ int		*definition_code(char *cmd)
 		get_cmd(cmd, codes);
 		get_arg(cmd, codes);
 		get_file(cmd, codes);
-		// get_quote(cmd, codes);
 	}
 	return (codes);
 }
