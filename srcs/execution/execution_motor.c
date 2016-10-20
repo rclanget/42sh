@@ -24,8 +24,9 @@ int (*p[])(t_info *x, t_tree *y) = {\
 			&operator_or, \
 			&operator_pipe, \
 			&redirection_right, \
+			&redirection_left, \
 			&redirection_dright, \
-			&redirection_left};
+			&redirection_dleft};
 
 int				wich_operator(char *op)
 {

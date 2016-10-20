@@ -31,7 +31,7 @@ SRCS_ENV		=	$(addprefix $(SRC_ENV),$(SRCN_ENV))
 
 SRC_EXEC		=	./srcs/execution/
 SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
-					execution_search.c  operator_comma.c  redirection_dright.c \
+					execution_search.c  operator_comma.c  redirection_dright.c redirection_dleft.c \
 					builtin_cd.c builtin_unalias.c execution_command.c \
 					execution_status.c operator_or.c redirection_left.c \
 					builtin_echo.c builtin_unsetenv.c execution_motor.c \

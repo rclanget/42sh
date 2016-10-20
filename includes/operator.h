@@ -23,5 +23,6 @@ int		operator_comma(t_info *info, t_tree *cmd);
 int		redirection_right(t_info *info, t_tree *cmd);
 int		redirection_dright(t_info *info, t_tree *cmd);
 int		redirection_left(t_info *info, t_tree *cmd);
+int		redirection_dleft(t_info *info, t_tree *cmd);
 int		redirection_get_fd(t_tree *cmd);
 #endif
