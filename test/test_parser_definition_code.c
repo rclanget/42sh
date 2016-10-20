@@ -189,5 +189,17 @@ int main(void)
 	printf("\n\n");
 	free(str);
 
+	str = ft_strdup("echo \'test test test\'");
+	printf("%s\n", str);
+	i = definition_code(str);
+	len = ft_strlen(str);
+	while (len--)
+	{
+		printf("%d", *i);
+		i++;
+	}
+	printf("\n\n");
+	free(str);
+
 	return (1);
 }

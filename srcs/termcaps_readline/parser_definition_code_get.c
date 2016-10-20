@@ -30,6 +30,21 @@ int	*get_operator(char *cmd, int *codes)
 	return (codes);
 }
 
+int	*get_quote(char *cmd, int *codes)
+{
+	int	i;
+	int	code;
+
+	i = 0;
+	while (cmd[i])
+	{
+		if ((code = is_quote(cmd[i])))
+			codes[i] = code;
+		i++;
+	}
+	return (codes);
+}
+
 int	*get_cmd(char *cmd, int *codes)
 {
 	int i;

@@ -90,6 +90,7 @@ int						is_operator(char cmd);
 void					skip_space(char *cmd, int *i);
 int						*definition_code(char *cmd);
 int 					ft_isspace(char c);
+int						is_quote(char cmd);
 
 int						*get_operator(char *cmd, int *codes);
 int						*get_cmd(char *cmd, int *codes);

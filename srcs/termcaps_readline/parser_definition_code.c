@@ -31,10 +31,18 @@
 # define C_QUOTE 		 14
 # define C_DQUOTE 		 15
 
+int		is_quote(char cmd)
+{
+	char * tmp;
+	char * operators = "\'\"";
+
+	return (tmp = ft_strchr(operators, cmd)) ? (tmp - operators)  + 14: 0;
+}
+
 int		is_operator(char cmd)
 {
 	char * tmp;
-	char * operators = "><(){}|&;\'\"";
+	char * operators = "><(){}|&;";
 
 	return (tmp = ft_strchr(operators, cmd)) ? (tmp - operators)  + 5: 0;
 }
@@ -60,6 +68,7 @@ int		*definition_code(char *cmd)
 		get_cmd(cmd, codes);
 		get_arg(cmd, codes);
 		get_file(cmd, codes);
+		get_quote(cmd, codes);
 	}
 	return (codes);
 }
