@@ -15,7 +15,6 @@
 
 #include <unistd.h>
 #include <fcntl.h>
-#include <stdio.h>
 
 int			redirection_left(t_info *info, t_tree *cmd)
 {
