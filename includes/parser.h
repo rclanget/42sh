@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/19 22:03:03 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/20 10:12:22 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int						is_operator(char cmd);
 void					skip_space(char *cmd, int *i);
 int						*definition_code(char *cmd);
 
-int						*get_operator(char *cmd);
+int						*get_operator(char *cmd, int *codes);
 int						*get_cmd(char *cmd, int *codes);
 int						*get_arg(char *cmd, int *codes);
 int						*get_file(char *cmd, int *codes);

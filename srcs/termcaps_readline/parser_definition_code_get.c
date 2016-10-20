@@ -6,18 +6,16 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 21:59:06 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/19 22:08:01 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/20 10:11:46 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
-#include "command_line_termcaps.h"
 
-int	*get_operator(char *cmd)
+int	*get_operator(char *cmd, int *codes)
 {
 	int	i;
 	int	code;
-	int	codes[BUFFER_SIZE];
 
 	i = 0;
 	while (cmd[i])

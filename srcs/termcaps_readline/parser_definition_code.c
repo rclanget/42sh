@@ -6,11 +6,12 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 19:51:35 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/19 22:06:16 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/20 10:16:58 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
+#include "command_line_termcaps.h"
 
 int		is_operator(char cmd)
 {
@@ -42,15 +43,15 @@ void	skip_space(char *cmd, int *i)
 
 int		*definition_code(char *cmd)
 {
-	static int *codes;
+	static int codes[BUFFER_SIZE];
 
 	if (cmd)
 	{
-		codes = get_operator(cmd);
-		codes = get_cmd(cmd, codes);
-		codes = get_arg(cmd, codes);
-		codes = get_file(cmd, codes);
-		codes = get_quote(cmd, codes);
+		get_operator(cmd, codes);
+		get_cmd(cmd, codes);
+		get_arg(cmd, codes);
+		get_file(cmd, codes);
+		// get_quote(cmd, codes);
 	}
 	return (codes);
 }
