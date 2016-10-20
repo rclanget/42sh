@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/29 10:45:36 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/03 13:00:05 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:45:17 by gdeguign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ int		operator_comma(t_info *info, t_tree *cmd);
 int		redirection_right(t_info *info, t_tree *cmd);
 int		redirection_dright(t_info *info, t_tree *cmd);
 int		redirection_left(t_info *info, t_tree *cmd);
-
+int		redirection_get_fd(t_tree *cmd);
 #endif

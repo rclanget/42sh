@@ -6,19 +6,14 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 15:30:38 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/26 09:19:10 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:35:11 by gdeguign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
-int		ft_blank(char c)
-{
-	if (c == ' ' || c == '\n' || c == '\t')
-		return (1);
-	return (0);
-}
+int		ft_blank(char c);
 
 char	*ft_strtrimb(char *s)
 {

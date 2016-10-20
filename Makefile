@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/03/03 14:20:30 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/10/20 16:49:42 by gdeguign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					execution_status.c operator_or.c redirection_left.c \
 					builtin_echo.c builtin_unsetenv.c execution_motor.c \
 					operator_and.c operator_pipe.c redirection_right.c \
-					builtin_env.c
+					builtin_env.c redirection_get_fd.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 

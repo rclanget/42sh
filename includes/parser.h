@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/20 11:11:08 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/20 16:34:23 by gdeguign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char					*clean_backslash(char *str);
 int						is_operator(char cmd);
 void					skip_space(char *cmd, int *i);
 int						*definition_code(char *cmd);
-int 					ft_isspace(char c);
 int						is_quote(char cmd);
 
 int						*get_operator(char *cmd, int *codes);
