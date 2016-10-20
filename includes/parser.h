@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/20 10:38:19 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/20 11:11:08 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 # define C_FILE 		 4
 # define C_CHEV_R 		 5
 # define C_CHEV_L 		 6
-# define C_PARENTHESE 	 7
-# define C_BRACKET 		 8
-# define C_PIPE 		 9
-# define C_AMP 			 10
-# define C_SEMICOL 		 11
-# define C_QUOTE 		 12
-# define C_DQUOTE 		 13
+# define C_PARENTHESE_O  7
+# define C_PARENTHESE_C	 8
+# define C_BRACKET_O	 9
+# define C_BRACKET_C	 10
+# define C_PIPE 		 11
+# define C_AMP 			 12
+# define C_SEMICOL 		 13
+# define C_QUOTE 		 14
+# define C_DQUOTE 		 15
 
 typedef struct			s_tree
 {
