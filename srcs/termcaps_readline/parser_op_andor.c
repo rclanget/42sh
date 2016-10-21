@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 14:56:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:21:12 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/21 14:35:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int			check_op_and(char *str)
 {
-	return ((!ft_strncmp(str, "&&", 2)) ? 1 : 0);
+	return ((!ft_strncmp(str, "&&", 2)) ? 2 : 0);
 }
 
 char		**parse_op_and(char *str, int pos)
@@ -35,7 +35,7 @@ char		**parse_op_and(char *str, int pos)
 
 int			check_op_or(char *str)
 {
-	return ((!ft_strncmp(str, "||", 2)) ? 1 : 0);
+	return ((!ft_strncmp(str, "||", 2)) ? 3 : 0);
 }
 
 char		**parse_op_or(char *str, int pos)

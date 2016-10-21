@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/20 16:34:23 by gdeguign         ###   ########.fr       */
+/*   Updated: 2016/10/21 14:43:52 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ char					**parse_op_comma(char *str, int pos);
 int						check_op_parentheses(char *str);
 char					**parse_op_parentheses(char *str, int pos);
 
+int						check_op_redir(char *str);
 int						check_op_right(char *str);
 char					**parse_op_right(char *str, int pos);
 int						check_op_dright(char *str);
@@ -70,6 +71,7 @@ char					**parse_op_left(char *str, int pos);
 int						check_op_dleft(char *str);
 char					**parse_op_dleft(char *str, int pos);
 
+int						check_op_logical(char *str);
 int						check_op_and(char *str);
 char					**parse_op_and(char *str, int pos);
 int						check_op_or(char *str);
@@ -98,5 +100,6 @@ int						*get_file(char *cmd, int *codes);
 int						*get_quote(char *cmd, int *codes);
 
 extern t_parse g_parse[];
+extern t_parse g_parse2[];
 
 #endif

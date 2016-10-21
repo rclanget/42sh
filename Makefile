@@ -6,14 +6,14 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/20 16:49:42 by gdeguign         ###   ########.fr        #
+#    Updated: 2016/10/21 14:46:37 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJ_PATH		=	./obj/
 INC_PATH		=	./includes/ ./libft/includes/
 NAME			=	./21sh
-CC				=	gcc
+CC				=	gcc -g
 CFLAGS			=	-Wall -Werror -Wextra
 
 SRC_ALIAS		=	./srcs/alias/
@@ -67,7 +67,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					termcap_capinit.c termcap_winsz.c termcaps_activation.c \
 					termcaps_available.c termcaps_handle_keyboard.c \
 					termcaps_loop.c termcaps_print.c termcaps_readline.c \
-					termcaps_save.c
+					termcaps_save.c parser_op_logical.c parser_op_redir.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 

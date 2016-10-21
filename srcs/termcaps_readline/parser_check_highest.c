@@ -6,14 +6,14 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 14:08:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/02 11:14:26 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:31:50 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
-t_parse g_parse[] =
+t_parse g_parse2[] =
 {
 	{1, check_op_comma, parse_op_comma},
 	{2, check_op_and, parse_op_and},
@@ -26,22 +26,23 @@ t_parse g_parse[] =
 	{0, NULL, NULL}
 };
 
-// char		*ft_strndup(char *str, int len)
-// {
-// 	char	*s;
-//
-// 	s = (char * )malloc(sizeof(char) * len + 1);
-// 	ft_bzero(s, sizeof(char) * len + 1);
-// 	ft_memcpy(s, str, len);
-// 	return (s);
-// }
+t_parse g_parse[] =
+{
+	{1, check_op_comma, parse_op_comma},
+	{23, check_op_logical, NULL},
+	{4, check_op_pipe, parse_op_pipe},
+	{5678, check_op_redir, NULL},
+	{0, NULL, NULL}
+};
 
 int			check_hightest(char *cmd, int i)
 {
-	return ((g_parse[i].check(cmd)) ? i + 1 : 0);
+	int ret;
+
+	return ((ret = g_parse[i].check(cmd)) ? ret : 0);
 }
 
 char		**split_on(char *cmd, int pos, int type)
 {
-	return (g_parse[type - 1].parse(cmd, pos));
+	return (g_parse2[type - 1].parse(cmd, pos));
 }

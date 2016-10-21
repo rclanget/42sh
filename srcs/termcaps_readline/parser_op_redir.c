@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_op_pipe.c                                   :+:      :+:    :+:   */
+/*   parser_op_redir.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/24 15:23:26 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/21 14:35:24 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/10/21 14:39:41 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/10/21 15:23:30 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "parser.h"
 
-int			check_op_pipe(char *str)
+int			check_op_redir(char *str)
 {
-	return ((str && *str && *str == '|') ? 4 : 0);
-}
+	int ret;
 
-char		**parse_op_pipe(char *str, int pos)
-{
-	char	**tab;
-
-	tab = NULL;
-	if ((tab = (char **)malloc(sizeof(char *) * 4)))
-	{
-		tab[0] = ft_strndup(str, pos);
-		tab[1] = ft_strdup("|");
-		tab[2] = ft_strdup(&str[pos + 1]);
-		tab[3] = NULL;
-	}
-	return (tab);
+	ret = 0;
+	if ((ret = check_op_right(str)))
+	;
+	else if ((ret = check_op_dright(str)))
+	;
+	else if ((ret = check_op_left(str)))
+	;
+	else if ((ret = check_op_dleft(str)))
+	;
+	return (ret);
 }

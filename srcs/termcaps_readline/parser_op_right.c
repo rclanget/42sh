@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 17:55:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:21:42 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:50:11 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 
 int			check_op_right(char *str)
 {
-	return ((*str == '>' && *(str + 1) && *(str + 1) != '>') ? 1 : 0);
+	return ((*str == '>' && *(str + 1) && *(str + 1) != '>') ? 5 : 0);
 }
 
+#include <stdio.h>
 char		**parse_op_right(char *str, int pos)
 {
 	char	**tab;
@@ -35,7 +36,7 @@ char		**parse_op_right(char *str, int pos)
 
 int			check_op_dright(char *str)
 {
-	return ((!ft_strncmp(str, ">>", 2)) ? 1 : 0);
+	return ((!ft_strncmp(str, ">>", 2)) ? 7 : 0);
 }
 
 char		**parse_op_dright(char *str, int pos)

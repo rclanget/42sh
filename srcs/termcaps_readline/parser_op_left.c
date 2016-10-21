@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 17:54:59 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:21:27 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/21 14:36:19 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int			check_op_left(char *str)
 {
-	return ((*str == '<' && *(str + 1) && *(str + 1) != '<') ? 1 : 0);
+	return ((*str == '<' && *(str + 1) && *(str + 1) != '<') ? 6 : 0);
 }
 
 char		**parse_op_left(char *str, int pos)
@@ -35,7 +35,7 @@ char		**parse_op_left(char *str, int pos)
 
 int			check_op_dleft(char *str)
 {
-	return ((!ft_strncmp(str, "<<", 2)) ? 1 : 0);
+	return ((!ft_strncmp(str, "<<", 2)) ? 8 : 0);
 }
 
 char		**parse_op_dleft(char *str, int pos)

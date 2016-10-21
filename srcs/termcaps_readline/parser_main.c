@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/18 10:15:30 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/21 16:51:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_tree		*parser_cmd(char *cmd)
 			free_tab(tab);
 		}
 		else
-			node->elem = ft_strtrimb(cmd);
+			node->elem = ft_strtrim(cmd);
 	}
 	return (node);
 }

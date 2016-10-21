@@ -6,31 +6,12 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/19 16:58:32 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/20 18:05:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
-
-char				*ft_strtrim(char const *s)
-{
-	char *beg;
-	char *end;
-	char *ret;
-
-	ret = NULL;
-	if (s)
-	{
-		beg = (char *)s;
-		end = (char *)&(s[ft_strlen(s) - 1]);
-		while ((*beg == ' ' || *beg == '\n' || *beg == '\t') && ++beg);
-		while ((*beg == ' ' || *beg == '\n' || *beg == '\t') && --end);
-		if (++end - beg >= 0 && (ret = ft_memalloc(sizeof(char) * (end - beg + 1))))
-			ret = ft_memcpy(ret, beg, (end - beg));
-	}
-	return ret;
-}
 
 static char			*remove_quote(char *str)
 {
