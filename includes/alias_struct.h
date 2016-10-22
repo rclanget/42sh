@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:56:43 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/03 13:02:16 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/22 14:39:12 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,12 @@ typedef struct		s_alias
 	char			*replace;
 	struct s_alias	*next;
 }					t_alias;
+
+typedef struct		s_word
+{
+	char 			*word;
+	int 			treat;
+	struct s_word 	*next;
+}					t_word;
 
 #endif

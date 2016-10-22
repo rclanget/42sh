@@ -1,1 +1,0 @@
-gcc -L libft -lft -ltermcap -I libft/includes -I includes srcs/termcaps_readline/*.c srcs/main/main.c srcs/hashmap/*.c  srcs/env/*.c  srcs/tools/*.c srcs/execution/*.c srcs/alias/*.c -o 42sh
