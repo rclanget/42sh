@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 10:24:39 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/01/28 15:30:05 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/22 15:35:18 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,7 @@ int					ft_nbrlen(int n);
 int					ft_option(int ac, char **av, const char *list, int *option);
 int					ft_print(const char *fmt, ...);
 int					ft_fdprint(int fd, const char *fmt, ...);
+
+int					ft_free_them_all(int nb, ...);
 
 #endif

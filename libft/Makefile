@@ -1,4 +1,4 @@
-#******************************************************************************#
+# **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,9 +6,9 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/11/08 11:15:44 by ulefebvr          #+#    #+#              #
-#    Updated: 2015/10/28 17:55:53 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/10/22 15:35:46 by rclanget         ###   ########.fr        #
 #                                                                              #
-#******************************************************************************#
+# **************************************************************************** #
 
 OBJ_PATH	=	./obj/
 SRC_PATH	=	./srcs/
@@ -27,7 +27,7 @@ SRC_NAME	= 	ft_putchar.c ft_putstr.c ft_putnbr.c ft_strlen.c ft_strdup.c \
 				ft_itoa.c ft_putendl.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c \
 				ft_putnbr_fd.c ft_strncat.c ft_lstadd.c ft_lstdel.c ft_lstdelone.c \
 				ft_lstiter.c ft_lstmap.c ft_lstnew.c ft_nbrlen.c ft_print.c\
-				get_next_line.c ft_getenv.c ft_option.c
+				get_next_line.c ft_getenv.c ft_option.c ft_free_them_all.c
 SRC			= $(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ_NAME	= $(SRC_NAME:.c=.o)
 OBJ			= $(addprefix $(OBJ_PATH),$(OBJ_NAME))
