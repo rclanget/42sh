@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:55:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/22 15:40:47 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/22 17:40:36 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ char 		*get_other(char *cmd, int *code);
 char 		*get_command(char *cmd, int *code);
 t_word		*get_the_list(char *s);
 
-void		free_list(t_word *list);
 t_alias		*search_alias2(t_info *info, char *var, int *position);
 char		*make_sentence(t_word *words);
-char		*get_the_alias(t_info *info, t_word *ws, char *cmd, char *visited);
+char		*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited);
 #endif

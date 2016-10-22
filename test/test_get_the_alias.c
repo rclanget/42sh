@@ -1,7 +1,8 @@
-// gcc srcs/alias/get_the_alias.c srcs/alias/get_the_alias_tool.c srcs/termcaps_readline/parser_definition_code.c srcs/termcaps_readline/parser_definition_code_get.c srcs/alias/search_alias.c srcs/alias/add_alias.c test/test_get_the_alias.c -Iincludes -Ilibft/includes libft/libft.a
+// gcc srcs/alias/apply_alias_get.c srcs/alias/apply_alias.c srcs/termcaps_readline/parser_definition_code.c srcs/termcaps_readline/parser_definition_code_get.c srcs/alias/add_alias.c test/test_get_the_alias.c -Iincludes -Ilibft/includes libft/libft.a
 #include <stdio.h>
 #include "alias.h"
 #include "libft.h"
+#include "parser.h"
 #include "command_line_termcaps.h"
 
 int main(void)
@@ -19,7 +20,7 @@ int main(void)
 	add_alias(&info, "echo", "cd");
 	// add_alias(&info, "cd", "ls");
 
-	printf("%s\n", get_the_alias(&info, get_the_list(cmd), ft_strdup(cmd), visited));
+	printf("%s\n", apply_alias(&info, get_the_list(cmd), ft_strdup(cmd), visited));
 
 	sleep(15);
 
