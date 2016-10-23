@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 21:59:06 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/20 10:38:41 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/21 18:58:29 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	*get_cmd(char *cmd, int *codes)
 			if ((!i && codes[i] != C_SPACE) || i)
 				i++;
 			skip_space(cmd, &i);
-			while (cmd[i] && !ft_isspace(cmd[i]) && codes[i] == C_SPACE)
+			while (cmd[i] && !IS_SPACE(cmd[i]) && codes[i] == C_SPACE)
 				codes[i++] = C_CMD;
 		}
 		else

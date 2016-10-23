@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 19:51:35 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/20 18:01:56 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/21 18:58:16 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,9 @@ int		is_operator(char cmd)
 	return (tmp = ft_strchr(operators, cmd)) ? (tmp - operators)  + 5: 0;
 }
 
-int 	ft_isspace(char c)
-{
-	return (c == ' ' || c == '\t');
-}
-
 void	skip_space(char *cmd, int *i)
 {
-	while (cmd[*i] && ft_isspace(cmd[*i]))
+	while (cmd[*i] && IS_SPACE(cmd[*i]))
 		*i += 1;
 }
 

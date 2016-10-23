@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/21 14:43:52 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 19:20:21 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define C_SEMICOL 		 13
 # define C_QUOTE 		 14
 # define C_DQUOTE 		 15
+
+# define IS_SPACE(x) (x == ' ' || x == '\t')
+# define IS_TEXT(x) (x == C_SPACE || x == C_CMD || x == C_ARG || x == C_FILE)
 
 typedef struct			s_tree
 {
