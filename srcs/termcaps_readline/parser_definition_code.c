@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 19:51:35 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/21 18:58:16 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 20:20:31 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		*definition_code(char *cmd)
 {
 	static int codes[BUFFER_SIZE];
 
-	if (cmd)
+	if (cmd && *cmd)
 	{
 		get_operator(cmd, codes);
 		get_cmd(cmd, codes);

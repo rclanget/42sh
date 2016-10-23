@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/04 15:14:31 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 20:58:10 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,6 @@ void			save_fd(int tosave)
 	}
 }
 
-char			**execution_alias(t_info *info, char **cmd_o)
-{
-	char	*tmp;
-	char	**tab;
-	char	**cmd;
-
-	if (cmd_o && (tmp = check_alias(info, cmd_o[0])))
-	{
-		tab = ft_strsplit(tmp, ' ');
-		cmd = ft_tabjoin(tab, &cmd_o[1]);
-		free(tab);
-		free(cmd_o[0]);
-		free(cmd_o);
-		free(tmp);
-	}
-	else
-		cmd = cmd_o;
-	return (cmd);
-}
-
 void			execution(t_info *info, t_tree *cmd, char **env)
 {
 	char	*tmp;
@@ -87,7 +67,6 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 
 	env = NULL;
 	status = 0;
-	cmd->cmd = execution_alias(info, cmd->cmd);
 	if (!is_builtin(cmd->cmd[0]))
 	{
 		if ((pid = fork()) == -1)

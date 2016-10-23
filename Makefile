@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
+#    By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/23 19:15:18 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/10/23 20:10:45 by rclanget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ CFLAGS			=	-Wall -Werror -Wextra
 
 SRC_ALIAS		=	./srcs/alias/
 SRCN_ALIAS		=	add_alias.c check_alias.c free_alias.c remove_alias.c \
-					search_alias.c update_alias.c
+					search_alias.c update_alias.c len_alias.c apply_alias.c \
+					apply_alias_get.c
 OBJ_ALIAS		=	$(SRCN_ALIAS:.c=.o)
 SRCS_ALIAS		=	$(addprefix $(SRC_ALIAS),$(SRCN_ALIAS))
 
@@ -67,7 +68,8 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					termcap_capinit.c termcap_winsz.c termcaps_activation.c \
 					termcaps_available.c termcaps_handle_keyboard.c \
 					termcaps_loop.c termcaps_print.c termcaps_readline.c \
-					termcaps_save.c parser_op_logical.c parser_op_redir.c
+					termcaps_save.c parser_op_logical.c parser_op_redir.c \
+					parser_definition_code.c parser_definition_code_get.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 

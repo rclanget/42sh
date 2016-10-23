@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_the_alias.c                                    :+:      :+:    :+:   */
+/*   apply_alias.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/22 14:59:11 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/22 16:08:40 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/23 20:57:19 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ char			*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited)
 
 	w = ws;
 	tmp = ft_strdup(visited);
-	while (w)
+	while (w && tmp)
 	{
 		if (w->treat && (alias = search_alias2(info, w->word, &i)) && !tmp[i]++)
 		{
 			free(w->word);
-			w->word = apply_alias(info, get_the_list(alias->replace),
+			w->word = apply_alias(info, get_the_list(alias->replace, definition_code(alias->replace)),
 				ft_strdup(alias->replace), ft_strdup(tmp));
 		}
 		ft_strcpy(tmp, visited);
@@ -82,4 +82,22 @@ char			*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited)
 	free_list(ws);
 	ft_free_them_all(3, cmd, visited, tmp);
 	return (replace);
+}
+
+char			*apply_alias_verified(t_info *info, char *command)
+{
+	char		*tmp;
+
+	if (*command)
+	{
+		tmp = apply_alias(
+			info,
+			get_the_list(command, definition_code(command)),
+			ft_strdup(command),
+			ft_memalloc(sizeof(char) * len_alias(info->alias))
+			);
+		free(command);
+		command = tmp;
+	}
+	return (command);
 }

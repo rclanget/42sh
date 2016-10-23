@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/04 15:12:14 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 20:51:30 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char        *return_string(t_termcaps *term)
 	if ((len = ft_strlen(term->cmd)) != term->pos_c)
 		move_cursor(term->capa, term->pos_c, ft_strlen(term->prompt), len);
 	ft_putstr("\n");
-	return (term->cmd);
+	return (ft_strdup(term->cmd));
 }
 
 char        *termcaps_loop(t_info *info)

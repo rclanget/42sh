@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/04 15:12:46 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 20:57:35 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "env.h"
 #include "operator.h"
 #include "command_line_termcaps.h"
+#include "alias.h"
 
 void        ft_exit_shell(t_info *info) {
 	(void)info;
@@ -44,9 +45,9 @@ int main(int ac, char const **av, char **env) {
 	char *command;
 	while ((command = termcaps_readline(&info)))
 	{
-		ft_print("%s\n", command);
 		save_fd(1);
-		info.cmd = parser_cmd(command);
+		command = apply_alias_verified(&info, command);
+		info.cmd = parser_cmd(ft_strtrim(command));
 		execution_motor(&info, info.cmd, 1);
 		info.cmd = parser_free_cmd(info.cmd);
 		save_fd(0);
