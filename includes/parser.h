@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 19:20:21 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 21:39:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char					**parse_op_rightfd(char *str, int pos);
 void					*parser_free_cmd(t_tree *cmd);
 
 char					*clean_parentheses(char *str, int *value);
-char					*clean_backslash(char *str);
 
 int						is_operator(char cmd);
 void					skip_space(char *cmd, int *i);

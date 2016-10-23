@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+srcs/termcaps_readline/parser_clean_backslash.c/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   execution_motor.c                                  :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/04 15:14:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 21:42:50 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "operator.h"
 #include "execution.h"
 #include "libft.h"
+#include "tools.h"
 
 #include <unistd.h>
 
@@ -45,7 +46,7 @@ int				execution_motor(t_info *info, t_tree *cmd, int wait)
 {
 	if (cmd)
 	{
-		cmd->cmd = ft_strsplit(cmd->elem, ' ');
+		cmd->cmd = cust_split(cmd->elem);
 		if (!cmd->type)
 			return (execution_command(info, cmd, wait));
 		else

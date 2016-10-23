@@ -6,12 +6,13 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/20 18:05:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/23 21:45:14 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
+#include "tools.h"
 
 static char			*remove_quote(char *str)
 {
@@ -74,7 +75,7 @@ static char			*get_next_word(char *str)
 		del = seek_next_delimiter(content);
 		tmp = ft_memalloc(sizeof(char) * (del - content + 1));
 		tmp = ft_memcpy(tmp, content, (del - content));
-		ret = remove_quote(ft_strtrim(tmp));
+		ret = clean_backslash(remove_quote(ft_strtrim(tmp)));
 		free(tmp);
 		del = (!*del) ? NULL : del;
 		if (!*ret)

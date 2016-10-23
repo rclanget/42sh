@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_clean_backslash.c                           :+:      :+:    :+:   */
+/*   clean_backslash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:55:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/19 11:55:59 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/23 21:38:34 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "parser.h"
 
 char *clean_backslash(char *str)
 {
@@ -37,4 +36,3 @@ char *clean_backslash(char *str)
     free(str);
     return (str_new);
 }
-
