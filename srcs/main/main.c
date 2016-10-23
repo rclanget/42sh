@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 20:57:35 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/23 21:25:00 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "operator.h"
 #include "command_line_termcaps.h"
 #include "alias.h"
+#include "syntax.h"
 
 void        ft_exit_shell(t_info *info) {
 	(void)info;
@@ -48,13 +49,11 @@ int main(int ac, char const **av, char **env) {
 		save_fd(1);
 		command = apply_alias_verified(&info, command);
 		info.cmd = parser_cmd(ft_strtrim(command));
-		execution_motor(&info, info.cmd, 1);
+		if (syntax_check(info.cmd))
+			execution_motor(&info, info.cmd, 1);
 		info.cmd = parser_free_cmd(info.cmd);
 		save_fd(0);
-		if (info.term->is_term)
-			ft_bzero(info.term->cmd, BUFFER_SIZE);
-		else
-			free(command);
+		free(command);
 		info.term->pos_c = 0;
 		update_path(&info, search_env_var(&info, "PATH"));
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 20:51:30 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/23 21:27:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char        *termcaps_loop(t_info *info)
 	long                chr;
 
 	chr = 0;
+	ft_bzero(info->term->cmd, BUFFER_SIZE);
 	while ((ret = read(0, &chr, sizeof(chr))) > 0)
 	{
 		if ((chr == NL) || (chr == CTRL_D && (ret = -1) == -1))
