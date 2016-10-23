@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/21 14:46:37 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/10/23 19:15:18 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,10 +71,15 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
+SRC_SYNTAX		=	./srcs/syntax/
+SRCN_SYNTAX		=	syntax_analyse.c
+OBJ_SYNTAX		=	$(SRCN_SYNTAX:.c=.o)
+SRCS_SYNTAX		=	$(addprefix $(SRC_SYNTAX),$(SRCN_SYNTAX))
+
 
 SRC_NAME		=	$(SRCN_ALIAS) $(SRCN_ENV) $(SRCN_EXEC) \
 					$(SRCN_TOOLS) $(SRCN_TERM) \
-					$(SRCN_MAIN) $(SRCN_HASH)
+					$(SRCN_MAIN) $(SRCN_HASH) $(SRCN_SYNTAX)
 OBJ_NAME		=	$(SRC_NAME:.c=.o)
 SRC				=	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
@@ -116,6 +121,10 @@ $(OBJ_PATH)%.o: $(SRC_TERM)%.c
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 $(OBJ_PATH)%.o: $(SRC_HASH)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+
+$(OBJ_PATH)%.o: $(SRC_SYNTAX)%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
