@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 18:19:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/24 19:31:26 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int main(int ac, char const **av, char **env) {
 	(void)av;
 	t_info info;
 	t_termcaps term;
-
-	env = NULL;
 
 	ft_bzero(&info, sizeof(info));
 	ft_bzero(&term, sizeof(term));
