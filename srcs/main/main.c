@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 17:54:58 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/24 18:19:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int main(int ac, char const **av, char **env) {
 	t_info info;
 	t_termcaps term;
 
+	env = NULL;
+
 	ft_bzero(&info, sizeof(info));
 	ft_bzero(&term, sizeof(term));
 
@@ -41,8 +43,12 @@ int main(int ac, char const **av, char **env) {
 	ft_init_env(&info, env);
 	info.alias = NULL;
 
-	info.hash = creer_hashmap(ft_strdup((search_env_var(&info, "PATH")) ?
-		search_env_var(&info, "PATH")->content : NULL), NULL);
+	info.hash = creer_hashmap(
+		ft_strdup(
+			(search_env_var(&info, "PATH")) ? search_env_var(&info, "PATH")->content : NULL
+		),
+		NULL
+	);
 
 	char *command;
 	while ((command = termcaps_readline(&info)))

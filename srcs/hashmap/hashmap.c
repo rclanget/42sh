@@ -95,10 +95,10 @@ char		*change_path(void)
 		return (NULL);
 	while (get_next_line(fd, &line))
 	{
-		tmp = ft_strjoin(line, ":");
+		tmp = ft_strjoin_custom(line, ":");
 		ft_strdel(&line);
 		tmp2 = tmp3;
-    	tmp3 = ft_strjoin(tmp2, tmp);
+    	tmp3 = ft_strjoin_custom(tmp2, tmp);
     	ft_strdel(&tmp);
     	ft_strdel(&tmp2);
 	}
