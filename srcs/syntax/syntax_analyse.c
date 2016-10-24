@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 17:47:05 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 19:16:04 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:13:44 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@ int (*checker[])(t_tree *y) = {\
 			&syntax_logical, \
 			&syntax_redir};
 
-int syntax_comma(t_tree *cmd)
+int		syntax_comma(t_tree *cmd)
 {
-	if (!syntax_check(cmd->left))
+	if (!syntax_check(cmd->left, 0))
 		return (0);
-	return ((!cmd->right) ? 1 : syntax_check(cmd->right));
+	return ((!cmd->right) ? 1 : syntax_check(cmd->right, 0));
 }
 
-int syntax_logical(t_tree *cmd)
+int		syntax_logical(t_tree *cmd)
 {
-	return (syntax_check(cmd->left) && syntax_check(cmd->right));
+	return (syntax_check(cmd->left, 0) && syntax_check(cmd->right, 0));
 }
 
-int syntax_redir(t_tree *cmd)
+int		syntax_redir(t_tree *cmd)
 {
-	return (syntax_check(cmd->left) && syntax_check(cmd->right));
+	return (syntax_check(cmd->left, 0) && syntax_check(cmd->right, 0));
 }
 
 int		syntax_family(int type)
@@ -49,17 +49,20 @@ int		syntax_family(int type)
 	return ret;
 }
 
-int		syntax_check(t_tree *cmd)
+int		syntax_check(t_tree *cmd, int reset)
 {
-	int ret;
+	int			ret;
+	static int	status;
 
 	ret = 0;
+	if (reset)
+		status = 0;
 	if (cmd)
 	{
 		if (!cmd->type)
 			ret = 1;
-		else if (!(ret = checker[syntax_family(cmd->type)](cmd)))
-				ft_print("42sh: parse error near \'%s\'\n", cmd->elem);
+		else if (!(ret = checker[syntax_family(cmd->type)](cmd)) && !status++)
+			ft_print("42sh: parse error near \'%s\'\n", cmd->elem);
 	}
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 21:25:00 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/24 16:13:01 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int main(int ac, char const **av, char **env) {
 		save_fd(1);
 		command = apply_alias_verified(&info, command);
 		info.cmd = parser_cmd(ft_strtrim(command));
-		if (syntax_check(info.cmd))
+		if (syntax_check(info.cmd, 1))
 			execution_motor(&info, info.cmd, 1);
 		info.cmd = parser_free_cmd(info.cmd);
 		save_fd(0);
