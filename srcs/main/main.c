@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 16:13:01 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:54:58 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "command_line_termcaps.h"
 #include "alias.h"
 #include "syntax.h"
+#include "execution.h"
 
 void        ft_exit_shell(t_info *info) {
 	(void)info;
@@ -61,5 +62,6 @@ int main(int ac, char const **av, char **env) {
 	ft_free_env(info.env);
 	hashmap_free(info.hash);
 	info.env = NULL;
-	return (0);
+	ft_print("[%d]", info.status);
+	exit(execution_status(info.status));
 }

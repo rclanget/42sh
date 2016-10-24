@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 20:58:10 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:41:52 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 			execution(info, cmd, env);
 		}
 		if (wait)
-			waitpid(pid, &status, WUNTRACED);
+			waitpid(pid, &info->status, WUNTRACED);
 		free_env_tab(env);
-		return (execution_status(status));
+		return (execution_status(info->status));
 	}
 	return(execution_builtin(info, cmd));
 }

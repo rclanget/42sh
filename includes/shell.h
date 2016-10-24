@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 12:09:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/03 12:50:41 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/24 17:41:15 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct			s_info
 	struct s_hashmap	*hash;
 	struct s_termcaps	*term;
 	int					stop;
+	int					status;
 }						t_info;
 
 t_hashmap				*creer_hashmap(char *path, t_hashmap *map);
