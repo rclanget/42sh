@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 16:28:35 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:47:40 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
 
 #define IS_REDIR(x) (x == 5 || x == 6 || x == 7 || x == 8)
 #define TO_LEFT(x) (x == 6 || x == 8)
@@ -66,7 +67,7 @@ int			redirection_get_fd(t_tree *cmd, int *fds)
 		);
 		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
-			ft_fdprint(2, "STOOOOP ERROR");
+			ft_fdprint(2, "42sh: %s: %s\n", strerror(errno), GET_FILE(cmd->right));
 			close(fds[!(TO_LEFT(cmd->type)) ? 0 : 1]);
 			fds[!(TO_LEFT(cmd->type)) ? 0 : 1] = -1;
 		}
