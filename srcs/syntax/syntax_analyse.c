@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 17:47:05 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 16:13:44 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:25:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int (*checker[])(t_tree *y) = {\
 			&syntax_comma,\
 			&syntax_logical, \
-			&syntax_redir};
+			&syntax_subshell};
 
 int		syntax_comma(t_tree *cmd)
 {
@@ -30,9 +30,10 @@ int		syntax_logical(t_tree *cmd)
 	return (syntax_check(cmd->left, 0) && syntax_check(cmd->right, 0));
 }
 
-int		syntax_redir(t_tree *cmd)
+int		syntax_subshell(t_tree *cmd)
 {
-	return (syntax_check(cmd->left, 0) && syntax_check(cmd->right, 0));
+	(void)cmd;
+	return (1);
 }
 
 int		syntax_family(int type)
@@ -42,9 +43,9 @@ int		syntax_family(int type)
 	ret = 0;
 	if (type == 1)
 		ret = 0;
-	else if (2 <= type &&  type <= 4)
+	else if (2 <= type &&  type <= 8)
 		ret = 1;
-	else if (5 <= type && type <= 9)
+	else if (type == 9)
 		ret = 2;
 	return ret;
 }

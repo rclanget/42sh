@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 12:44:41 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:25:49 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int (*p[])(t_info *x, t_tree *y) = {\
 			&redirection_right, \
 			&redirection_left, \
 			&redirection_dright, \
-			&redirection_dleft};
+			&redirection_dleft,
+			&process_subshell};
 
 int				wich_operator(char *op)
 {

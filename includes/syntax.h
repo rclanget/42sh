@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 19:16:28 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 16:13:07 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:22:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 int		syntax_comma(t_tree *cmd);
 int		syntax_logical(t_tree *cmd);
 int		syntax_redir(t_tree *cmd);
+int		syntax_subshell(t_tree *cmd);
+
 int		syntax_check(t_tree *cmd, int reset);
 
 #endif

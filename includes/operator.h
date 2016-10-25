@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/29 10:45:36 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 15:16:10 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:39:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,7 @@ int		redirection_left(t_info *info, t_tree *cmd);
 int		redirection_dleft(t_info *info, t_tree *cmd);
 
 int		redirection_get_fd(t_tree *cmd, int *fds);
+
+int		process_subshell(t_info *info, t_tree *cmd);
+
 #endif

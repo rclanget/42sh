@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 17:07:34 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 19:48:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int main(int ac, char const **av, char **env) {
 
 	ft_bzero(&info, sizeof(info));
 	ft_bzero(&term, sizeof(term));
+
+	info.self = realpath(av[0], NULL);
 
 	info.term = &term;
 	info.term->is_term = termcap_available();

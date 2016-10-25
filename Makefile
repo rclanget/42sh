@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/25 16:12:38 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/10/25 19:38:23 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					execution_status.c operator_or.c  \
 					builtin_echo.c builtin_unsetenv.c execution_motor.c \
 					operator_and.c operator_pipe.c  \
-					builtin_env.c redirection_all.c
+					builtin_env.c redirection_all.c process_subshell.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
@@ -70,7 +70,8 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					termcaps_available.c termcaps_handle_keyboard.c \
 					termcaps_loop.c termcaps_print.c termcaps_readline.c \
 					termcaps_save.c parser_op_logical.c parser_op_redir.c \
-					parser_definition_code.c parser_definition_code_get.c
+					parser_definition_code.c parser_definition_code_get.c \
+					parser_clean_parentheses.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
