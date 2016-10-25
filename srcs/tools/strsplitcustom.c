@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 17:27:37 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 18:17:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,13 @@ static char			*remove_quote(char *str)
 	tmp2 = str;
 	while (tmp && *tmp)
 	{
-		if (*tmp == '\'' || *tmp == '\"')
+		if (*tmp == '\\' && *(tmp + 1))
 		{
-			tmp++;
+			*tmp2++ = *tmp++;
+			*tmp2++ = *tmp++;
 		}
+		else if (*tmp == '\'' || *tmp == '\"')
+			tmp++;
 		else
 		{
 			*tmp2 = *tmp;
@@ -52,6 +55,8 @@ static char			*seek_next_delimiter(char *str)
 			continue;
 		else if (!chr && (*str == '\'' || *str == '\"'))
 			quote = (quote && *str == quote) ? 0 : *str;
+		else if (chr && !quote && *str && *(str + 1) == ' ')
+			str++;
 		else if (!chr && !quote && *str == ' ')
 			break;
 		if (chr)
