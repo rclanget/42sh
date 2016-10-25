@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 19:31:26 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 17:07:34 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int main(int ac, char const **av, char **env) {
 	ft_free_env(info.env);
 	hashmap_free(info.hash);
 	info.env = NULL;
-	ft_print("[%d]", info.status);
 	exit(execution_status(info.status));
 }
