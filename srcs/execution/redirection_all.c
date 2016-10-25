@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_right.c                                :+:      :+:    :+:   */
+/*   redirection_all.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/20 16:45:48 by gdeguign         ###   ########.fr       */
+/*   Created: 2016/10/25 15:31:07 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/10/25 16:17:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,50 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int			redirection_right(t_info *info, t_tree *cmd)
+int			redirection_all(t_info *info, t_tree *cmd)
 {
-	int		fd;
+	int		fds[2];
 	int		ret;
 
-	fd = -1;
 	ret = 0;
 	save_fd(1);
 	if (cmd->right)
-		fd = redirection_get_fd(cmd);
-	if (fd != -1)
+		redirection_get_fd(cmd, fds);
+	if (fds[0] != -1 || fds[1] != -1)
 	{
-		dup2(fd, 1);
-		close(fd);
+		if (fds[0] != -1)
+		{
+			dup2(fds[0], 0);
+			close(fds[0]);
+		}
+		if (fds[1] != -1)
+		{
+			dup2(fds[1], 1);
+			close(fds[1]);
+		}
 		ret = execution_motor(info, cmd->left, 1);
 		save_fd(0);
 		return (ret);
 	}
 	return (1);
+}
+
+int			redirection_right(t_info *info, t_tree *cmd)
+{
+	return (redirection_all(info, cmd));
+}
+
+int			redirection_dright(t_info *info, t_tree *cmd)
+{
+	return (redirection_all(info, cmd));
+}
+
+int			redirection_left(t_info *info, t_tree *cmd)
+{
+	return (redirection_all(info, cmd));
+}
+
+int			redirection_dleft(t_info *info, t_tree *cmd)
+{
+	return (redirection_all(info, cmd));
 }

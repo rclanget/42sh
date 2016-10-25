@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/21 14:10:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:16:58 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,65 +17,58 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-// int			redirection_get_fd(t_tree *cmd)
-// {
-// 	t_tree	*position_actuelle;
-// 	int		fd_new_file;
-// 	char	*new_str;
-//
-// 	new_str = NULL;
-// 	position_actuelle = cmd;
-// 	while (cmd && cmd->right && !(ft_strcmp(cmd->right->elem, ">")))
-// 	{
-// 		if (cmd->right->left)
-// 			new_str = ft_strtrim(cmd->right->left->elem);
-// 		fd_new_file = open(new_str, O_WRONLY | O_TRUNC | O_CREAT,
-// 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-// 		free(new_str);
-// 		if (fd_new_file != -1)
-// 		{
-// 			close(fd_new_file);
-// 			fd_new_file = -1;
-// 		}
-// 		cmd = cmd->right;
-// 	}
-// 	cmd = position_actuelle;
-// 	while (cmd->right)
-// 		cmd = cmd->right;
-// 	return (open(cmd->elem, O_WRONLY | O_TRUNC | O_CREAT,
-// 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH));
-// }
+#define IS_REDIR(x) (x == 5 || x == 6 || x == 7 || x == 8)
+#define TO_LEFT(x) (x == 6 || x == 8)
+#define IN 0
+#define OUT 1
+#define GET_FILE(x) (x->type ? x->left->elem : x->elem)
 
-#include <stdio.h>
+#define RIGHT(x) (x == 5)
+#define DRIGHT(x) (x == 7)
+#define LEFT(x) (x == 6)
 
-int			redirection_get_fd(t_tree *cmd)
+#define FILE_RIGHTS S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
+
+int			get_the_flags(int type)
 {
-	int		i;
-	t_tree	*list[20];
+	int		oflags;
 
-	i = 0;
-	while (cmd->right)
+	if (LEFT(type))
+		oflags = O_RDONLY;
+	else
+		oflags = O_WRONLY | (RIGHT(type) ? O_TRUNC : O_APPEND) | O_CREAT;
+	return (oflags);
+}
+
+int			replace_actual_file(int fd, char *filename, int type)
+{
+	int		new_fd;
+
+	close(fd);
+	if (LEFT(type))
+		new_fd = open(filename, get_the_flags(type));
+	else
+		new_fd = open(filename, get_the_flags(type), FILE_RIGHTS);
+	return (new_fd);
+}
+
+int			redirection_get_fd(t_tree *cmd, int *fds)
+{
+	ft_bzero(fds, sizeof(int) * 2);
+	fds[0] = -1;
+	fds[1] = -1;
+	while (cmd->right && cmd->type)
 	{
-		if (cmd->type == 5 && cmd->right->type)
+		fds[!(TO_LEFT(cmd->type)) ? 1 : 0] = replace_actual_file(
+			fds[!(TO_LEFT(cmd->type)) ? 1 : 0],
+			GET_FILE(cmd->right),
+			cmd->type
+		);
+		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
-			list[i] = cmd->right->left;
-			printf("%s\n", list[i]->elem);
-			i++;
-		}
-		else if (cmd->type == 5)
-		{
-			list[i] = cmd->right;
-			printf("%s\n", list[i]->elem);
-			i++;
+			ft_fdprint(2, "STOOOOP ERROR");
 		}
 		cmd = cmd->right;
 	}
-	return 0;
+	return (0);
 }
-
-			// 
-			// echo > f1 < f2 > f3
-			// 		>
-			// echo 1		<
-			// 		f1		>
-			// 			f2		f3
