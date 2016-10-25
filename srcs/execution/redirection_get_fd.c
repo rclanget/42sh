@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 16:16:58 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 16:28:35 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int			redirection_get_fd(t_tree *cmd, int *fds)
 		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
 			ft_fdprint(2, "STOOOOP ERROR");
+			close(fds[!(TO_LEFT(cmd->type)) ? 0 : 1]);
+			fds[!(TO_LEFT(cmd->type)) ? 0 : 1] = -1;
 		}
 		cmd = cmd->right;
 	}
