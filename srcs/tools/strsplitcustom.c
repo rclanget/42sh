@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 21:45:14 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/25 17:27:37 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char				**cust_split(char *str)
 		tab = (char **)ft_memalloc(sizeof(char *) * (nword + 1));
 		tab[nword] = 0;
 		while (nword--)
-		tab[nword] = tmptab[nword];
+			tab[nword] = tmptab[nword];
 	}
 	return (tab);
 }
