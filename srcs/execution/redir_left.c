@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_left.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gdeguign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/10/26 18:24:07 by gdeguign          #+#    #+#             */
+/*   Updated: 2016/10/26 18:24:14 by gdeguign         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include "parser.h"
 #include "tools.h"
@@ -50,8 +62,11 @@ char	*dleft_redirection(const char *delimiteur, int reinit)
 	nom_fichier_temp = ft_fichier_temp(tmp);
 	fd = open(nom_fichier_temp, O_WRONLY | O_TRUNC | O_CREAT,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	ft_putstr("< ");
-	sub_redirection_dleft(delimiteur, fd);
+	if (isatty(0))
+	{
+		ft_putstr("< ");
+		sub_redirection_dleft(delimiteur, fd);
+	}
 	close(fd);
 	tmp++;
 	return (nom_fichier_temp);
