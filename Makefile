@@ -37,7 +37,7 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					execution_status.c operator_or.c  \
 					builtin_echo.c builtin_unsetenv.c execution_motor.c \
 					operator_and.c operator_pipe.c  \
-					builtin_env.c redirection_all.c process_subshell.c
+					builtin_env.c redirection_all.c process_subshell.c redir_left.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 

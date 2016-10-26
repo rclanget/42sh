@@ -57,7 +57,10 @@ int main(int ac, char const **av, char **env) {
 		command = apply_alias_verified(&info, command);
 		info.cmd = parser_cmd(ft_strtrim(command));
 		if (syntax_check(info.cmd, 1))
+		{
+			modif_tree(info.cmd);
 			execution_motor(&info, info.cmd, 1);
+		}
 		info.cmd = parser_free_cmd(info.cmd);
 		save_fd(0);
 		free(command);

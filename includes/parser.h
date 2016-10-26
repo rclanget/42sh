@@ -100,6 +100,7 @@ int						*get_cmd(char *cmd, int *codes);
 int						*get_arg(char *cmd, int *codes);
 int						*get_file(char *cmd, int *codes);
 int						*get_quote(char *cmd, int *codes);
+void					modif_tree(t_tree *tree);
 
 extern t_parse g_parse[];
 extern t_parse g_parse2[];
