@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 19:25:49 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/26 22:03:16 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				execution_motor(t_info *info, t_tree *cmd, int wait)
 {
 	if (cmd)
 	{
-		cmd->cmd = cust_split(cmd->elem);
+		cmd->cmd = cust_split(apply_magicquote(info, cmd->elem));
 		if (!cmd->type)
 			return (execution_command(info, cmd, wait));
 		else
