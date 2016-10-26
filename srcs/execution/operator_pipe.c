@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 16:29:30 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 14:07:34 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/26 14:27:27 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int				operator_pipe(t_info *info, t_tree *cmd)
+int				operator_pipe2(t_info *info, t_tree *cmd)
 {
 	int			fdp[2];
 	pid_t		pid;
@@ -32,5 +32,18 @@ int				operator_pipe(t_info *info, t_tree *cmd)
 	close(fdp[1]);
 	wait(0);
 	execution_motor(info, cmd->right, 1);
+	return (0);
+}
+
+int				operator_pipe(t_info * info, t_tree *cmd)
+{
+	pid_t		pid;
+
+	if (!(pid = fork()))
+	{
+		operator_pipe2(info, cmd);
+		exit(0);
+	}
+	wait(0);
 	return (0);
 }
