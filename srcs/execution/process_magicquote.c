@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 22:09:32 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/26 22:22:50 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/27 13:00:32 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 
 #include <fcntl.h>
 
+#define MAX_CONTENT 2046
 #define MQ_FILE O_RDWR | O_TRUNC | O_CREAT
+#define MQ_OFLAG S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 #define MQ_FILENAME "/tmp/magicquote"
 
 static void		free_list(t_word *list)
@@ -35,26 +37,15 @@ static void		free_list(t_word *list)
 static char		*get_file_content()
 {
 	int		fd;
-	char	*tmp;
-	char	*line;
-	char	*content;
+	char	*a;
 
-	line = NULL;
-	content = NULL;
-	if ((fd = open(MQ_FILENAME, O_RDONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
-		return line;
-	while (get_next_line(fd, &line) > 0)
-	{
-		tmp = ft_strjoin_custom(content, " ");
-		free (content);
-		content = tmp;
-		tmp = ft_strjoin_custom(content, line);
-		ft_free_them_all(2, content, line);
-		content = tmp;
-		line = NULL;
-	}
+	a = NULL;
+	if (((fd = open(MQ_FILENAME, MQ_OFLAG)) == -1) ||
+		(!(a = ft_memalloc(sizeof(char) * MAX_CONTENT + 1)) && close(fd) <= 0))
+		return a;
+	read(fd, a, MAX_CONTENT);
 	close(fd);
-	return (content);
+	return (a);
 }
 
 char			*process_magicquote(t_info *info, char *cmd)
@@ -64,7 +55,7 @@ char			*process_magicquote(t_info *info, char *cmd)
 	int			fd;
 
 	pipe(fdp);
-	if (!cmd || (fd = open(MQ_FILENAME, MQ_FILE)) == -1)
+	if (!cmd || (fd = open(MQ_FILENAME, MQ_FILE, MQ_OFLAG)) == -1)
 		return (NULL);
 	if (!(pid = fork()))
 	{
