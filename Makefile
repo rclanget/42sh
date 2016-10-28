@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/28 14:09:55 by gdeguign         ###   ########.fr        #
+#    Updated: 2016/10/28 15:03:03 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					termcaps_loop.c termcaps_print.c termcaps_readline.c \
 					termcaps_save.c parser_op_logical.c parser_op_redir.c \
 					parser_definition_code.c parser_definition_code_get.c \
-					parser_clean_parentheses.c
+					parser_clean_parentheses.c keyboard_updown.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
@@ -81,10 +81,14 @@ SRCN_SYNTAX		=	syntax_analyse.c
 OBJ_SYNTAX		=	$(SRCN_SYNTAX:.c=.o)
 SRCS_SYNTAX		=	$(addprefix $(SRC_SYNTAX),$(SRCN_SYNTAX))
 
+SRC_HISTORY		=	./srcs/history/
+SRCN_HISTORY	=	add_history.c free_history.c copy_history.c
+OBJ_HISTORY		=	$(SRCN_HISTORY:.c=.o)
+SRCS_HISTORY	=	$(addprefix $(SRC_HISTORY),$(SRCN_HISTORY))
 
 SRC_NAME		=	$(SRCN_ALIAS) $(SRCN_ENV) $(SRCN_EXEC) \
-					$(SRCN_TOOLS) $(SRCN_TERM) \
-					$(SRCN_MAIN) $(SRCN_HASH) $(SRCN_SYNTAX)
+					$(SRCN_TOOLS) $(SRCN_TERM) $(SRCN_MAIN) \
+					$(SRCN_HASH) $(SRCN_SYNTAX) $(SRCN_HISTORY)
 OBJ_NAME		=	$(SRC_NAME:.c=.o)
 SRC				=	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
@@ -130,6 +134,10 @@ $(OBJ_PATH)%.o: $(SRC_HASH)%.c
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 $(OBJ_PATH)%.o: $(SRC_SYNTAX)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+
+$(OBJ_PATH)%.o: $(SRC_HISTORY)%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 

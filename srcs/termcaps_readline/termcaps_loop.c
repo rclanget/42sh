@@ -6,13 +6,14 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 21:27:56 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 14:31:22 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command_line_termcaps.h"
 #include "libft.h"
 #include "parser.h"
+#include "history.h"
 
 #include <unistd.h>
 
@@ -40,11 +41,12 @@ char        *return_string(t_termcaps *term)
 
 char        *termcaps_loop(t_info *info)
 {
-	int                 ret;
-	long                chr;
+	int					ret;
+	long				chr;
+	char				*returned;
 
 	chr = 0;
-	ft_bzero(info->term->cmd, BUFFER_SIZE);
+	set_temporary_hist(info, 1);
 	while ((ret = read(0, &chr, sizeof(chr))) > 0)
 	{
 		if ((chr == NL) || (chr == CTRL_D && (ret = -1) == -1))
@@ -52,6 +54,8 @@ char        *termcaps_loop(t_info *info)
 		termcaps_handle_keyboard(info, chr);
 		chr = 0;
 	}
+	returned = (ret != -1) ? return_string(info->term) : NULL;
+	set_temporary_hist(info, 0);
 	termcaps_save(0);
-	return ((ret == -1) ? NULL : return_string(info->term));
+	return (returned);
 }

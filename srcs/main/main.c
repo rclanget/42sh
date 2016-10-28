@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 19:48:56 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 15:05:01 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "alias.h"
 #include "syntax.h"
 #include "execution.h"
+#include "history.h"
 
 void        ft_exit_shell(t_info *info) {
 	(void)info;
@@ -37,7 +38,7 @@ int main(int ac, char const **av, char **env) {
 	info.term = &term;
 	info.term->is_term = termcap_available();
 	info.term->capa = termcap_capainit();
-	info.term->cmd = ft_memalloc(BUFFER_SIZE);
+	// info.term->cmd = ft_memalloc(BUFFER_SIZE);
 	info.term->prompt = "$> ";
 
 	ft_init_env(&info, env);
@@ -53,6 +54,7 @@ int main(int ac, char const **av, char **env) {
 	while ((command = termcaps_readline(&info)))
 	{
 		save_fd(1);
+		add_history(&info, command);
 		command = apply_alias_verified(&info, command);
 		info.cmd = parser_cmd(ft_strtrim(command));
 		if (syntax_check(info.cmd, 1))
@@ -66,7 +68,7 @@ int main(int ac, char const **av, char **env) {
 		info.term->pos_c = 0;
 		update_path(&info, search_env_var(&info, "PATH"));
 	}
-
+	free_history(get_head(info.hist));
 	ft_free_env(info.env);
 	hashmap_free(info.hash);
 	info.env = NULL;

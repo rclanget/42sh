@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 12:09:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 18:54:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 15:03:37 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct			s_info
 	struct s_env		*env;
 	struct s_hashmap	*hash;
 	struct s_termcaps	*term;
+	struct s_history	*hist;
 	int					stop;
 	int					status;
 	char				*self;

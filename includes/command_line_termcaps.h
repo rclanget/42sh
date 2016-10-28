@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/03 12:51:37 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 10:36:20 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ void			move_word_right(t_info *info);
 void			cut_line(t_info *info);
 void			copy_line(t_info *info);
 void			paste_line(t_info *info);
+void			move_up(t_info *info);
+void			move_down(t_info *info);
 
 #endif
