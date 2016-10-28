@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
+#    By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/28 15:03:03 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/10/28 18:17:01 by rclanget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ SRCS_HASH		=	$(addprefix $(SRC_HASH),$(SRCN_HASH))
 SRC_TOOLS		=	./srcs/tools/
 SRCN_TOOLS		=	ft_putcharb.c ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
 					ft_tabjoin.c ft_tablen.c ft_strjoin_tool.c strsplitcustom.c \
-					clean_backslash.c
+					clean_backslash.c ft_strerror.c signal.c
 OBJ_TOOLS		=	$(SRCN_TOOLS:.c=.o)
 SRCS_TOOLS		=	$(addprefix $(SRC_TOOLS),$(SRCN_TOOLS))
 

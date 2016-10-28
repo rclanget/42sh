@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 15:05:01 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 18:22:09 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "syntax.h"
 #include "execution.h"
 #include "history.h"
+#include "tools.h"
 
 void        ft_exit_shell(t_info *info) {
 	(void)info;
@@ -49,7 +50,7 @@ int main(int ac, char const **av, char **env) {
 		),
 		NULL
 	);
-
+	ft_signal(0);
 	char *command;
 	while ((command = termcaps_readline(&info)))
 	{

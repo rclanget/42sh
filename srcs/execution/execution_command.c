@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/24 17:41:52 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 18:44:27 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 			ft_exit_shell(info);
 		if (!pid)
 		{
+			ft_signal(1);
 			env = env_lst_tab(info->env);
 			execution(info, cmd, env);
+			ft_signal(0);
 		}
 		if (wait)
 			waitpid(pid, &info->status, WUNTRACED);

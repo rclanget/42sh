@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:55:47 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 21:42:22 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 18:16:44 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ char		*ft_strjoinc(char const *s1, char const c);
 char		*ft_strjoin_custom(char const *s1, char const *s2);
 char		*clean_backslash(char *str);
 char		**cust_split(char *str);
+int			ft_signal(int i);
 
 #endif

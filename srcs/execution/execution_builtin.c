@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 14:48:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/29 10:07:19 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/10/28 18:45:56 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtin.h"
 #include "shell.h"
 #include "libft.h"
+#include "tools.h"
 
 t_builtin g_builtin[] = {
 		{"cd", &builtin_cd},
@@ -37,12 +38,19 @@ int			is_builtin(char *cmd)
 int			execution_builtin(t_info *info, t_tree *cmd)
 {
 	int		i;
+	int		ret;
 
 	i = -1;
+	ret = 0;
 	while (++i <= MAX_BUILTIN)
 	{
 		if (!ft_strcmp(g_builtin[i].name, cmd->cmd[0]))
-			return (g_builtin[i].func(info, cmd));
+		{
+			ft_signal(1);
+			ret = g_builtin[i].func(info, cmd);
+			ft_signal(0);
+			break;
+		}
 	}
-	return (0);
+	return (ret);
 }
