@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/26 19:24:09 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/10/28 14:09:55 by gdeguign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,13 +32,13 @@ SRCS_ENV		=	$(addprefix $(SRC_ENV),$(SRCN_ENV))
 
 SRC_EXEC		=	./srcs/execution/
 SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
-					execution_search.c  operator_comma.c redirection_get_fd.c  \
+					operator_comma.c redirection_get_fd.c  \
 					builtin_cd.c builtin_unalias.c execution_command.c \
 					execution_status.c operator_or.c  \
 					builtin_echo.c builtin_unsetenv.c execution_motor.c \
 					operator_and.c operator_pipe.c  \
 					builtin_env.c redirection_all.c process_subshell.c \
-					redir_left.c process_magicquote_fn.c process_magicquote.c
+					redirection_dleft.c process_magicquote_fn.c process_magicquote.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
