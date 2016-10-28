@@ -3,49 +3,53 @@
 #include "hashmap_struct.h"
 #include "libft.h"
 #include "get_next_line.h"
-
 #include <fcntl.h>
 #include <sys/types.h>
 #include <dirent.h>
 
 #define BUFF_PWD 256
 
-char		*lire_hashmap(t_hashmap *map, char *key)
+unsigned int	jenkins_one_at_a_time_hash(char *key, size_t len)
 {
-	t_hashmap	*temp;
+	unsigned int	hash;
+	unsigned int	i;
 
-	temp = map;
-	if (map == NULL)
-		return (NULL);
-	while (temp && (ft_strcmp(temp->key, key)) != 0)
-			temp = temp->next;
-	if ((ft_strcmp(temp->key, key)) == 0)
-		return (temp->value);
-	return (NULL);
+	i = 0;
+	hash = 0;
+	while (i < len)
+	{
+		hash += key[i];
+		hash += (hash << 10);
+		hash ^= (hash >> 6);
+		i++;
+	}
+	hash += (hash << 3);
+	hash ^= (hash >> 11);
+	hash += (hash << 15);
+	return (hash % 29496729);
 }
 
-t_hashmap	*ecrire_hashmap(t_hashmap *map, char *key, char *val)
+char		*lire_hashmap(t_hashmap *hashmap, char *key)
 {
-	t_hashmap *new;
-	t_hashmap *temp;
-	char	*tmp;
+	return (hashmap->map[jenkins_one_at_a_time_hash(key, ft_strlen(key))]);
+}
 
-	tmp = NULL;
-	temp = map;
+void		ecrire_hashmap(t_hashmap *hashmap, char *key, char *val)
+{
+	char			*tmp;
+	unsigned int	hash_value;
+
+	if (!hashmap || !hashmap->map)
+		return ;
 	if (ft_strcmp(key, ".") == 0 || ft_strcmp(key, "..") == 0)
-		return (map);
-	new = malloc(sizeof(t_hashmap));
-	new->next = NULL;
+		return ;
+	hash_value = jenkins_one_at_a_time_hash(key, ft_strlen(key));
+	if (hashmap->size > 4000 || (hashmap->map[hash_value] != NULL))
+		return ;
 	tmp = ft_strjoin("/", key);
-	new->value = ft_strjoin(val, tmp);
+	hashmap->map[hash_value] = ft_strjoin(val, tmp);
 	free(tmp);
-	new->key = ft_strdup(key);
-	if (!map)
-		return (new);
-	while (temp->next)
-		temp = temp->next;
-	temp->next = new;
-	return (map);
+	hashmap->size++;
 }
 
 int			check_access(char *str)
@@ -64,7 +68,7 @@ int			check_access(char *str)
 }
 
 
-t_hashmap	*liste_fichier(t_hashmap *map, DIR*	dir, char *pwd)
+void		liste_fichier(t_hashmap *map, DIR*	dir, char *pwd)
 {
 	struct dirent* file_name;
 	// char	*pwd;
@@ -73,9 +77,8 @@ t_hashmap	*liste_fichier(t_hashmap *map, DIR*	dir, char *pwd)
 	// pwd = getcwd(pwd, BUFF_PWD);
 	file_name = NULL;
 	while ((file_name = readdir(dir)) != NULL)
-		map = ecrire_hashmap(map, file_name->d_name, pwd);
+		ecrire_hashmap(map, file_name->d_name, pwd);
 	// ft_strdel(&pwd);
-	return (map);
 }
 
 char		*change_path(void)
@@ -127,7 +130,7 @@ t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
 			i++;
 			continue ;
 		}
-		map = liste_fichier(map, dir, tab_path[i]);
+		liste_fichier(map, dir, tab_path[i]);
 		if (closedir(dir) == -1)
 		{
 			ft_print("%s\n", "echec closedir");
@@ -142,17 +145,46 @@ t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
 	return (map);
 }
 
-void		print_hashmap(t_hashmap *map)
+void		print_hashmap(t_hashmap *hashmap)
 {
-	t_hashmap	*temp;
+	unsigned int	i;
+	char			**map;
 
-	temp = map;
-	if (!temp)
-		ft_print("%s\n", "pas de hashmap");
-	while (temp)
+	i = 0;
+	map = hashmap->map;
+	if (!map)
+		return ;
+	while (i < 29496729)
 	{
-		ft_print("key : %s\n", temp->key);
-		ft_print("value : %s\n", temp->value);
-		temp = temp->next;
+		if (map[i] != NULL)
+			ft_putendl(map[i]);
+		i++;
 	}
+}
+
+t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
+{
+	unsigned int 	i;
+	char			**map;
+
+	i = 0;
+	if (!hashmap)
+		hashmap = (t_hashmap*)malloc(sizeof(t_hashmap));
+	hashmap->size = 0;
+	hashmap->map = NULL;
+	hashmap->map = (char**)malloc(294967295 * sizeof(char*));
+	if (hashmap->map == NULL)
+	{
+		ft_print("%s\n", "echec malloc hashmap");
+		return (0);
+	}
+	map = hashmap->map;
+	while (i < 29496729)
+	{
+		map[i] = NULL;
+		i++;
+	}
+
+	hashmap = creer_hashmap(path, hashmap);
+	return (hashmap);
 }

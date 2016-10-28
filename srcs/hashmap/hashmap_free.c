@@ -14,13 +14,23 @@
 
 #include <stdlib.h>
 
-void hashmap_free(t_hashmap *map)
+void hashmap_free(t_hashmap *hashmap)
 {
-  if (map)
-  {
-    hashmap_free(map->next);
-    free(map->key);
-    free(map->value);
-    free(map);
-  }
+	unsigned int	i;
+	char 			**map;
+
+	i = 0;
+	map = hashmap->map;
+	while (i < 29496729)
+	{
+		if (map[i])
+		{
+			free(map[i]);
+			map[i] = NULL;
+		}
+		i++;
+	}
+	free(map);
+	map = NULL;
+	hashmap->size = 0;
 }

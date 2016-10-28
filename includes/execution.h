@@ -19,7 +19,7 @@
 int			execution_motor(t_info *info, t_tree *cmd, int wait);
 int			execution_command(t_info *info, t_tree *cmd, int wait);
 int			execution_status(int status);
-char		*executable_search(t_info *info, char *exec);
+char		*lire_hashmap(t_hashmap *hashmap, char *key);
 
 t_tree		*self_node(t_info *info);
 

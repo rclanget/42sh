@@ -46,7 +46,7 @@ void			execution(t_info *info, t_tree *cmd, char **env)
 
 	if ((access(cmd->cmd[0], X_OK)) != -1)
 		;
-	else if ((tmp = executable_search(info, cmd->cmd[0])))
+	else if ((tmp = lire_hashmap(info->hash, cmd->cmd[0])))
 	{
 		free(cmd->cmd[0]);
 		cmd->cmd[0] = tmp;

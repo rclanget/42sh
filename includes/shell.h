@@ -30,7 +30,7 @@ typedef struct			s_info
 	char				*self;
 }						t_info;
 
-t_hashmap				*creer_hashmap(char *path, t_hashmap *map);
+t_hashmap				*pre_creer_hashmap(char *path, t_hashmap *map);
 void					hashmap_free(t_hashmap *map);
 
 void					ft_init_env(t_info *info, char **env);

@@ -15,9 +15,8 @@
 
 typedef struct			s_hashmap
 {
-	char				*key;
-	char				*value;
-	struct s_hashmap	*next;
+	char				**map;
+	unsigned int		size;
 }						t_hashmap;
 
 #endif

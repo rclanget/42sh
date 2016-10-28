@@ -42,8 +42,7 @@ int main(int ac, char const **av, char **env) {
 
 	ft_init_env(&info, env);
 	info.alias = NULL;
-
-	info.hash = creer_hashmap(
+	info.hash = pre_creer_hashmap(
 		ft_strdup(
 			(search_env_var(&info, "PATH")) ? search_env_var(&info, "PATH")->content : NULL
 		),
