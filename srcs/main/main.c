@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 18:22:09 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/31 10:50:37 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,16 @@ int main(int ac, char const **av, char **env) {
 		NULL
 	);
 	ft_signal(0);
+
 	char *command;
+	char *tmp;
 	while ((command = termcaps_readline(&info)))
 	{
 		save_fd(1);
 		add_history(&info, command);
 		command = apply_alias_verified(&info, command);
-		info.cmd = parser_cmd(ft_strtrim(command));
+		tmp = ft_strtrim(command);
+		info.cmd = parser_cmd(tmp);
 		if (syntax_check(info.cmd, 1))
 		{
 			modif_tree(info.cmd);
@@ -65,7 +68,7 @@ int main(int ac, char const **av, char **env) {
 		}
 		info.cmd = parser_free_cmd(info.cmd);
 		save_fd(0);
-		free(command);
+		ft_free_them_all(2, command, tmp);
 		info.term->pos_c = 0;
 		update_path(&info, search_env_var(&info, "PATH"));
 	}

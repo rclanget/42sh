@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_motor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 21:41:42 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/10/31 10:46:09 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,16 @@ int				wich_operator(char *op)
 
 int				execution_motor(t_info *info, t_tree *cmd, int wait)
 {
-	if (cmd && (cmd->cmd = cust_split(apply_magicquote(info, cmd->elem))))
+	char		*tmp;
+
+	tmp = apply_magicquote(info, cmd->elem);
+	cmd->cmd = cust_split(tmp);
+	ft_free_them_all(1, tmp);
+	if (cmd && cmd->cmd)
 	{
 		if (!cmd->type)
 			return (execution_command(info, cmd, wait));
 		else
-			// return (p[wich_operator(cmd->cmd[0])](info, cmd));
 			return (p[cmd->type](info, cmd));
 	}
 	return (0);
