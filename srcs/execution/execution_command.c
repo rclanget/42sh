@@ -62,11 +62,9 @@ void			execution(t_info *info, t_tree *cmd, char **env)
 int				execution_command(t_info *info, t_tree *cmd, int wait)
 {
 	pid_t	pid;
-	int		status;
 	char	**env;
 
 	env = NULL;
-	status = 0;
 	if (!is_builtin(cmd->cmd[0]))
 	{
 		if ((pid = fork()) == -1)
@@ -76,7 +74,6 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 			ft_signal(1);
 			env = env_lst_tab(info->env);
 			execution(info, cmd, env);
-			ft_signal(0);
 		}
 		if (wait)
 			waitpid(pid, &info->status, WUNTRACED);

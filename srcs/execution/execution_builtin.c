@@ -22,7 +22,8 @@ t_builtin g_builtin[] = {
 		{"env", &builtin_env},
 		{"alias", &builtin_alias},
 		{"echo", &builtin_echo},
-		{"unalias", &builtin_unalias}};
+		{"unalias", &builtin_unalias},
+		{"history", &builtin_history}};
 
 int			is_builtin(char *cmd)
 {
@@ -38,19 +39,12 @@ int			is_builtin(char *cmd)
 int			execution_builtin(t_info *info, t_tree *cmd)
 {
 	int		i;
-	int		ret;
 
 	i = -1;
-	ret = 0;
 	while (++i <= MAX_BUILTIN)
 	{
 		if (!ft_strcmp(g_builtin[i].name, cmd->cmd[0]))
-		{
-			ft_signal(1);
-			ret = g_builtin[i].func(info, cmd);
-			ft_signal(0);
-			break;
-		}
+			return (g_builtin[i].func(info, cmd));
 	}
-	return (ret);
+	return (0);
 }
