@@ -6,13 +6,14 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 16:47:40 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/04 12:51:44 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "operator.h"
 #include "libft.h"
+#include "error.h"
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -67,7 +68,7 @@ int			redirection_get_fd(t_tree *cmd, int *fds)
 		);
 		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
-			ft_fdprint(2, "42sh: %s: %s\n", strerror(errno), GET_FILE(cmd->right));
+			ft_fdprint(2, "42sh: %s: %s\n", ft_strerror(errno), GET_FILE(cmd->right));
 			close(fds[!(TO_LEFT(cmd->type)) ? 0 : 1]);
 			fds[!(TO_LEFT(cmd->type)) ? 0 : 1] = -1;
 		}
