@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+         #
+#    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/10/28 18:17:01 by rclanget         ###   ########.fr        #
+#    Updated: 2016/11/04 11:47:20 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,10 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					builtin_echo.c builtin_unsetenv.c execution_motor.c \
 					operator_and.c operator_pipe.c  \
 					builtin_env.c redirection_all.c process_subshell.c \
-					redirection_dleft.c process_magicquote_fn.c process_magicquote.c
+					redirection_dleft.c process_magicquote_fn.c \
+					process_magicquote.c builtin_history.c \
+					builtin_history_optps.c builtin_history_optcd.c \
+					builtin_history_optanrw.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
@@ -72,7 +75,9 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					termcaps_loop.c termcaps_print.c termcaps_readline.c \
 					termcaps_save.c parser_op_logical.c parser_op_redir.c \
 					parser_definition_code.c parser_definition_code_get.c \
-					parser_clean_parentheses.c keyboard_updown.c
+					parser_clean_parentheses.c keyboard_updown.c \
+					keyboard_ccp_fn.c \
+					# keyboard_reverse_search.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
@@ -99,7 +104,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	$(CC) $(LDFLAGS) $(OBJ) -o $@
+	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
