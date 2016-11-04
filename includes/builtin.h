@@ -15,7 +15,7 @@
 
 # include "shell.h"
 
-# define MAX_BUILTIN		6
+# define MAX_BUILTIN		7
 
 typedef struct	s_builtin
 {
@@ -30,6 +30,7 @@ int				builtin_unsetenv(t_info *info, t_tree *cmd);
 int				builtin_alias(t_info *info, t_tree *cmd);
 int				builtin_unalias(t_info *info, t_tree *cmd);
 int				builtin_env(t_info *info, t_tree *cmd);
+int				builtin_history(t_info *info, t_tree *cmd);
 
 int				is_builtin(char *cmd);
 int				execution_builtin(t_info *info, t_tree *cmd);

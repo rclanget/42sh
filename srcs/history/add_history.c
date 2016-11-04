@@ -17,11 +17,13 @@
 void				add_history(t_info *info, char *cmd)
 {
 	t_history		*node;
+	static int 		number;
 
 	node = NULL;
 	if ((node = ft_memalloc(sizeof(t_history))))
 	{
 		node->cmd = ft_strdup(cmd);
+		node->n = number++;
 		if ((node->next = info->hist))
 			node->next->prev = node;
 		info->hist = node;

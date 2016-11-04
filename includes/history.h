@@ -18,6 +18,7 @@
 typedef struct			s_history
 {
 	char				*cmd;
+	int					n;
 	struct s_history	*next;
 	struct s_history	*prev;
 }						t_history;
