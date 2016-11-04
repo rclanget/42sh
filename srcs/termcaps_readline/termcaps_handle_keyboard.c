@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_handle_keyboard.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/04 11:47:59 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/04 15:24:49 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static t_key g_key_tab[] =
   {CTRL_O, copy_line},
   {CTRL_P, paste_line},
   {KEY_UP, move_up},
-  {KEY_DOWN, move_down}
-  // {CTRL_R, reverse_search_i}
+  {KEY_DOWN, move_down},
+  {CTRL_R, reverse_search_i}
 };
 
 static int     add_chr(t_info *info, long chr)

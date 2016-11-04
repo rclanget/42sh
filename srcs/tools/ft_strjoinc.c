@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoinc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/31 14:02:27 by rclanget          #+#    #+#             */
-/*   Updated: 2015/10/31 14:50:49 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/04 15:27:48 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,13 @@ char	*ft_strjoinc(char const *s1, char const c)
 			if (i < ft_strlen(s1))
 				dst[i] = s1[i];
 			else
+			{
 				dst[i] = c;
+				break;
+			}
 			i++;
 		}
-		dst[i] = '\0';
+		dst[++i] = '\0';
 		return (dst);
 	}
 	dst = (char *)malloc(sizeof(char) + 1);
