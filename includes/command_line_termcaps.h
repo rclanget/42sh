@@ -43,21 +43,32 @@ void			move_cursor(t_capa *capa, int from, int plen, int to);
 
 void			move_cursor_left(t_info *info);
 void			move_cursor_right(t_info *info);
+
 void			move_start(t_info *info);
 void			move_end(t_info *info);
 void			move_delete(t_info *info);
+
 void			move_supp(t_info *info);
+
 void			move_clear_left(t_info *info);
 void			move_clear_right(t_info *info);
+
 void			move_clear_screen(t_info *info);
+
 void			move_line_up(t_info *info);
 void			move_line_down(t_info *info);
+
 void			move_word_left(t_info *info);
 void			move_word_right(t_info *info);
+
 void			cut_line(t_info *info);
 void			copy_line(t_info *info);
 void			paste_line(t_info *info);
+char			*get_selection(t_info *info);
+
 void			move_up(t_info *info);
 void			move_down(t_info *info);
+
+void			reverse_search_i(t_info *info);
 
 #endif

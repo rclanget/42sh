@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/27 00:19:56 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 10:38:24 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/04 11:47:59 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #include <unistd.h>
 
-t_key g_key_tab[] =
+static t_key g_key_tab[] =
 {
   {MYKEY_RIGHT, move_cursor_right},
   {MYKEY_LEFT, move_cursor_left},
@@ -38,9 +38,10 @@ t_key g_key_tab[] =
   {CTRL_P, paste_line},
   {KEY_UP, move_up},
   {KEY_DOWN, move_down}
+  // {CTRL_R, reverse_search_i}
 };
 
-int     add_chr(t_info *info, long chr)
+static int     add_chr(t_info *info, long chr)
 {
   int cmd_len;
   int i;
@@ -73,7 +74,7 @@ int     termcaps_handle_keyboard(t_info *info, long chr)
     int         ret;
 
     i = -1;
-    while (++i < 20)
+    while (++i < 21)
     {
        if (g_key_tab[i].key == chr)
        {
