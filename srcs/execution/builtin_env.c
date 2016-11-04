@@ -77,13 +77,11 @@ int         ft_takechanges(t_info *info, char **argv)
 
 int         builtin_env(t_info *info, t_tree *cmd)
 {
-    int     len;
     t_env   *tmp;
     char    **argv;
     char    **tmp_comm;
 
     tmp = info->env;
-    len = ft_tablen(cmd->cmd);
     info->env = cpy_env(info->env);
     argv = cmd->cmd + 1;
     tmp_comm = cmd->cmd;

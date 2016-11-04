@@ -111,13 +111,11 @@ void	modif_tree(t_tree *tree)
 {
 	t_tree		*un_noeud;
 	char		*nom_fichier_temp;
-	char		*tmp;
 
 	if (!tree)
 		return ;
 	while ((un_noeud = find_dleft(tree)) != NULL)
 	{
-		tmp = get_delimit(un_noeud);
 		nom_fichier_temp = dleft_redirection(get_delimit(un_noeud), 0);
 		if (un_noeud->right && !(un_noeud->right->type))
 		{
