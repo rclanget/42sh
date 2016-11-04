@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "hashmap_struct.h"
+#include "hashmap.h"
 
 #include <stdlib.h>
 
@@ -21,7 +22,7 @@ void hashmap_free(t_hashmap *hashmap)
 
 	i = 0;
 	map = hashmap->map;
-	while (i < 29496729)
+	while (i < HASHMAP_SIZE)
 	{
 		if (map[i])
 		{

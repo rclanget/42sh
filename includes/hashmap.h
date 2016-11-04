@@ -15,4 +15,6 @@
 
 void	*free_tab(char **tab);
 
+# define HASHMAP_SIZE 100000
+
 #endif

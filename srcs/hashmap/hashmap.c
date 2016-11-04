@@ -26,7 +26,7 @@ unsigned int	jenkins_one_at_a_time_hash(char *key, size_t len)
 	hash += (hash << 3);
 	hash ^= (hash >> 11);
 	hash += (hash << 15);
-	return (hash % 29496729);
+	return (hash % HASHMAP_SIZE);
 }
 
 char		*lire_hashmap(t_hashmap *hashmap, char *key)
@@ -154,7 +154,7 @@ void		print_hashmap(t_hashmap *hashmap)
 	map = hashmap->map;
 	if (!map)
 		return ;
-	while (i < 29496729)
+	while (i < HASHMAP_SIZE)
 	{
 		if (map[i] != NULL)
 			ft_putendl(map[i]);
@@ -172,14 +172,14 @@ t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
 		hashmap = (t_hashmap*)malloc(sizeof(t_hashmap));
 	hashmap->size = 0;
 	hashmap->map = NULL;
-	hashmap->map = (char**)malloc(294967295 * sizeof(char*));
+	hashmap->map = (char**)malloc(HASHMAP_SIZE * sizeof(char*));
 	if (hashmap->map == NULL)
 	{
 		ft_print("%s\n", "echec malloc hashmap");
 		return (0);
 	}
 	map = hashmap->map;
-	while (i < 29496729)
+	while (i < HASHMAP_SIZE)
 	{
 		map[i] = NULL;
 		i++;

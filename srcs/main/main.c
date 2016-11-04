@@ -70,7 +70,7 @@ int main(int ac, char const **av, char **env) {
 		save_fd(0);
 		ft_free_them_all(2, command, tmp);
 		info.term->pos_c = 0;
-		update_path(&info, search_env_var(&info, "PATH"));
+		// update_path(&info, search_env_var(&info, "PATH"));
 	}
 	free_history(get_head(info.hist));
 	ft_free_env(info.env);
