@@ -119,4 +119,6 @@ void			reverse_search_i(t_info *info)
 		print_research(info, research, find);
         chr = 0;
     }
+	if (research)
+		free (research);
 }
