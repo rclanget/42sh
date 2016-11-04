@@ -96,6 +96,7 @@ void 			print_research(t_info *info, char *research, int find)
 	prompt = find ? ft_strdup("(reverse-i-search)`") : ft_strdup("(failed reverse-i-search)`");
 	move_cursor(info->term->capa, ft_strlen(info->term->cmd) + 30 + ft_strlen(research), 0, 0);
 	ft_print("%s%s%s': %s", info->term->capa->str_cd, prompt, research, info->term->cmd);
+	free(prompt);
 }
 
 void			reverse_search_i(t_info *info)
