@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:55:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/25 18:27:24 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/04 14:43:49 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,5 @@ char *clean_backslash(char *str)
 		str_new[i] = 0;
 		free(str);
 	}
-	return (str_new);
+	return (str_new ? str_new : str);
 }
