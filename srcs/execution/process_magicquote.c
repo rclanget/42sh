@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 22:09:32 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/27 13:00:32 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/04 11:46:58 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include "tools.h"
 
 #include <fcntl.h>
+#ifdef __linux__
+# include <wait.h>
+#endif
 
 #define MAX_CONTENT 2046
 #define MQ_FILE O_RDWR | O_TRUNC | O_CREAT

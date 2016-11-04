@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 16:29:30 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/26 14:27:27 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/04 11:46:35 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+
+#ifdef __linux__
+# include <wait.h>
+#endif
 
 int				operator_pipe2(t_info *info, t_tree *cmd)
 {
