@@ -72,7 +72,7 @@ int main(int ac, char const **av, char **env) {
 		info.term->pos_c = 0;
 		if (info.stop)
 			break;
-		// update_path(&info, search_env_var(&info, "PATH"));
+		update_path(&info, search_env_var(&info, "PATH"));
 	}
 	free_history(get_head(info.hist));
 	ft_free_env(info.env);

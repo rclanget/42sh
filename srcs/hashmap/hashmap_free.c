@@ -34,4 +34,6 @@ void hashmap_free(t_hashmap *hashmap)
 	free(map);
 	map = NULL;
 	hashmap->size = 0;
+	free(hashmap);
+	hashmap = NULL;
 }

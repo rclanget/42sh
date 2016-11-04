@@ -119,8 +119,12 @@ t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
 	// pwd = getcwd(pwd, BUFF_PWD);
 	i = 0;
 	dir = NULL;
-	if (!path)
+	ft_putendl("affichage de path !!");
+	ft_putendl(path);
+	if (!path || (ft_strlen(path) == 0)){
+		ft_putendl("pas de path !!");
 		path = change_path();
+	}
 	tab_path = ft_strsplit(path, ':');
 	while (tab_path[i])
 	{
@@ -168,6 +172,7 @@ t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
 	char			**map;
 
 	i = 0;
+	ft_putendl("\n\nappel de pre_cre_hahmap\n\n\n");
 	if (!hashmap)
 		hashmap = (t_hashmap*)malloc(sizeof(t_hashmap));
 	hashmap->size = 0;
