@@ -34,6 +34,8 @@ t_capa *termcap_capainit(void)
         capa->str_cd = tgetstr("cd", NULL);
         capa->str_bl = tgetstr("bl", NULL);
         capa->str_ho = tgetstr("ho", NULL);
+        capa->str_us = tgetstr("us", NULL);
+        capa->str_ue = tgetstr("ue", NULL);
     }
     return (capa);
 }

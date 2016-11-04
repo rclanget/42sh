@@ -39,6 +39,8 @@ typedef struct			s_capa
 	char				*str_cd;
 	char				*str_bl;
 	char				*str_ho;
+	char				*str_us;
+	char				*str_ue;
 }						t_capa;
 
 #endif
