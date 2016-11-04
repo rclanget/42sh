@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/31 10:50:37 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/04 12:43:49 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int main(int ac, char const **av, char **env) {
 		save_fd(0);
 		ft_free_them_all(2, command, tmp);
 		info.term->pos_c = 0;
+		if (info.stop)
+			break;
 		// update_path(&info, search_env_var(&info, "PATH"));
 	}
 	free_history(get_head(info.hist));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 14:48:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 18:45:56 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/04 12:42:55 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 #include "libft.h"
 #include "tools.h"
 
-t_builtin g_builtin[] = {
+t_builtin g_builtin[] =
+{
 		{"cd", &builtin_cd},
 		{"setenv", &builtin_setenv},
 		{"unsetenv", &builtin_unsetenv},
@@ -23,7 +24,9 @@ t_builtin g_builtin[] = {
 		{"alias", &builtin_alias},
 		{"echo", &builtin_echo},
 		{"unalias", &builtin_unalias},
-		{"history", &builtin_history}};
+		{"history", &builtin_history},
+		{"exit", &builtin_exit}
+};
 
 int			is_builtin(char *cmd)
 {
