@@ -18,12 +18,20 @@ int			check_op_redir(char *str)
 
 	ret = 0;
 	if ((ret = check_op_dright(str)))
-	;
+	{
+		;
+	}
 	else if ((ret = check_op_right(str)))
-	;
+	{
+		;
+	}
 	else if ((ret = check_op_dleft(str)))
-	;
+	{
+		;
+	}
 	else if ((ret = check_op_left(str)))
-	;
+	{
+		;
+	}
 	return (ret);
 }

@@ -41,7 +41,9 @@ int			pass_string(char *cmd, int i)
 		while (cmd[i] != c)
 		{
 			if (cmd[i] == '\\')
+			{
 				;
+			}
 			++i;
 		}
 		ret = i;
