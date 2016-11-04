@@ -2,10 +2,34 @@
 #include "tools.h"
 #include "libft.h"
 #include "command_line_termcaps.h"
+#include "keyboard_keys.h"
 
 # define KEY_DEL			127
 
-int			search_history(t_info *info, char *str)
+static t_key g_key_tab[] =
+{
+  {MYKEY_RIGHT, move_cursor_right},
+  {MYKEY_LEFT, move_cursor_left},
+  {CTRL_A, move_start},
+  {KEY_START, move_start},
+  {CTRL_E, move_end},
+  {KEY_END, move_end},
+  {KEY_SUPP, move_supp},
+  {CTRL_U, move_clear_left},
+  {CTRL_K, move_clear_right},
+  {CTRL_L, move_clear_screen},
+  {CTRL_UP, move_line_up},
+  {CTRL_DOWN, move_line_down},
+  {CTRL_RIGHT, move_word_right},
+  {CTRL_LEFT, move_word_left},
+  {CTRL_I, cut_line},
+  {CTRL_O, copy_line},
+  {CTRL_P, paste_line},
+  {KEY_UP, move_up},
+  {KEY_DOWN, move_down}
+};
+
+int				search_history(t_info *info, char *str)
 {
 	int			ret;
 	t_history 	*hist;
@@ -28,66 +52,70 @@ int			search_history(t_info *info, char *str)
 
 static char		*add_chr(char *research, char chr)
 {
-	char *tmp_research;
+	char 		*tmp_research;
 
-	tmp_research = NULL;
 	if (chr != KEY_DEL)
 	{
-		tmp_research = ft_strjoin_custom(research, &chr);
+		tmp_research = ft_strdup(research);
 		free(research);
-		research = tmp_research;
+		research = ft_strjoinc(tmp_research ? tmp_research : "", chr);
+		free(tmp_research);
 	}
-	else
+	else if(research)
 		research[ft_strlen(research) - 1] = 0;
 	return (research);
 }
 
-int            handling_key(t_info *info, char *buffer, long chr)
+int            handling_key(t_info *info, long chr, char *research)
 {
-    int ret;
+	int 		i;
+	int 		ret;
 
-    ret = 0;
-    if (chr == KEY_DEL && ++ret)
-        move_delete(info);
-    else if (ft_isprint(chr) && ++ret)
-        buffer[ft_strlen(buffer)] = chr;
+	i = 0;
+	ret = 0;
+	while (i < 19)
+	{
+		if (g_key_tab[i].key == chr)
+		{
+			move_cursor(info->term->capa, ft_strlen(info->term->cmd) + 30 + ft_strlen(research), 0, 0);
+			info->term->pos_c = ft_strlen(info->term->cmd);
+			ft_print("%s%s%s", info->term->capa->str_cd, info->term->prompt, info->term->cmd);
+			g_key_tab[i].f(info);
+			ret = 1;
+			break;
+		}
+		i++;
+	}
     return (ret);
 }
 
-void        get_search_work(t_info *info)
+void 			print_research(t_info *info, char *research, int find)
 {
-    long    chr;
-    char    *buffer;
+	char 		*prompt;
 
-    buffer = (char **)ft_memalloc(sizeof(char) * BUFFER_SIZE);
-    while ((ret = read(0, &chr, sizeof(chr))) > 0)
-    {
-        if ((chr == NL) || (chr == CTRL_D && (ret = -1) == -1)
-            || !handling_key(info, buffer, chr))
-            break;
-        ROGER_FUNCTION
-        FUNCTIOM QUI AFFICHE QUI PRINT DU FEU
-        chr = 0;
-    }
+	prompt = find ? ft_strdup("(reverse-i-search)`") : ft_strdup("(failed reverse-i-search)`");
+	move_cursor(info->term->capa, ft_strlen(info->term->cmd) + 30 + ft_strlen(research), 0, 0);
+	ft_print("%s%s%s': %s", info->term->capa->str_cd, prompt, research, info->term->cmd);
 }
 
-void		reverse_search_i(t_info *info)
+void			reverse_search_i(t_info *info)
 {
-	// int ret;
-	// long chr;
-	// char *research;
+	int 		ret;
+	long 		chr;
+	char 		*research;
+	int 		find;
 
-	// chr = 0;
-	// research = NULL;
-	// ft_bzero(&info->term->cmd, sizeof(char *) * ft_strlen(info->term->cmd));
-	// while ((ret = read(0, &chr, sizeof(chr))) > 0)
- //    {
- //        if ((chr == NL) || (chr == CTRL_D && (ret = -1) == -1))
- //            break;
- //        research = add_chr(research, (char)chr);
- //        search_history(info, research);
-	// 	move_cursor(info->term->capa, ft_strlen(info->term->cmd), 0, 0);
-	// 	ft_print("%s(reverse-i-search)`%s': %s", info->term->capa->str_cd, research, info->term->cmd);
- //        chr = 0;
- //    }
+	chr = 0;
+	research = NULL;
+	ft_bzero(&info->term->cmd, sizeof(char *) * ft_strlen(info->term->cmd));
+	print_research(info, "", 1);
+	while ((ret = read(0, &chr, sizeof(chr))) > 0)
+    {
+        if ((chr == NL) || handling_key(info, chr, research) || (chr == CTRL_D && (ret = -1) == -1))
+            break;
+        research = add_chr(research, (int)chr);
+        find = search_history(info, research);
+		print_research(info, research, find);
+        chr = 0;
+    }
 }
