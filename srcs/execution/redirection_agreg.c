@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 15:20:25 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/05 18:19:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/05 20:05:06 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,20 @@
 #define			FLAG_TRUNC O_RDWR | O_TRUNC | O_CREAT
 #define			OPEN_MODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 
-int			get_left_fd(char *str)
+int			get_right_n(char *str)
 {
     int n;
 
     n = (ft_isdigit(*str)) ? ft_atoi(str) : 1;
     if (read(n, NULL, 0) < 0)
     {
-    	ft_fdprint(2, "42sh: %d: %s", n, ft_strerror(errno));
+    	ft_fdprint(2, "42sh: %d: %s\n", n, ft_strerror(errno));
     	n = -1;
     }
     return (n);
 }
 
-int         get_right_fd(char **cmd, int i, int *size)
+int         get_right_word(char **cmd, int i, int *size)
 {
 	char	*tmp;
 	int 	n;
@@ -62,7 +62,7 @@ int         get_right_fd(char **cmd, int i, int *size)
 		{
 			n = ft_atoi(tmp);
 		    if ((write(n, NULL, 0) < 0) && (n = -1))
-		    	ft_fdprint(2, "42sh: %d: %s", n, ft_strerror(errno));
+		    	ft_fdprint(2, "42sh: %d: %s\n", n, ft_strerror(errno));
 		}
 		else
 			n = open(tmp, FLAG_TRUNC, OPEN_MODE);
@@ -80,6 +80,57 @@ void		do_right_redirection(int n, int word)
 		dup2(word, n);
 }
 
+int	get_left_n(char *str)
+{
+    int n;
+
+    n = (ft_isdigit(*str)) ? ft_atoi(str) : 1;
+    if (read(n, NULL, 0) < 0)
+    {
+    	ft_fdprint(2, "42sh: %d: %s", n, strerror(errno));
+    	n = -1;
+    }
+    return (n);
+}
+
+int get_left_word(char **cmd, int i, int *size)
+{
+	char	*tmp;
+	int 	n;
+
+	n = 0;
+	*size = 2;
+	if ((tmp = ft_strstr(cmd[i], "<&") + 2) && *tmp)
+	{
+		*size = 1;
+		if (*tmp == '-')
+			n = -2;
+		else if (ft_isdigit(*tmp))
+		{
+			n = ft_atoi(tmp);
+		    if ((read(n, NULL, 0) < 0) && (n = -1))
+		    	ft_fdprint(2, "42sh: %d: %s\n", n, strerror(errno));
+		}
+	}
+	else
+	{
+		n = ft_atoi(cmd[i + 1]);
+		if ((read(n, NULL, 0) < 0) && (n = -1))
+		    	ft_fdprint(2, "42sh: %d: %s\n", n, strerror(errno));
+	}
+	return (n);
+}
+
+void		do_left_redirection(int n, int word)
+{
+	if (word == -2)
+		close(n);
+	else
+	{
+		dup2(n, word);
+	}
+}
+
 int			is_redirection_agreg(char **cmd, int i)
 {
 	int n;
@@ -89,9 +140,16 @@ int			is_redirection_agreg(char **cmd, int i)
 	size = 0;
 	if (cmd && cmd[i] && ft_strstr(cmd[i], ">&"))
 	{
-		if ((n = get_left_fd(cmd[i])) != -1
-			&& (word = get_right_fd(cmd, i, &size)) != -1)
+		if ((n = get_right_n(cmd[i])) != -1
+			&& (word = get_right_word(cmd, i, &size)) != -1)
 			do_right_redirection(n, word);
+		return (size);
+	}
+	else if (cmd && cmd[i] && ft_strstr(cmd[i], "<&"))
+	{
+		if ((n = get_left_n(cmd[i])) != -1
+			&& (word = get_left_word(cmd, i, &size)) != -1)
+			do_left_redirection(n, word);
 		return (size);
 	}
 	return (0);
@@ -120,7 +178,6 @@ char		**redirection_agreg(char **cmd)
 		if ((size = is_redirection_agreg(cmd, i)))
 		{
 			cmd = clean_command(cmd, i, size);
-			i = 0; // PEUT ETRE QU'ON POURRA L'ENLEVER MAIS ON TEST D'ABORD
 		}
 		++i;
 	}

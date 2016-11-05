@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 19:10:51 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/05 19:57:49 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char		**split_on_highest(char *cmd, int *type)
 					i = pass_string(cmd, i);
 				else if (cmd[i] == '(')
 					i = pass_grouping(cmd, i);
-				else if (!ft_strncmp(">&", &cmd[i], 2))
+				else if (!ft_strncmp(">&", &cmd[i], 2) || !ft_strncmp("<&", &cmd[i], 2))
 					i += 2;
 				else if ((*type = check_hightest(&cmd[i], j)))
 					tab = split_on(cmd, &cmd[i] - cmd, *type);
