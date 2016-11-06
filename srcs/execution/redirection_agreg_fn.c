@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_agreg_fn.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 17:30:32 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 18:57:55 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int			get_right_word(char **cmd, int i, int *size)
 	int		n;
 
 	n = -1;
-	*size = 2;
 	if ((tmp = ft_strstr(cmd[i], ">&") + 2) && *tmp)
 	{
 		*size = 1;
@@ -83,7 +82,7 @@ int			get_right_word(char **cmd, int i, int *size)
 		else
 			n = open(tmp, FLAG_TRUNC, OPEN_MODE);
 	}
-	else if (cmd[i + 1])
+	else if (cmd[i + 1] && (*size = 2))
 		n = open(cmd[i + 1], FLAG_TRUNC, OPEN_MODE);
 	return (n);
 }
@@ -94,7 +93,6 @@ int			get_left_word(char **cmd, int i, int *size)
 	int		n;
 
 	n = -1;
-	*size = 2;
 	if ((tmp = ft_strstr(cmd[i], "<&") + 2) && *tmp)
 	{
 		*size = 1;
@@ -107,8 +105,9 @@ int			get_left_word(char **cmd, int i, int *size)
 				ft_fdprint(2, "42sh: %d: %s\n", n, strerror(errno));
 		}
 	}
-	else
+	else if (cmd[i + 1])
 	{
+		*size = 2;
 		n = ft_atoi(cmd[i + 1]);
 		if ((read(n, NULL, 0) < 0) && (n = -1))
 			ft_fdprint(2, "42sh: %d: %s\n", n, strerror(errno));
