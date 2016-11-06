@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 17:06:33 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 17:11:35 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			get_right_word(char **cmd, int i, int *size)
 	char	*tmp;
 	int		n;
 
-	n = 0;
+	n = -1;
 	*size = 2;
 	if ((tmp = ft_strstr(cmd[i], ">&") + 2) && *tmp)
 	{
@@ -88,20 +88,12 @@ int			get_right_word(char **cmd, int i, int *size)
 	return (n);
 }
 
-void		do_redirection(int n, int word, int right)
-{
-	if (word == -2)
-		close(n);
-	else
-		dup2(right ? word : n, right ? n : word);
-}
-
 int			get_left_word(char **cmd, int i, int *size)
 {
 	char	*tmp;
 	int		n;
 
-	n = 0;
+	n = -1;
 	*size = 2;
 	if ((tmp = ft_strstr(cmd[i], "<&") + 2) && *tmp)
 	{
@@ -122,6 +114,14 @@ int			get_left_word(char **cmd, int i, int *size)
 			ft_fdprint(2, "42sh: %d: %s\n", n, strerror(errno));
 	}
 	return (n);
+}
+
+void		do_redirection(int n, int word, int right)
+{
+	if (word == -2)
+	close(n);
+	else
+	dup2(right ? word : n, right ? n : word);
 }
 
 int			is_redirection_agreg(char **cmd, int i)
