@@ -14,6 +14,8 @@
 #include "operator.h"
 #include "libft.h"
 #include "error.h"
+#include "execution.h"
+#include "tools.h"
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -54,6 +56,20 @@ int			replace_actual_file(int fd, char *filename, int type)
 	return (new_fd);
 }
 
+char		*get_filename(t_tree *cmd)
+{
+	if (cmd->type)
+	{
+		cmd->left->cmd = redirection_agreg(cust_split(cmd->left->elem));
+		return (cmd->left->cmd[0]);
+	}
+	else
+	{
+		cmd->cmd = redirection_agreg(cust_split(cmd->elem));
+		return (cmd->cmd[0]);
+	}
+}
+
 int			redirection_get_fd(t_tree *cmd, int *fds)
 {
 	ft_bzero(fds, sizeof(int) * 2);
@@ -63,12 +79,12 @@ int			redirection_get_fd(t_tree *cmd, int *fds)
 	{
 		fds[!(TO_LEFT(cmd->type)) ? 1 : 0] = replace_actual_file(
 			fds[!(TO_LEFT(cmd->type)) ? 1 : 0],
-			GET_FILE(cmd->right),
+			get_filename(cmd->right),
 			cmd->type
 		);
 		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
-			ft_fdprint(2, "42sh: %s: %s\n", ft_strerror(errno), GET_FILE(cmd->right));
+			ft_fdprint(2, "42sh: %s: %s\n", ft_strerror(errno), get_filename(cmd->right));
 			close(fds[!(TO_LEFT(cmd->type)) ? 0 : 1]);
 			fds[!(TO_LEFT(cmd->type)) ? 0 : 1] = -1;
 		}
