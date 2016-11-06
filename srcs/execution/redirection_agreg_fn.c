@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 17:11:35 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 17:30:32 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			get_right_word(char **cmd, int i, int *size)
 		*size = 1;
 		if (*tmp == '-')
 			n = -2;
-		else if (ft_isdigit(*tmp))
+		else if (*tmp && ft_isdigit(*tmp))
 		{
 			n = ft_atoi(tmp);
 			if ((write(n, NULL, 0) < 0) && (n = -1))
@@ -100,7 +100,7 @@ int			get_left_word(char **cmd, int i, int *size)
 		*size = 1;
 		if (*tmp == '-')
 			n = -2;
-		else if (ft_isdigit(*tmp))
+		else if (*tmp && ft_isdigit(*tmp))
 		{
 			n = ft_atoi(tmp);
 			if ((read(n, NULL, 0) < 0) && (n = -1))
