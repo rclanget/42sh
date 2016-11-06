@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 17:30:32 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 19:07:59 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int			get_right_word(char **cmd, int i, int *size)
 		*size = 1;
 		if (*tmp == '-')
 			n = -2;
-		else if (*tmp && ft_isdigit(*tmp))
+		else if (ft_isdigit(*tmp))
 		{
 			n = ft_atoi(tmp);
 			if ((write(n, NULL, 0) < 0) && (n = -1))
@@ -119,9 +119,9 @@ int			get_left_word(char **cmd, int i, int *size)
 void		do_redirection(int n, int word, int right)
 {
 	if (word == -2)
-	close(n);
+		close(n);
 	else
-	dup2(right ? word : n, right ? n : word);
+		dup2(right ? word : n, right ? n : word);
 }
 
 int			is_redirection_agreg(char **cmd, int i)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 17:40:00 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/06 18:21:27 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int					main(int ac, char **av, char **env)
 	info = init_shell(ac, av, env);
 	while ((command = add_history(info, termcaps_readline(info))))
 	{
-		save_fd(1);
 		command = apply_alias_verified(info, command);
 		tmp = ft_strtrim(command);
 		info->cmd = parser_cmd(tmp);
@@ -73,7 +72,6 @@ int					main(int ac, char **av, char **env)
 		if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
 			execution_motor(info, info->cmd, 1);
 		info->cmd = parser_free_cmd(info->cmd);
-		save_fd(0);
 		info->term->pos_c = 0;
 		if (info->stop)
 			break ;

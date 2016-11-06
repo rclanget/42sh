@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/04 12:51:44 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 18:34:51 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #define TO_LEFT(x) (x == 6 || x == 8)
 #define IN 0
 #define OUT 1
-#define GET_FILE(x) (x->type ? x->left->elem : x->elem)
+#define GET_FILE(x) (x->type ? x->left->cmd[0] : x->cmd[0])
 
 #define RIGHT(x) (x == 5)
 #define DRIGHT(x) (x == 7)

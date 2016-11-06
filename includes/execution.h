@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:30:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 17:07:25 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 18:32:44 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ t_word		*treat_magicquote(t_info *info, t_word *words);
 
 char		**redirection_agreg(char **cmd);
 int			is_redirection_agreg(char **cmd, int i);
+void		apply_fd_agreg(t_tree *cmd);
 
 #endif
