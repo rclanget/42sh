@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_left.c                                       :+:      :+:    :+:   */
+/*   redirection_dleft.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdeguign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gdeguign <gdeguign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:24:07 by gdeguign          #+#    #+#             */
-/*   Updated: 2016/10/26 18:24:14 by gdeguign         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:28:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,13 +107,13 @@ char	*get_delimit(t_tree *un_noeud)
 	return (delimit);
 }
 
-void	modif_tree(t_tree *tree)
+int		modif_tree(t_tree *tree)
 {
 	t_tree		*un_noeud;
 	char		*nom_fichier_temp;
 
 	if (!tree)
-		return ;
+		return (1);
 	while ((un_noeud = find_dleft(tree)) != NULL)
 	{
 		nom_fichier_temp = dleft_redirection(get_delimit(un_noeud), 0);
@@ -132,4 +132,5 @@ void	modif_tree(t_tree *tree)
 			un_noeud->right->left->elem = nom_fichier_temp;
 		}
 	}
+	return (1);
 }

@@ -82,7 +82,7 @@ int history_deloffset(t_info *info, char **av)
             if (hist->next)
                 hist->next->prev = hist->prev;
             delay_other(hist->prev);
-            ft_free_them_all(2, hist->cmd, hist);
+            ft_free_them_all(2, &hist->cmd, &hist);
             break;
         }
         hist = hist->next;

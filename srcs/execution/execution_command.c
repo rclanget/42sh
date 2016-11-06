@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 18:44:27 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:20:46 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 	if (!is_builtin(cmd->cmd[0]))
 	{
 		if ((pid = fork()) == -1)
-			ft_exit_shell(info);
+			exit_shell(info);
 		if (!pid)
 		{
 			ft_signal(1);

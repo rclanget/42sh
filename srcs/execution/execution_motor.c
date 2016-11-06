@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/05 17:53:00 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:12:09 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int				execution_motor(t_info *info, t_tree *cmd, int wait)
 
 	tmp = apply_magicquote(info, cmd->elem);
 	cmd->cmd = redirection_agreg(cust_split(tmp));
-	ft_free_them_all(1, tmp);
+	ft_free_them_all(1, &tmp);
 	if (cmd && cmd->cmd)
 	{
 		if (!cmd->type)

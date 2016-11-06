@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/22 14:59:11 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/23 20:57:19 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:11:33 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char			*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited)
 	}
 	replace = make_sentence(ws);
 	free_list(ws);
-	ft_free_them_all(3, cmd, visited, tmp);
+	ft_free_them_all(3, &cmd, &visited, &tmp);
 	return (replace);
 }
 

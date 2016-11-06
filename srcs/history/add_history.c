@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:58:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 14:41:51 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:31:40 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 #include "libft.h"
 #include "history.h"
 
-void				add_history(t_info *info, char *cmd)
+char				*add_history(t_info *info, char *cmd)
 {
 	t_history		*node;
 	static int 		number;
 
 	node = NULL;
-	if ((node = ft_memalloc(sizeof(t_history))))
+	if (ft_strlen(cmd) && (node = ft_memalloc(sizeof(t_history))))
 	{
 		node->cmd = ft_strdup(cmd);
 		node->n = number++;
@@ -28,4 +28,5 @@ void				add_history(t_info *info, char *cmd)
 			node->next->prev = node;
 		info->hist = node;
 	}
+	return (cmd);
 }

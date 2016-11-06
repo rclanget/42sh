@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 15:23:19 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/27 15:26:11 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:12:28 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,6 @@ void			free_history(t_history *hist)
 	if (hist)
 	{
 		free_history(hist->next);
-		ft_free_them_all(2, hist->cmd, hist);
+		ft_free_them_all(2, &hist->cmd, &hist);
 	}
 }
