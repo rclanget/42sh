@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_magicquote_fn.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:11:10 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/26 22:20:15 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 22:35:35 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ t_word			*treat_magicquote(t_info *info, t_word *words)
 	{
 		if (tmp->treat)
 		{
-			save_fd(1);
+			// save_fd(1);
 			treated = process_magicquote(info, tmp->word);
-			save_fd(0);
+			// save_fd(0);
 			free (tmp->word);
 			tmp->word = treated;
 		}
