@@ -24,12 +24,13 @@
 
 void			save_fd(int tosave)
 {
-	static int	save[2];
+	static int	save[3];
 
 	if (tosave)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
+		save[2] = dup(2);
 	}
 	else
 	{
@@ -37,6 +38,8 @@ void			save_fd(int tosave)
 		close(save[0]);
 		dup2(save[1], 1);
 		close(save[1]);
+		dup2(save[2], 2);
+		close(save[2]);
 	}
 }
 

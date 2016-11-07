@@ -118,9 +118,12 @@ int			get_left_word(char **cmd, int i, int *size)
 void		do_redirection(int n, int word, int right)
 {
 	if (word == -2)
-	close(n);
+		close(n);
 	else
-	dup2(right ? word : n, right ? n : word);
+	{
+		dup2(right ? word : n, right ? n : word);
+		// close(right ? word : n);
+	}
 }
 
 int			is_redirection_agreg(char **cmd, int i)

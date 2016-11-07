@@ -53,6 +53,8 @@ int			replace_actual_file(int fd, char *filename, int type)
 		new_fd = open(filename, get_the_flags(type));
 	else
 		new_fd = open(filename, get_the_flags(type), FILE_RIGHTS);
+	dup2(new_fd, LEFT(type) ? 0 : 1);
+	close(new_fd);
 	return (new_fd);
 }
 
@@ -60,13 +62,27 @@ char		*get_filename(t_tree *cmd)
 {
 	if (cmd->type)
 	{
-		cmd->left->cmd = redirection_agreg(cust_split(cmd->left->elem));
+		cmd->left->cmd = cust_split(cmd->left->elem);
 		return (cmd->left->cmd[0]);
 	}
 	else
 	{
-		cmd->cmd = redirection_agreg(cust_split(cmd->elem));
+		cmd->cmd = cust_split(cmd->elem);
 		return (cmd->cmd[0]);
+	}
+}
+
+char		*treat_agreg(t_tree *cmd)
+{
+	if (cmd->type)
+	{
+		cmd->left->cmd = redirection_agreg(cust_split(cmd->left->elem));
+		return (cmd->left->elem);
+	}
+	else
+	{
+		cmd->cmd = redirection_agreg(cust_split(cmd->elem));
+		return (cmd->elem);
 	}
 }
 
@@ -82,6 +98,7 @@ int			redirection_get_fd(t_tree *cmd, int *fds)
 			get_filename(cmd->right),
 			cmd->type
 		);
+		treat_agreg(cmd->right);
 		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
 			ft_fdprint(2, "42sh: %s: %s\n", ft_strerror(errno), get_filename(cmd->right));
