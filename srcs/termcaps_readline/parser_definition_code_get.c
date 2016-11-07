@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_definition_code_get.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 21:59:06 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/21 18:58:29 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/07 21:03:07 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	*get_operator(char *cmd, int *codes)
 	int	code;
 
 	i = 0;
-	while (cmd[i])
+	while (cmd && cmd[i])
 	{
 		if ((code = is_operator(cmd[i])))
 			codes[i] = code;
@@ -36,7 +36,7 @@ int	*get_quote(char *cmd, int *codes)
 	int	code;
 
 	i = 0;
-	while (cmd[i])
+	while (cmd && cmd[i])
 	{
 		if ((code = is_quote(cmd[i])))
 			codes[i] = code;
@@ -50,7 +50,7 @@ int	*get_cmd(char *cmd, int *codes)
 	int i;
 
 	i = 0;
-	while (cmd[i])
+	while (cmd && cmd[i])
 	{
 		if ((!i && codes[i] == C_SPACE) || codes[i] > C_CHEV_L)
 		{
@@ -71,14 +71,14 @@ int	*get_arg(char *cmd, int *codes)
 	int i;
 
 	i = 0;
-	while (cmd[i])
+	while (cmd && cmd[i])
 	{
 		if (codes[i] == C_CMD)
 		{
-			while (cmd[i] && codes[i] && codes[i] == C_CMD)
+			while (cmd && cmd[i] && codes[i] && codes[i] == C_CMD)
 				i++;
 			skip_space(cmd, &i);
-			while (cmd[i] && codes[i] == C_SPACE)
+			while (cmd && cmd[i] && codes[i] == C_SPACE)
 			{
 				if (cmd[i] != ' ')
 					while (cmd[i] && cmd[i] != ' ' && codes[i] == C_SPACE)
