@@ -123,7 +123,7 @@ t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
 		path = change_path();
 	}
 	tab_path = ft_strsplit(path, ':');
-	while (tab_path[i])
+	while (tab_path && tab_path[i])
 	{
 		// chdir(tab_path[i]);
 		if ((dir = opendir(tab_path[i])) == NULL)
