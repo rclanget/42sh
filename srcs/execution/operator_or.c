@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "operator.h"
 
 int			operator_or(t_info *info, t_tree *cmd)
 {
@@ -18,5 +19,6 @@ int			operator_or(t_info *info, t_tree *cmd)
 	{
 		return (0);
 	}
+	save_fd(0);
 	return (execution_motor(info, cmd->right, 1));
 }
