@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_get_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/04 12:51:44 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/07 13:18:36 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "error.h"
 #include "execution.h"
 #include "tools.h"
+#include "hashmap.h"
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -76,11 +77,13 @@ char		*treat_agreg(t_tree *cmd)
 {
 	if (cmd->type)
 	{
+		free_tab(cmd->left->cmd);
 		cmd->left->cmd = redirection_agreg(cust_split(cmd->left->elem));
 		return (cmd->left->elem);
 	}
 	else
 	{
+		free_tab(cmd->cmd);
 		cmd->cmd = redirection_agreg(cust_split(cmd->elem));
 		return (cmd->elem);
 	}
