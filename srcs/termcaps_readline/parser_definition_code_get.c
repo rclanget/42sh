@@ -75,7 +75,7 @@ int	*get_arg(char *cmd, int *codes)
 	{
 		if (codes[i] == C_CMD)
 		{
-			while (codes[i] && codes[i] == C_CMD)
+			while (cmd[i] && codes[i] && codes[i] == C_CMD)
 				i++;
 			skip_space(cmd, &i);
 			while (cmd[i] && codes[i] == C_SPACE)

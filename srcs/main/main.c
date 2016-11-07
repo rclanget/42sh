@@ -60,11 +60,11 @@ void				exit_shell(t_info *info)
 	// exit(execution_status(status));
 }
 
-void				execute_shell(t_info *info, char *command)
+void				execute_shell(t_info *info, char **command)
 {
 	save_fd(1);
-	command = apply_alias_verified(info, command);
-	info->cmd = parser_cmd(ft_strtrim(command));
+	*command = apply_alias_verified(info, *command);
+	info->cmd = parser_cmd(ft_strtrim(*command));
 	if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
 		execution_motor(info, info->cmd, 1);
 	info->cmd = parser_free_cmd(info->cmd);
@@ -80,7 +80,7 @@ int					main(int ac, char **av, char **env)
 	while ((command = add_history(info, termcaps_readline(info))))
 	{
 		if (ft_strlen(command))
-			execute_shell(info, command);
+			execute_shell(info, &command);
 		ft_free_them_all(1, &command);
 		info->term->pos_c = 0;
 		if (info->stop)
