@@ -20,7 +20,7 @@ char	*ft_strjoin_custom(char const *s1, char const *s2)
 		return (NULL);
     if (!s1 || !s2)
         return (ft_strdup((!s1) ? s2 : s1));
-	str = (char*)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	str = ft_memalloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
 	if (!str)
 		return (NULL);
 	ft_strclr(str);

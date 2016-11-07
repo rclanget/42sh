@@ -103,7 +103,7 @@ t_tree		*parser_cmd(char *cmd)
 	node = NULL;
 	if (cmd && ft_strlen(cmd))
 	{
-		node = (t_tree *)malloc(sizeof(t_tree));
+		node = (t_tree *)ft_memalloc(sizeof(t_tree));
 		ft_bzero(node, sizeof(t_tree));
 		if ((tab = split_on_highest(cmd, &type)))
 		{
@@ -116,5 +116,6 @@ t_tree		*parser_cmd(char *cmd)
 		else
 			node->elem = clean_parentheses(ft_strdup(cmd), &node->type);
 	}
+	free(cmd);
 	return (node);
 }

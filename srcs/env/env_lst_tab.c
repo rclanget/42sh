@@ -43,7 +43,7 @@ char	**env_lst_tab(t_env *env)
 		;
 	if (i)
 	{
-		tab = (char **)malloc(sizeof(char *) * i + 1);
+		tab = (char **)malloc(sizeof(char *) * (i + 1));
 		transfer_env(tab, env, 0);
 	}
 	return (tab);

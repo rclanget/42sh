@@ -44,7 +44,7 @@ char	**ft_strsplit(char const *s, char c)
 	i = 0;
 	if (!s)
 		return (NULL);
-	tab = (char**)malloc(sizeof(char*) * ft_xcolums(s, c) + 1);
+	tab = (char**)malloc(sizeof(*tab) * (ft_xcolums(s, c) + 1));
 	if (!tab)
 		return (NULL);
 	tab[ft_xcolums(s, c)] = 0;

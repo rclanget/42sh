@@ -37,7 +37,7 @@ char *clean_backslash(char *str)
 
 	j = 0;
 	i = 0;
-	if ((str_new = ft_memalloc(get_len(str))))
+	if ((str_new = ft_memalloc(get_len(str) + 1)))
 	{
 		while (str[j])
 		{

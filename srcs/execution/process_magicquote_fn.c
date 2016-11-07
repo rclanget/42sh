@@ -23,6 +23,7 @@ static char		*get_words(char *s)
 	char		c;
 
 	tmp = s;
+	quote = 0;
 	while (tmp && *tmp)
 	{
 		if (!quote && *tmp == '\\' && *(tmp + 1))

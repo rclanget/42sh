@@ -49,27 +49,29 @@ t_info				*init_shell(int ac, char **av, char **env)
 
 void				exit_shell(t_info *info)
 {
+	// int				status;
+
+	// status = info->status;
 	free_history(get_head(info->hist));
 	ft_free_env(info->env);
 	hashmap_free(info->hash);
 	info->env = NULL;
-	exit(execution_status(info->status));
+	ft_free_them_all(5, &info->self, &info->term->capa, &info->term->prompt, &info->term, &info);
+	// exit(execution_status(status));
 }
 
 int					main(int ac, char **av, char **env)
 {
 	t_info			*info;
 	char			*command;
-	char			*tmp;
 
 	info = init_shell(ac, av, env);
 	while ((command = add_history(info, termcaps_readline(info))))
 	{
 		save_fd(1);
 		command = apply_alias_verified(info, command);
-		tmp = ft_strtrim(command);
-		info->cmd = parser_cmd(tmp);
-		ft_free_them_all(2, &command, &tmp);
+		info->cmd = parser_cmd(ft_strtrim(command));
+		ft_free_them_all(1, &command);
 		if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
 			execution_motor(info, info->cmd, 1);
 		info->cmd = parser_free_cmd(info->cmd);
@@ -80,5 +82,7 @@ int					main(int ac, char **av, char **env)
 		update_path(info, search_env_var(info, "PATH"));
 	}
 	exit_shell(info);
+	info = NULL;
+	command = NULL;
 	return (0);
 }
