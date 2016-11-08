@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_agreg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 15:20:25 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 18:59:38 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/08 15:09:43 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char		**clean_command(char **cmd, int i, int size)
 		cmd[i] = cmd[i + size];
 		++i;
 	}
+	free(cmd[i]);
 	cmd[i] = 0;
 	return (cmd);
 }
