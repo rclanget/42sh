@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_main.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/05 19:57:49 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:28:10 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,18 @@ char		**split_on_highest(char *cmd, int *type)
 	int		i;
 	int		j;
 	char	**tab;
+	int 	len;
 
 	j = -1;
 	*type = 0;
 	tab = NULL;
+	len = ft_strlen(cmd);
 	if (cmd)
 	{
 		while (g_parse[++j].check)
 		{
 			i = 0;
-			while (cmd[i] && !tab)
+			while ((i < len) && !tab)
 			{
 				if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\')
 					i = pass_string(cmd, i);
