@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strsplitcustom.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 21:42:14 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/08 13:39:37 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,13 @@ static char			*get_next_word(char *str)
 		tmp = ft_memalloc(sizeof(char) * (del - content + 1));
 		tmp = ft_memcpy(tmp, content, (del - content));
 		ret = clean_backslash(remove_quote(ft_strtrim(tmp)));
+		ft_fdprint(2, "%s, %s, %s\n", del, ret, tmp);
 		free(tmp);
 		del = (!*del) ? NULL : del;
 		if (ret && !*ret)
 			ft_memdel((void **)&ret);
 		content = del;
+		ft_fdprint(2, "%s, %s\n", del, ret);
 	}
 	return ret;
 }
