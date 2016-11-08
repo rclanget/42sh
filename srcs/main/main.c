@@ -49,15 +49,15 @@ t_info				*init_shell(int ac, char **av, char **env)
 
 void				exit_shell(t_info *info)
 {
-	// int				status;
+	int				status;
 
-	// status = info->status;
+	status = info->status;
 	free_history(get_head(info->hist));
 	ft_free_env(info->env);
 	hashmap_free(info->hash);
 	info->env = NULL;
 	ft_free_them_all(5, &info->self, &info->term->capa, &info->term->prompt, &info->term, &info);
-	// exit(execution_status(status));
+	exit(execution_status(status));
 }
 
 void				execute_shell(t_info *info, char **command)
@@ -88,7 +88,5 @@ int					main(int ac, char **av, char **env)
 		update_path(info, search_env_var(info, "PATH"));
 	}
 	exit_shell(info);
-	info = NULL;
-	command = NULL;
 	return (0);
 }

@@ -31,20 +31,17 @@ int			pass_string(char *cmd, int i)
 	char	c;
 	int		ret;
 
+	ret = i;
 	if (cmd[i] == '\\')
+		++ret;
+	else if ((c = cmd[i]) && cmd[i + 1])
 	{
-		ret = ++i;
-	}
-	else
-	{
-		c = cmd[i++];
-		while (cmd[i] != c)
+		while (cmd[++i] && cmd[i] != c)
 		{
 			if (cmd[i] == '\\')
 			{
 				;
 			}
-			++i;
 		}
 		ret = i;
 	}
