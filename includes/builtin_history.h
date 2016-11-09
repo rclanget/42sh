@@ -26,4 +26,6 @@ int				history_deloffset(t_info *info, char **av);
 
 int				history_file(t_info *info, char **av, int option);
 
+char			*history_excldot(t_info *info, char *cmd);
+
 #endif
