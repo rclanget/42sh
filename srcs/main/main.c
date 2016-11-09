@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 17:40:00 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/09 19:07:15 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "execution.h"
 #include "history.h"
 #include "tools.h"
+#include "builtin_history.h"
 
 t_info				*init_shell(int ac, char **av, char **env)
 {
@@ -77,7 +78,7 @@ int					main(int ac, char **av, char **env)
 	char			*command;
 
 	info = init_shell(ac, av, env);
-	while ((command = add_history(info, termcaps_readline(info))))
+	while ((command = add_history(info, history_excldot(info, termcaps_readline(info)))))
 	{
 		if (ft_strlen(command))
 			execute_shell(info, &command);
