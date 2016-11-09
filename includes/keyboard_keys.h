@@ -61,11 +61,13 @@
 
 # endif
 
-# define CTRL_I				9
-# define CTRL_O				15
-# define CTRL_P				16
+# define CTRL_I				39883
+# define CTRL_O				34755
+# define CTRL_P				9082850
 
 # define KEY_UP				4283163
 # define KEY_DOWN			4348699
+
+# define TAB				9
 
 #endif

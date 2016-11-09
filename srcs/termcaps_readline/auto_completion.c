@@ -17,15 +17,16 @@
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "libft.h"
-#include <limits.h>
+//#include <limits.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <dirent.h>
-
 #include <libgen.h>
 
+#include "libft.h"
+#include "keyboard_keys.h"
+#include "command_line_termcaps.h"
 #include "auto_completion.h"
 
 /*
@@ -37,11 +38,6 @@ srcs/termcaps_readline/termcaps_handle_keyboard.c
 
 srcs/termcaps_readline/keyboard_move_word.c
 
-add_chr
-
-mettre 22 au lieu de 21 dans un des fichier
-
-creer une fction et rajouter une ligne dans le tableau t_key g_key_tab
 */
 
 char	*ft_strdup_spe(const char *s1)
@@ -128,13 +124,13 @@ void	print_list_completion(t_dlist *head)
 	while (tmp && tmp->suiv != NULL)
 	{
 		ft_putendl((char*)tmp->str);
-		ft_putchar((char)tmp->pos);
-		ft_putchar('\n');
+		//ft_putchar((char)tmp->pos);
+		//ft_putchar('\n');
 		tmp = tmp->suiv;
 	}
 	ft_putendl((char*)tmp->str);
-	ft_putchar((char)tmp->pos);
-	ft_putchar('\n');
+	// ft_putchar((char)tmp->pos);
+	// ft_putchar('\n');
 	tmp = tmp->suiv;
 	ft_putendl("************fin        affichage de la liste************");
 }
@@ -246,20 +242,37 @@ void	next_word(t_auto_comp *auto_completion)
 		auto_completion->list_words->pos = '1';
 }
 
-void	auto_complete(char *line, t_auto_comp *auto_completion)
+void	integrate_word(t_info *info, char *line)
+{
+	// CLEAR PARTIE DROITE
+	ft_print("%s", info->term->capa->str_cd);
+	// INTEGRE LA word_display
+	char *word;
+	word = word_display(info->auto_completion.list_words);
+	if (!word)
+		return ;
+	ft_strcpy(&info->term->cmd[info->term->pos_c - ft_strlen(line)], word);
+	move_cursor(info->term->capa, info->term->pos_c, ft_strlen(info->term->prompt), 0);
+    ft_print("%s", info->term->cmd);
+    move_cursor(info->term->capa, ft_strlen(info->term->cmd), ft_strlen(info->term->prompt), info->term->pos_c);
+}
+
+void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 {
 	DIR				*dir;
 	char			*current_dir;
 	char			*texte_a_chercher;
 	struct dirent	*file_name;
 
+	if (!line)
+		return ;
 	current_dir = dirname(line);
 	texte_a_chercher = basename(line);
-	printf("affichage de current_dir[%s]\n", current_dir);
-	printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
+	//printf("affichage de current_dir[%s]\n", current_dir);
+	//printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
 	if ((dir = opendir(current_dir)) == NULL)
 	{
-		printf("%s\n", "impossible d'ouvrir le dossir courant");
+		//printf("%s\n", "impossible d'ouvrir le dossir courant");
 		return ;
 	}
 	while ((file_name = readdir(dir)) != NULL)
@@ -268,10 +281,81 @@ void	auto_complete(char *line, t_auto_comp *auto_completion)
 	closedir(dir);
 	if (auto_completion->list_words)
 		auto_completion->list_words->pos = '1';
-	print_list_completion(auto_completion->list_words);
-	next_word(auto_completion);
-	ft_putendl(word_display(auto_completion->list_words));
-	fin_auto_completion(auto_completion);
+	integrate_word(info, line);
+	//print_list_completion(auto_completion->list_words);
+}
+
+#include <stdio.h>
+
+char	*get_current_word(char *cmd, int pos)
+{
+	unsigned int	start;
+
+	if (pos != 0 && (cmd[pos] == ' ' || cmd[pos] == '\0') && cmd[pos - 1]\
+		&& (ft_isalpha(cmd[pos - 1]) || cmd[pos - 1] == '/'))
+		pos--;
+	if (!(cmd[pos]) || !(ft_isalpha(cmd[pos]) || cmd[pos] == '/'))
+		return (NULL);
+	start = (unsigned int)pos;
+	if (start == 0 && (ft_isalpha(cmd[start]) || cmd[start] == '/'))
+		return (ft_strsub(cmd, start, 1));
+	while (start)
+	{
+		if (ft_isalpha(cmd[start]) || cmd[start] == '/')
+			start--;
+		else
+			break;
+	}
+	if (start != 0)
+		start++;
+	//char * ft_strsub(char const *s, unsigned int start, en);
+	// printf("%s\n", "");
+	// printf("affichage de start[%u]\n", start);
+	// printf("affichage de pos[%d]\n", pos);
+	// printf("%s\n", "");
+	return (ft_strsub(cmd, start, (pos - start) +  1));
+}
+
+void			call_autocomp2(t_info *info)
+{
+	char	*current_word;
+
+	//printf("\naffichage de info->term->cmd[%s]\n", info->term->cmd);
+	current_word = get_current_word(info->term->cmd, info->term->pos_c);
+	//printf("affichage de current_word[%s]\n", current_word);
+	auto_complete(current_word, &(info->auto_completion), info);
+	if (current_word)
+		free(current_word);
+	//ft_putendl("fonction d'autocomp appelee");
+	
+}
+
+void			mot_suivant(t_info *info)
+{
+	next_word(&(info->auto_completion));
+	ft_putendl(word_display(info->auto_completion.list_words));
+}
+
+void			call_autocomp(t_info *info)
+{
+	int 		ret;
+	long 		chr;
+
+	chr = 0;
+	call_autocomp2(info);
+	if (info->auto_completion.list_words == NULL)
+	{
+		fin_auto_completion(&info->auto_completion);
+		return ;
+	}
+	while ((ret = read(0, &chr, sizeof(chr))) > 0)
+    {
+        if (chr == TAB)
+        	mot_suivant(info);
+        else
+        	break ;
+    }
+    fin_auto_completion(&info->auto_completion);
 }
 
 /*

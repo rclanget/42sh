@@ -71,4 +71,6 @@ void			move_down(t_info *info);
 
 void			reverse_search_i(t_info *info);
 
+void			call_autocomp(t_info *info);
+
 #endif
