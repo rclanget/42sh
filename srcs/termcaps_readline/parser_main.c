@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/25 19:10:51 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/08 16:51:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,17 @@ int			pass_string(char *cmd, int i)
 	char	c;
 	int		ret;
 
+	ret = i;
 	if (cmd[i] == '\\')
+		++ret;
+	else if ((c = cmd[i]) && cmd[i + 1])
 	{
-		ret = ++i;
-	}
-	else
-	{
-		c = cmd[i++];
-		while (cmd[i] != c)
+		while (cmd[++i] && cmd[i] != c)
 		{
 			if (cmd[i] == '\\')
 			{
 				;
 			}
-			++i;
 		}
 		ret = i;
 	}
@@ -72,23 +69,19 @@ char		**split_on_highest(char *cmd, int *type)
 	j = -1;
 	*type = 0;
 	tab = NULL;
-	if (cmd)
+	while (cmd && g_parse[++j].check)
 	{
-		while (g_parse[++j].check)
+		i = -1;
+		while ((i == -1 || cmd[i]) && cmd[++i] && !tab)
 		{
-			i = 0;
-			while (cmd[i] && !tab)
-			{
-				if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\')
-					i = pass_string(cmd, i);
-				else if (cmd[i] == '(')
-					i = pass_grouping(cmd, i);
-				else if (!ft_strncmp(">&", &cmd[i], 2))
-					i += 2;
-				else if ((*type = check_hightest(&cmd[i], j)))
-					tab = split_on(cmd, &cmd[i] - cmd, *type);
-				++i;
-			}
+			if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\')
+				i = pass_string(cmd, i);
+			else if (cmd[i] == '(')
+				i = pass_grouping(cmd, i);
+			else if (!ft_strncmp(">&", &cmd[i], 2) || !ft_strncmp("<&", &cmd[i], 2))
+				i += 2;
+			else if ((*type = check_hightest(&cmd[i], j)))
+				tab = split_on(cmd, &cmd[i] - cmd, *type);
 		}
 	}
 	return (tab);
@@ -103,7 +96,7 @@ t_tree		*parser_cmd(char *cmd)
 	node = NULL;
 	if (cmd && ft_strlen(cmd))
 	{
-		node = (t_tree *)malloc(sizeof(t_tree));
+		node = (t_tree *)ft_memalloc(sizeof(t_tree));
 		ft_bzero(node, sizeof(t_tree));
 		if ((tab = split_on_highest(cmd, &type)))
 		{
@@ -116,5 +109,6 @@ t_tree		*parser_cmd(char *cmd)
 		else
 			node->elem = clean_parentheses(ft_strdup(cmd), &node->type);
 	}
+	free(cmd);
 	return (node);
 }

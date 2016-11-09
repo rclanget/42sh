@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 19:26:43 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/04 11:46:58 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/08 17:15:27 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "operator.h"
 #include "libft.h"
 #include "execution.h"
+#include "hashmap.h"
 
 #ifdef __linux__
 # include <wait.h>
@@ -29,6 +30,11 @@ t_tree				*self_node(t_info *info)
 		ft_bzero(&tree, sizeof(t_tree));
 		tree.elem = info->self;
 		set++;
+	}
+	if (tree.cmd)
+	{
+		free_tab(tree.cmd);
+		tree.cmd = NULL;
 	}
 	return (&tree);
 }

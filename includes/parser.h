@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 21:39:08 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:29:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int						*get_cmd(char *cmd, int *codes);
 int						*get_arg(char *cmd, int *codes);
 int						*get_file(char *cmd, int *codes);
 int						*get_quote(char *cmd, int *codes);
-void					modif_tree(t_tree *tree);
+int						modif_tree(t_tree *tree);
 
 extern t_parse g_parse[];
 extern t_parse g_parse2[];

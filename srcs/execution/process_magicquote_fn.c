@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:11:10 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/26 22:20:15 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/08 13:25:18 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static char		*get_words(char *s)
 	char		c;
 
 	tmp = s;
+	quote = 0;
 	while (tmp && *tmp)
 	{
 		if (!quote && *tmp == '\\' && *(tmp + 1))
@@ -85,7 +86,6 @@ t_word			*treat_magicquote(t_info *info, t_word *words)
 	{
 		if (tmp->treat)
 		{
-			save_fd(1);
 			treated = process_magicquote(info, tmp->word);
 			save_fd(0);
 			free (tmp->word);

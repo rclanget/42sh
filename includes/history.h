@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 14:54:11 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 10:46:10 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:32:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ typedef struct			s_history
 }						t_history;
 
 t_history				*get_head(t_history *history);
-void					add_history(t_info *info, char *cmd);
+char					*add_history(t_info *info, char *cmd);
 void					free_history(t_history *hist);
 void					set_temporary_hist(t_info *info, int set);
 

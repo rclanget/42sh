@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_op_comma.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 16:20:44 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:21:21 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/07 22:41:06 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char		**parse_op_comma(char *str, int pos)
 	char	**tab;
 
 	tab = NULL;
-	if ((tab = (char **)malloc(sizeof(char *) * 4)))
+	if ((tab = (char **)ft_memalloc(sizeof(char *) * 4)))
 	{
 		tab[0] = ft_strndup(str, pos);
 		tab[1] = ft_strdup(";");

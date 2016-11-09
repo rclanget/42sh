@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 18:44:27 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/09 16:23:11 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@
 
 void			save_fd(int tosave)
 {
-	static int	save[2];
+	static int	save[3];
 
 	if (tosave)
 	{
 		save[0] = dup(0);
 		save[1] = dup(1);
+		save[2] = dup(2);
 	}
 	else
 	{
@@ -37,6 +38,8 @@ void			save_fd(int tosave)
 		close(save[0]);
 		dup2(save[1], 1);
 		close(save[1]);
+		dup2(save[2], 2);
+		close(save[2]);
 	}
 }
 
@@ -65,20 +68,20 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 	char	**env;
 
 	env = NULL;
-	if (!is_builtin(cmd->cmd[0]))
+	if (!is_builtin(cmd->cmd[0]) && ((access(cmd->cmd[0], X_OK)) != -1 ||
+		lire_hashmap(info->hash, cmd->cmd[0])))
 	{
 		if ((pid = fork()) == -1)
-			ft_exit_shell(info);
-		if (!pid)
-		{
-			ft_signal(1);
-			env = env_lst_tab(info->env);
-			execution(info, cmd, env);
-		}
+			exit_shell(info);
+		else if (!pid && !ft_signal(1))
+			execution(info, cmd, env = env_lst_tab(info->env));
 		if (wait)
 			waitpid(pid, &info->status, WUNTRACED);
 		free_env_tab(env);
 		return (execution_status(info->status));
 	}
-	return(execution_builtin(info, cmd));
+	else if (is_builtin(cmd->cmd[0]))
+		return(execution_builtin(info, cmd));
+	ft_fdprint(2, "42sh: %s: command not found\n", cmd->cmd[0]);
+	return (execution_status(info->status = 127));
 }

@@ -30,7 +30,7 @@ char    *history_add_args(char **cmd)
     while (cmd && *cmd)
     {
         tmp1 = ft_strjoin_custom(tmp, *cmd);
-        ft_free_them_all(1, tmp);
+        ft_free_them_all(1, &tmp);
         tmp = tmp1;
         cmd++;
     }
@@ -47,7 +47,7 @@ int history_substitute(t_info *info, char **av, int option)
         {
             tmp = history_perform(info, *av);
             ft_print("%s\n", tmp ? tmp : *av);
-            ft_free_them_all(1, tmp);
+            ft_free_them_all(1, &tmp);
         }
         else
         {

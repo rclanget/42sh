@@ -17,6 +17,8 @@ void		cut_line(t_info *info)
 	{
 		plen = ft_strlen(info->term->prompt);
 		slen = ft_strlen(selection);
+		if (info->term->save_cmd)
+			free(info->term->save_cmd);
 		info->term->save_cmd = selection;
 		ft_memcpy(&info->term->cmd[MIN(start, info->term->pos_c)],
 			&info->term->cmd[MAX(start, info->term->pos_c)],
@@ -39,6 +41,7 @@ void		copy_line(t_info *info)
         if (info->term->save_cmd)
             free(info->term->save_cmd);
         info->term->save_cmd = ft_strdup(selection);
+		free(selection);
     }
 }
 

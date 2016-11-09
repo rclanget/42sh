@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   env_lst_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/16 16:15:34 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/26 12:26:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/08 17:53:23 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "libft.h"
+#include "tools.h"
 
 #include <stdlib.h>
 
@@ -21,8 +22,8 @@ void	transfer_env(char **tab, t_env *env, int i)
 
 	if (env)
 	{
-		tmp = ft_strjoin(env->var, "=");
-		tab[i] = ft_strjoin(tmp, env->content);
+		tmp = ft_strjoin_custom(env->var, "=");
+		tab[i] = ft_strjoin_custom(tmp, env->content);
 		free(tmp);
 		transfer_env(tab, env->next, ++i);
 	}
@@ -43,7 +44,7 @@ char	**env_lst_tab(t_env *env)
 		;
 	if (i)
 	{
-		tab = (char **)malloc(sizeof(char *) * i + 1);
+		tab = (char **)malloc(sizeof(char *) * (i + 1));
 		transfer_env(tab, env, 0);
 	}
 	return (tab);

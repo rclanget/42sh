@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 12:09:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 15:03:37 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/06 16:21:10 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void					ft_init_env(t_info *info, char **env);
 
 int						execution_motor(t_info *info, t_tree *cmd, int wait);
 
-void					ft_exit_shell(t_info *info);
+void					exit_shell(t_info *info);
 
 #endif

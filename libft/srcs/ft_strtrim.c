@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 16:33:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/21 14:17:24 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/07 22:40:00 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char				*ft_strtrim(char const *s)
 	char *c;
 
 	c = NULL;
-	if (s)
+	if (s && ft_strlen(s))
 	{
 		a = (char *)s;
 		b = (char *)&(s[ft_strlen(s) - 1]);

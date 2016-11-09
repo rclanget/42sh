@@ -11,11 +11,13 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "operator.h"
 
 int				operator_and(t_info *info, t_tree *cmd)
 {
 	if (!execution_motor(info, cmd->left, 1))
 	{
+		save_fd(0);
 		return (execution_motor(info, cmd->right, 1));
 	}
 	else
