@@ -17,6 +17,7 @@
 # include "hashmap_struct.h"
 # include "parser.h"
 # include "termcaps_struct.h"
+# include "auto_completion.h"
 
 typedef struct			s_info
 {
@@ -26,6 +27,7 @@ typedef struct			s_info
 	struct s_hashmap	*hash;
 	struct s_termcaps	*term;
 	struct s_history	*hist;
+	struct s_auto_comp	auto_completion;
 	int					stop;
 	int					status;
 	char				*self;

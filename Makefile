@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/09 18:31:58 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/11/09 19:05:00 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					parser_definition_code.c parser_definition_code_get.c \
 					parser_clean_parentheses.c keyboard_updown.c \
 					keyboard_ccp_fn.c keyboard_reverse_search.c \
-					parser_history_substitute.c
+					parser_history_substitute.c auto_completion.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
