@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 16:20:46 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/09 16:23:11 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,20 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 	char	**env;
 
 	env = NULL;
-	if (!is_builtin(cmd->cmd[0]))
+	if (!is_builtin(cmd->cmd[0]) && ((access(cmd->cmd[0], X_OK)) != -1 ||
+		lire_hashmap(info->hash, cmd->cmd[0])))
 	{
 		if ((pid = fork()) == -1)
 			exit_shell(info);
-		if (!pid)
-		{
-			ft_signal(1);
-			env = env_lst_tab(info->env);
-			execution(info, cmd, env);
-		}
+		else if (!pid && !ft_signal(1))
+			execution(info, cmd, env = env_lst_tab(info->env));
 		if (wait)
 			waitpid(pid, &info->status, WUNTRACED);
 		free_env_tab(env);
 		return (execution_status(info->status));
 	}
-	return(execution_builtin(info, cmd));
+	else if (is_builtin(cmd->cmd[0]))
+		return(execution_builtin(info, cmd));
+	ft_fdprint(2, "42sh: %s: command not found\n", cmd->cmd[0]);
+	return (execution_status(info->status = 127));
 }
