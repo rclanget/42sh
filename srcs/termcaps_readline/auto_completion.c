@@ -307,10 +307,12 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 
 #include <stdio.h>
 
-char	*get_current_word(char *cmd, int pos)
+char	*get_current_word(char *cmd, int pos, int flag)
 {
 	unsigned int	start;
 
+	if ((ft_isalpha(cmd[pos]) || cmd[pos] == '/') && flag)
+		return (NULL);
 	if (pos != 0 && (cmd[pos] == ' ' || cmd[pos] == '\0') && cmd[pos - 1]\
 		&& (ft_isalpha(cmd[pos - 1]) || cmd[pos - 1] == '/'))
 		pos--;
@@ -341,7 +343,7 @@ void			call_autocomp2(t_info *info)
 	char	*current_word;
 
 	//printf("\naffichage de info->term->cmd[%s]\n", info->term->cmd);
-	current_word = get_current_word(info->term->cmd, info->term->pos_c);
+	current_word = get_current_word(info->term->cmd, info->term->pos_c, 1);
 	//printf("affichage de current_word[%s]\n", current_word);
 	auto_complete(current_word, &(info->auto_completion), info);
 	if (current_word)
@@ -354,7 +356,7 @@ void			mot_suivant(t_info *info)
 {
 	char	*line;
 
-	line = get_current_word(info->term->cmd, info->term->pos_c);
+	line = get_current_word(info->term->cmd, info->term->pos_c, 0);
 	integrate_word(info, line, 1);
 	next_word(&(info->auto_completion));
 }
@@ -368,8 +370,8 @@ void			call_autocomp(t_info *info)
 	call_autocomp2(info);
 	if (info->auto_completion.list_words == NULL)
 	{
-		fin_auto_completion(&info->auto_completion);
 		//printf("%s\n", "Jesuislaaaaaaaaaaaa");
+		fin_auto_completion(&info->auto_completion);
 		return ;
 	}
 	while ((ret = read(0, &chr, sizeof(chr))) > 0)
