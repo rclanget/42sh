@@ -249,7 +249,7 @@ void	integrate_word(t_info *info, char *line, int first_time)
 
 	tmp = &info->term->cmd[info->term->pos_c];
 	i = 0;
-	while (*tmp && (*tmp == '/' || ft_isalpha(*tmp)))
+	while (*tmp && (*tmp == '/' || ft_isalnum(*tmp)))
 	{
 		tmp++;
 		i++;
@@ -311,19 +311,19 @@ char	*get_current_word(char *cmd, int pos, int flag)
 {
 	unsigned int	start;
 
-	if ((ft_isalpha(cmd[pos]) || cmd[pos] == '/') && flag)
+	if ((ft_isalnum(cmd[pos]) || cmd[pos] == '/') && flag)
 		return (NULL);
 	if (pos != 0 && (cmd[pos] == ' ' || cmd[pos] == '\0') && cmd[pos - 1]\
-		&& (ft_isalpha(cmd[pos - 1]) || cmd[pos - 1] == '/'))
+		&& (ft_isalnum(cmd[pos - 1]) || cmd[pos - 1] == '/'))
 		pos--;
-	if (!(cmd[pos]) || !(ft_isalpha(cmd[pos]) || cmd[pos] == '/'))
+	if (!(cmd[pos]) || !(ft_isalnum(cmd[pos]) || cmd[pos] == '/'))
 		return (NULL);
 	start = (unsigned int)pos;
-	if (start == 0 && (ft_isalpha(cmd[start]) || cmd[start] == '/'))
+	if (start == 0 && (ft_isalnum(cmd[start]) || cmd[start] == '/'))
 		return (ft_strsub(cmd, start, 1));
 	while (start)
 	{
-		if (ft_isalpha(cmd[start]) || cmd[start] == '/')
+		if (ft_isalnum(cmd[start]) || cmd[start] == '/')
 			start--;
 		else
 			break;
