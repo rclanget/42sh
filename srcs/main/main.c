@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/09 19:07:15 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/10 14:13:13 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int					main(int ac, char **av, char **env)
 	t_info			*info;
 	char			*command;
 
-	info = init_shell(ac, av, env);
+	info = save_info(init_shell(ac, av, env));
 	while ((command = add_history(info, history_excldot(info, termcaps_readline(info)))))
 	{
 		if (ft_strlen(command))
