@@ -242,16 +242,33 @@ void	next_word(t_auto_comp *auto_completion)
 		auto_completion->list_words->pos = '1';
 }
 
-void	integrate_word(t_info *info, char *line)
+void	integrate_word(t_info *info, char *line, int first_time)
 {
-	// CLEAR PARTIE DROITE
-	ft_print("%s", info->term->capa->str_cd);
-	// INTEGRE LA word_display
+	char	*tmp;
+	int		i;
+
+	tmp = &info->term->cmd[info->term->pos_c];
+	i = 0;
+	while (*tmp && (*tmp == '/' || ft_isalpha(*tmp)))
+	{
+		tmp++;
+		i++;
+	}
+	tmp = ft_strdup(tmp);
+	(void)info;
+	(void)i;
+	// printf("affichage de tmp [%s]\n", tmp);
+	// sleep(1);
 	char *word;
 	word = word_display(info->auto_completion.list_words);
 	if (!word)
 		return ;
-	ft_strcpy(&info->term->cmd[info->term->pos_c - ft_strlen(line)], word);
+	//printf("****affichage de word [%s]\n", word);
+	//sleep(1);
+	ft_print("%s", info->term->capa->str_cd);
+	//move_cursor(term->capa, term->pos_c , ft_strlen(term->prompt), 0);`
+	ft_strcpy(&info->term->cmd[info->term->pos_c - ft_strlen(line) + first_time], word);
+	ft_strcpy(&info->term->cmd[info->term->pos_c - ft_strlen(line) + ft_strlen(word) + first_time], tmp);
 	move_cursor(info->term->capa, info->term->pos_c, ft_strlen(info->term->prompt), 0);
     ft_print("%s", info->term->cmd);
     move_cursor(info->term->capa, ft_strlen(info->term->cmd), ft_strlen(info->term->prompt), info->term->pos_c);
@@ -281,7 +298,8 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 	closedir(dir);
 	if (auto_completion->list_words)
 		auto_completion->list_words->pos = '1';
-	integrate_word(info, line);
+	integrate_word(info, line, 0);
+	next_word(&(info->auto_completion));
 	//print_list_completion(auto_completion->list_words);
 }
 
@@ -327,13 +345,16 @@ void			call_autocomp2(t_info *info)
 	if (current_word)
 		free(current_word);
 	//ft_putendl("fonction d'autocomp appelee");
-	
+
 }
 
 void			mot_suivant(t_info *info)
 {
+	char	*line;
+
+	line = get_current_word(info->term->cmd, info->term->pos_c);
+	integrate_word(info, line, 1);
 	next_word(&(info->auto_completion));
-	ft_putendl(word_display(info->auto_completion.list_words));
 }
 
 void			call_autocomp(t_info *info)
@@ -346,6 +367,7 @@ void			call_autocomp(t_info *info)
 	if (info->auto_completion.list_words == NULL)
 	{
 		fin_auto_completion(&info->auto_completion);
+		//printf("%s\n", "Jesuislaaaaaaaaaaaa");
 		return ;
 	}
 	while ((ret = read(0, &chr, sizeof(chr))) > 0)
@@ -371,7 +393,7 @@ int		main(void)
 	while (get_next_line(0, &line) > 0)
 	{
 		ft_putendl("");
-		//retour = 
+		//retour =
 		auto_complete(line, &auto_completion);
 		free(line);
 		ft_putendl("");
