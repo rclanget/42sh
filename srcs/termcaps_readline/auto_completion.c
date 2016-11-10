@@ -267,11 +267,13 @@ void	integrate_word(t_info *info, char *line, int first_time)
 	//sleep(1);
 	ft_print("%s", info->term->capa->str_cd);
 	//move_cursor(term->capa, term->pos_c , ft_strlen(term->prompt), 0);`
+
 	ft_strcpy(&info->term->cmd[info->term->pos_c - ft_strlen(line) + first_time], word);
 	ft_strcpy(&info->term->cmd[info->term->pos_c - ft_strlen(line) + ft_strlen(word) + first_time], tmp);
 	move_cursor(info->term->capa, info->term->pos_c, ft_strlen(info->term->prompt), 0);
     ft_print("%s", info->term->cmd);
     move_cursor(info->term->capa, ft_strlen(info->term->cmd), ft_strlen(info->term->prompt), info->term->pos_c);
+    free(tmp);
 }
 
 void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
