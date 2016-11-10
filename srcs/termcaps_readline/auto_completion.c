@@ -225,7 +225,7 @@ char	*get_dirname(char *line)
 	char	*tmp;
 
 	current_dir = NULL;
-	if (!(ft_strchr(line, '/')) || line[ft_strlen(line) - 1] == '/')
+	if (!(ft_strrchr(line, '/')) || line[ft_strlen(line) - 1] == '/')
 	{
 		current_dir = (char*)malloc(sizeof(char) * 2);
 		current_dir[0] = '.';
@@ -234,7 +234,7 @@ char	*get_dirname(char *line)
 	else
 	{
 		current_dir = ft_strdup(line);
-		tmp = ft_strchr(current_dir, '/');
+		tmp = ft_strrchr(current_dir, '/');
 		if (tmp)
 			*tmp = '\0';
 
@@ -339,11 +339,11 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 	if (!line)
 		return ;
 	last_slash = ft_strrchr(line, '/');
-	printf("affichage de line[%s]\n", line);
+	//printf("affichage de line[%s]\n", line);
 	current_dir = get_dirname(line);
 	texte_a_chercher = get_basename(line, last_slash);
-	printf("affichage de current_dir[%s]\n", current_dir);
-	printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
+	//printf("affichage de current_dir[%s]\n", current_dir);
+	//printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
 	if ((dir = opendir(current_dir)) == NULL)
 	{
 		//printf("%s\n", "impossible d'ouvrir le dossir courant");
