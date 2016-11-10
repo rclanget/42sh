@@ -62,7 +62,38 @@ char	*ft_strdup_spe(const char *s1)
 		return (NULL);
 }
 
-t_dlist		*ajouter_avant(t_dlist *element, char *str, int is_dir)
+char		*add_path_to_str_2(char *str, int is_dir, char *cu_dir)
+{
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
+
+	tmp = ft_strjoin(cu_dir, "/");
+	if (is_dir)
+		tmp2 = ft_strdup_spe(str);
+	else
+		tmp2 = ft_strdup(str);
+	tmp3 = ft_strjoin(tmp, tmp2);
+	free(tmp);
+	free(tmp2);
+	return (tmp3);
+}
+
+char		*add_path_to_str(char *str, int is_dir, char *cu_dir)
+{
+	if (ft_strcmp(cu_dir, ".") == 0)
+	{
+		if (is_dir)
+			return (ft_strdup_spe(str));
+		else
+			return (ft_strdup(str));
+	}
+	if (is_dir)
+		return (add_path_to_str_2(str, is_dir, cu_dir));
+	return (add_path_to_str_2(str, is_dir, cu_dir));
+}
+
+t_dlist		*ajouter_avant(t_dlist *elem, char *str, int is_dir, char *cu_dir)
 {
 	t_dlist     *nouvel_element;
 
@@ -71,17 +102,17 @@ t_dlist		*ajouter_avant(t_dlist *element, char *str, int is_dir)
 	{
 		nouvel_element->pos = '0';
 		if (is_dir)
-			nouvel_element->str = ft_strdup_spe(str);
+			nouvel_element->str = add_path_to_str(str, is_dir, cu_dir);
 		else
-			nouvel_element->str = ft_strdup(str);
-		nouvel_element->suiv = element;
+			nouvel_element->str = add_path_to_str(str, is_dir, cu_dir);
+		nouvel_element->suiv = elem;
 		//ft_print("lelement courant est %s , le suivant %s\n", nouvel_element->str, nouvel_element->suiv->str);
 		return (nouvel_element);
 	}
 	return (NULL);
 }
 
-t_dlist		*cree_liste(char *str, int is_dir)
+t_dlist		*cree_liste(char *str, int is_dir, char *cu_dir)
 {
 	t_dlist		*racine;
 
@@ -91,9 +122,9 @@ t_dlist		*cree_liste(char *str, int is_dir)
 		racine->pos = '0';
 		racine->suiv = NULL;
 		if (is_dir)
-			racine->str = ft_strdup_spe(str);
+			racine->str = add_path_to_str(str, is_dir, cu_dir);
 		else
-			racine->str = ft_strdup(str);
+			racine->str = add_path_to_str(str, is_dir, cu_dir);
 	}
 	return (racine);
 }
@@ -168,11 +199,11 @@ void	print_file(char *key, char *line, t_auto_comp *auto_c, char *cu_dir)
 			//printf("%s\n", key);
 		if (!(auto_c->list_words))
 		{
-			auto_c->list_words = cree_liste(key, is_dir);
+			auto_c->list_words = cree_liste(key, is_dir, cu_dir);
 		}
 		else
 			auto_c->list_words = \
-		ajouter_avant(auto_c->list_words, key, is_dir);
+		ajouter_avant(auto_c->list_words, key, is_dir, cu_dir);
 	}
 }
 
