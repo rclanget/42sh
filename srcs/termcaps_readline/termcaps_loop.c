@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/10 12:32:01 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/10 20:59:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ char        *return_string(t_termcaps *term)
 
 char        *termcaps_loop(t_info *info)
 {
-	int					ret;
-	long				chr;
-	char				*returned;
+	int		ret;
+	long	chr;
+	char	*returned;
 
 	chr = 0;
 	set_temporary_hist(info, 1);
@@ -57,6 +57,5 @@ char        *termcaps_loop(t_info *info)
 	}
 	returned = (ret != -1) ? return_string(info->term) : NULL;
 	set_temporary_hist(info, 0);
-	termcaps_save(0);
 	return (returned);
 }
