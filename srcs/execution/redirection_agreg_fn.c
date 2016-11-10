@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_agreg_fn.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 18:57:55 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/10 01:18:05 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@
 **.
 */
 
-int			get_n(char *str)
+int			get_n(char *str, int right)
 {
 	int		n;
 
 	n = (ft_isdigit(*str)) ? ft_atoi(str) : 1;
-	if (read(n, NULL, 0) < 0)
+	if ((right ? write(n, NULL, 0) : read(n, NULL, 0)) < 0)
 	{
 		ft_fdprint(2, "42sh: %d: %s\n", n, ft_strerror(errno));
 		n = -1;
@@ -135,14 +135,14 @@ int			is_redirection_agreg(char **cmd, int i)
 	size = 0;
 	if (cmd && cmd[i] && ft_strstr(cmd[i], ">&"))
 	{
-		if ((n = get_n(cmd[i])) != -1
+		if ((n = get_n(cmd[i], 1)) != -1
 			&& (word = get_right_word(cmd, i, &size)) != -1)
 			do_redirection(n, word, 1);
 		return (size);
 	}
 	else if (cmd && cmd[i] && ft_strstr(cmd[i], "<&"))
 	{
-		if ((n = get_n(cmd[i])) != -1
+		if ((n = get_n(cmd[i], 0)) != -1
 			&& (word = get_left_word(cmd, i, &size)) != -1)
 			do_redirection(n, word, 0);
 		return (size);
