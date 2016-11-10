@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_loop.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 22:51:52 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/07 16:36:38 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/10 12:32:01 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char        *termcaps_loop(t_info *info)
 	set_temporary_hist(info, 1);
 	while ((ret = read(0, &chr, sizeof(chr))) > 0)
 	{
-		if ((chr == NL) || (chr == CTRL_D && (ret = -1) == -1))
+		if ((chr == NL) ||
+			(chr == CTRL_D && !ft_strlen(info->term->cmd) && (ret = -1) == -1))
 			break;
 		termcaps_handle_keyboard(info, chr);
 		chr = 0;
