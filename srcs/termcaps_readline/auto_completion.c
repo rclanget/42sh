@@ -30,13 +30,13 @@
 #include "auto_completion.h"
 
 /*
-info->term->cmd
+**condition pour deux ligne du dessous
+affichage de current_dir[.]
+affichage de texte_a_chercher[]
 
-srcs/termcaps_readline/termcaps_loop.c
 
-srcs/termcaps_readline/termcaps_handle_keyboard.c
+**coller le path dans la liste de mot
 
-srcs/termcaps_readline/keyboard_move_word.c
 
 */
 
@@ -188,9 +188,10 @@ char	*ft_strsplit_spe(char *line, char c)
 	return (dir_name);
 }
 
-char	*get_dir_from_string(char *line)
+char	*get_dirname(char *line)
 {
 	char	*current_dir;
+	char	*tmp;
 
 	current_dir = NULL;
 	if (!(ft_strchr(line, '/')) || line[ft_strlen(line) - 1] == '/')
@@ -200,8 +201,28 @@ char	*get_dir_from_string(char *line)
 		current_dir[1] = '\0';
 	}
 	else
-		current_dir = ft_strsplit_spe(line, '/');
+	{
+		current_dir = ft_strdup(line);
+		tmp = ft_strchr(current_dir, '/');
+		if (tmp)
+			*tmp = '\0';
+
+	}
 	return (current_dir);
+}
+
+
+char	*get_basename(char *line, char *slash)
+{
+	char	*basename;
+
+	if (!slash)
+		return (ft_strdup(line));
+	else if (slash + 1)
+		return (ft_strdup(slash + 1));
+	basename = (char*)malloc(sizeof(char));
+	basename[0] = '\0';
+	return (basename);
 }
 
 void	fin_auto_completion(t_auto_comp *auto_completion)
@@ -279,16 +300,19 @@ void	integrate_word(t_info *info, char *line, int first_time)
 void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 {
 	DIR				*dir;
+	char			*last_slash;
 	char			*current_dir;
 	char			*texte_a_chercher;
 	struct dirent	*file_name;
 
 	if (!line)
 		return ;
-	current_dir = dirname(line);
-	texte_a_chercher = basename(line);
-	//printf("affichage de current_dir[%s]\n", current_dir);
-	//printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
+	last_slash = ft_strrchr(line, '/');
+	printf("affichage de line[%s]\n", line);
+	current_dir = get_dirname(line);
+	texte_a_chercher = get_basename(line, last_slash);
+	printf("affichage de current_dir[%s]\n", current_dir);
+	printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
 	if ((dir = opendir(current_dir)) == NULL)
 	{
 		//printf("%s\n", "impossible d'ouvrir le dossir courant");
@@ -300,6 +324,8 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 	closedir(dir);
 	if (auto_completion->list_words)
 		auto_completion->list_words->pos = '1';
+	free(current_dir);
+	free(texte_a_chercher);
 	integrate_word(info, line, 0);
 	next_word(&(info->auto_completion));
 	//print_list_completion(auto_completion->list_words);
@@ -310,14 +336,24 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 char	*get_current_word(char *cmd, int pos, int flag)
 {
 	unsigned int	start;
+	char 			*tmp;
 
 	if ((ft_isalnum(cmd[pos]) || cmd[pos] == '/') && flag)
+	{
+		//printf("%s\n", "+++++ici 1 ++++++");
 		return (NULL);
+	}
 	if (pos != 0 && (cmd[pos] == ' ' || cmd[pos] == '\0') && cmd[pos - 1]\
 		&& (ft_isalnum(cmd[pos - 1]) || cmd[pos - 1] == '/'))
+	{
+		//printf("%s\n", "+++++ par la ++++++");
 		pos--;
-	if (!(cmd[pos]) || !(ft_isalnum(cmd[pos]) || cmd[pos] == '/'))
+	}
+	if (!(cmd[pos]) || (ft_isalnum(cmd[pos] && cmd[pos] != '/')))
+	{
+		//printf("%s\n", "+++++ici 2 ++++++");
 		return (NULL);
+	}
 	start = (unsigned int)pos;
 	if (start == 0 && (ft_isalnum(cmd[start]) || cmd[start] == '/'))
 		return (ft_strsub(cmd, start, 1));
@@ -335,7 +371,9 @@ char	*get_current_word(char *cmd, int pos, int flag)
 	// printf("affichage de start[%u]\n", start);
 	// printf("affichage de pos[%d]\n", pos);
 	// printf("%s\n", "");
-	return (ft_strsub(cmd, start, (pos - start) +  1));
+	tmp = ft_strsub(cmd, start, (pos - start) + 1);
+	//printf("affich de TMP [%s]\n", tmp);
+	return (tmp);
 }
 
 void			call_autocomp2(t_info *info)
