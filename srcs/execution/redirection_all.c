@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_all.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 15:31:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 22:34:42 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/10 16:24:45 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,28 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#ifdef __linux__
+# include <wait.h>
+#endif
+
 int			redirection_all(t_info *info, t_tree *cmd)
 {
 	int		fds[2];
 	int		ret;
+	pid_t	pid;
 
 	ret = 1;
-	if (cmd->left)
+	if (!(pid = fork()))
+	{
+		if (cmd->left)
 		cmd->left->cmd = redirection_agreg(cust_split(cmd->left->elem));
-	if (cmd->right)
+		if (cmd->right)
 		redirection_get_fd(cmd, fds);
-	if (fds[0] != -1 || fds[1] != -1)
+		if (fds[0] != -1 || fds[1] != -1)
 		ret = execution_command(info, cmd->left, 1);
+		exit(0);
+	}
+	wait(0);
 	return (ret);
 }
 
