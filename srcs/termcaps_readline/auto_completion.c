@@ -40,6 +40,19 @@ affichage de texte_a_chercher[]
 
 */
 
+
+
+int		ft_isalnum_or_dot(int c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || c == '.')
+		return (1);
+	if ((c >= 'A' && c <= 'Z'))
+		return (1);
+	else
+		return (0);
+}
+
+
 char	*ft_strdup_spe(const char *s1)
 {
 	char    *str;
@@ -301,7 +314,7 @@ void	integrate_word(t_info *info, char *line, int first_time)
 
 	tmp = &info->term->cmd[info->term->pos_c];
 	i = 0;
-	while (*tmp && (*tmp == '/' || ft_isalnum(*tmp)))
+	while (*tmp && (*tmp == '/' || ft_isalnum_or_dot(*tmp)))
 	{
 		tmp++;
 		i++;
@@ -339,14 +352,23 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 	if (!line)
 		return ;
 	last_slash = ft_strrchr(line, '/');
-	//printf("affichage de line[%s]\n", line);
+	printf("affichage de line[%s]\n", line);
 	current_dir = get_dirname(line);
 	texte_a_chercher = get_basename(line, last_slash);
-	//printf("affichage de current_dir[%s]\n", current_dir);
-	//printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
+	if (!(ft_strcmp(texte_a_chercher, "")))
+	{
+		free(current_dir);
+		free(texte_a_chercher);
+		printf("%s\n", "le texte a chercher est vide");
+		return ;
+	}
+	printf("affichage de current_dir[%s]\n", current_dir);
+	printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
 	if ((dir = opendir(current_dir)) == NULL)
 	{
 		//printf("%s\n", "impossible d'ouvrir le dossir courant");
+		free(current_dir);
+		free(texte_a_chercher);
 		return ;
 	}
 	while ((file_name = readdir(dir)) != NULL)
@@ -369,28 +391,28 @@ char	*get_current_word(char *cmd, int pos, int flag)
 	unsigned int	start;
 	char 			*tmp;
 
-	if ((ft_isalnum(cmd[pos]) || cmd[pos] == '/') && flag)
+	if ((ft_isalnum_or_dot(cmd[pos]) || cmd[pos] == '/') && flag)
 	{
 		//printf("%s\n", "+++++ici 1 ++++++");
 		return (NULL);
 	}
 	if (pos != 0 && (cmd[pos] == ' ' || cmd[pos] == '\0') && cmd[pos - 1]\
-		&& (ft_isalnum(cmd[pos - 1]) || cmd[pos - 1] == '/'))
+		&& (ft_isalnum_or_dot(cmd[pos - 1]) || cmd[pos - 1] == '/'))
 	{
 		//printf("%s\n", "+++++ par la ++++++");
 		pos--;
 	}
-	if (!(cmd[pos]) || (ft_isalnum(cmd[pos] && cmd[pos] != '/')))
+	if (!(cmd[pos]) || (ft_isalnum_or_dot(cmd[pos] && cmd[pos] != '/')))
 	{
 		//printf("%s\n", "+++++ici 2 ++++++");
 		return (NULL);
 	}
 	start = (unsigned int)pos;
-	if (start == 0 && (ft_isalnum(cmd[start]) || cmd[start] == '/'))
+	if (start == 0 && (ft_isalnum_or_dot(cmd[start]) || cmd[start] == '/'))
 		return (ft_strsub(cmd, start, 1));
 	while (start)
 	{
-		if (ft_isalnum(cmd[start]) || cmd[start] == '/')
+		if (ft_isalnum_or_dot(cmd[start]) || cmd[start] == '/')
 			start--;
 		else
 			break;
