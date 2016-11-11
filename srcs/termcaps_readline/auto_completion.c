@@ -355,11 +355,20 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 	printf("affichage de line[%s]\n", line);
 	current_dir = get_dirname(line);
 	texte_a_chercher = get_basename(line, last_slash);
+	if (!(ft_strcmp(texte_a_chercher, "")))
+	{
+		free(current_dir);
+		free(texte_a_chercher);
+		printf("%s\n", "le texte a chercher est vide");
+		return ;
+	}
 	printf("affichage de current_dir[%s]\n", current_dir);
 	printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
 	if ((dir = opendir(current_dir)) == NULL)
 	{
 		//printf("%s\n", "impossible d'ouvrir le dossir courant");
+		free(current_dir);
+		free(texte_a_chercher);
 		return ;
 	}
 	while ((file_name = readdir(dir)) != NULL)
