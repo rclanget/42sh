@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/11 12:58:25 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/11 13:03:25 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ char		check_quote(char *cmd, char quote)
 		else if (!quote && (cmd[i] == '\'' || cmd[i] == '\"'))
 			quote = cmd[i];
 		++i;
-
-
 	}
 	return quote;
 }
