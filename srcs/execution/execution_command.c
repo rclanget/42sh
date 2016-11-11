@@ -21,6 +21,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
 
 void			save_fd(int tosave)
 {
@@ -43,11 +44,21 @@ void			save_fd(int tosave)
 	}
 }
 
+int				isfile(char *file)
+{
+	struct stat buffer;
+
+	stat(file, &buffer);
+	if (S_ISDIR(buffer.st_mode))
+		return (0);
+	return (1);
+}
+
 void			execution(t_info *info, t_tree *cmd, char **env)
 {
 	char	*tmp;
 
-	if ((access(cmd->cmd[0], X_OK)) != -1)
+	if ((access(cmd->cmd[0], X_OK)) != -1 && isfile(cmd->cmd[0]))
 		;
 	else if ((tmp = lire_hashmap(info->hash, cmd->cmd[0])))
 	{
