@@ -44,7 +44,8 @@ affichage de texte_a_chercher[]
 
 int		ft_isalnum_or_dot(int c)
 {
-	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || c == '.')
+	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || c == '.' ||\
+	c == '-' || c == '_' || c == '+')
 		return (1);
 	if ((c >= 'A' && c <= 'Z'))
 		return (1);
@@ -328,8 +329,10 @@ void	integrate_word(t_info *info, char *line, int first_time)
 	word = word_display(info->auto_completion.list_words);
 	if (!word)
 		return ;
-	//printf("****affichage de word [%s]\n", word);
-	//sleep(1);
+	// printf("****affichage de word [%s]\n", word);
+	// sleep(2);
+	// printf("****affichage de tmp [%s]\n", tmp);
+	// sleep(2);
 	ft_print("%s", info->term->capa->str_cd);
 	//move_cursor(term->capa, term->pos_c , ft_strlen(term->prompt), 0);`
 
@@ -352,18 +355,18 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 	if (!line)
 		return ;
 	last_slash = ft_strrchr(line, '/');
-	printf("affichage de line[%s]\n", line);
+	//printf("affichage de line[%s]\n", line);
 	current_dir = get_dirname(line);
 	texte_a_chercher = get_basename(line, last_slash);
 	if (!(ft_strcmp(texte_a_chercher, "")))
 	{
 		free(current_dir);
 		free(texte_a_chercher);
-		printf("%s\n", "le texte a chercher est vide");
+		//printf("%s\n", "le texte a chercher est vide");
 		return ;
 	}
-	printf("affichage de current_dir[%s]\n", current_dir);
-	printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
+	//printf("affichage de current_dir[%s]\n", current_dir);
+	//printf("affichage de texte_a_chercher[%s]\n", texte_a_chercher);
 	if ((dir = opendir(current_dir)) == NULL)
 	{
 		//printf("%s\n", "impossible d'ouvrir le dossir courant");
