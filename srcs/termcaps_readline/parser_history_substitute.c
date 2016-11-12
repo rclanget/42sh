@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:18:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/12 14:32:19 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/12 15:26:47 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int			get_subsitution(t_info *info, char **cmd, int i)
 	char	*repl;
 	int		len;
 
-	str = *cmd + 1;
+	str = *cmd + i + 1;
 	if (ft_isdigit(*str))
 	{
 		len = ft_digitlen(str);
-		if (!(repl = history_perform(info, *cmd)))
+		if (!(repl = history_perform(info, *cmd + i)))
 		{
 			ft_free_them_all(1, cmd);
 			*cmd = ft_strdup("42sh: Event not found");
