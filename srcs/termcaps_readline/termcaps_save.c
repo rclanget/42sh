@@ -13,20 +13,20 @@
 #include <termios.h>
 #include <unistd.h>
 
-int         termcaps_save(int save_or_restore)
+int		termcaps_save(int save_or_restore)
 {
-    static struct termios   save;
-    static char             saved = 0;
+	static struct termios	save;
+	static char				saved = 0;
 
-    if (save_or_restore)
-    {
-        if (tcgetattr(0, &save) != -1)
-            saved = 1;
-    }
-    else
-    {
-        if (saved)
-            tcsetattr(0, TCSANOW, &save);
-    }
-    return (saved ? 1 : 0);
+	if (save_or_restore)
+	{
+		if (tcgetattr(0, &save) != -1)
+			saved = 1;
+	}
+	else
+	{
+		if (saved)
+			tcsetattr(0, TCSANOW, &save);
+	}
+	return (saved ? 1 : 0);
 }

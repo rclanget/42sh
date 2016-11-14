@@ -17,19 +17,17 @@
 
 #include <unistd.h>
 
-void 		show_tree(t_tree *tree)
+void		show_tree(t_tree *tree)
 {
 	if (tree)
 	{
 		show_tree(tree->left);
 		ft_print("{%d;%s}\n", tree->type, tree->elem);
 		show_tree(tree->right);
-		// free(tree->elem);
-		// free(tree);
 	}
 }
 
-char        *return_string(t_termcaps *term)
+char		*return_string(t_termcaps *term)
 {
 	int		len;
 
@@ -39,7 +37,7 @@ char        *return_string(t_termcaps *term)
 	return (ft_strdup(term->cmd));
 }
 
-char        *termcaps_loop(t_info *info)
+char		*termcaps_loop(t_info *info)
 {
 	int		ret;
 	long	chr;
@@ -51,7 +49,7 @@ char        *termcaps_loop(t_info *info)
 	{
 		if ((chr == NL) ||
 			(chr == CTRL_D && !ft_strlen(info->term->cmd) && (ret = -1) == -1))
-			break;
+			break ;
 		termcaps_handle_keyboard(info, chr);
 		chr = 0;
 	}

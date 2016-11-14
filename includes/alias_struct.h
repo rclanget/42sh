@@ -22,9 +22,9 @@ typedef struct		s_alias
 
 typedef struct		s_word
 {
-	char 			*word;
-	int 			treat;
-	struct s_word 	*next;
+	char			*word;
+	int				treat;
+	struct s_word	*next;
 }					t_word;
 
 #endif

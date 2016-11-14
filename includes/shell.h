@@ -17,7 +17,8 @@
 # include "hashmap_struct.h"
 # include "parser.h"
 # include "termcaps_struct.h"
-# include "auto_completion.h"
+# include "libft.h"
+# include "auto_completion_struct.h"
 
 typedef struct			s_info
 {

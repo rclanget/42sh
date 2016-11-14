@@ -22,9 +22,9 @@ t_alias		*search_alias(t_info *info, char *var);
 void		update_alias(t_info *info, char *init, char *replace);
 char		*check_alias(t_info *info, char *init);
 
-char 		*get_other(char *cmd, int *code);
-char 		*get_command(char *cmd, int *code);
-t_word		*get_the_list(char *s, int *);
+char		*get_other(char *cmd, int *code);
+char		*get_command(char *cmd, int *code);
+t_word		*get_the_list(char *s, int *n);
 
 t_alias		*search_alias2(t_info *info, char *var, int *position);
 char		*make_sentence(t_word *words);

@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/14 15:10:52 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/11/14 16:51:23 by gdeguign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,14 +48,15 @@ OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
 SRC_HASH		=	./srcs/hashmap/
-SRCN_HASH		=	hashmap.c hashmap_free.c
+SRCN_HASH		=	hashmap.c hashmap_2.c hashmap_free.c
 OBJ_HASH		=	$(SRCN_HASH:.c=.o)
 SRCS_HASH		=	$(addprefix $(SRC_HASH),$(SRCN_HASH))
 
 SRC_TOOLS		=	./srcs/tools/
-SRCN_TOOLS		=	ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
+SRCN_TOOLS		=	ft_putcharb.c ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
 					ft_tabjoin.c ft_tablen.c ft_strjoin_tool.c strsplitcustom.c \
-					clean_backslash.c ft_strerror.c signal.c
+					clean_backslash.c ft_strerror.c signal.c ft_isalnum_or_dot.c \
+					ft_strdup_spe.c
 OBJ_TOOLS		=	$(SRCN_TOOLS:.c=.o)
 SRCS_TOOLS		=	$(addprefix $(SRC_TOOLS),$(SRCN_TOOLS))
 
@@ -79,7 +80,8 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					parser_definition_code.c parser_definition_code_get.c \
 					parser_clean_parentheses.c keyboard_updown.c \
 					keyboard_ccp_fn.c keyboard_reverse_search.c \
-					parser_history_substitute.c auto_completion.c
+					parser_history_substitute.c auto_completion.c auto_completion_2.c\
+					auto_completion_3.c auto_completion_4.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 

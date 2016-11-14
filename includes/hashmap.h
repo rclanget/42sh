@@ -13,7 +13,13 @@
 #ifndef HASHMAP_H
 # define HASHMAP_H
 
-void	*free_tab(char **tab);
+# include "hashmap_struct.h"
+# include <stdlib.h>
+
+void			*free_tab(char **tab);
+unsigned int	jenkins_one_at_a_time_hash(char *key, size_t len);
+int				check_access(char *str);
+char			*lire_hashmap(t_hashmap *hashmap, char *key);
 
 # define HASHMAP_SIZE 100000
 

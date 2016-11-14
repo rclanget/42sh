@@ -15,10 +15,10 @@
 
 #include <stdlib.h>
 
-void hashmap_free(t_hashmap *hashmap)
+void	hashmap_free(t_hashmap *hashmap)
 {
 	unsigned int	i;
-	char 			**map;
+	char			**map;
 
 	i = 0;
 	map = hashmap->map;

@@ -1,20 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_history.h                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gdeguign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/14 16:09:37 by gdeguign          #+#    #+#             */
+/*   Updated: 2016/11/14 16:09:42 by gdeguign         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef BUILTIN_HISTORY_H
 # define BUILTIN_HISTORY_H
 
-#define			HIST_FILE "./.42sh_hist"
-#define			FLAG_APPEND O_WRONLY | O_APPEND | O_CREAT
-#define			FLAG_TRUNC O_RDWR | O_TRUNC | O_CREAT
-#define			FLAG_READ O_RDONLY
-#define			OPEN_MODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
+# define HIST_FILE "./.42sh_hist"
+# define FLAG_APPEND O_WRONLY | O_APPEND | O_CREAT
+# define FLAG_TRUNC O_RDWR | O_TRUNC | O_CREAT
+# define FLAG_READ O_RDONLY
+# define OPEN_MODE S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH
 
-#define 		OPT_C 0x001
-#define 		OPT_D 0x002
-#define 		OPT_A 0x004
-#define 		OPT_N 0x008
-#define 		OPT_R 0x010
-#define 		OPT_W 0x020
-#define 		OPT_P 0x040
-#define 		OPT_S 0x080
+# define OPT_C 0x001
+# define OPT_D 0x002
+# define OPT_A 0x004
+# define OPT_N 0x008
+# define OPT_R 0x010
+# define OPT_W 0x020
+# define OPT_P 0x040
+# define OPT_S 0x080
 
 char			*history_perform(t_info *info, char *str);
 char			*history_add_args(char **cmd);

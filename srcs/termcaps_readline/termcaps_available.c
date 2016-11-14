@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <termcap.h>
 
-int termcap_available(void)
+int	termcap_available(void)
 {
 	int		ret;
 	char	*term;

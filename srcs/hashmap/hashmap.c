@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hashmap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gdeguign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/14 12:51:22 by gdeguign          #+#    #+#             */
+/*   Updated: 2016/11/14 12:51:55 by gdeguign         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "tools.h"
 #include "hashmap.h"
-#include "hashmap_struct.h"
 #include "libft.h"
 #include "get_next_line.h"
 #include <fcntl.h>
@@ -8,31 +19,6 @@
 #include <dirent.h>
 
 #define BUFF_PWD 256
-
-unsigned int	jenkins_one_at_a_time_hash(char *key, size_t len)
-{
-	unsigned int	hash;
-	unsigned int	i;
-
-	i = 0;
-	hash = 0;
-	while (i < len)
-	{
-		hash += key[i];
-		hash += (hash << 10);
-		hash ^= (hash >> 6);
-		i++;
-	}
-	hash += (hash << 3);
-	hash ^= (hash >> 11);
-	hash += (hash << 15);
-	return (hash % HASHMAP_SIZE);
-}
-
-char		*lire_hashmap(t_hashmap *hashmap, char *key)
-{
-	return (hashmap->map[jenkins_one_at_a_time_hash(key, ft_strlen(key))]);
-}
 
 void		ecrire_hashmap(t_hashmap *hashmap, char *key, char *val)
 {
@@ -52,33 +38,13 @@ void		ecrire_hashmap(t_hashmap *hashmap, char *key, char *val)
 	hashmap->size++;
 }
 
-int			check_access(char *str)
+void		liste_fichier(t_hashmap *map, DIR *dir, char *pwd)
 {
-	if (access(str, F_OK) == -1)
-	{
-		ft_putendl("cd: no such file or directory: ");
-		return (0);
-	}
-	else if (access(str, X_OK) == -1)
-	{
-		ft_putendl("cd: permission denied: ");
-		return (0);
-	}
-	return (1);
-}
+	struct dirent	*file_name;
 
-
-void		liste_fichier(t_hashmap *map, DIR*	dir, char *pwd)
-{
-	struct dirent* file_name;
-	// char	*pwd;
-
-	// pwd = NULL;
-	// pwd = getcwd(pwd, BUFF_PWD);
 	file_name = NULL;
 	while ((file_name = readdir(dir)) != NULL)
 		ecrire_hashmap(map, file_name->d_name, pwd);
-	// ft_strdel(&pwd);
 }
 
 char		*change_path(void)
@@ -101,31 +67,17 @@ char		*change_path(void)
 		tmp = ft_strjoin_custom(line, ":");
 		ft_strdel(&line);
 		tmp2 = tmp3;
-    	tmp3 = ft_strjoin_custom(tmp2, tmp);
-    	ft_strdel(&tmp);
-    	ft_strdel(&tmp2);
+		tmp3 = ft_strjoin_custom(tmp2, tmp);
+		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
 	}
 	return (tmp3);
 }
 
-t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
+void		ouverture_dossier(int i, char **tab_path, t_hashmap *map, DIR *dir)
 {
-	char	**tab_path;
-	int		i;
-	DIR*	dir;
-	// char	*pwd;
-
-	// pwd = NULL;
-	// pwd = getcwd(pwd, BUFF_PWD);
-	i = 0;
-	dir = NULL;
-	if (!path || (ft_strlen(path) == 0)){
-		path = change_path();
-	}
-	tab_path = ft_strsplit(path, ':');
 	while (tab_path && tab_path[i])
 	{
-		// chdir(tab_path[i]);
 		if ((dir = opendir(tab_path[i])) == NULL)
 		{
 			i++;
@@ -135,37 +87,34 @@ t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
 		if (closedir(dir) == -1)
 		{
 			ft_print("%s\n", "echec closedir");
-			exit(-1);
+			break ;
 		}
 		i++;
 	}
+}
+
+t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
+{
+	char	**tab_path;
+	int		i;
+	DIR		*dir;
+
+	i = 0;
+	dir = NULL;
+	if (!path || (ft_strlen(path) == 0))
+	{
+		path = change_path();
+	}
+	tab_path = ft_strsplit(path, ':');
+	ouverture_dossier(i, tab_path, map, dir);
 	ft_strdel(&path);
-	// chdir(pwd);
-	// ft_strdel(&pwd);
 	free_tab(tab_path);
 	return (map);
 }
 
-void		print_hashmap(t_hashmap *hashmap)
-{
-	unsigned int	i;
-	char			**map;
-
-	i = 0;
-	map = hashmap->map;
-	if (!map)
-		return ;
-	while (i < HASHMAP_SIZE)
-	{
-		if (map[i] != NULL)
-			ft_putendl(map[i]);
-		i++;
-	}
-}
-
 t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
 {
-	unsigned int 	i;
+	unsigned int	i;
 	char			**map;
 
 	i = 0;
@@ -185,7 +134,6 @@ t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
 		map[i] = NULL;
 		i++;
 	}
-
 	hashmap = creer_hashmap(path, hashmap);
 	return (hashmap);
 }
