@@ -114,24 +114,24 @@ t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
 
 t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
 {
-	unsigned int	i;
-	char			**map;
+	int	i;
+	int				h_size;
 
 	i = 0;
+	h_size = HASHMAP_SIZE;
 	if (!hashmap)
 		hashmap = (t_hashmap*)malloc(sizeof(t_hashmap));
 	hashmap->size = 0;
 	hashmap->map = NULL;
-	hashmap->map = (char**)malloc(HASHMAP_SIZE * sizeof(char*));
+	hashmap->map = (char**)malloc(h_size * sizeof(char*));
 	if (hashmap->map == NULL)
 	{
 		ft_print("%s\n", "echec malloc hashmap");
 		return (0);
 	}
-	map = hashmap->map;
-	while (i < HASHMAP_SIZE)
+	while (i < h_size)
 	{
-		map[i] = NULL;
+		hashmap->map[i] = NULL;
 		i++;
 	}
 	hashmap = creer_hashmap(path, hashmap);
