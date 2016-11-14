@@ -59,6 +59,33 @@ char			*lire_hashmap(t_hashmap *hashmap, char *key)
 	return (hashmap->map[jenkins_one_at_a_time_hash(key, ft_strlen(key))]);
 }
 
+char			*change_path(void)
+{
+	int		fd;
+	char	*line;
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
+
+	tmp = NULL;
+	tmp2 = NULL;
+	tmp3 = NULL;
+	line = NULL;
+	fd = open("/private/etc/paths", O_RDONLY);
+	if (fd == -1)
+		return (NULL);
+	while (get_next_line(fd, &line))
+	{
+		tmp = ft_strjoin_custom(line, ":");
+		ft_strdel(&line);
+		tmp2 = tmp3;
+		tmp3 = ft_strjoin_custom(tmp2, tmp);
+		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
+	}
+	return (tmp3);
+}
+
 void			print_hashmap(t_hashmap *hashmap)
 {
 	unsigned int	i;

@@ -20,6 +20,7 @@ void			*free_tab(char **tab);
 unsigned int	jenkins_one_at_a_time_hash(char *key, size_t len);
 int				check_access(char *str);
 char			*lire_hashmap(t_hashmap *hashmap, char *key);
+char			*change_path(void);
 
 # define HASHMAP_SIZE 100000
 

@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/14 16:51:23 by gdeguign         ###   ########.fr        #
+#    Updated: 2016/11/14 17:19:57 by gdeguign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ OBJ_HASH		=	$(SRCN_HASH:.c=.o)
 SRCS_HASH		=	$(addprefix $(SRC_HASH),$(SRCN_HASH))
 
 SRC_TOOLS		=	./srcs/tools/
-SRCN_TOOLS		=	ft_putcharb.c ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
+SRCN_TOOLS		=	ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
 					ft_tabjoin.c ft_tablen.c ft_strjoin_tool.c strsplitcustom.c \
 					clean_backslash.c ft_strerror.c signal.c ft_isalnum_or_dot.c \
 					ft_strdup_spe.c

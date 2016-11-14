@@ -47,33 +47,6 @@ void		liste_fichier(t_hashmap *map, DIR *dir, char *pwd)
 		ecrire_hashmap(map, file_name->d_name, pwd);
 }
 
-char		*change_path(void)
-{
-	int		fd;
-	char	*line;
-	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
-
-	tmp = NULL;
-	tmp2 = NULL;
-	tmp3 = NULL;
-	line = NULL;
-	fd = open("/private/etc/paths", O_RDONLY);
-	if (fd == -1)
-		return (NULL);
-	while (get_next_line(fd, &line))
-	{
-		tmp = ft_strjoin_custom(line, ":");
-		ft_strdel(&line);
-		tmp2 = tmp3;
-		tmp3 = ft_strjoin_custom(tmp2, tmp);
-		ft_strdel(&tmp);
-		ft_strdel(&tmp2);
-	}
-	return (tmp3);
-}
-
 void		ouverture_dossier(int i, char **tab_path, t_hashmap *map, DIR *dir)
 {
 	while (tab_path && tab_path[i])
@@ -114,7 +87,7 @@ t_hashmap	*creer_hashmap(char *path, t_hashmap *map)
 
 t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
 {
-	int	i;
+	int				i;
 	int				h_size;
 
 	i = 0;
