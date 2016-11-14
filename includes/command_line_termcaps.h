@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 10:36:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:28:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ typedef struct	s_key
 	void		(*f)(struct s_info *info);
 }				t_key;
 
-char			*ft_getenv(char *var);
+char			*ft_getenv(char **env, char *var);
 
-int				termcap_available(void);
+int				termcap_available(char **env);
 int				termcaps_save(int save_or_restore);
 int				termcaps_activation(int is_term);
 t_capa			*termcap_capainit(void);

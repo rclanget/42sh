@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/14 16:51:23 by gdeguign         ###   ########.fr        #
+#    Updated: 2016/11/14 17:05:42 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,7 @@ OBJ_HASH		=	$(SRCN_HASH:.c=.o)
 SRCS_HASH		=	$(addprefix $(SRC_HASH),$(SRCN_HASH))
 
 SRC_TOOLS		=	./srcs/tools/
-SRCN_TOOLS		=	ft_putcharb.c ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
+SRCN_TOOLS		=	ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
 					ft_tabjoin.c ft_tablen.c ft_strjoin_tool.c strsplitcustom.c \
 					clean_backslash.c ft_strerror.c signal.c ft_isalnum_or_dot.c \
 					ft_strdup_spe.c
@@ -72,7 +72,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					keyboard_start_end.c parser_check_highest.c parser_free.c \
 					parser_main.c parser_op_andor.c parser_op_comma.c \
 					parser_op_left.c parser_op_parentheses.c parser_op_pipe.c \
-					parser_op_right.c parser_op_rightfd.c parser_trimreplace.c \
+					parser_op_right.c parser_op_rightfd.c \
 					termcap_capinit.c termcap_winsz.c termcaps_activation.c \
 					termcaps_available.c termcaps_handle_keyboard.c \
 					termcaps_loop.c termcaps_print.c termcaps_readline.c \
