@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 10:24:39 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/22 15:35:18 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/14 18:00:08 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_nbrlen(int n);
-// char				*ft_getenv(char **env, char *str);
 
 int					ft_option(int ac, char **av, const char *list, int *option);
 int					ft_print(const char *fmt, ...);
