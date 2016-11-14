@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/12 15:07:03 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:00:01 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@
 
 #include <unistd.h>
 
-char        *getnextline(int fd, t_info *info)
+char		*getnextline(int fd, t_info *info)
 {
-    char    *line;
-    int     ret;
+	char	*line;
+	int		ret;
 
-    line = NULL;
-    (void)info;
-    ret = get_next_line(fd, &line);
-    return (ret ? line : NULL);
+	line = NULL;
+	(void)info;
+	ret = get_next_line(fd, &line);
+	return (ret ? line : NULL);
 }
 
 char		check_quote(char *cmd, char quote)
@@ -37,12 +37,12 @@ char		check_quote(char *cmd, char quote)
 		if (cmd[i] == '\\' && cmd[i + 1])
 			++i;
 		else if (quote && cmd[i] == quote)
-                quote = 0;
+			quote = 0;
 		else if (!quote && (cmd[i] == '\'' || cmd[i] == '\"'))
 			quote = cmd[i];
 		++i;
 	}
-	return quote;
+	return (quote);
 }
 
 char		*get_currentline(t_info *info, int term, char quote)
@@ -63,25 +63,25 @@ char		*get_currentline(t_info *info, int term, char quote)
 		ft_free_them_all(2, &cmd, &tmp, &tmp2);
 		cmd = tmp3;
 	}
-	return cmd;
+	return (cmd);
 }
 
-char        *termcaps_readline(t_info *info)
+char		*termcaps_readline(t_info *info)
 {
-    int     term;
+	int		term;
 	char	*str;
 
-    if (isatty(0))
-    {
-        termcaps_save(1);
-        term = termcaps_activation(info->term->is_term);
-        str = get_currentline(info, term, 0);
+	if (isatty(0))
+	{
+		termcaps_save(1);
+		term = termcaps_activation(info->term->is_term);
+		str = get_currentline(info, term, 0);
 		termcaps_save(0);
-        return (str);
-    }
-    else
-    {
-        return (getnextline(0, info));
-    }
-    return (NULL);
+		return (str);
+	}
+	else
+	{
+		return (getnextline(0, info));
+	}
+	return (NULL);
 }
