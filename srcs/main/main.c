@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 12:59:39 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:26:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ t_info				*init_shell(int ac, char **av, char **env)
 	{
 		ft_signal(0);
 		info->self = realpath(av[0], NULL);
+		ft_init_env(info, env);
 		info->term = term;
-		info->term->is_term = termcap_available();
+		info->term->is_term = termcap_available(env);
 		info->term->capa = termcap_capainit();
 		info->term->prompt = ft_strdup("$> ");
-		ft_init_env(info, env);
 		info->hash = pre_creer_hashmap(ft_strdup((search_env_var(info, "PATH"))
 			? search_env_var(info, "PATH")->content : NULL), NULL);
 	}

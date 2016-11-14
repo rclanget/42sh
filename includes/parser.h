@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/06 16:29:10 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 17:05:02 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ typedef struct			s_parse
 
 t_tree					*parser_cmd(char *cmd);
 
-char					*ft_strtrimb(char *s);
 char					*ft_strndup(char *str, int len);
 int						check_hightest(char *cmd, int type);
 char					**split_on(char *cmd, int pos, int type);

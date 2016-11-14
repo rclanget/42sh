@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/14 17:19:57 by gdeguign         ###   ########.fr        #
+#    Updated: 2016/11/14 17:41:55 by gdeguign         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					keyboard_start_end.c parser_check_highest.c parser_free.c \
 					parser_main.c parser_op_andor.c parser_op_comma.c \
 					parser_op_left.c parser_op_parentheses.c parser_op_pipe.c \
-					parser_op_right.c parser_op_rightfd.c parser_trimreplace.c \
+					parser_op_right.c parser_op_rightfd.c \
 					termcap_capinit.c termcap_winsz.c termcaps_activation.c \
 					termcaps_available.c termcaps_handle_keyboard.c \
 					termcaps_loop.c termcaps_print.c termcaps_readline.c \
