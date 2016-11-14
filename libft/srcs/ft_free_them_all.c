@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/22 15:33:27 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/06 16:19:40 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:46:22 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	ft_free_them_all(int nb, ...)
 {
-    va_list		list;
+	va_list		list;
 	void		*target;
 
 	va_start(list, nb);

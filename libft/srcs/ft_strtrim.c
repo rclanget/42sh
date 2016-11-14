@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/07 16:33:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/07 22:40:00 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/14 16:46:11 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_blank(char c)
+int					ft_blank(char c)
 {
 	if (c == ' ' || c == '\n' || c == '\t')
 		return (1);
