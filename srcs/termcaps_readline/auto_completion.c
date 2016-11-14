@@ -10,13 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
-#define BUFF_SIZE 42
-#define BUFFER_SIZE     1024
-
-#include <stdlib.h>
-#include <unistd.h>
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -142,7 +135,7 @@ void		vider_liste(t_dlist *head_ref)
 	}
 }
 
-void	print_list_completion(t_dlist *head)
+void		print_list_completion(t_dlist *head)
 {
 	t_dlist *tmp;
 
@@ -160,7 +153,7 @@ void	print_list_completion(t_dlist *head)
 	ft_putendl("************fin        affichage de la liste************");
 }
 
-int		is_directory(const char *my_path, char *key)
+int			is_directory(const char *my_path, char *key)
 {
 	char		*path;
 	char		*tmp;
@@ -179,7 +172,7 @@ int		is_directory(const char *my_path, char *key)
 	return (S_ISDIR(statbuf.st_mode));
 }
 
-void	print_file(char *key, char *line, t_auto_comp *auto_c, char *cu_dir)
+void		print_file(char *key, char *line, t_auto_comp *auto_c, char *cu_dir)
 {
 	int		is_dir;
 
@@ -200,7 +193,7 @@ void	print_file(char *key, char *line, t_auto_comp *auto_c, char *cu_dir)
 	}
 }
 
-char	*ft_strsplit_spe(char *line, char c)
+char		*ft_strsplit_spe(char *line, char c)
 {
 	char	*dir_name;
 	char	*tmp;
@@ -234,7 +227,7 @@ char		*get_dirname(char *line)
 	return (current_dir);
 }
 
-char	*get_basename(char *line, char *slash)
+char		*get_basename(char *line, char *slash)
 {
 	char	*basename;
 
@@ -247,13 +240,13 @@ char	*get_basename(char *line, char *slash)
 	return (basename);
 }
 
-void	fin_auto_completion(t_auto_comp *auto_completion)
+void		fin_auto_completion(t_auto_comp *auto_completion)
 {
 	vider_liste(auto_completion->list_words);
 	auto_completion->list_words = NULL;
 }
 
-char	*word_display(t_dlist *head)
+char		*word_display(t_dlist *head)
 {
 	t_dlist *tmp;
 
@@ -269,7 +262,7 @@ char	*word_display(t_dlist *head)
 	return (NULL);
 }
 
-void	next_word(t_auto_comp *auto_completion)
+void		next_word(t_auto_comp *auto_completion)
 {
 	t_dlist	*ptr;
 
@@ -285,7 +278,7 @@ void	next_word(t_auto_comp *auto_completion)
 		auto_completion->list_words->pos = '1';
 }
 
-void	integrate_word(t_info *info, char *line, int first_time)
+void		integrate_word(t_info *info, char *line, int first_time)
 {
 	char	*tmp;
 	char	*word;
@@ -297,7 +290,7 @@ void	integrate_word(t_info *info, char *line, int first_time)
 	(void)info;
 	word = word_display(info->auto_completion.list_words);
 	if (!word)
-		return ;
+		return (ft_strdel(&tmp));
 	ft_print("%s", info->term->capa->str_cd);
 	ft_strcpy(&info->term->cmd[info->term->pos_c - ft_strlen(line) +\
 	first_time], word);
@@ -308,16 +301,16 @@ void	integrate_word(t_info *info, char *line, int first_time)
 	ft_print("%s", info->term->cmd);
 	move_cursor(info->term->capa, ft_strlen(info->term->cmd),\
 	ft_strlen(info->term->prompt), info->term->pos_c);
-	free(tmp);
+	ft_strdel(&tmp);
 }
 
-void	free_dir_basename(char *dir, char *file_name)
+void		free_dir_basename(char *dir, char *file_name)
 {
 	ft_strdel(&dir);
 	ft_strdel(&file_name);
 }
 
-void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
+void		auto_complete(char *line, t_auto_comp *auto_comp, t_info *info)
 {
 	DIR				*dir;
 	char			*last_slash;
@@ -336,16 +329,16 @@ void	auto_complete(char *line, t_auto_comp *auto_completion, t_info *info)
 		return (free_dir_basename(current_dir, texte_a_chercher));
 	while ((file_name = readdir(dir)) != NULL)
 		print_file(file_name->d_name, texte_a_chercher,\
-		auto_completion, current_dir);
+		auto_comp, current_dir);
 	closedir(dir);
-	if (auto_completion->list_words)
-		auto_completion->list_words->pos = '1';
+	if (auto_comp->list_words)
+		auto_comp->list_words->pos = '1';
 	free_dir_basename(current_dir, texte_a_chercher);
 	integrate_word(info, line, 0);
 	next_word(&(info->auto_completion));
 }
 
-char	*get_current_word(char *cmd, int pos, int flag)
+char		*get_current_word(char *cmd, int pos, int flag)
 {
 	unsigned int	start;
 	char			*tmp;
@@ -373,26 +366,28 @@ char	*get_current_word(char *cmd, int pos, int flag)
 	return (tmp);
 }
 
-void			call_autocomp2(t_info *info)
+void		call_autocomp2(t_info *info)
 {
 	char	*current_word;
 
 	current_word = get_current_word(info->term->cmd, info->term->pos_c, 1);
 	auto_complete(current_word, &(info->auto_completion), info);
 	if (current_word)
-		free(current_word);
+		ft_strdel(&current_word);
 }
 
-void			mot_suivant(t_info *info)
+void		mot_suivant(t_info *info)
 {
 	char	*line;
 
 	line = get_current_word(info->term->cmd, info->term->pos_c, 0);
 	integrate_word(info, line, 1);
 	next_word(&(info->auto_completion));
+	if (line)
+		ft_strdel(&line);
 }
 
-void			call_autocomp(t_info *info)
+void		call_autocomp(t_info *info)
 {
 	int		ret;
 	long	chr;
