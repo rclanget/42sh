@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/09 16:23:11 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 13:11:28 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 		return (execution_status(info->status));
 	}
 	else if (is_builtin(cmd->cmd[0]))
-		return(execution_builtin(info, cmd));
+		return (execution_builtin(info, cmd));
 	ft_fdprint(2, "42sh: %s: command not found\n", cmd->cmd[0]);
 	return (execution_status(info->status = 127));
 }

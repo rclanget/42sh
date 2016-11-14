@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   keyboard_ccp.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/14 15:28:54 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/11/14 15:33:50 by ulefebvr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "command_line_termcaps.h"
 #include "keyboard_keys.h"
 #include "libft.h"
@@ -34,38 +46,40 @@ void		cut_line(t_info *info)
 
 void		copy_line(t_info *info)
 {
-    char	*selection;
+	char	*selection;
 
-    if ((selection = get_selection(info)))
-    {
-        if (info->term->save_cmd)
-            free(info->term->save_cmd);
-        info->term->save_cmd = ft_strdup(selection);
+	if ((selection = get_selection(info)))
+	{
+		if (info->term->save_cmd)
+			free(info->term->save_cmd);
+		info->term->save_cmd = ft_strdup(selection);
 		free(selection);
-    }
+	}
 }
 
 void		paste_line(t_info *info)
 {
-    int		len;
-    int		slen;
-    int		pos_c;
-    int		plen;
+	int			len;
+	int			slen;
+	int			p;
+	int			plen;
+	t_termcaps	*term;
 
-    pos_c = info->term->pos_c;
-    if (info->term->save_cmd)
-    {
-        len = ft_strlen(info->term->cmd);
-        plen = ft_strlen(info->term->prompt);
-        slen = ft_strlen(info->term->save_cmd);
-        if ((len + slen) < BUFFER_SIZE)
-        {
-            ft_memcpy(&info->term->cmd[pos_c + slen], &info->term->cmd[pos_c], len - pos_c);
-            ft_memcpy(&info->term->cmd[pos_c], info->term->save_cmd, slen);
-            move_cursor(info->term->capa, pos_c , plen, 0);
-            ft_putstr(info->term->cmd);
-            move_cursor(info->term->capa, ft_strlen(info->term->cmd) , plen, pos_c + slen);
-            info->term->pos_c = pos_c + slen;
-        }
-    }
+	term = info->term;
+	p = term->pos_c;
+	if (term->save_cmd)
+	{
+		len = ft_strlen(term->cmd);
+		plen = ft_strlen(term->prompt);
+		slen = ft_strlen(term->save_cmd);
+		if ((len + slen) < BUFFER_SIZE)
+		{
+			ft_memcpy(&term->cmd[p + slen], &term->cmd[p], len - p);
+			ft_memcpy(&term->cmd[p], term->save_cmd, slen);
+			move_cursor(term->capa, p, plen, 0);
+			ft_putstr(term->cmd);
+			move_cursor(term->capa, ft_strlen(term->cmd), plen, p + slen);
+			term->pos_c = p + slen;
+		}
+	}
 }

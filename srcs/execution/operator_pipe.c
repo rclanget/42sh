@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 16:29:30 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/04 11:46:35 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 14:45:17 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				operator_pipe2(t_info *info, t_tree *cmd)
 	return (0);
 }
 
-int				operator_pipe(t_info * info, t_tree *cmd)
+int				operator_pipe(t_info *info, t_tree *cmd)
 {
 	pid_t		pid;
 

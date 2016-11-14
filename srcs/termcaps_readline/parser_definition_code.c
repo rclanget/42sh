@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 19:51:35 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/23 20:20:31 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:05:40 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,20 @@
 
 int		is_quote(char cmd)
 {
-	char * tmp;
-	char * operators = "\'\"";
+	char *tmp;
+	char *operators;
 
-	return (tmp = ft_strchr(operators, cmd)) ? (tmp - operators)  + 14: 0;
+	operators = "\'\"";
+	return (tmp = ft_strchr(operators, cmd)) ? (tmp - operators) + 14 : 0;
 }
 
 int		is_operator(char cmd)
 {
-	char * tmp;
-	char * operators = "><(){}|&;";
+	char *tmp;
+	char *operators;
 
-	return (tmp = ft_strchr(operators, cmd)) ? (tmp - operators)  + 5: 0;
+	operators = "><(){}|&;";
+	return (tmp = ft_strchr(operators, cmd)) ? (tmp - operators) + 5 : 0;
 }
 
 void	skip_space(char *cmd, int *i)

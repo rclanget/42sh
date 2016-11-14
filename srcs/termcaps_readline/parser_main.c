@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/08 16:51:56 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:07:52 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	free_tab(char **tab)
 	if (tab)
 	{
 		while (tab[++i])
-		free(tab[i]);
+			free(tab[i]);
 		free(tab);
 	}
 }
@@ -55,7 +55,10 @@ int			pass_grouping(char *cmd, int i)
 	if (cmd[i] == '(')
 	{
 		c = ')';
-		while (cmd[++i] && cmd[i] != c && cmd[i - 1] != '\\');
+		while (cmd[++i] && cmd[i] != c && cmd[i - 1] != '\\')
+		{
+			;
+		}
 	}
 	return (i);
 }
@@ -78,7 +81,8 @@ char		**split_on_highest(char *cmd, int *type)
 				i = pass_string(cmd, i);
 			else if (cmd[i] == '(')
 				i = pass_grouping(cmd, i);
-			else if (!ft_strncmp(">&", &cmd[i], 2) || !ft_strncmp("<&", &cmd[i], 2))
+			else if (!ft_strncmp(">&", &cmd[i], 2)
+				|| !ft_strncmp("<&", &cmd[i], 2))
 				i += 2;
 			else if ((*type = check_hightest(&cmd[i], j)))
 				tab = split_on(cmd, &cmd[i] - cmd, *type);

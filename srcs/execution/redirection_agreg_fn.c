@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/10 01:18:05 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 14:49:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,6 @@ void		do_redirection(int n, int word, int right)
 	else
 	{
 		dup2(right ? word : n, right ? n : word);
-		// close(right ? word : n);
 	}
 }
 

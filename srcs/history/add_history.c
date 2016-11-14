@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:58:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/12 15:10:39 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 12:58:21 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char				*replace_nl(char *str)
 char				*add_history(t_info *info, char *cmd)
 {
 	t_history		*node;
-	static int 		number;
+	static int		number;
 
 	node = NULL;
 	if (ft_strlen(cmd) && (node = ft_memalloc(sizeof(t_history))))

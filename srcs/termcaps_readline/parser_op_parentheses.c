@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 18:31:19 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/24 16:21:32 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 16:08:33 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*subshell_value(char *str, int *pos)
 	if (str[i] == ')' && i > 1)
 	{
 		value = ft_memalloc(i);
-		ft_memcpy(value,  str + 1, i - 1);
+		ft_memcpy(value, str + 1, i - 1);
 	}
 	*pos += i;
 	return (value);

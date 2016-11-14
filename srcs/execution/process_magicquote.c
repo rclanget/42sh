@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 22:09:32 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/08 14:19:16 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 14:46:29 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void		change_nl2sp(char *c)
 	*c = (*c == '\n') ? ' ' : *c;
 }
 
-static char		*get_file_content()
+static char		*get_file_content(void)
 {
 	int		fd;
 	char	*a;
@@ -50,7 +50,7 @@ static char		*get_file_content()
 	a = NULL;
 	if (((fd = open(MQ_FILENAME, MQ_OFLAG)) == -1) ||
 		(!(a = ft_memalloc(sizeof(char) * MAX_CONTENT + 1)) && close(fd) <= 0))
-		return a;
+		return (a);
 	read(fd, a, MAX_CONTENT);
 	ft_striter(a, &change_nl2sp);
 	close(fd);
@@ -68,12 +68,15 @@ char			*process_magicquote(t_info *info, char *cmd)
 		return (NULL);
 	if (!(pid = fork()))
 	{
-		dup2(fdp[1], 1), close(fdp[0]);
+		dup2(fdp[1], 1);
+		close(fdp[0]);
 		ft_putendl(cmd);
 		exit(0);
 	}
-	dup2(fdp[0], 0); close(fdp[1]);
-	dup2(fd, 1); close(fd);
+	dup2(fdp[0], 0);
+	close(fdp[1]);
+	dup2(fd, 1);
+	close(fd);
 	wait(0);
 	execution_motor(info, self_node(info), 1);
 	return (get_file_content());

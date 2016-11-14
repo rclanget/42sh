@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/10 14:13:13 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 12:59:39 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void				exit_shell(t_info *info)
 	ft_free_env(info->env);
 	hashmap_free(info->hash);
 	info->env = NULL;
-	ft_free_them_all(5, &info->self, &info->term->capa, &info->term->prompt, &info->term, &info);
+	ft_free_them_all(5, &info->self, &info->term->capa, &info->term->prompt,
+		&info->term, &info);
 	exit(execution_status(status));
 }
 
@@ -74,20 +75,20 @@ void				execute_shell(t_info *info, char **command)
 
 int					main(int ac, char **av, char **env)
 {
-	t_info			*info;
+	t_info			*i;
 	char			*command;
 
-	info = save_info(init_shell(ac, av, env));
-	while ((command = add_history(info, history_excldot(info, termcaps_readline(info)))))
+	i = save_info(init_shell(ac, av, env));
+	while ((command = add_history(i, history_excldot(i, termcaps_readline(i)))))
 	{
 		if (ft_strlen(command))
-			execute_shell(info, &command);
+			execute_shell(i, &command);
 		ft_free_them_all(1, &command);
-		info->term->pos_c = 0;
-		if (info->stop)
+		i->term->pos_c = 0;
+		if (i->stop)
 			break ;
-		update_path(info, search_env_var(info, "PATH"));
+		update_path(i, search_env_var(i, "PATH"));
 	}
-	exit_shell(info);
+	exit_shell(i);
 	return (0);
 }

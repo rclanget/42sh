@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 19:36:57 by zipo              #+#    #+#             */
-/*   Updated: 2016/01/31 19:46:16 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/14 16:12:09 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,18 @@
 #include <unistd.h>
 #include <sys/ioctl.h>
 
-int     termcap_winsz_x(void)
+int		termcap_winsz_x(void)
 {
-    struct winsize w;
+	struct winsize w;
 
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    return (w.ws_col);
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	return (w.ws_col);
 }
 
-int     termcap_winsz_y(void)
+int		termcap_winsz_y(void)
 {
-    struct winsize w;
+	struct winsize w;
 
-    ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-    return (w.ws_row);
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+	return (w.ws_row);
 }

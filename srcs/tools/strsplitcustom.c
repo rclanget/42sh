@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/08 17:30:33 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:20:29 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char			*remove_quote(char *str)
 			*tmp2++ = *tmp++;
 	}
 	*tmp2 = *tmp;
-	return str;
+	return (str);
 }
 
 static char			*seek_next_delimiter(char *str)
@@ -49,7 +49,10 @@ static char			*seek_next_delimiter(char *str)
 
 	quote = 0;
 	chr = 0;
-	while (str && *str && *str == ' ' && ++str);
+	while (str && *str && *str == ' ' && ++str)
+	{
+		;
+	}
 	while (str && *str)
 	{
 		if (!chr && *str == '\\' && (chr = 1))
@@ -59,12 +62,12 @@ static char			*seek_next_delimiter(char *str)
 		else if (chr && !quote && *str && *(str + 1) == ' ')
 			str++;
 		else if (!chr && !quote && *str == ' ')
-			break;
+			break ;
 		if (chr)
 			chr = 0;
 		++str;
 	}
-	return str;
+	return (str);
 }
 
 static char			*get_next_word(char *str)
@@ -88,7 +91,7 @@ static char			*get_next_word(char *str)
 			ft_memdel((void **)&ret);
 		content = del;
 	}
-	return ret;
+	return (ret);
 }
 
 char				**cust_split(char *str)

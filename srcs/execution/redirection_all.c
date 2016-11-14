@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 15:31:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/10 16:24:45 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 14:47:40 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ int			redirection_all(t_info *info, t_tree *cmd)
 	if (!(pid = fork()))
 	{
 		if (cmd->left)
-		cmd->left->cmd = redirection_agreg(cust_split(cmd->left->elem));
+			cmd->left->cmd = redirection_agreg(cust_split(cmd->left->elem));
 		if (cmd->right)
-		redirection_get_fd(cmd, fds);
+			redirection_get_fd(cmd, fds);
 		if (fds[0] != -1 || fds[1] != -1)
-		ret = execution_command(info, cmd->left, 1);
+			ret = execution_command(info, cmd->left, 1);
 		exit(0);
 	}
 	wait(0);

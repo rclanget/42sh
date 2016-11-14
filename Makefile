@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/09 19:05:00 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/11/14 15:10:52 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					process_magicquote.c builtin_history.c \
 					builtin_history_optps.c builtin_history_optcd.c \
 					builtin_history_optanrw.c builtin_exit.c \
-					redirection_agreg.c redirection_agreg_fn.c
+					redirection_agreg.c redirection_agreg_fn.c \
+					redirection_dleft_fn.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
@@ -52,7 +53,7 @@ OBJ_HASH		=	$(SRCN_HASH:.c=.o)
 SRCS_HASH		=	$(addprefix $(SRC_HASH),$(SRCN_HASH))
 
 SRC_TOOLS		=	./srcs/tools/
-SRCN_TOOLS		=	ft_putcharb.c ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
+SRCN_TOOLS		=	ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
 					ft_tabjoin.c ft_tablen.c ft_strjoin_tool.c strsplitcustom.c \
 					clean_backslash.c ft_strerror.c signal.c
 OBJ_TOOLS		=	$(SRCN_TOOLS:.c=.o)

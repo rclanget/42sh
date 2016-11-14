@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:11:10 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/08 13:25:18 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 14:47:02 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char		*get_words(char *s)
 				quote = !quote;
 		}
 		else if (*tmp == '`' && !quote)
-			break;
+			break ;
 		++tmp;
 	}
 	return (ft_strsub(s, 0, tmp - s));
@@ -71,7 +71,8 @@ t_word			*get_magicquotelist(char *s)
 	{
 		word->word = get_next_word(s, &treat);
 		word->treat = treat;
-		word->next = get_magicquotelist(s + ft_strlen(word->word) + (treat ? 2 : 0));
+		word->next = get_magicquotelist(s + ft_strlen(word->word) +
+			(treat ? 2 : 0));
 	}
 	return (word);
 }
@@ -88,7 +89,7 @@ t_word			*treat_magicquote(t_info *info, t_word *words)
 		{
 			treated = process_magicquote(info, tmp->word);
 			save_fd(0);
-			free (tmp->word);
+			free(tmp->word);
 			tmp->word = treated;
 		}
 		tmp = tmp->next;

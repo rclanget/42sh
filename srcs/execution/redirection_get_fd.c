@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_get_fd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/07 13:18:36 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/14 14:48:20 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,12 @@ int			redirection_get_fd(t_tree *cmd, int *fds)
 		fds[!(TO_LEFT(cmd->type)) ? 1 : 0] = replace_actual_file(
 			fds[!(TO_LEFT(cmd->type)) ? 1 : 0],
 			get_filename(cmd->right),
-			cmd->type
-		);
+			cmd->type);
 		treat_agreg(cmd->right);
 		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
-			ft_fdprint(2, "42sh: %s: %s\n", ft_strerror(errno), get_filename(cmd->right));
+			ft_fdprint(2, "42sh: %s: %s\n", ft_strerror(errno),
+				get_filename(cmd->right));
 			close(fds[!(TO_LEFT(cmd->type)) ? 0 : 1]);
 			fds[!(TO_LEFT(cmd->type)) ? 0 : 1] = -1;
 		}

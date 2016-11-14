@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   redirection_dleft.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/23 16:32:19 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/23 17:38:17 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/11/14 14:58:55 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/11/14 14:59:28 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef REDIRECTION_DLEFT_H
+#define REDIRECTION_DLEFT_H
 
-int			count_words(char *s)
-{
-	int		i;
+char	*ft_fichier_temp(int tmp);
+void	sub_redirection_dleft(const char *d, int fd);
+char	*dleft_redirection(const char *delimiteur, int reinit);
+t_tree	*find_dleft(t_tree *tree);
+char	*get_delimit(t_tree *un_noeud);
 
-	i = 0;
-	while (s && *s)
-	{
-		
-	}
-}
-
-char		**ft_split(char *s)
-{
-	char	**tab;
-
-	tab = (char **)malloc(sizeof(char *) * count_words(s));
-	return (tab);
-}
+#endif

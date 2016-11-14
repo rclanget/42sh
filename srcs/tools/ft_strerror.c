@@ -6,14 +6,14 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/28 14:03:38 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/28 15:54:51 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:19:17 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "error.h"
 #include <stdlib.h>
 
-const 						t_error error_tab[] = 
+const						t_error g_error_tab[] =
 {
 	{EPERM, "Operation not permitted"},
 	{ENOENT, "No such file or directory"},
@@ -105,7 +105,7 @@ const 						t_error error_tab[] =
 	{EBADMACHO, "Malformed Macho file"},
 	{ECANCELED, "Operation canceled"},
 	{EIDRM, "Identifier removed"},
-	{ENOMSG, "No message of desired type"}, 
+	{ENOMSG, "No message of desired type"},
 	{EILSEQ, "Illegal byte sequence"},
 	{ENOATTR, "Attribute not found"},
 	{EBADMSG, "Bad message"},
@@ -122,5 +122,6 @@ const 						t_error error_tab[] =
 
 char	*ft_strerror(int error_value)
 {
-	return ((error_value-- > 0 && error_value < ERROR_TAB_LEN) ? error_tab[error_value].msg : NULL);
+	return ((error_value-- > 0 && error_value < ERROR_TAB_LEN) ?
+		g_error_tab[error_value].msg : NULL);
 }

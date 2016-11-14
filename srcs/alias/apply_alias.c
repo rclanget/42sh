@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/22 14:59:11 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/06 16:11:33 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 12:30:54 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ char			*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited)
 		if (w->treat && (alias = search_alias2(info, w->word, &i)) && !tmp[i]++)
 		{
 			free(w->word);
-			w->word = apply_alias(info, get_the_list(alias->replace, definition_code(alias->replace)),
+			w->word = apply_alias(info, get_the_list(alias->replace,
+				definition_code(alias->replace)),
 				ft_strdup(alias->replace), ft_strdup(tmp));
 		}
 		ft_strcpy(tmp, visited);
@@ -94,8 +95,7 @@ char			*apply_alias_verified(t_info *info, char *command)
 			info,
 			get_the_list(command, definition_code(command)),
 			ft_strdup(command),
-			ft_memalloc(sizeof(char) * len_alias(info->alias))
-			);
+			ft_memalloc(sizeof(char) * len_alias(info->alias)));
 		free(command);
 		command = tmp;
 	}

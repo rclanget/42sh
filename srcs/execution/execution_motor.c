@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_motor.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/07 12:56:54 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/14 13:11:03 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,19 @@
 
 #include <unistd.h>
 
-int (*p[])(t_info *x, t_tree *y) = {\
-			NULL,\
-			&operator_comma, \
-			&operator_and,\
-			&operator_or, \
-			&operator_pipe, \
-			&redirection_right, \
-			&redirection_left, \
-			&redirection_dright, \
-			&redirection_dleft,
-			&process_subshell};
+int (*g_p[])(t_info *x, t_tree *y) =
+{\
+	NULL,\
+	&operator_comma, \
+	&operator_and,\
+	&operator_or, \
+	&operator_pipe, \
+	&redirection_right, \
+	&redirection_left, \
+	&redirection_dright, \
+	&redirection_dleft,
+	&process_subshell
+};
 
 int				wich_operator(char *op)
 {
@@ -55,7 +57,7 @@ int				execution_motor(t_info *info, t_tree *cmd, int wait)
 		if (!cmd->type)
 			return (execution_command(info, cmd, wait));
 		else
-			return (p[cmd->type](info, cmd));
+			return (g_p[cmd->type](info, cmd));
 	}
 	return (0);
 }

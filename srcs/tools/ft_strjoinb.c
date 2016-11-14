@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoinb.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/11/14 15:12:21 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/11/14 15:15:42 by ulefebvr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shell.h"
 
 #include <stdlib.h>
 #include "libft.h"
 
-char *ft_strjoinb(char *s1, char *s2, int n)
+char		*ft_strjoinb(char *s1, char *s2, int n)
 {
 	char	*tmp;
 	char	*line;

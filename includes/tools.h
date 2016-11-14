@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:55:47 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/28 18:16:44 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:11:05 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOOLS_H
 # define TOOLS_H
 
-int			ft_putcharb(int c);
 char		*ft_strjoinb(char *s1, char *s2, int n);
 char		*ft_strndup(char *str, int n);
 int			ft_tablen(char **tab);

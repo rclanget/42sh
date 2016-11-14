@@ -6,16 +6,16 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:55:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/04 14:43:49 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/14 15:09:21 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int			get_len(char *str)
+static int		get_len(char *str)
 {
-	int	 i;
-	int	 j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -29,11 +29,11 @@ static int			get_len(char *str)
 	return (i);
 }
 
-char *clean_backslash(char *str)
+char			*clean_backslash(char *str)
 {
-	int	 i;
-	int	 j;
-	char	 *str_new;
+	int		i;
+	int		j;
+	char	*str_new;
 
 	j = 0;
 	i = 0;
