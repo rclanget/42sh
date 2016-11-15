@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/30 18:34:55 by zipo              #+#    #+#             */
-/*   Updated: 2016/10/28 10:32:57 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/15 14:55:07 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,13 @@
 # define CTRL_E				5
 
 # ifdef __APPLE__
-
 #  define KEY_END			4610843
 #  define KEY_START			4741915
-
 # endif
 
 # ifdef __linux__
-
 #  define KEY_END			4607771
 #  define KEY_START			4738843
-
 # endif
 
 # define KEY_DEL			127
@@ -50,7 +46,6 @@
 #  define CTRL_DOWN			18630336467524379
 #  define CTRL_RIGHT		18911811444235035
 #  define CTRL_LEFT			19193286420945691
-
 # endif
 
 # ifdef __linux__
@@ -58,12 +53,19 @@
 #  define CTRL_DOWN			72796393790235
 #  define CTRL_RIGHT		73895905418011
 #  define CTRL_LEFT			74995417045787
-
 # endif
 
-# define CTRL_I				39883
-# define CTRL_O				34755
-# define CTRL_P				9082850
+# ifdef __APPLE__
+#  define CTRL_I				8948194
+#  define CTRL_O				42947
+#  define CTRL_P				10127586
+# endif
+
+# ifdef __linux__
+#  define CTRL_I				8948194
+#  define CTRL_O				42947
+#  define CTRL_P				10127586
+# endif
 
 # define KEY_UP				4283163
 # define KEY_DOWN			4348699

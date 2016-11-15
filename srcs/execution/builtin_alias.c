@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 15:56:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/29 10:21:34 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/15 14:56:12 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	**split_alias(char *line)
 	return (tab);
 }
 
-static void	free_alias(char **tmp)
+static void	free_aliass(char **tmp)
 {
 	int		i;
 
@@ -69,7 +69,7 @@ int			builtin_alias(t_info *info, t_tree *cmd)
 			break ;
 		val = split_alias(*tmp);
 		update_alias(info, val[0], val[1]);
-		free_alias(val);
+		free_aliass(val);
 		tmp++;
 	}
 	return (0);
