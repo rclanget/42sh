@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 17:26:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/15 01:15:27 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,11 @@ void				exit_shell(t_info *info)
 	free_history(get_head(info->hist));
 	ft_free_env(info->env);
 	hashmap_free(info->hash);
+	free_alias(info->alias);
 	info->env = NULL;
-	ft_free_them_all(5, &info->self, &info->term->capa, &info->term->prompt,
-		&info->term, &info);
+	ft_free_them_all(6, &info->self, &info->term->capa, &info->term->prompt,
+		&info->term->save_cmd, &info->term, &info);
+	update_path(NULL, NULL);
 	exit(execution_status(status));
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alias.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:55:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 20:57:31 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/11/15 00:23:54 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ char		*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited);
 char		*apply_alias_verified(t_info *info, char *command);
 
 int			len_alias(t_alias *alias);
+
+void		free_alias(t_alias *alias);
 
 #endif
