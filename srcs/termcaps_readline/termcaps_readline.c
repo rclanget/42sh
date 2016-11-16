@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 17:00:01 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/16 12:43:33 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ char		*get_currentline(t_info *info, int term, char quote)
 	{
 		info->term->pos_c = 0;
 		tmp = get_currentline(info, term, quote);
-		tmp2 = ft_strjoinc(cmd, '\n');
+		tmp2 = ft_strjoin(cmd, "\n");
 		tmp3 = ft_strjoin(tmp2, tmp);
-		ft_free_them_all(2, &cmd, &tmp, &tmp2);
+		ft_free_them_all(3, &cmd, &tmp, &tmp2);
 		cmd = tmp3;
 	}
 	return (cmd);
