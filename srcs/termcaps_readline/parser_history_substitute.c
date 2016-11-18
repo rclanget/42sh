@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:18:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/12 15:26:47 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/18 14:33:59 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void		replace_at(char **cmd, int from, int to, char *by)
 	char	*tmp2;
 	char	*tmp3;
 
-	tmp = ft_strdup(&(*cmd[from + to]));
+	tmp = ft_strdup(*cmd + from + to + 1);
 	tmp2 = ft_strndup(*cmd, from);
 	tmp3 = ft_strjoin(tmp2, by);
 	ft_free_them_all(1, &tmp2);
