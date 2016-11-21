@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_readline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/21 14:54:22 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:24:42 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char		*get_currentline(t_info *info, int term, char quote)
 	char	*tmp2;
 	char	*tmp3;
 
-	ft_print(!quote ? "%s" : "> ", info->term->prompt);
+	ft_print(!quote ? "%s" : "> ", get_prompt(info));
 	cmd = ((term) ? termcaps_loop(info) : getnextline(0, info));
 	if (cmd && (quote = check_quote(cmd, quote)))
 	{

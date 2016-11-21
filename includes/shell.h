@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 12:09:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 17:25:18 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 18:23:04 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ int						execution_motor(t_info *info, t_tree *cmd, int wait);
 void					exit_shell(t_info *info);
 
 t_info					*save_info(t_info *info);
+
+char					*get_prompt(t_info *info);
 
 #endif

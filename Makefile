@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
+#    By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/14 17:41:55 by gdeguign         ###   ########.fr        #
+#    Updated: 2016/11/21 18:23:40 by zipo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,7 +81,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					parser_clean_parentheses.c keyboard_updown.c \
 					keyboard_ccp_fn.c keyboard_reverse_search.c \
 					parser_history_substitute.c auto_completion.c auto_completion_2.c\
-					auto_completion_3.c auto_completion_4.c
+					auto_completion_3.c auto_completion_4.c termcaps_prompt.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
