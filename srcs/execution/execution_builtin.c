@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 14:48:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 13:05:41 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 17:58:31 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ t_builtin	g_builtin[] =
 	{"echo", &builtin_echo},
 	{"unalias", &builtin_unalias},
 	{"history", &builtin_history},
-	{"exit", &builtin_exit}
+	{"exit", &builtin_exit},
+	{"true", &builtin_true},
+	{"false", &builtin_false}
 };
 
 int			is_builtin(char *cmd)
