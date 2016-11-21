@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/16 12:43:33 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 14:54:22 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ char		check_quote(char *cmd, char quote)
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i] == '\\' && cmd[i + 1])
+		if (cmd[i] == '\\' && quote == '\'')
+			;
+		else if (cmd[i] == '\\' && cmd[i + 1])
 			++i;
 		else if (quote && cmd[i] == quote)
 			quote = 0;
