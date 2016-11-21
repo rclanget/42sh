@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_dleft_fn.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 14:57:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 15:01:39 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 17:19:10 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,10 @@ char	*ft_fichier_temp(int tmp)
 	return (nom_fichier_temp);
 }
 
-void	sub_redirection_dleft(const char *d, int fd)
+void	sub_redirection_dleft(const char *d, int fd, int option)
 {
 	char		*line;
+	char 		*tmp;
 
 	line = NULL;
 	while (get_next_line(0, &line))
@@ -40,30 +41,28 @@ void	sub_redirection_dleft(const char *d, int fd)
 			free(line);
 			break ;
 		}
-		ft_putendl_fd(line, fd);
+		tmp = line;
+		while (option && *tmp == '\t')
+			tmp++;
+		ft_putendl_fd(tmp, fd);
 		free(line);
 		ft_putstr("< ");
 	}
 }
 
-char	*dleft_redirection(const char *delimiteur, int reinit)
+char	*dleft_redirection(const char *delimiteur, int option)
 {
 	static int	tmp = 1;
 	int			fd;
 	char		*nom_fichier_temp;
 
-	if (reinit)
-	{
-		tmp = 1;
-		return (NULL);
-	}
 	nom_fichier_temp = ft_fichier_temp(tmp);
 	fd = open(nom_fichier_temp, O_WRONLY | O_TRUNC | O_CREAT,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (isatty(0))
 	{
 		ft_putstr("< ");
-		sub_redirection_dleft(delimiteur, fd);
+		sub_redirection_dleft(delimiteur, fd, option);
 	}
 	close(fd);
 	tmp++;
