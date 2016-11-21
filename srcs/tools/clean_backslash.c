@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean_backslash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:55:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/14 15:09:21 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 15:42:58 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int		get_len(char *str)
 	return (i);
 }
 
-char			*clean_backslash(char *str)
+char			*clean_backslash(char *str, char quote)
 {
 	int		i;
 	int		j;
@@ -37,6 +37,8 @@ char			*clean_backslash(char *str)
 
 	j = 0;
 	i = 0;
+	(void)quote;
+	ft_print("str: %s\n", str);
 	if ((str_new = ft_memalloc(get_len(str) + 1)))
 	{
 		while (str[j])
