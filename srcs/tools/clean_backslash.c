@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:55:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/21 15:42:58 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/21 15:46:57 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,11 @@ char			*clean_backslash(char *str, char quote)
 	j = 0;
 	i = 0;
 	(void)quote;
-	ft_print("str: %s\n", str);
 	if ((str_new = ft_memalloc(get_len(str) + 1)))
 	{
 		while (str[j])
 		{
-			if (str[j] != '\\')
+			if (str[j] != '\\' || (str[j] == '\\' && quote == '\''))
 				str_new[i++] = str[j++];
 			else if (str[j] == '\\' && str[j + 1] == '\\' && ++j)
 				str_new[i++] = str[j++];
