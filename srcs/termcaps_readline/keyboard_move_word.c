@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/07 16:40:13 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/14 15:50:15 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 22:21:16 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "command_line_termcaps.h"
 #include "keyboard_keys.h"
 
-static int		ft_isspace(int c)
+int		ft_isspace(int c)
 {
 	if (c == '\f')
 		return (1);

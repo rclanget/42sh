@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   termcaps_prompt.c                                  :+:      :+:    :+:   */
+/*   var.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/21 18:06:17 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/21 18:54:36 by zipo             ###   ########.fr       */
+/*   Created: 2016/11/22 23:33:11 by zipo              #+#    #+#             */
+/*   Updated: 2016/11/22 23:50:19 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "libft.h"
+#ifndef VAR_H
+# define VAR_H
 
-char *get_prompt(t_info *info)
-{
-    t_env   *e;
+#include    "shell.h"
+#include    "alias_struct.h"
 
-    e = search_env_var(info, "PS1");
-    if (ft_strcmp(info->term->prompt, (e && e->content) ? e->content : "?> "))
-    {
-        free(info->term->prompt);
-        info->term->prompt = ft_strdup((e && e->content) ? e->content : "?> ");
-    }
-    return (info->term->prompt);
-}
+void        update_var(t_info *info, char *init, char *replace);
+t_alias		*search_var(t_info *info, char *var);
+void		remove_var(t_info *info, char *var);
+void	    add_var(t_info *info, char *var, char *content);
+
+char		*parse_var(t_info *info, char *cmd);
+
+#endif

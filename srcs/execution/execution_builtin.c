@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_builtin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 14:48:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/21 17:58:31 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 23:53:31 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ t_builtin	g_builtin[] =
 	{"history", &builtin_history},
 	{"exit", &builtin_exit},
 	{"true", &builtin_true},
-	{"false", &builtin_false}
+	{"false", &builtin_false},
+	{"read", &builtin_read},
+	{"export", &builtin_export},
+	{"unset", &builtin_unset}
 };
 
 int			is_builtin(char *cmd)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 16:00:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/21 18:01:41 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 23:39:46 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "shell.h"
 
-# define MAX_BUILTIN		10
+# define MAX_BUILTIN		13
 
 typedef struct	s_builtin
 {
@@ -34,6 +34,9 @@ int				builtin_history(t_info *info, t_tree *cmd);
 int				builtin_exit(t_info *info, t_tree *cmd);
 int				builtin_false(t_info * info, t_tree *cmd);
 int				builtin_true(t_info * info, t_tree *cmd);
+int				builtin_read(t_info * info, t_tree *cmd);
+int				builtin_unset(t_info *info, t_tree *cmd);
+int				builtin_export(t_info *info, t_tree *cmd);
 
 int				is_builtin(char *cmd);
 int				execution_builtin(t_info *info, t_tree *cmd);

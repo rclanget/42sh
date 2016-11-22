@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command_line_termcaps.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:51:24 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 17:28:08 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 22:21:38 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,7 @@ void			move_down(t_info *info);
 void			reverse_search_i(t_info *info);
 
 void			call_autocomp(t_info *info);
+
+int				ft_isspace(int c);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/15 01:15:27 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 23:56:55 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "history.h"
 #include "tools.h"
 #include "builtin_history.h"
+#include "var.h"
 
 t_info				*init_shell(int ac, char **av, char **env)
 {
@@ -67,6 +68,7 @@ void				exit_shell(t_info *info)
 void				execute_shell(t_info *info, char **command)
 {
 	save_fd(1);
+	*command = parse_var(info, *command);
 	*command = apply_alias_verified(info, *command);
 	info->cmd = parser_cmd(ft_strtrim(*command));
 	if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))

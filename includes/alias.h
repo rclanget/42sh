@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alias.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:55:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/15 00:23:54 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 22:17:23 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char		*apply_alias_verified(t_info *info, char *command);
 int			len_alias(t_alias *alias);
 
 void		free_alias(t_alias *alias);
+char	   **split_alias(char *line);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/21 18:41:27 by zipo             ###   ########.fr        #
+#    Updated: 2016/11/22 23:52:37 by zipo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,8 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					builtin_history_optps.c builtin_history_optcd.c \
 					builtin_history_optanrw.c builtin_exit.c \
 					redirection_agreg.c redirection_agreg_fn.c \
-					redirection_dleft_fn.c builtin_true_false.c
+					redirection_dleft_fn.c builtin_true_false.c \
+					builtin_read.c builtin_export.c builtin_unset.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
@@ -81,7 +82,8 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					parser_clean_parentheses.c keyboard_updown.c \
 					keyboard_ccp_fn.c keyboard_reverse_search.c \
 					parser_history_substitute.c auto_completion.c auto_completion_2.c\
-					auto_completion_3.c auto_completion_4.c termcaps_prompt.c
+					auto_completion_3.c auto_completion_4.c termcaps_prompt.c \
+					parser_var.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
@@ -95,9 +97,14 @@ SRCN_HISTORY	=	add_history.c free_history.c copy_history.c
 OBJ_HISTORY		=	$(SRCN_HISTORY:.c=.o)
 SRCS_HISTORY	=	$(addprefix $(SRC_HISTORY),$(SRCN_HISTORY))
 
+SRC_VAR			=	./srcs/var/
+SRCN_VAR		=	add_var.c remove_var.c search_var.c update_var.c
+OBJ_VAR			=	$(SRCN_VAR:.c=.o)
+SRCS_VAR		=	$(addprefix $(SRC_VAR),$(SRCN_VAR))
+
 SRC_NAME		=	$(SRCN_ALIAS) $(SRCN_ENV) $(SRCN_EXEC) \
 					$(SRCN_TOOLS) $(SRCN_TERM) $(SRCN_MAIN) \
-					$(SRCN_HASH) $(SRCN_SYNTAX) $(SRCN_HISTORY)
+					$(SRCN_HASH) $(SRCN_SYNTAX) $(SRCN_HISTORY) $(SRCN_VAR)
 OBJ_NAME		=	$(SRC_NAME:.c=.o)
 SRC				=	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
@@ -147,6 +154,10 @@ $(OBJ_PATH)%.o: $(SRC_SYNTAX)%.c
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 $(OBJ_PATH)%.o: $(SRC_HISTORY)%.c
+	@mkdir -p $(OBJ_PATH)
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+
+$(OBJ_PATH)%.o: $(SRC_VAR)%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
