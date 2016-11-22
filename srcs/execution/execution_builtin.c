@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 14:48:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 00:03:15 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/23 00:08:38 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ t_builtin	g_builtin[] =
 	{"unalias", &builtin_unalias},
 	{"history", &builtin_history},
 	{"exit", &builtin_exit},
-	{"unset", &builtin_unset},
-	{"export", &builtin_export}
 	{"true", &builtin_true},
 	{"false", &builtin_false},
 	{"read", &builtin_read},

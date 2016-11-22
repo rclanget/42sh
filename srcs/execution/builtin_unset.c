@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 17:01:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/22 17:13:01 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/23 00:10:05 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "libft.h"
 #include "alias_struct.h"
-#include "builtin_variable.h"
+#include "var.h"
 
 int			builtin_unset(t_info *info, t_tree *cmd)
 {

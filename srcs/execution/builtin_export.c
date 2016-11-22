@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:28:12 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/22 17:17:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/23 00:09:07 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "libft.h"
 #include "alias_struct.h"
-#include "builtin_variable.h"
+#include "var.h"
 
 static char	**split_alias(char *line)
 {

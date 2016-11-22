@@ -6,7 +6,7 @@
 #    By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/23 00:06:16 by zipo             ###   ########.fr        #
+#    Updated: 2016/11/23 00:10:49 by zipo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,14 +98,9 @@ SRCN_HISTORY	=	add_history.c free_history.c copy_history.c
 OBJ_HISTORY		=	$(SRCN_HISTORY:.c=.o)
 SRCS_HISTORY	=	$(addprefix $(SRC_HISTORY),$(SRCN_HISTORY))
 
-SRC_VAR			=	./srcs/var/
-SRCN_VAR		=	add_var.c remove_var.c search_var.c update_var.c
-OBJ_VAR			=	$(SRCN_VAR:.c=.o)
-SRCS_VAR		=	$(addprefix $(SRC_VAR),$(SRCN_VAR))
-
 SRC_NAME		=	$(SRCN_ALIAS) $(SRCN_ENV) $(SRCN_EXEC) \
 					$(SRCN_TOOLS) $(SRCN_TERM) $(SRCN_MAIN) \
-					$(SRCN_HASH) $(SRCN_SYNTAX) $(SRCN_HISTORY) $(SRCN_VAR)
+					$(SRCN_HASH) $(SRCN_SYNTAX) $(SRCN_HISTORY)
 OBJ_NAME		=	$(SRC_NAME:.c=.o)
 SRC				=	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
@@ -155,10 +150,6 @@ $(OBJ_PATH)%.o: $(SRC_SYNTAX)%.c
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 $(OBJ_PATH)%.o: $(SRC_HISTORY)%.c
-	@mkdir -p $(OBJ_PATH)
-	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-
-$(OBJ_PATH)%.o: $(SRC_VAR)%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
