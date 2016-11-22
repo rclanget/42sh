@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_alias.c                                    :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/10/20 15:56:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 00:04:16 by zipo             ###   ########.fr       */
+/*   Created: 2016/11/22 15:28:12 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/11/22 17:17:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "alias.h"
-#include "alias_struct.h"
 #include "shell.h"
 #include "libft.h"
+#include "alias_struct.h"
+#include "builtin_variable.h"
 
-char	**split_alias(char *line)
+static char	**split_alias(char *line)
 {
 	char	**tab;
 	char	*tmp;
@@ -30,46 +30,19 @@ char	**split_alias(char *line)
 	return (tab);
 }
 
-static void	free_aliass(char **tmp)
-{
-	int		i;
-
-	i = 0;
-	while (tmp && tmp[i])
-		free(tmp[i++]);
-	if (tmp)
-		free(tmp);
-}
-
-static void	show_aliases(t_info *info)
-{
-	t_alias	*alias;
-
-	if ((alias = info->alias))
-	{
-		while (alias)
-		{
-			ft_print("%s=%s\n", alias->init, alias->replace);
-			alias = alias->next;
-		}
-	}
-}
-
-int			builtin_alias(t_info *info, t_tree *cmd)
+int		builtin_export(t_info *info, t_tree *cmd)
 {
 	char	**tmp;
 	char	**val;
 
 	tmp = cmd->cmd + 1;
-	if (!tmp || !*tmp)
-		show_aliases(info);
 	while (tmp && *tmp)
 	{
 		if (!ft_strchr(*tmp, '='))
 			break ;
 		val = split_alias(*tmp);
-		update_alias(info, val[0], val[1]);
-		free_aliass(val);
+		update_var(info, val[0], val[1]);
+		ft_free_them_all(3, &val[0], &val[1], &val);
 		tmp++;
 	}
 	return (0);

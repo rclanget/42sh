@@ -6,7 +6,7 @@
 #    By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/22 23:52:37 by zipo             ###   ########.fr        #
+#    Updated: 2016/11/23 00:06:16 by zipo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,9 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					builtin_history_optps.c builtin_history_optcd.c \
 					builtin_history_optanrw.c builtin_exit.c \
 					redirection_agreg.c redirection_agreg_fn.c \
-					redirection_dleft_fn.c builtin_true_false.c \
-					builtin_read.c builtin_export.c builtin_unset.c
+					redirection_dleft_fn.c builtin_export_unset_fn.c \
+					builtin_export.c builtin_unset.c builtin_read.c \
+					builtin_true_false.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
