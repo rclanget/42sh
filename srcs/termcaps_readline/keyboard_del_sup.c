@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_del_sup.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/05 03:36:03 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 15:44:56 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 17:51:27 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,6 @@ void	move_delete(t_info *info)
 		--term->pos_c;
 		ft_putstr(info->term->capa->str_cd);
 		ft_putstr(&info->term->cmd[info->term->pos_c]);
-		if ((plen + ft_strlen(term->cmd)) &&
-			!((plen + ft_strlen(term->cmd)) % termcap_winsz_x()))
-			write(1, "\n", 1);
 		move_cursor(term->capa, ft_strlen(term->cmd), plen, term->pos_c);
 	}
 	else
@@ -54,9 +51,6 @@ void	move_supp(t_info *info)
 			1 + ft_strlen(&term->cmd[pos_c]));
 		ft_putstr(term->capa->str_cd);
 		ft_putstr(&term->cmd[term->pos_c]);
-		if ((plen + ft_strlen(term->cmd)) &&
-			!((plen + ft_strlen(term->cmd)) % termcap_winsz_x()))
-			write(1, "\n", 1);
 		move_cursor(term->capa, ft_strlen(term->cmd), plen, term->pos_c);
 	}
 	else

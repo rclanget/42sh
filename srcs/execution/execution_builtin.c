@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/26 14:48:04 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/22 17:19:56 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 18:31:01 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ t_builtin	g_builtin[] =
 	{"exit", &builtin_exit},
 	{"unset", &builtin_unset},
 	{"export", &builtin_export}
+	{"true", &builtin_true},
+	{"false", &builtin_false}
 };
 
 int			is_builtin(char *cmd)

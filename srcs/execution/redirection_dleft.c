@@ -3,41 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_dleft.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdeguign <gdeguign@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:24:07 by gdeguign          #+#    #+#             */
-/*   Updated: 2016/11/14 15:03:01 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 17:27:26 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "redirection_dleft.h"
+#include "libft.h"
 
 #include <stdlib.h>
 
 int		modif_tree(t_tree *tree)
 {
-	t_tree		*un_noeud;
-	char		*nom_fichier_temp;
+	t_tree		*n;
+	t_tree		*tmp;
+	char		*f_name;
 
-	if (!tree)
-		return (1);
-	while ((un_noeud = find_dleft(tree)) != NULL)
+	while (tree && (n = find_dleft(tree)) != NULL)
 	{
-		nom_fichier_temp = dleft_redirection(get_delimit(un_noeud), 0);
-		if (un_noeud->right && !(un_noeud->right->type))
+		f_name = dleft_redirection(get_delimit(n), !ft_strcmp(n->elem, "<<-"));
+		if ((n->right && !(n->right->type)) ||
+		(n->right->left && !(n->right->left->type)))
 		{
-			un_noeud->type = 6;
-			if (un_noeud->right->elem)
-				free(un_noeud->right->elem);
-			un_noeud->right->elem = nom_fichier_temp;
-		}
-		else if (un_noeud->right->left && !(un_noeud->right->left->type))
-		{
-			un_noeud->type = 6;
-			if (un_noeud->right->left->elem)
-				free(un_noeud->right->left->elem);
-			un_noeud->right->left->elem = nom_fichier_temp;
+			n->type = 6;
+			tmp = (n->right && !(n->right->type)) ? n->right : n->right->left;
+			if (tmp->elem)
+				free(tmp->elem);
+			tmp->elem = f_name;
 		}
 	}
 	return (1);

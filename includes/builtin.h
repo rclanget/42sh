@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 16:00:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/22 17:20:33 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 18:31:45 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int				builtin_history(t_info *info, t_tree *cmd);
 int				builtin_exit(t_info *info, t_tree *cmd);
 int				builtin_export(t_info *info, t_tree *cmd);
 int				builtin_unset(t_info *info, t_tree *cmd);
+int				builtin_false(t_info * info, t_tree *cmd);
+int				builtin_true(t_info * info, t_tree *cmd);
 
 int				is_builtin(char *cmd);
 int				execution_builtin(t_info *info, t_tree *cmd);

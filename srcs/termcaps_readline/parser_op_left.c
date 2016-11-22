@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_op_left.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 17:54:59 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/23 18:44:24 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/21 16:57:40 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ char		**parse_op_dleft(char *str, int pos)
 	if ((tab = (char **)malloc(sizeof(char *) * 4)))
 	{
 		tab[0] = ft_strndup(str, pos);
-		tab[1] = ft_strdup("<<");
-		tab[2] = ft_strdup(&str[pos + 2]);
+		tab[1] = ft_strdup(str[pos + 2] == '-' ? "<<-" : "<<");
+		tab[2] = ft_strdup(&str[pos + ft_strlen(tab[1])]);
 		tab[3] = NULL;
 	}
 	return (tab);

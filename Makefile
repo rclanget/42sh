@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/22 17:10:44 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/11/22 18:32:18 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					redirection_agreg.c redirection_agreg_fn.c \
 					redirection_dleft_fn.c builtin_export_unset_fn.c \
 					builtin_export.c builtin_unset.c
+					builtin_true_false.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 
@@ -82,7 +83,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					parser_clean_parentheses.c keyboard_updown.c \
 					keyboard_ccp_fn.c keyboard_reverse_search.c \
 					parser_history_substitute.c auto_completion.c auto_completion_2.c\
-					auto_completion_3.c auto_completion_4.c
+					auto_completion_3.c auto_completion_4.c termcaps_prompt.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
