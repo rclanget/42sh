@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 12:09:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 17:25:18 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/22 17:13:32 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct			s_info
 {
 	struct s_tree		*cmd;
 	struct s_alias		*alias;
+	struct s_alias		*var;
 	struct s_env		*env;
 	struct s_hashmap	*hash;
 	struct s_termcaps	*term;
