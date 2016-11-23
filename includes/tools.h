@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:55:47 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/21 15:16:55 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/23 16:29:54 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ char		**cust_split(char *str);
 int			ft_signal(int i);
 int			ft_isalnum_or_dot(int c);
 char		*ft_strdup_spe(const char *s1);
+char		*ft_itoa2(int n);
 
 #endif

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   builtin_variable.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 12:28:36 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 16:59:22 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/11/22 17:11:47 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/11/22 17:12:47 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "libft.h"
+#ifndef BUILTIN_VARIABLE_H
+# define BUILTIN_VARIABLE_H
 
-int			builtin_exit(t_info *info, t_tree *cmd)
-{
-	if (cmd->cmd[1])
-		info->status = ft_atoi(cmd->cmd[1]);
-	info->stop = 1;
-	return (0);
-}
+void		add_var(t_info *info, char *var, char *content);
+void		remove_var(t_info *info, char *var);
+t_alias		*search_var(t_info *info, char *var);
+void		update_var(t_info *info, char *init, char *replace);
+
+#endif

@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_exit.c                                     :+:      :+:    :+:   */
+/*   ft_itoa2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/04 12:28:36 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 16:59:22 by ulefebvr         ###   ########.fr       */
+/*   Created: 2016/11/23 16:23:15 by ulefebvr          #+#    #+#             */
+/*   Updated: 2016/11/23 16:34:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
 #include "libft.h"
 
-int			builtin_exit(t_info *info, t_tree *cmd)
+char		*ft_itoa2(int n)
 {
-	if (cmd->cmd[1])
-		info->status = ft_atoi(cmd->cmd[1]);
-	info->stop = 1;
-	return (0);
+	static char		number[25];
+	int				i;
+
+	i = 0;
+	ft_bzero(number, sizeof(char) * 25);
+	if (n < 0)
+		number[0] = '-';
+	n *= (n < 0) ? -1 : 1;
+	i = ft_nbrlen(n);
+	if (n == 0)
+		number[0] = '0';
+	while (n)
+	{
+		number[--i] = '0' + (n % 10);
+		n = n / 10;
+	}
+	return (number);
 }
