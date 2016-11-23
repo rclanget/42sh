@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/22 23:56:55 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/23 15:58:59 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void				exit_shell(t_info *info)
 	ft_free_env(info->env);
 	hashmap_free(info->hash);
 	free_alias(info->alias);
+	free_alias(info->var);
 	info->env = NULL;
 	ft_free_them_all(6, &info->self, &info->term->capa, &info->term->prompt,
 		&info->term->save_cmd, &info->term, &info);
