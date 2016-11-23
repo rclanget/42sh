@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/19 14:39:06 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/29 10:26:17 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:06:54 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			builtin_setenv(t_info *info, t_tree *cmd)
 	int		stat;
 	t_env	*tmp;
 
-	stat = 1;
+	stat = 0;
 	tmp = info->env;
 	len = ft_tablen(cmd->cmd);
 	if (len == 1)
@@ -37,7 +37,7 @@ int			builtin_setenv(t_info *info, t_tree *cmd)
 	else
 	{
 		ft_fdprint(2, "setenv: Too many arguments.\n");
-		stat = 0;
+		stat = 1;
 	}
 	return (stat);
 }
