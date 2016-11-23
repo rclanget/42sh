@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/29 10:24:04 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:12:21 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,5 @@ int			builtin_cd(t_info *info, t_tree *cmd)
 	}
 	if (ret)
 		ft_fdprint(2, "cd: %s\n", ERR_MSG[ret]);
-	return (ret > 0 ? 0 : 1);
+	return (ret > 0 ? 1 : 0);
 }

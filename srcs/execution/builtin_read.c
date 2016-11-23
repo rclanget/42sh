@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:18:49 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/23 16:01:46 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/23 17:16:58 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ int         builtin_read(t_info * info, t_tree *cmd)
 
     (void)info;
     var = cmd->cmd + 1;
-    i = 0;
+	if ((i = ft_option(0, cmd->cmd, "r", &i)) < 0)
+		return (1);
+	i = 0;
     get_next_line(0, &line);
     content = ft_strsplit(line, ' ');
     free(line);
@@ -58,5 +60,5 @@ int         builtin_read(t_info * info, t_tree *cmd)
         i++;
     }
 	free_tab(content);
-    return (1);
+    return (0);
 }
