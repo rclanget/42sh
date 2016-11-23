@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/22 23:56:28 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/23 15:46:14 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,11 @@ char		*parse_var(t_info *info, char *cmd)
 
 	tmp = cmd;
 	i = 0;
-	while (tmp[i])
+	while (tmp && tmp[i])
 	{
 		if (tmp[i] == '$')
-		{
 			tmp = replace_var(info, tmp, i);
-		}
-		i++;
+		i += tmp[i] ? 1 : 0;
 	}
 	return (tmp);
 }
