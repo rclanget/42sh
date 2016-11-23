@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 17:01:19 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/29 10:22:37 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:14:36 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			builtin_unalias(t_info *info, t_tree *cmd)
 	if (!(tmp = cmd->cmd + 1))
 	{
 		ft_fdprint(2, "unalias: not enough arguments");
-		exit(1);
+		return (1);
 	}
 	while (tmp && *tmp)
 	{
