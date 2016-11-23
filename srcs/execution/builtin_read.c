@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:18:49 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/23 17:16:58 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/23 17:44:14 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,26 @@ int         builtin_read(t_info * info, t_tree *cmd)
     char    *tmp;
     int     i;
 
-    (void)info;
+	line = NULL;
     var = cmd->cmd + 1;
 	if ((i = ft_option(0, cmd->cmd, "r", &i)) < 0)
 		return (1);
 	i = 0;
     get_next_line(0, &line);
-    content = ft_strsplit(line, ' ');
-    free(line);
-    while (var[i] && content[i])
-    {
-        tmp = (!var[i + 1] && content[i + 1]) ? regroup_content(content, i) : content[i];
-        update_var(info, var[i], tmp);
-        if (!var[i + 1] && content[i + 1])
-            free(tmp);
-        i++;
-    }
-	free_tab(content);
-    return (0);
+	if (line)
+	{
+	    content = ft_strsplit(line, ' ');
+	    free(line);
+	    while (var[i] && content[i])
+	    {
+	        tmp = (!var[i + 1] && content[i + 1]) ? regroup_content(content, i) : content[i];
+	        update_var(info, var[i], tmp);
+	        if (!var[i + 1] && content[i + 1])
+	            free(tmp);
+	        i++;
+	    }
+		free_tab(content);
+	    return (0);
+	}
+	return (1);
 }
