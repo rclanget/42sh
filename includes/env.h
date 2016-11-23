@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 12:18:50 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/03/03 12:52:25 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/23 16:02:52 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ void		transfer_env(char **tab, t_env *env, int i);
 void		update_path(t_info *info, t_env *path);
 
 void		ft_free_env(t_env *env);
+
+void		*free_tab(char **tab);
 
 #endif

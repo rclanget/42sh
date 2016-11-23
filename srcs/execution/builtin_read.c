@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:18:49 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/23 00:17:26 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/23 16:01:46 by zipo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "shell.h"
 #include "get_next_line.h"
 #include "var.h"
+#include "env.h"
 
 char        *regroup_content(char **content, int position)
 {
@@ -56,5 +57,6 @@ int         builtin_read(t_info * info, t_tree *cmd)
             free(tmp);
         i++;
     }
+	free_tab(content);
     return (1);
 }
