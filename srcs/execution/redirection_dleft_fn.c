@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_dleft_fn.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 14:57:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/21 17:19:10 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/30 14:46:07 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_fichier_temp(int tmp)
 void	sub_redirection_dleft(const char *d, int fd, int option)
 {
 	char		*line;
-	char 		*tmp;
+	char		*tmp;
 
 	line = NULL;
 	while (get_next_line(0, &line))

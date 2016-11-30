@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/23 15:46:14 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/30 14:50:57 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "env.h"
 
-char 		*set_content(char *cmd, char *content, int position, int len)
+char		*set_content(char *cmd, char *content, int position, int len)
 {
 	char	*tmp;
 	char	*tmp2;
@@ -49,23 +49,25 @@ char		*replace_var(t_info *info, char *cmd, int position)
 	char	*tmp;
 
 	var_name = get_var(cmd, position);
-	if ((env = search_env_var(info, var_name)) || (var = search_var(info, var_name)))
+	env = search_env_var(info, var_name);
+	var = search_var(info, var_name);
+	if (env || var)
 		content = env ? env->content : var->replace;
-    else
-        content = "";
+	else
+		content = "";
 	if ((tmp = set_content(cmd, content, position, ft_strlen(var_name) + 1)))
 	{
 		free(cmd);
 		cmd = tmp;
 	}
 	free(var_name);
-	return(cmd);
+	return (cmd);
 }
 
 char		*parse_var(t_info *info, char *cmd)
 {
 	char	*tmp;
-	int 	i;
+	int		i;
 
 	tmp = cmd;
 	i = 0;

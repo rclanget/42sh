@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:28:12 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 00:09:07 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/30 14:35:19 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	**split_alias(char *line)
 	return (tab);
 }
 
-int		builtin_export(t_info *info, t_tree *cmd)
+int			builtin_export(t_info *info, t_tree *cmd)
 {
 	char	**tmp;
 	char	**val;

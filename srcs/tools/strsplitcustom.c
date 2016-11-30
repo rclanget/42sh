@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strsplitcustom.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/21 15:47:13 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/30 14:52:15 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static char			*seek_next_delimiter(char *str)
 	while (str && *str)
 	{
 		if (*str == '\\' && quote == '\'')
-			{;}
+			;
 		else if (!chr && *str == '\\' && (chr = 1))
 			continue;
 		else if (!chr && (*str == '\'' || *str == '\"'))

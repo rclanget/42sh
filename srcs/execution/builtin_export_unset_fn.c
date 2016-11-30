@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export_unset_fn.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 17:01:03 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/22 17:16:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/11/30 14:46:47 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void		update_var(t_info *info, char *init, char *replace)
 {
 	t_alias	*var;
 
-	if ((var = search_alias(info, init)) || (var = search_var(info, init)))
+	if (!(var = search_alias(info, init)))
+		var = search_var(info, init);
+	if (var)
 	{
 		free(var->replace);
 		var->replace = ft_strdup(replace);

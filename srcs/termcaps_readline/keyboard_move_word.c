@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keyboard_move_word.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/07 16:40:13 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/22 22:21:16 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/30 14:48:26 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "command_line_termcaps.h"
 #include "keyboard_keys.h"
 
-int		ft_isspace(int c)
+int				ft_isspace(int c)
 {
 	if (c == '\f')
 		return (1);

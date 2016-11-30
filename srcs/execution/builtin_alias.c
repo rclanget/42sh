@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_alias.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/20 15:56:22 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 00:04:16 by zipo             ###   ########.fr       */
+/*   Updated: 2016/11/30 14:35:05 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "libft.h"
 
-char	**split_alias(char *line)
+char		**split_alias(char *line)
 {
 	char	**tab;
 	char	*tmp;
