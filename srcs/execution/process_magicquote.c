@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 22:09:32 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 14:46:29 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/02 00:20:04 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ static char		*get_file_content(void)
 {
 	int		fd;
 	char	*a;
+	int		byte;
 
 	a = NULL;
 	if (((fd = open(MQ_FILENAME, MQ_OFLAG)) == -1) ||
 		(!(a = ft_memalloc(sizeof(char) * MAX_CONTENT + 1)) && close(fd) <= 0))
 		return (a);
-	read(fd, a, MAX_CONTENT);
+	if ((byte = read(fd, a, MAX_CONTENT)) > 0)
+		a[byte - 1] = 0;
 	ft_striter(a, &change_nl2sp);
 	close(fd);
 	return (a);
