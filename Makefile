@@ -6,14 +6,14 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/11/23 16:33:16 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/12/01 14:05:29 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJ_PATH		=	./obj/
 INC_PATH		=	./includes/ ./libft/includes/
-NAME			=	./21sh
-CC				=	gcc -g
+NAME			=	./42sh
+CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra
 
 SRC_ALIAS		=	./srcs/alias/
