@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 15:58:59 by zipo             ###   ########.fr       */
+/*   Updated: 2016/12/02 01:52:34 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void				exit_shell(t_info *info)
 void				execute_shell(t_info *info, char **command)
 {
 	save_fd(1);
-	*command = parse_var(info, *command);
 	*command = apply_alias_verified(info, *command);
 	info->cmd = parser_cmd(ft_strtrim(*command));
 	if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))

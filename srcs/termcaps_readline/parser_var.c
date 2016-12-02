@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/02 01:23:38 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/02 02:50:28 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,24 @@ char		*replace_var(t_info *info, char *cmd, int position)
 	return (cmd);
 }
 
+int 		isquote(char c)
+{
+	static	int backslash = 0;
+	static	int quote = 0;
+	static	int dquote = 0;
+	static	int mquote = 0;
+
+	if (c == '\'' && !backslash && !dquote && !mquote)
+		quote = !quote;
+	else if (c == '\"' && !backslash && !quote && !mquote)
+		dquote = !dquote;
+	else if (c == '`'&& !backslash && !dquote && !quote)
+		mquote = !mquote;
+	else if (c == '\\' && !quote)
+		backslash = !backslash;
+	return (quote);
+}
+
 char		*parse_var(t_info *info, char *cmd)
 {
 	char	*tmp;
@@ -75,7 +93,7 @@ char		*parse_var(t_info *info, char *cmd)
 	i = 0;
 	while (tmp && tmp[i])
 	{
-		if (tmp[i] == '$')
+		if (!isquote(tmp[i]) && tmp[i] == '$')
 			tmp = replace_var(info, tmp, i);
 		i += tmp[i] ? 1 : 0;
 	}
