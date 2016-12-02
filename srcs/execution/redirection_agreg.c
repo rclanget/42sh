@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 15:20:25 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/08 15:09:43 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/02 03:48:14 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,12 @@
 
 char		**clean_command(char **cmd, int i, int size)
 {
+	free(cmd[i]);
 	while (cmd && cmd[i] && cmd[i + size])
 	{
-		free(cmd[i]);
 		cmd[i] = cmd[i + size];
 		++i;
 	}
-	free(cmd[i]);
 	cmd[i] = 0;
 	return (cmd);
 }
