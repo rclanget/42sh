@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:34:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 12:36:47 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/02 04:49:25 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int				history_clear(t_info *info, char **av)
 	(void)av;
 	free_history(get_head(info->hist));
 	info->hist = NULL;
+	add_history(info, NULL);
 	return (1);
 }
 

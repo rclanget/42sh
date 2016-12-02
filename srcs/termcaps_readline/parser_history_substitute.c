@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:18:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/18 14:33:59 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/02 21:17:02 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,38 @@ int			get_subsitution(t_info *info, char **cmd, int i)
 	return (-1);
 }
 
+int			check_optp(char *cmd)
+{
+	char	**tab;
+	int		len;
+	int 	i;
+
+	tab = ft_strsplit(cmd, ' ');
+	len = 0;
+	i = 0;
+	while (tab[i])
+	{
+		if (!ft_strcmp(tab[i], "history"))
+		{
+			len += ft_strlen(tab[i]);
+			i++;
+			if (tab[i] && tab[i][0] == '-' && ft_strchr(tab[i], 'p'))
+			{
+				len += ft_strlen(tab[i]) + 1;
+				i++;
+				if (tab[i] && tab[i][0] == '!')
+				{
+					len += ft_strlen(tab[i]) + 1;
+					return (len);
+				}
+			}
+		}
+		else
+			i++;
+	}
+	return (len);
+}
+
 char		*history_excldot(t_info *info, char *cmd)
 {
 	int		i;
@@ -70,6 +102,7 @@ char		*history_excldot(t_info *info, char *cmd)
 	quote = 0;
 	while (i != -1 && cmd && cmd[i])
 	{
+		i += check_optp(&cmd[i]);
 		if (cmd[i] == '\'' && ++i)
 			quote = !quote;
 		else if (!quote && cmd[i] == '!')
