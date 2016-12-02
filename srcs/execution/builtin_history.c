@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_history.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:49:43 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 17:12:09 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/01 20:24:52 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int			check_options(int option)
 
 static int	error(void)
 {
-	ft_putendl_fd("history: bad options\nhistory: usage: history [-c] [-d o\
-	ffset] [n] or history -anrw [filename] or history -ps arg [arg...]", 2);
+	ft_putendl_fd("history: bad options\nhistory: usage: history [-c] [-d o"\
+	"ffset] [n] or history -anrw [filename] or history -ps arg [arg...]", 2);
 	return (1);
 }
 
@@ -52,7 +52,7 @@ int			builtin_history(t_info *info, t_tree *cmd)
 
 	option = 0;
 	if ((i = ft_option(ft_tablen(cmd->cmd), cmd->cmd, OPTS, &option)) == -1)
-		return (1);
+		return (error());
 	av = cmd->cmd + i;
 	if ((i = check_options(option)))
 	{
