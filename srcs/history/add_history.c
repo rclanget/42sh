@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/27 13:58:45 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 12:58:21 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/02 04:48:38 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ char				*add_history(t_info *info, char *cmd)
 	static int		number;
 
 	node = NULL;
-	if (ft_strlen(cmd) && (node = ft_memalloc(sizeof(t_history))))
+	if (cmd == NULL)
+		number = 0;
+	else if (ft_strlen(cmd) && (node = ft_memalloc(sizeof(t_history))))
 	{
 		node->cmd = replace_nl(ft_strdup(cmd));
 		node->n = number++;
