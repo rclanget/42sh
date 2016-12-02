@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/30 14:50:57 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/02 01:23:38 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "libft.h"
 #include "shell.h"
 #include "env.h"
+
+#define IS_VALID_CHAR(x) (ft_isalpha(x) || ft_isdigit(x) || x == '_')
 
 char		*set_content(char *cmd, char *content, int position, int len)
 {
@@ -33,9 +35,9 @@ char		*get_var(char *cmd, int position)
 	int		position_save;
 	char	*var;
 
-	position_save = position;
-	while (cmd[position] && cmd[position] != ' ' && !is_operator(cmd[position]))
-		++position;
+	position_save = position++;
+	while (cmd[position] && IS_VALID_CHAR(cmd[position]))
+		position++;
 	var = ft_strsub(cmd, position_save + 1, position - (position_save + 1));
 	return (var);
 }
