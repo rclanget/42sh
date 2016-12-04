@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 16:59:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 15:41:52 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/04 13:36:47 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	move_clear_right(t_info *info)
 	term = info->term;
 	pos_c = term->pos_c;
 	len = ft_strlen(term->cmd) - ft_strlen(&term->cmd[pos_c]);
-	if (pos_c)
+	if (pos_c >= 0)
 	{
 		ft_bzero(&term->cmd[pos_c], BUFFER_SIZE - len);
 		ft_putstr(term->capa->str_cd);
