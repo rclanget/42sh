@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:18:49 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/04 16:57:57 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/04 18:46:33 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int			builtin_read(t_info *info, t_tree *cmd)
 {
 	char	**var;
 	char	*line;
-	int 	opt;
+	int		opt;
 	int		i;
 
 	line = NULL;

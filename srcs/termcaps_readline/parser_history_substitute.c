@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:18:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/02 21:17:02 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/04 18:49:47 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int			check_optp(char *cmd)
 {
 	char	**tab;
 	int		len;
-	int 	i;
+	int		i;
 
 	tab = ft_strsplit(cmd, ' ');
 	len = 0;
@@ -74,17 +74,13 @@ int			check_optp(char *cmd)
 	{
 		if (!ft_strcmp(tab[i], "history"))
 		{
-			len += ft_strlen(tab[i]);
-			i++;
+			len += ft_strlen(tab[i++]);
 			if (tab[i] && tab[i][0] == '-' && ft_strchr(tab[i], 'p'))
 			{
-				len += ft_strlen(tab[i]) + 1;
-				i++;
-				if (tab[i] && tab[i][0] == '!')
-				{
-					len += ft_strlen(tab[i]) + 1;
+				len += ft_strlen(tab[i++]) + 1;
+				if (tab[i] && tab[i][0] == '!' &&\
+				(len += ft_strlen(tab[i]) + 1))
 					return (len);
-				}
 			}
 		}
 		else
