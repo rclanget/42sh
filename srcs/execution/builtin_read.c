@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_read.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:18:49 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/30 14:47:05 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/04 16:57:57 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "get_next_line.h"
 #include "var.h"
 #include "env.h"
+
+#define OPT_R	0x001
 
 char		*regroup_content(char **content, int position)
 {
@@ -57,19 +59,75 @@ int			r_update_var(t_info *info, char **var, char *line)
 	return (0);
 }
 
+char		*check_optr(char *line)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	j = 0;
+	while (line[i])
+		if (line[i++] == '\\')
+			j++;
+	tmp = (char *)malloc(sizeof(char) * ft_strlen(line) + j);
+	i = 0;
+	j = 0;
+	while (line[i])
+	{
+		if (line[i] == '\\')
+			tmp[j++] = line[i];
+		tmp[j] = line[i];
+		i++;
+		j++;
+	}
+	tmp[j] = 0;
+	free(line);
+	return (tmp);
+}
+
+char		*check_backslash_at_end(char *line)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = NULL;
+	if (line[ft_strlen(line) - 1] == '\\')
+	{
+		ft_putstr(">");
+		get_next_line(0, &tmp);
+		tmp2 = ft_strsub(line, 0, (ft_strlen(line) - 1));
+		free(line);
+		line = ft_strjoin(tmp2, tmp);
+		ft_free_them_all(2, tmp, tmp2);
+		if (line[ft_strlen(line) - 1] == '\\')
+			return (check_backslash_at_end(line));
+	}
+	return (line);
+}
+
 int			builtin_read(t_info *info, t_tree *cmd)
 {
 	char	**var;
 	char	*line;
+	int 	opt;
 	int		i;
 
 	line = NULL;
 	var = cmd->cmd + 1;
-	if ((i = ft_option(0, cmd->cmd, "r", &i)) < 0)
+	if ((i = ft_option(0, cmd->cmd, "r", &opt)) < 0)
 		return (1);
-	i = 0;
 	get_next_line(0, &line);
 	if (line)
+	{
+		if (opt & OPT_R)
+		{
+			var = cmd->cmd + 2;
+			line = check_optr(line);
+		}
+		else
+			line = check_backslash_at_end(line);
 		return (r_update_var(info, var, line));
+	}
 	return (1);
 }
