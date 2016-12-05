@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   strsplitcustom.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/30 14:52:15 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/05 14:01:16 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char			*remove_quote(char *str)
 	tmp2 = str;
 	while (tmp && *tmp)
 	{
-		if (*tmp == '\\' && *(tmp + 1) != '\'')
+		if (*tmp == '\\' && c != '\'')
 		{
 			*tmp2++ = *tmp++;
 			*tmp2++ = *tmp++;
