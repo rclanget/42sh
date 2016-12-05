@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/22 23:45:08 by zipo             ###   ########.fr       */
+/*   Updated: 2016/12/05 17:38:56 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char					**parse_op_rightfd(char *str, int pos);
 
 void					*parser_free_cmd(t_tree *cmd);
 
-char					*clean_parentheses(char *str, int *value);
+t_tree					*clean_parentheses(t_tree *node, char *str);
 
 int						is_operator(char cmd);
 void					skip_space(char *cmd, int *i);

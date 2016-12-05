@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 19:26:43 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/08 17:15:27 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/05 17:43:02 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,9 @@ int					process_subshell(t_info *info, t_tree *cmd)
 	pipe(fdp);
 	if (cmd->type == 9 && !(pid = fork()))
 	{
-		dup2(fdp[1], 1);
-		close(fdp[0]);
-		ft_putendl(cmd->elem);
+		execution_motor(info, cmd->left, 1);
 		exit(0);
 	}
-	dup2(fdp[0], 0);
-	close(fdp[1]);
 	wait(0);
-	execution_motor(info, self_node(info), 1);
 	return (0);
 }

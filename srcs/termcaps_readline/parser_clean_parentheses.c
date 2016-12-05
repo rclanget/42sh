@@ -6,14 +6,14 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 16:49:27 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/14 16:01:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/05 17:41:28 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
-char	*clean_parentheses(char *str, int *type)
+t_tree	*clean_parentheses(t_tree *node, char *str)
 {
 	int		i;
 	char	*str_new;
@@ -27,11 +27,14 @@ char	*clean_parentheses(char *str, int *type)
 		if (str[i] == ')' && str[i - 1] != '\\')
 		{
 			str_new = ft_memalloc(i);
-			ft_memcpy(str_new, str + 1, i - 1);
-			*type = PARENTHESES_VAL;
+			node->elem = ft_memcpy(str_new, str + 1, i - 1);
+			node->type = PARENTHESES_VAL;
 			free(str);
-			return (str_new);
+			node->left = parser_cmd(ft_strtrim(node->elem));
+			return (node);
 		}
 	}
-	return (str);
+	else
+		node->elem = str;
+	return (node);
 }
