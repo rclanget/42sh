@@ -6,13 +6,14 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:18:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/04 18:49:47 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/05 13:09:01 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "shell.h"
 #include "builtin_history.h"
+#include "env.h"
 
 int			ft_digitlen(char *str)
 {
@@ -80,12 +81,13 @@ int			check_optp(char *cmd)
 				len += ft_strlen(tab[i++]) + 1;
 				if (tab[i] && tab[i][0] == '!' &&\
 				(len += ft_strlen(tab[i]) + 1))
-					return (len);
+					break ;
 			}
 		}
 		else
 			i++;
 	}
+	free_tab(tab);
 	return (len);
 }
 

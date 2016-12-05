@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:18:49 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/04 18:46:33 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/05 13:16:42 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char		*check_optr(char *line)
 	while (line[i])
 		if (line[i++] == '\\')
 			j++;
-	tmp = (char *)malloc(sizeof(char) * ft_strlen(line) + j);
+	tmp = (char *)malloc(sizeof(char) * ft_strlen(line) + j + 1);
 	i = 0;
 	j = 0;
 	while (line[i])
@@ -99,7 +99,9 @@ char		*check_backslash_at_end(char *line)
 		tmp2 = ft_strsub(line, 0, (ft_strlen(line) - 1));
 		free(line);
 		line = ft_strjoin(tmp2, tmp);
-		ft_free_them_all(2, tmp, tmp2);
+		free(tmp2);
+		if (tmp)
+			free(tmp);
 		if (line[ft_strlen(line) - 1] == '\\')
 			return (check_backslash_at_end(line));
 	}
