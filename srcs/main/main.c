@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/02 01:52:34 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/05 21:56:23 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,44 @@ void				exit_shell(t_info *info)
 	exit(execution_status(status));
 }
 
+char				*check_dollard_parenthese(char *cmd)
+{
+		int			i;
+		int			j;
+		int			parenthese;
+
+		i = 0;
+		j = 0;
+		parenthese = 0;
+		while (cmd[i])
+		{
+			if (cmd[i] == '$' && cmd[i + 1] && cmd[i + 1] == '(')
+			{
+				if (cmd[i - 1] && cmd[i - 1] == '\\' && ++i)
+					continue;
+				i += 2;
+				parenthese = 1;
+				cmd[j++] = '`';
+			}
+			else if (parenthese && cmd[i] == ')')
+			{
+				if ((cmd[i - 1] == '\\') && i++)
+					continue;
+				parenthese = 0;
+				cmd[j++] = '`';
+				i++;
+			}
+			else
+				cmd[j++] = cmd[i++];
+		}
+		cmd[j] = 0;
+		return (cmd);
+}
+
 void				execute_shell(t_info *info, char **command)
 {
 	save_fd(1);
+	*command = check_dollard_parenthese(*command);
 	*command = apply_alias_verified(info, *command);
 	info->cmd = parser_cmd(ft_strtrim(*command));
 	if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
