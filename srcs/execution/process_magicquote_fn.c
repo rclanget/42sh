@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/26 18:11:10 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 14:47:02 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/05 16:14:23 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ t_word			*treat_magicquote(t_info *info, t_word *words)
 	{
 		if (tmp->treat)
 		{
+			save_fd(1);
 			treated = process_magicquote(info, tmp->word);
 			save_fd(0);
 			free(tmp->word);
