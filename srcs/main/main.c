@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/06 18:07:46 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/06 18:17:43 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,39 @@ void				exit_shell(t_info *info)
 static void			ft_glob_errfunc(char const *error)
 {
 	ft_fdprint(2, "42sh: no matches found: %s\n", error);
+
+char				*check_dollard_parenthese(char *cmd)
+{
+		int			i;
+		int			j;
+		int			parenthese;
+
+		i = 0;
+		j = 0;
+		parenthese = 0;
+		while (cmd[i])
+		{
+			if (cmd[i] == '$' && cmd[i + 1] && cmd[i + 1] == '(')
+			{
+				if (cmd[i - 1] && cmd[i - 1] == '\\' && ++i)
+					continue;
+				i += 2;
+				parenthese = 1;
+				cmd[j++] = '`';
+			}
+			else if (parenthese && cmd[i] == ')')
+			{
+				if ((cmd[i - 1] == '\\') && i++)
+					continue;
+				parenthese = 0;
+				cmd[j++] = '`';
+				i++;
+			}
+			else
+				cmd[j++] = cmd[i++];
+		}
+		cmd[j] = 0;
+		return (cmd);
 }
 
 void				execute_shell(t_info *info, char **command)
@@ -82,6 +115,7 @@ void				execute_shell(t_info *info, char **command)
 		save_fd(1);
 		free(*command);
 		*command = command_resolved;
+		*command = check_dollard_parenthese(*command);
 		*command = apply_alias_verified(info, *command);
 		info->cmd = parser_cmd(ft_strtrim(*command));
 		if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
