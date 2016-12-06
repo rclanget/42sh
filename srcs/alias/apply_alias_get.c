@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/22 15:46:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/10/23 21:06:29 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:46:44 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_word		*get_the_list(char *s, int *c)
 	int		len;
 
 	len = 0;
-	word = NULL;
+	word = 0;
 	if (s && *s && (word = ft_memalloc(sizeof(t_word))))
 	{
 		word->word = (*c == C_CMD) ? get_command(s, c) : get_other(s, c);
