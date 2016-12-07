@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 14:18:49 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/05 13:16:42 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/07 17:12:24 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char		*check_backslash_at_end(char *line)
 	tmp = NULL;
 	if (line[ft_strlen(line) - 1] == '\\')
 	{
-		ft_putstr(">");
+		ft_putstr("> ");
 		get_next_line(0, &tmp);
 		tmp2 = ft_strsub(line, 0, (ft_strlen(line) - 1));
 		free(line);
