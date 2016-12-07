@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Zoellingam <illan91@hotmail.com>           +#+  +:+       +#+         #
+#    By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2015/09/30 20:03:48 by igomez            #+#    #+#              #
-#    Updated: 2016/12/03 15:20:37 by Zoellingam       ###   ########.fr        #
+#    Created: 2016/12/07 17:20:03 by rclanget          #+#    #+#              #
+#    Updated: 2016/12/07 17:20:04 by rclanget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

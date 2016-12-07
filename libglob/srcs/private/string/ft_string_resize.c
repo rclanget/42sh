@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_string_resize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Zoellingam <illan91@hotmail.com>           +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/15 11:17:11 by Zoellingam        #+#    #+#             */
-/*   Updated: 2016/12/04 01:36:44 by Zoellingam       ###   ########.fr       */
+/*   Created: 2016/12/07 17:22:11 by rclanget          #+#    #+#             */
+/*   Updated: 2016/12/07 17:25:32 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

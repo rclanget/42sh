@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_glob_finder_get_here.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Zoellingam <illan91@hotmail.com>           +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 10:36:53 by igomez            #+#    #+#             */
-/*   Updated: 2016/12/06 06:17:12 by Zoellingam       ###   ########.fr       */
+/*   Created: 2016/12/07 17:22:11 by rclanget          #+#    #+#             */
+/*   Updated: 2016/12/07 17:23:01 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

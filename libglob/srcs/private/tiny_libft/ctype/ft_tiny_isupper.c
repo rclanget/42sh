@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tiny_isupper.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Zoellingam <illan91@hotmail.com>           +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/30 23:14:13 by Zoellingam        #+#    #+#             */
-/*   Updated: 2016/12/03 16:52:19 by Zoellingam       ###   ########.fr       */
+/*   Created: 2016/12/07 17:22:11 by rclanget          #+#    #+#             */
+/*   Updated: 2016/12/07 17:27:51 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

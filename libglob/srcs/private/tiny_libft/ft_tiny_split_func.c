@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tiny_split_func.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Zoellingam <illan91@hotmail.com>           +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/09/15 11:17:11 by Zoellingam        #+#    #+#             */
-/*   Updated: 2016/12/03 16:47:59 by Zoellingam       ###   ########.fr       */
+/*   Created: 2016/12/07 17:22:11 by rclanget          #+#    #+#             */
+/*   Updated: 2016/12/07 17:28:29 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_glob_compile_logic.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Zoellingam <illan91@hotmail.com>           +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/11/04 10:36:53 by igomez            #+#    #+#             */
-/*   Updated: 2016/12/06 06:16:30 by Zoellingam       ###   ########.fr       */
+/*   Created: 2016/12/07 17:21:14 by rclanget          #+#    #+#             */
+/*   Updated: 2016/12/07 17:21:15 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
