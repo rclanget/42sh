@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 19:51:35 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/14 16:05:40 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/06 15:46:32 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,19 @@ void	skip_space(char *cmd, int *i)
 
 int		*definition_code(char *cmd)
 {
-	static int codes[BUFFER_SIZE];
+	int *codes;
 
-	if (cmd && *cmd)
+	codes = 0;
+	if (0 != (codes = (int *)ft_memalloc(sizeof(int) * ft_strlen(cmd))))
 	{
-		get_operator(cmd, codes);
-		get_cmd(cmd, codes);
-		get_arg(cmd, codes);
-		get_file(cmd, codes);
-		get_quote(cmd, codes);
+		if (cmd && *cmd)
+		{
+			get_operator(cmd, codes);
+			get_cmd(cmd, codes);
+			get_arg(cmd, codes);
+			get_file(cmd, codes);
+			get_quote(cmd, codes);
+		}
 	}
 	return (codes);
 }

@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/22 14:59:11 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/14 12:30:54 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/06 17:54:14 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ char			*make_sentence(t_word *words)
 char			*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited)
 {
 	int			i;
-	char		*replace;
 	char		*tmp;
 	t_alias		*alias;
 	t_word		*w;
+	int			*codes;
 
 	w = ws;
 	tmp = ft_strdup(visited);
@@ -72,30 +72,32 @@ char			*apply_alias(t_info *info, t_word *ws, char *cmd, char *visited)
 		if (w->treat && (alias = search_alias2(info, w->word, &i)) && !tmp[i]++)
 		{
 			free(w->word);
-			w->word = apply_alias(info, get_the_list(alias->replace,
-				definition_code(alias->replace)),
-				ft_strdup(alias->replace), ft_strdup(tmp));
+			codes = definition_code(alias->replace);
+			w->word = apply_alias(info, get_the_list(alias->replace, codes),
+						ft_strdup(alias->replace), ft_strdup(tmp));
+			free(codes);
 		}
 		ft_strcpy(tmp, visited);
 		w = w->next;
 	}
-	replace = make_sentence(ws);
+	ft_free_them_all(2, &cmd, &visited, &tmp);
+	tmp = make_sentence(ws);
 	free_list(ws);
-	ft_free_them_all(3, &cmd, &visited, &tmp);
-	return (replace);
+	return (tmp);
 }
 
 char			*apply_alias_verified(t_info *info, char *command)
 {
 	char		*tmp;
+	int			*def_code;
 
 	if (*command)
 	{
-		tmp = apply_alias(
-			info,
-			get_the_list(command, definition_code(command)),
-			ft_strdup(command),
-			ft_memalloc(sizeof(char) * len_alias(info->alias)));
+		def_code = definition_code(command);
+		tmp = apply_alias(info, get_the_list(command, def_code),
+				ft_strdup(command),
+				ft_memalloc(sizeof(char) * (len_alias(info->alias) + 1)));
+		free(def_code);
 		free(command);
 		command = tmp;
 	}

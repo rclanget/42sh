@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/06 11:47:37 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/07 10:56:12 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_glob.h"
 #include "libft.h"
 #include "shell.h"
 #include "env.h"
@@ -66,7 +67,12 @@ void				exit_shell(t_info *info)
 	exit(execution_status(status));
 }
 
-char				*check_dollard_parenthese(char *str)
+static void			ft_glob_errfunc(char const *error)
+{
+	ft_fdprint(2, "42sh: no matches found: %s\n", error);
+}
+
+char				*check_dollard_parenthese(char *cmd)
 {
 	int				i = 0;
 	int				i_mem = 0;
@@ -94,14 +100,22 @@ char				*check_dollard_parenthese(char *str)
 
 void				execute_shell(t_info *info, char **command)
 {
-	save_fd(1);
-	*command = check_dollard_parenthese(*command);
-	*command = apply_alias_verified(info, *command);
-	info->cmd = parser_cmd(ft_strtrim(*command));
-	if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
-		execution_motor(info, info->cmd, 1);
-	info->cmd = parser_free_cmd(info->cmd);
-	save_fd(0);
+	char	*command_resolved;
+
+	command_resolved = ft_glob_handler(*command, &ft_glob_errfunc);
+	if (0 != command_resolved)
+	{
+		save_fd(1);
+		free(*command);
+		*command = command_resolved;
+		*command = check_dollard_parenthese(*command);
+		*command = apply_alias_verified(info, *command);
+		info->cmd = parser_cmd(ft_strtrim(*command));
+		if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
+			execution_motor(info, info->cmd, 1);
+		info->cmd = parser_free_cmd(info->cmd);
+		save_fd(0);
+	}
 }
 
 int					main(int ac, char **av, char **env)
