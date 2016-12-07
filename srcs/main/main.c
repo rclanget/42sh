@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/07 11:23:33 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/07 17:15:09 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,25 @@ static void			ft_glob_errfunc(char const *error)
 
 char				*check_dollard_parenthese(char *cmd)
 {
-	int				i = 0;
-	int				i_mem = 0;
+	int				i;
+	int				i_mem;
 
+	i = 0;
+	i_mem = 0;
 	while (cmd[i])
 	{
-		if ((!i || cmd[i - 1] == ' ') && cmd[i] == '$' && cmd[i + 1] && cmd[i + 1] == '(')
+		if ((!i || cmd[i - 1] == ' ') &&\
+		cmd[i] == '$' && cmd[i + 1] && cmd[i + 1] == '(')
 		{
 			i_mem = i++;
-			while (cmd[i] && ( cmd[i] != ')' ||  cmd[i - 1] == '\\'))
+			while (cmd[i] && (cmd[i] != ')' || cmd[i - 1] == '\\'))
 				i++;
 			if (cmd[i])
 			{
 				cmd[i_mem] = '`';
 				cmd[i] = '`';
 				i = i_mem;
-				while(cmd[++i_mem])
+				while (cmd[++i_mem])
 					cmd[i_mem] = cmd[i_mem + 1];
 			}
 		}
