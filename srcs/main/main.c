@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/07 10:56:12 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/07 11:23:33 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,38 +77,38 @@ char				*check_dollard_parenthese(char *cmd)
 	int				i = 0;
 	int				i_mem = 0;
 
-	while (str[i])
+	while (cmd[i])
 	{
-		if ((!i || str[i - 1] == ' ') && str[i] == '$' && str[i + 1] && str[i + 1] == '(')
+		if ((!i || cmd[i - 1] == ' ') && cmd[i] == '$' && cmd[i + 1] && cmd[i + 1] == '(')
 		{
 			i_mem = i++;
-			while (str[i] && ( str[i] != ')' ||  str[i - 1] == '\\' ))
+			while (cmd[i] && ( cmd[i] != ')' ||  cmd[i - 1] == '\\'))
 				i++;
-			if (str[i])
+			if (cmd[i])
 			{
-				str[i_mem] = '`';
-				str[i] = '`';
+				cmd[i_mem] = '`';
+				cmd[i] = '`';
 				i = i_mem;
-				while(str[++i_mem])
-					str[i_mem] = str[i_mem + 1];
+				while(cmd[++i_mem])
+					cmd[i_mem] = cmd[i_mem + 1];
 			}
 		}
 		i++;
 	}
-	return (str);
+	return (cmd);
 }
 
 void				execute_shell(t_info *info, char **command)
 {
 	char	*command_resolved;
 
+	*command = check_dollard_parenthese(*command);
 	command_resolved = ft_glob_handler(*command, &ft_glob_errfunc);
 	if (0 != command_resolved)
 	{
 		save_fd(1);
 		free(*command);
 		*command = command_resolved;
-		*command = check_dollard_parenthese(*command);
 		*command = apply_alias_verified(info, *command);
 		info->cmd = parser_cmd(ft_strtrim(*command));
 		if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
