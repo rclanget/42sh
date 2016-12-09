@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/02 02:54:48 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/09 19:41:47 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "env.h"
 
-#define IS_VALID_CHAR(x) (ft_isalpha(x) || ft_isdigit(x) || x == '_')
+#define IS_VALID_CHAR(x) (ft_isprint(x))
 
 char		*set_content(char *cmd, char *content, int position, int len)
 {

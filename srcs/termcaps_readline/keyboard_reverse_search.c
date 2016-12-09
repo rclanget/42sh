@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 15:50:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 15:55:58 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/09 18:54:51 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static char		*add_chr(char *research, char chr)
 		free(tmp_research);
 	}
 	else if (research)
-		research[ft_strlen(research) - 1] = 0;
+		research[(ft_strlen(research)) ? ft_strlen(research) - 1 : 0] = 0;
 	return (research);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:18:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/05 13:09:01 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/09 18:44:14 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char		*history_excldot(t_info *info, char *cmd)
 			quote = !quote;
 		else if (!quote && cmd[i] == '!')
 			i = get_subsitution(info, &cmd, i);
-		else
+		else if (cmd[i])
 			i++;
 	}
 	if (cmd && i == -1)
