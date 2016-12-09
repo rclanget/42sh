@@ -6,7 +6,7 @@
 #    By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/07 17:20:03 by rclanget          #+#    #+#              #
-#    Updated: 2016/12/07 17:20:04 by rclanget         ###   ########.fr        #
+#    Updated: 2016/12/09 15:12:15 by rclanget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ INCLUDES := -I$(INCS) -I$(INCS)/private
 # Search source files
 C_FILES := $(shell find $(SRCS) -type f)
 C_DIRS := $(shell find $(SRCS) -depth -type d)
-C_FLAGS += -MMD -std=c99 -g -Wall -Wextra -Werror
+C_FLAGS += -Wall -Wextra -Werror
 
 # Build .o list
 O_DIRS := $(addprefix $(OBJS)/,$(C_DIRS))
@@ -35,23 +35,14 @@ DEPS := $(O_FILES:.o=.d)
 # Create OBJS and childs
 $(shell mkdir -p $(O_DIRS) $(OBJS))
 
-# Print
-ACTUAL = $(words $(COUNT))
-TOTAL = $(words $(filter %.c,$(C_FILES)))
-INCREMENT = $(eval COUNT+=1)
-
-PRINTINC = $(INCREMENT) $(PRINT)
-PRINT = printf "\r \033[31;1m%3s%%\033[0m\t -->>\t\033[31;1m%-65s\033[0m\r" "$(shell echo $(ACTUAL)\*100\/$(TOTAL) | bc)" "$^"
-PRINTDONE = printf "\r \033[32;1m%3s%%\033[0m\t -->>\t\033[32;1m%-65s\033[0m\r" "$(shell echo $(ACTUAL)\*100\/$(TOTAL) | bc)" "$@"
-
 all:
-	@make $(NAME)
+	make $(NAME)
 
 $(NAME): $(O_FILES)
-	@ar rcs $@ $^ && $(PRINTDONE) && echo || exit
+	ar rcs $@ $^
 
 $(OBJS)/%.o: %.c
-	@clang $(C_FLAGS) $(INCLUDES) -o $@ -c $< && $(PRINTINC) || exit
+	gcc $(C_FLAGS) $(INCLUDES) -o $@ -c $<
 
 clean:
 	@rm -rf $(O_FILES) $(OBJS)
@@ -64,4 +55,4 @@ re: fclean all
 -include $(DEPS)
 
 .PHONY: all clean fclean re
-.SILENT:
+# .SILENT:
