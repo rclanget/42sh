@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/23 17:47:05 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 15:07:50 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/11 19:12:06 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				syntax_check(t_tree *cmd, int reset)
 		if (!cmd->type)
 			ret = 1;
 		else if (!(ret = g_checker[syntax_family(cmd->type)](cmd)) && !status++)
-			ft_print("42sh: parse error near \'%s\'\n", cmd->elem);
+			ft_fdprint(2, "42sh: parse error near \'%s\'\n", cmd->elem);
 	}
 	return (ret);
 }
