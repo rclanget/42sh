@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/11 15:52:04 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/11 18:43:50 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char		*parse_var(t_info *info, char *cmd)
 	i = 0;
 	while (tmp && tmp[i])
 	{
-		if (!isquote(tmp[i]) && tmp[i] == '$')
+		if (!isquote(tmp[i]) && tmp[i] == '$' && (!i || tmp[i - 1] != '\\'))
 			tmp = replace_var(info, tmp, i);
 		i += tmp[i] ? 1 : 0;
 	}
