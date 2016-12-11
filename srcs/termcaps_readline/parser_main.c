@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/05 17:31:27 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/11 16:17:00 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char		**split_on_highest(char *cmd, int *type)
 		i = -1;
 		while ((i == -1 || cmd[i]) && cmd[++i] && !tab)
 		{
-			if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\')
+			if (cmd[i] == '\"' || cmd[i] == '\'' || cmd[i] == '\\' || cmd[i] == '`')
 				i = pass_string(cmd, i);
 			else if (cmd[i] == '(')
 				i = pass_grouping(cmd, i);
