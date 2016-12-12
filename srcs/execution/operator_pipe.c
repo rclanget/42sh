@@ -6,11 +6,14 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 16:29:30 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 14:45:17 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:47:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "tools.h"
+#include "var.h"
+#include "libft.h"
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -36,7 +39,7 @@ int				operator_pipe2(t_info *info, t_tree *cmd)
 	close(fdp[1]);
 	wait(0);
 	execution_motor(info, cmd->right, 1);
-	return (0);
+	return (WEXITSTATUS(info->status));
 }
 
 int				operator_pipe(t_info *info, t_tree *cmd)
@@ -45,9 +48,9 @@ int				operator_pipe(t_info *info, t_tree *cmd)
 
 	if (!(pid = fork()))
 	{
-		operator_pipe2(info, cmd);
-		exit(0);
+		exit(operator_pipe2(info, cmd));
 	}
-	wait(0);
+	waitpid(pid, &info->status, WUNTRACED);
+	update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
 	return (0);
 }
