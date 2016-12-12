@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/28 13:19:27 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 14:48:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:13:11 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 #define IN 0
 #define OUT 1
 #define GET_FILE(x) (x->type ? x->left->elem : x->elem)
+#define GET_FILENAME(x) (x->type ? x->left->cmd[0] : x->cmd[0])
+#define FILE_EXIST(x) (access(GET_FILENAME(x), F_OK) != -1)
+#define FILE_NOT_EXIST_MESSAGE "No such file or directory"
 
 #define RIGHT(x) (x == 5)
 #define DRIGHT(x) (x == 7)
@@ -103,10 +106,12 @@ int			redirection_get_fd(t_tree *cmd, int *fds)
 		treat_agreg(cmd->right);
 		if (fds[!(TO_LEFT(cmd->type)) ? 1 : 0] == -1)
 		{
-			ft_fdprint(2, "42sh: %s: %s\n", ft_strerror(errno),
+			ft_fdprint(2, "42sh: %s: %s\n", FILE_EXIST(cmd->right) ?
+				ft_strerror(errno) : FILE_NOT_EXIST_MESSAGE,
 				get_filename(cmd->right));
 			close(fds[!(TO_LEFT(cmd->type)) ? 0 : 1]);
 			fds[!(TO_LEFT(cmd->type)) ? 0 : 1] = -1;
+			break;
 		}
 		cmd = cmd->right;
 	}
