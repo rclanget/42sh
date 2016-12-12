@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 14:49:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:40:59 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int			get_n(char *str, int right)
 {
 	int		n;
 
-	n = (ft_isdigit(*str)) ? ft_atoi(str) : 1;
+	if ((n = (ft_isdigit(*str)) ? ft_atoi(str) : -1) == -1)
+		n = (right) ? 1 : 0;
 	if ((right ? write(n, NULL, 0) : read(n, NULL, 0)) < 0)
 	{
 		ft_fdprint(2, "42sh: %d: %s\n", n, ft_strerror(errno));
