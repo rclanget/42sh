@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/09 14:59:55 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/12 12:45:43 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void				execute_shell(t_info *info, char **command)
 		info->cmd = parser_cmd(ft_strtrim(*command));
 		if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
 			execution_motor(info, info->cmd, 1);
+		else
+			update_var(info, "?", ft_itoa2(info->status = 1));
 		info->cmd = parser_free_cmd(info->cmd);
 		save_fd(0);
 	}

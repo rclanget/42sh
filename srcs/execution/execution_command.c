@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 16:40:03 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 12:25:44 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 		if (wait)
 			waitpid(pid, &info->status, WUNTRACED);
 		free_env_tab(env);
-		update_var(info, "?", ft_itoa2(execution_status(info->status)));
+		update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
 		return (execution_status(info->status));
 	}
 	else if (is_builtin(cmd->cmd[0]))
