@@ -50,14 +50,26 @@ int			pass_string(char *cmd, int i)
 
 int			pass_grouping(char *cmd, int i)
 {
-	char	c;
+	static	int backslash = 0;
+	static	int quote = 0;
+	static	int dquote = 0;
+	static	int mquote = 0;
 
 	if (cmd[i] == '(')
 	{
-		c = ')';
-		while (cmd[++i] && cmd[i] != c && cmd[i - 1] != '\\')
+		while (cmd[++i])
 		{
-			;
+			if (cmd[i] == '\'' && !backslash && !dquote && !mquote)
+				quote = !quote;
+			else if (cmd[i] == '\"' && !backslash && !quote && !mquote)
+				dquote = !dquote;
+			else if (cmd[i] == '`' && !backslash && !dquote && !quote)
+				mquote = !mquote;
+			else if (cmd[i] == '\\' && !quote)
+				backslash = !backslash;
+			else if (!(quote || backslash || dquote || mquote)
+				&& cmd[i] == ')' && cmd[i - 1] != '\\')
+				break ;
 		}
 	}
 	return (i);

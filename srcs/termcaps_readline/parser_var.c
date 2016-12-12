@@ -66,7 +66,7 @@ char		*replace_var(t_info *info, char *cmd, int position)
 	return (cmd);
 }
 
-int			isquote(char c)
+static int			isquote(char c)
 {
 	static	int backslash = 0;
 	static	int quote = 0;
