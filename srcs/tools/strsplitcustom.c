@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/12 16:33:55 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:14:46 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,19 @@ static char			*seek_next_delimiter(char *str)
 	chr = 0;
 	while (str && *str && *str == ' ')
 		++str;
-	while (str && *str)
+	--str;
+	while (++str && *str && !(!chr && !quote && *str == ' ') && !(chr = 0))
 	{
 		if (*str == '\\' && quote == '\'')
 			;
 		else if (!chr && *str == '\\' && (chr = 1) && ++str)
 			continue;
+		else if (!chr && (*str == '\'' || *str == '\"') && *str == quote)
+			quote = 0;
 		else if (!chr && (*str == '\'' || *str == '\"'))
-			quote = (quote && *str == quote) ? 0 : *str;
+			quote = (quote) ? quote : *str;
 		else if (chr && !quote && *str && *(str + 1) == ' ')
 			str++;
-		else if (!chr && !quote && *str == ' ')
-			break ;
-		if (chr)
-			chr = 0;
-		++str;
 	}
 	return (str);
 }
