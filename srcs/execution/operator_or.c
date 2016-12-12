@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:23:12 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/02/29 11:21:14 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:22:28 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int			operator_or(t_info *info, t_tree *cmd)
 		return (0);
 	}
 	save_fd(0);
-	return (execution_motor(info, cmd->right, 1));
+	return (info->stop ? 0 : execution_motor(info, cmd->right, 1));
 }
