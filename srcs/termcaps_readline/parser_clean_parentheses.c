@@ -6,11 +6,12 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 16:49:27 by rclanget          #+#    #+#             */
-/*   Updated: 2016/12/05 17:41:28 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 14:54:04 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "get_next_line.h"
 #include "parser.h"
 
 static int			isquote(char c)
@@ -54,6 +55,19 @@ int		get_close_parenthese(char *str, int i)
 	return (i);
 }
 
+t_tree	*get_new_line(t_tree *node, char *str)
+{
+	char *tmp;
+	char *line;
+
+	line = NULL;
+	ft_putstr("> ");
+	get_next_line(1, &line);
+	tmp = ft_strjoin(str, line);
+	ft_free_them_all(2, &line, &str);
+	return (clean_parentheses(node, tmp));
+}
+
 t_tree	*clean_parentheses(t_tree *node, char *str)
 {
 	int		i;
@@ -61,7 +75,7 @@ t_tree	*clean_parentheses(t_tree *node, char *str)
 
 	i = 0;
 	str_new = NULL;
-	if (str[i] == '(')
+	if (str && str[i] == '(')
 	{
 		i = get_close_parenthese(str, i);
 		if (str[i] == ')' && str[i - 1] != '\\')
@@ -73,9 +87,10 @@ t_tree	*clean_parentheses(t_tree *node, char *str)
 			node->left = parser_cmd(ft_strtrim(node->elem));
 			return (node);
 		}
+		else if (!str[i])
+			return (get_new_line(node, str));
 	}
 	else
 		node->elem = str;
 	return (node);
 }
-
