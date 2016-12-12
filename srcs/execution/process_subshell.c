@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 19:26:43 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/12 11:37:52 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/12 20:53:31 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "libft.h"
 #include "execution.h"
 #include "hashmap.h"
+#include "var.h"
+#include "tools.h"
 
 #ifdef __linux__
 # include <wait.h>
@@ -49,8 +51,12 @@ int					process_subshell(t_info *info, t_tree *cmd)
 	{
 		save_fd(1);
 		execution_motor(info, cmd->left, 1);
-		exit(0);
+		exit(WEXITSTATUS(info->status));
 	}
-	wait(0);
+	if (cmd->type == 9)
+	{
+		waitpid(pid, &info->status, WUNTRACED);
+		update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
+	}
 	return (0);
 }
