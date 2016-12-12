@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 16:17:18 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/05 14:01:16 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/12 16:33:55 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static char			*seek_next_delimiter(char *str)
 	{
 		if (*str == '\\' && quote == '\'')
 			;
-		else if (!chr && *str == '\\' && (chr = 1))
+		else if (!chr && *str == '\\' && (chr = 1) && ++str)
 			continue;
 		else if (!chr && (*str == '\'' || *str == '\"'))
 			quote = (quote && *str == quote) ? 0 : *str;
