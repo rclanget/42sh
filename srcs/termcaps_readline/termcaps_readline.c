@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps_readline.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/21 18:24:42 by zipo             ###   ########.fr       */
+/*   Updated: 2016/12/12 15:03:58 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 #include "command_line_termcaps.h"
 
 #include <unistd.h>
-
-char		*getnextline(int fd, t_info *info)
-{
-	char	*line;
-	int		ret;
-
-	line = NULL;
-	(void)info;
-	ret = get_next_line(fd, &line);
-	return (ret ? line : NULL);
-}
 
 char		check_quote(char *cmd, char quote)
 {
@@ -47,6 +36,39 @@ char		check_quote(char *cmd, char quote)
 	return (quote);
 }
 
+char		*getnextline(t_info *info, char quote)
+{
+	char	*cmd;
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
+	int		ret;
+
+	cmd = NULL;
+	(void)info;
+	ret = get_next_line(0, &cmd);
+	if (cmd && (quote = check_quote(cmd, quote)))
+	{
+		tmp = getnextline(info, quote);
+		tmp2 = ft_strjoin(cmd, "\n");
+		tmp3 = ft_strjoin(tmp2, tmp);
+		ft_free_them_all(3, &cmd, &tmp, &tmp2);
+		cmd = tmp3;
+	}
+	return (ret ? cmd : NULL);
+}
+
+char		*getnextlineb(t_info *info)
+{
+	char	*cmd;
+	int		ret;
+
+	cmd = NULL;
+	(void)info;
+	ret = get_next_line(0, &cmd);
+	return (ret ? cmd : NULL);
+}
+
 char		*get_currentline(t_info *info, int term, char quote)
 {
 	char	*cmd;
@@ -55,7 +77,7 @@ char		*get_currentline(t_info *info, int term, char quote)
 	char	*tmp3;
 
 	ft_print(!quote ? "%s" : "> ", get_prompt(info));
-	cmd = ((term) ? termcaps_loop(info) : getnextline(0, info));
+	cmd = ((term) ? termcaps_loop(info) : getnextlineb(info));
 	if (cmd && (quote = check_quote(cmd, quote)))
 	{
 		info->term->pos_c = 0;
@@ -83,7 +105,7 @@ char		*termcaps_readline(t_info *info)
 	}
 	else
 	{
-		return (getnextline(0, info));
+		return (getnextline(info, 0));
 	}
 	return (NULL);
 }
