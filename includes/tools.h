@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:55:47 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 16:29:54 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:03:20 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int			ft_signal(int i);
 int			ft_isalnum_or_dot(int c);
 char		*ft_strdup_spe(const char *s1);
 char		*ft_itoa2(int n);
+char		*ft_strrstr_custom(const char *meule_de_foin, const char *aiguille);
 
 #endif
