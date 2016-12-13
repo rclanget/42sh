@@ -51,13 +51,14 @@ int			builtin_export(t_info *info, t_tree *cmd)
 	char	**val;
 	t_alias	*un_alias;
 
+	un_alias = NULL;
 	tmp = cmd->cmd + 1;
 	while (tmp && *tmp)
 	{
 		if (!ft_strchr(*tmp, '='))
 		{
-			un_alias = search_alias_2(info, tmp[0]);
-			env_update_var(info, tmp[0], un_alias->replace);
+			if ((un_alias = search_alias_2(info, tmp[0])))
+				env_update_var(info, tmp[0], un_alias->replace);
 			break ;
 		}
 		val = split_alias(*tmp);
