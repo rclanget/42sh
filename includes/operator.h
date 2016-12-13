@@ -28,5 +28,6 @@ int		redirection_dleft(t_info *info, t_tree *cmd);
 int		redirection_get_fd(t_tree *cmd, int *fds);
 
 int		process_subshell(t_info *info, t_tree *cmd);
+int		process_local_var(t_info *info, t_tree *cmd);
 
 #endif

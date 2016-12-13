@@ -16,19 +16,6 @@
 #include "execution.h"
 #include "libft.h"
 
-void			*free_tab(char **tab)
-{
-	int			i;
-
-	i = -1;
-	if (!tab)
-		return (NULL);
-	while (tab[++i])
-		free(tab[i]);
-	free(tab);
-	return (NULL);
-}
-
 void			print_env(t_env *env)
 {
 	while (env)

@@ -29,8 +29,9 @@ int (*g_p[])(t_info *x, t_tree *y) =
 	&redirection_right, \
 	&redirection_left, \
 	&redirection_dright, \
-	&redirection_dleft,
-	&process_subshell
+	&redirection_dleft, \
+	&process_subshell, \
+	&process_local_var
 };
 
 int				wich_operator(char *op)

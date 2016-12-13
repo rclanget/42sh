@@ -100,6 +100,8 @@ int						*get_arg(char *cmd, int *codes);
 int						*get_file(char *cmd, int *codes);
 int						*get_quote(char *cmd, int *codes);
 int						modif_tree(t_tree *tree);
+t_tree					*parser_local_var(char *cmd, t_tree *node);
+int						is_assignation_localvar(char *cmd);
 
 extern t_parse g_parse[];
 extern t_parse g_parse2[];
