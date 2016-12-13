@@ -34,6 +34,5 @@ char		*apply_alias_verified(t_info *info, char *command);
 int			len_alias(t_alias *alias);
 
 void		free_alias(t_alias *alias);
-char		**split_alias(char *line);
 
 #endif

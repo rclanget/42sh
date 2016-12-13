@@ -14,6 +14,21 @@
 #include "libft.h"
 #include "alias_struct.h"
 #include "var.h"
+#include "env.h"
+
+t_alias		*search_alias_2(t_info *info, char *var)
+{
+	t_alias		*alias;
+
+	alias = info->var;
+	while (alias && var)
+	{
+		if (!ft_strcmp(alias->init, var))
+			break ;
+		alias = alias->next;
+	}
+	return (alias);
+}
 
 static char	**split_alias(char *line)
 {
@@ -34,14 +49,19 @@ int			builtin_export(t_info *info, t_tree *cmd)
 {
 	char	**tmp;
 	char	**val;
+	t_alias	*un_alias;
 
 	tmp = cmd->cmd + 1;
 	while (tmp && *tmp)
 	{
 		if (!ft_strchr(*tmp, '='))
+		{
+			un_alias = search_alias_2(info, tmp[0]);
+			env_update_var(info, tmp[0], un_alias->replace);
 			break ;
+		}
 		val = split_alias(*tmp);
-		update_var(info, val[0], val[1]);
+		env_update_var(info, val[0], val[1]);
 		ft_free_them_all(3, &val[0], &val[1], &val);
 		tmp++;
 	}
