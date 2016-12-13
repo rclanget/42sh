@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 15:31:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 14:47:40 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/12 17:59:19 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "libft.h"
 #include "execution.h"
 #include "tools.h"
+#include "var.h"
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -38,9 +39,12 @@ int			redirection_all(t_info *info, t_tree *cmd)
 			redirection_get_fd(cmd, fds);
 		if (fds[0] != -1 || fds[1] != -1)
 			ret = execution_command(info, cmd->left, 1);
-		exit(0);
+		else
+			ret = 1;
+		exit(ret);
 	}
-	wait(0);
+	waitpid(pid, &info->status, WUNTRACED);
+	update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
 	return (ret);
 }
 

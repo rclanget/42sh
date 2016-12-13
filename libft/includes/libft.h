@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/04 10:24:39 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 18:00:08 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/13 14:43:13 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ int					ft_print(const char *fmt, ...);
 int					ft_fdprint(int fd, const char *fmt, ...);
 
 int					ft_free_them_all(int nb, ...);
+
+char				*ft_strrstr(const char *meule_de_foin, const char *aiguille);
 
 #endif

@@ -6,23 +6,41 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/24 14:56:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/10/21 14:35:10 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:10:27 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
+#include "tools.h"
 
 int			check_op_and(char *str)
 {
-	return ((!ft_strncmp(str, "&&", 2)) ? 2 : 0);
+	char	*tmp;
+	int		pos1;
+	int		pos2;
+
+	tmp = ft_strrstr_custom(str, "&&");
+	pos1 = ft_strlen(tmp);
+	tmp = ft_strrstr_custom(str, "||");
+	pos2 = ft_strlen(tmp);
+	if (pos1 && pos2)
+		return (pos1 > pos2 ? 3 : 2);
+	else if (pos1)
+		return (2);
+	else if (pos2)
+		return (3);
+	return (0);
 }
 
 char		**parse_op_and(char *str, int pos)
 {
 	char	**tab;
+	char	*tmp;
 
 	tab = NULL;
+	tmp = ft_strrstr_custom(str, "&&");
+	pos = tmp - str;
 	if ((tab = (char **)malloc(sizeof(char *) * 4)))
 	{
 		tab[0] = ft_strndup(str, pos);
@@ -35,14 +53,17 @@ char		**parse_op_and(char *str, int pos)
 
 int			check_op_or(char *str)
 {
-	return ((!ft_strncmp(str, "||", 2)) ? 3 : 0);
+	return (check_op_and(str));
 }
 
 char		**parse_op_or(char *str, int pos)
 {
 	char	**tab;
+	char	*tmp;
 
 	tab = NULL;
+	tmp = ft_strrstr_custom(str, "||");
+	pos = tmp - str;
 	if ((tab = (char **)malloc(sizeof(char *) * 4)))
 	{
 		tab[0] = ft_strndup(str, pos);

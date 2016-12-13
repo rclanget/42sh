@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 16:49:27 by rclanget          #+#    #+#             */
-/*   Updated: 2016/12/12 14:54:04 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/13 18:08:48 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "get_next_line.h"
 #include "parser.h"
 
-static int			isquote(char c)
+static int	isquote(char c)
 {
 	static	int backslash = 0;
 	static	int quote = 0;
@@ -32,9 +32,9 @@ static int			isquote(char c)
 	return (quote || backslash || dquote || mquote);
 }
 
-int		get_close_parenthese(char *str, int i)
+int			get_close_parenthese(char *str, int i)
 {
-	int open_parenthese;
+	int		open_parenthese;
 
 	open_parenthese = 0;
 	while (str[i++])
@@ -55,10 +55,10 @@ int		get_close_parenthese(char *str, int i)
 	return (i);
 }
 
-t_tree	*get_new_line(t_tree *node, char *str)
+t_tree		*get_new_line(t_tree *node, char *str)
 {
-	char *tmp;
-	char *line;
+	char	*tmp;
+	char	*line;
 
 	line = NULL;
 	ft_putstr("> ");
@@ -68,7 +68,7 @@ t_tree	*get_new_line(t_tree *node, char *str)
 	return (clean_parentheses(node, tmp));
 }
 
-t_tree	*clean_parentheses(t_tree *node, char *str)
+t_tree		*clean_parentheses(t_tree *node, char *str)
 {
 	int		i;
 	char	*str_new;
