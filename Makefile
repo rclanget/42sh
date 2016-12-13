@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/12/09 14:58:31 by rclanget         ###   ########.fr        #
+#    Updated: 2016/12/13 18:13:40 by rclanget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRC_TOOLS		=	./srcs/tools/
 SRCN_TOOLS		=	ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
 					ft_tabjoin.c ft_tablen.c ft_strjoin_tool.c strsplitcustom.c \
 					clean_backslash.c ft_strerror.c signal.c ft_isalnum_or_dot.c \
-					ft_strdup_spe.c ft_itoa2.c
+					ft_strdup_spe.c ft_itoa2.c ft_strrstr_custom.c
 OBJ_TOOLS		=	$(SRCN_TOOLS:.c=.o)
 SRCS_TOOLS		=	$(addprefix $(SRC_TOOLS),$(SRCN_TOOLS))
 
