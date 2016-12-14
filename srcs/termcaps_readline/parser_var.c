@@ -93,7 +93,7 @@ char		*parse_var(t_info *info, char *cmd)
 	i = 0;
 	while (tmp && tmp[i])
 	{
-		if (!isquote(tmp[i]) && tmp[i] == '$' && (!i || tmp[i - 1] != '\\'))
+		if (!isquote(tmp[i]) && tmp[i] == '$')
 			tmp = replace_var(info, tmp, i);
 		i += tmp[i] ? 1 : 0;
 	}

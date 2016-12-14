@@ -58,11 +58,19 @@ int			builtin_export(t_info *info, t_tree *cmd)
 		if (!ft_strchr(*tmp, '='))
 		{
 			if ((un_alias = search_alias_2(info, tmp[0])))
-				env_update_var(info, tmp[0], un_alias->replace);
+			{
+				if (ft_isalpha(tmp[0][0]))
+					env_update_var(info, tmp[0], un_alias->replace);
+				else
+					ft_fdprint(2, "export: '%s': identifier must begin with a letter", tmp[0]);
+			}
 			break ;
 		}
 		val = split_alias(*tmp);
-		env_update_var(info, val[0], val[1]);
+		if (ft_isalpha(val[0][0]))
+			env_update_var(info, val[0], val[1]);
+		else
+			ft_fdprint(2, "export: '%s': identifier must begin with a letter", val[0]);
 		ft_free_them_all(3, &val[0], &val[1], &val);
 		tmp++;
 	}
