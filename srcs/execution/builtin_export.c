@@ -59,13 +59,25 @@ static char	**split_alias(char *line)
 	return (tab);
 }
 
+void			builtin_export_2(t_info *info, char **tmp)
+{
+	t_alias	*un_alias;
+
+	un_alias = NULL;
+	if ((un_alias = search_alias_2(info, tmp[0])))
+	{
+		if (ft_isalpha(tmp[0][0]))
+			env_update_var(info, tmp[0], un_alias->replace);
+		else
+			ft_fdprint(2, "export: '%s': identifier must begin with a letter\n", tmp[0]);
+	}
+}
+
 int			builtin_export(t_info *info, t_tree *cmd)
 {
 	char	**tmp;
 	char	**val;
-	t_alias	*un_alias;
 
-	un_alias = NULL;
 	tmp = cmd->cmd + 1;
 	if (!tmp || !*tmp)
 		show_localvar(info);
@@ -73,13 +85,7 @@ int			builtin_export(t_info *info, t_tree *cmd)
 	{
 		if (!ft_strchr(*tmp, '='))
 		{
-			if ((un_alias = search_alias_2(info, tmp[0])))
-			{
-				if (ft_isalpha(tmp[0][0]))
-					env_update_var(info, tmp[0], un_alias->replace);
-				else
-					ft_fdprint(2, "export: '%s': identifier must begin with a letter\n", tmp[0]);
-			}
+			builtin_export_2(info, tmp);
 			break ;
 		}
 		val = split_alias(*tmp);

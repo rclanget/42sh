@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/14 14:26:06 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/11 16:17:00 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int			is_assignation_localvar(char *cmd)
 			change_state(&d_quote);
 		else if (cmd[i] == '\'')
 			change_state(&quote);
-		if (cmd[i + 1] && cmd[i - 1] && cmd[i] == '=' && quote == '0' &&\
-			d_quote == '0' && ft_isalnum(cmd[i + 1]) && ft_isalnum(cmd[i - 1]))
+		if (cmd[i - 1] && cmd[i] == '=' && quote == '0' &&\
+			d_quote == '0' && ft_isalnum(cmd[i - 1]))
 			return (1);
 		i++;
 	}
