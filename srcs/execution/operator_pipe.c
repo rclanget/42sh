@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/27 16:29:30 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/12 20:47:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/13 16:16:06 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ int				operator_pipe2(t_info *info, t_tree *cmd)
 		dup2(fdp[1], 1);
 		close(fdp[0]);
 		execution_motor(info, cmd->left, 0);
+		wait(0);
 		exit(0);
 	}
 	dup2(fdp[0], 0);
 	close(fdp[1]);
-	wait(0);
 	execution_motor(info, cmd->right, 1);
+	wait(0);
 	return (WEXITSTATUS(info->status));
 }
 
