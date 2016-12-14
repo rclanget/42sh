@@ -14,6 +14,7 @@
 #include "shell.h"
 #include "alias.h"
 #include "alias_struct.h"
+#include "env.h"
 
 void		add_var(t_info *info, char *var, char *content)
 {
@@ -76,10 +77,16 @@ t_alias		*search_var(t_info *info, char *var)
 void		update_var(t_info *info, char *init, char *replace)
 {
 	t_alias	*var;
+	t_env	*un_env;
 
+	un_env = NULL;
 	if (!(var = search_alias(info, init)))
 		var = search_var(info, init);
-	if (var)
+	if ((un_env = search_env_var(info, init)) != NULL)
+	{
+		env_update_var(info, init, replace);
+	}
+	else if (var)
 	{
 		free(var->replace);
 		var->replace = ft_strdup(replace);
