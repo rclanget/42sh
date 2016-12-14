@@ -6,12 +6,18 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/13 18:09:19 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/14 14:24:56 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
+
+#define BCKSLSH 0
+#define SQTE 1
+#define DQTE 2
+#define MQTE 3
+#define SUBSHL 4
 
 static void	free_tab(char **tab)
 {
@@ -50,25 +56,25 @@ int			pass_string(char *cmd, int i)
 
 int			pass_grouping(char *cmd, int i)
 {
-	static	int backslash = 0;
-	static	int quote = 0;
-	static	int dquote = 0;
-	static	int mquote = 0;
+	int		d[5];
 
+	ft_bzero(d, sizeof(int) * 5);
 	if (cmd[i] == '(')
 	{
 		while (cmd[++i])
 		{
-			if (cmd[i] == '\'' && !backslash && !dquote && !mquote)
-				quote = !quote;
-			else if (cmd[i] == '\"' && !backslash && !quote && !mquote)
-				dquote = !dquote;
-			else if (cmd[i] == '`' && !backslash && !dquote && !quote)
-				mquote = !mquote;
-			else if (cmd[i] == '\\' && !quote)
-				backslash = !backslash;
-			else if (!(quote || backslash || dquote || mquote)
-				&& cmd[i] == ')' && cmd[i - 1] != '\\')
+			if (cmd[i] == '(')
+				d[SUBSHL]++;
+			if (cmd[i] == '\'' && !d[BCKSLSH] && !d[DQTE] && !d[MQTE])
+				d[SQTE] = !d[SQTE];
+			else if (cmd[i] == '\"' && !d[BCKSLSH] && !d[SQTE] && !d[MQTE])
+				d[DQTE] = !d[DQTE];
+			else if (cmd[i] == '`' && !d[BCKSLSH] && !d[DQTE] && !d[SQTE])
+				d[MQTE] = !d[MQTE];
+			else if (cmd[i] == '\\' && !d[SQTE])
+				d[BCKSLSH] = !d[BCKSLSH];
+			else if (!(d[SQTE] || d[BCKSLSH] || d[DQTE] || d[MQTE])
+				&& cmd[i] == ')' && cmd[i - 1] != '\\' && !d[SUBSHL]--)
 				break ;
 		}
 	}
