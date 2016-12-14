@@ -32,14 +32,14 @@ t_alias		*search_alias_2(t_info *info, char *var)
 
 static void	show_localvar(t_info *info)
 {
-	t_alias	*alias;
+	t_env	*env;
 
-	if ((alias = info->var))
+	if ((env = info->env))
 	{
-		while (alias)
+		while (env)
 		{
-			ft_print("%s=%s\n", alias->init, alias->replace);
-			alias = alias->next;
+			ft_print("%s=%s\n", env->var, env->content);
+			env = env->next;
 		}
 	}
 }
@@ -78,7 +78,7 @@ int			builtin_export(t_info *info, t_tree *cmd)
 				if (ft_isalpha(tmp[0][0]))
 					env_update_var(info, tmp[0], un_alias->replace);
 				else
-					ft_fdprint(2, "export: '%s': identifier must begin with a letter", tmp[0]);
+					ft_fdprint(2, "export: '%s': identifier must begin with a letter\n", tmp[0]);
 			}
 			break ;
 		}
@@ -86,7 +86,7 @@ int			builtin_export(t_info *info, t_tree *cmd)
 		if (ft_isalpha(val[0][0]))
 			env_update_var(info, val[0], val[1]);
 		else
-			ft_fdprint(2, "export: '%s': identifier must begin with a letter", val[0]);
+			ft_fdprint(2, "export: '%s': identifier must begin with a letter\n", val[0]);
 		ft_free_them_all(3, &val[0], &val[1], &val);
 		tmp++;
 	}

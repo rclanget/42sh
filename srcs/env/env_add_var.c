@@ -21,7 +21,7 @@ void		env_add_var(t_info *info, char *var, char *content)
 
 	if (!(ft_isalpha(var[0])))
 	{
-		ft_fdprint(2, "setenv: Variable name must begin with a letter.");
+		ft_fdprint(2, "setenv: Variable name must begin with a letter.\n");
 		return ;
 	}
 	elem = (t_env *)malloc(sizeof(t_env));
