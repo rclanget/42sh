@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/13 18:10:50 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/14 15:31:01 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "shell.h"
 #include "env.h"
 
-#define IS_VALID_CHAR(x) (ft_isprint(x))
+#define IS_VALID_CHAR(x) (ft_isprint(x) && !ft_strchr("\'\"`/-*+=", x))
 
 char		*set_content(char *cmd, char *content, int position, int len)
 {
@@ -93,7 +93,7 @@ char		*parse_var(t_info *info, char *cmd)
 	i = 0;
 	while (tmp && tmp[i])
 	{
-		if (!isquote(tmp[i]) && tmp[i] == '$')
+		if (!isquote(tmp[i]) && tmp[i] == '$' && (!i || tmp[i - 1] != '\\'))
 			tmp = replace_var(info, tmp, i);
 		i += tmp[i] ? 1 : 0;
 	}
