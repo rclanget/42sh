@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:28:12 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/30 14:35:19 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:07:28 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 t_alias		*search_alias_2(t_info *info, char *var)
 {
-	t_alias		*alias;
+	t_alias	*alias;
 
 	alias = info->var;
 	while (alias && var)
@@ -59,7 +59,7 @@ static char	**split_alias(char *line)
 	return (tab);
 }
 
-void			builtin_export_2(t_info *info, char **tmp)
+void		builtin_export_2(t_info *info, char **tmp)
 {
 	t_alias	*un_alias;
 
@@ -69,7 +69,10 @@ void			builtin_export_2(t_info *info, char **tmp)
 		if (ft_isalpha(tmp[0][0]))
 			env_update_var(info, tmp[0], un_alias->replace);
 		else
-			ft_fdprint(2, "export: '%s': identifier must begin with a letter\n", tmp[0]);
+			ft_fdprint(
+				2,
+				"export: '%s': identifier must begin with a letter\n",
+				tmp[0]);
 	}
 }
 
@@ -92,7 +95,8 @@ int			builtin_export(t_info *info, t_tree *cmd)
 		if (ft_isalpha(val[0][0]))
 			env_update_var(info, val[0], val[1]);
 		else
-			ft_fdprint(2, "export: '%s': identifier must begin with a letter\n", val[0]);
+			ft_fdprint(2, "export: '%s': identifier must begin with a letter\n",
+				val[0]);
 		ft_free_them_all(3, &val[0], &val[1], &val);
 		tmp++;
 	}
