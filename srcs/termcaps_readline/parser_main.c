@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 12:49:13 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/14 14:24:56 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/14 18:03:38 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 #define DQTE 2
 #define MQTE 3
 #define SUBSHL 4
+
+#define IS_REDI_RIGHT(X) !ft_strncmp(">&", X, 2)
+#define IS_REDI_LEFT(X) !ft_strncmp("<&", X, 2)
+#define IS_REDI_ALL(X) !ft_strncmp("&>", X, 2)
+#define IS_REDI_AGREG(x) IS_REDI_RIGHT(x) || IS_REDI_LEFT(x) || IS_REDI_ALL(x)
 
 static void	free_tab(char **tab)
 {
@@ -100,9 +105,8 @@ char		**split_on_highest(char *cmd, int *type)
 				i = pass_string(cmd, i);
 			else if (cmd[i] == '(')
 				i = pass_grouping(cmd, i);
-			else if (!ft_strncmp(">&", &cmd[i], 2)
-				|| !ft_strncmp("<&", &cmd[i], 2))
-				i += 2;
+			else if (IS_REDI_AGREG(cmd + i))
+				i += 1;
 			else if ((*type = check_hightest(&cmd[i], j)))
 				tab = split_on(cmd, &cmd[i] - cmd, *type);
 		}

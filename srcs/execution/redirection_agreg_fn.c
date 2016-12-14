@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/06 16:54:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/12 16:40:59 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/14 17:56:21 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ int			get_n(char *str, int right)
 	return (n);
 }
 
-int			get_right_word(char **cmd, int i, int *size)
+int			get_right_word(char **cmd, int i, int *size, char *op)
 {
 	char	*tmp;
 	int		n;
 
 	n = -1;
-	if ((tmp = ft_strstr(cmd[i], ">&") + 2) && *tmp)
+	if ((tmp = ft_strstr(cmd[i], op) + 2) && *tmp)
 	{
 		*size = 1;
 		if (*tmp == '-')
@@ -116,35 +116,53 @@ int			get_left_word(char **cmd, int i, int *size)
 	return (n);
 }
 
-void		do_redirection(int n, int word, int right)
+void		do_redirection(int n, int word, int right, int doubl)
 {
-	if (word == -2)
-		close(n);
+	if (doubl)
+	{
+		if (word == -2)
+		{
+			close(1);
+			close(2);
+		}
+		else
+		{
+			dup2(word, 1);
+			dup2(word, 2);
+		}
+	}
 	else
 	{
-		dup2(right ? word : n, right ? n : word);
+		if (word == -2)
+			close(n);
+		else
+			dup2(right ? word : n, right ? n : word);
 	}
 }
+
+#define IS_REDIR_RIGHT(x) (x == 2 ? 0 : 1)
+#define IS_REDIR_ALL(x) (x == 3 ? 1 : 0)
+#define WHICH_REDIR_RIGHT(x) (IS_REDIR_ALL(x) ? "&>" : ">&")
 
 int			is_redirection_agreg(char **cmd, int i)
 {
 	int		n;
 	int		word;
 	int		size;
+	int		type;
 
 	size = 0;
-	if (cmd && cmd[i] && ft_strstr(cmd[i], ">&"))
+	type = 0;
+	if (cmd && cmd[i]
+		&& ((++type && ft_strstr(cmd[i], ">&"))
+		|| (++type && ft_strstr(cmd[i], "<&"))
+		|| (++type && ft_strstr(cmd[i], "&>"))))
 	{
-		if ((n = get_n(cmd[i], 1)) != -1
-			&& (word = get_right_word(cmd, i, &size)) != -1)
-			do_redirection(n, word, 1);
-		return (size);
-	}
-	else if (cmd && cmd[i] && ft_strstr(cmd[i], "<&"))
-	{
-		if ((n = get_n(cmd[i], 0)) != -1
-			&& (word = get_left_word(cmd, i, &size)) != -1)
-			do_redirection(n, word, 0);
+		if ((n = get_n(cmd[i], IS_REDIR_RIGHT(type))) != -1
+			&& -1 != (word = !IS_REDIR_RIGHT(type) ?
+			get_left_word(cmd, i, &size) :
+			get_right_word(cmd, i, &size, WHICH_REDIR_RIGHT(type))))
+			do_redirection(n, word, IS_REDIR_RIGHT(type), IS_REDIR_ALL(type));
 		return (size);
 	}
 	return (0);
