@@ -30,6 +30,20 @@ t_alias		*search_alias_2(t_info *info, char *var)
 	return (alias);
 }
 
+static void	show_localvar(t_info *info)
+{
+	t_alias	*alias;
+
+	if ((alias = info->var))
+	{
+		while (alias)
+		{
+			ft_print("%s=%s\n", alias->init, alias->replace);
+			alias = alias->next;
+		}
+	}
+}
+
 static char	**split_alias(char *line)
 {
 	char	**tab;
@@ -53,6 +67,8 @@ int			builtin_export(t_info *info, t_tree *cmd)
 
 	un_alias = NULL;
 	tmp = cmd->cmd + 1;
+	if (!tmp || !*tmp)
+		show_localvar(info);
 	while (tmp && *tmp)
 	{
 		if (!ft_strchr(*tmp, '='))
