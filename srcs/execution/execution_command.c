@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/12 12:25:44 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:00:20 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,10 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 	else if (is_builtin(cmd->cmd[0]))
 	{
 		update_var(info, "?", ft_itoa2(
-			info->status = execution_builtin(info, cmd)));
+			info->status = W_EXITCODE(execution_builtin(info, cmd), 0)));
 		return (info->status);
 	}
 	ft_fdprint(2, "42sh: %s: command not found\n", cmd->cmd[0]);
-	return (execution_status(info->status = 127));
+	update_var(info, "?", ft_itoa2(info->status = W_EXITCODE(127, 0)));
+	return (execution_status(info->status));
 }

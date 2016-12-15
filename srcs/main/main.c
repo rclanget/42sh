@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/12 12:45:43 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:01:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void				exit_shell(t_info *info)
 	ft_free_them_all(6, &info->self, &info->term->capa, &info->term->prompt,
 		&info->term->save_cmd, &info->term, &info);
 	update_path(NULL, NULL);
-	exit(execution_status(status));
+	exit(WEXITSTATUS(status));
 }
 
 static void			ft_glob_errfunc(char const *error)
