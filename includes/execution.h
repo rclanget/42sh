@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:30:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 20:06:54 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/15 21:49:14 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,5 @@ char		**redirection_agreg(char **cmd);
 int			is_redirection_agreg(char **cmd, int i);
 
 char		*check_dollard_parenthese(char *cmd);
-
-char		*replace_tild(t_info *info, char *command, int pos);
-int			find_tild(char *cmd);
-void		init_assignation_localvar(int *i, char *quote, char *d_quote);
-void		change_state(char *quote);
 
 #endif

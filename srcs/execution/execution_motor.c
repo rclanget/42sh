@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/11 16:35:29 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/15 21:21:22 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int				execution_motor(t_info *info, t_tree *cmd, int wait)
 	char		*tmp;
 	char		*tmp1;
 
+	cmd->elem = parser_tild(info, cmd->elem);
 	tmp = parse_var(info, ft_strdup(cmd->elem));
 	tmp1 = apply_magicquote(info, tmp);
 	cmd->cmd = redirection_agreg(cust_split(tmp1));

@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 19:59:41 by gdeguign         ###   ########.fr       */
+/*   Updated: 2016/12/15 21:20:31 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "tools.h"
 #include "builtin_history.h"
 #include "var.h"
+#include "parser.h"
 
 t_info				*init_shell(int ac, char **av, char **env)
 {
@@ -77,21 +78,8 @@ static void			ft_glob_errfunc(char const *error)
 void				execute_shell(t_info *info, char **command)
 {
 	char	*command_resolved;
-	char	*tmp;
-	int		pos;
-	//char	*new_command;
 
-	pos = -1;
 	*command = check_dollard_parenthese(*command);
-	tmp = *command;
-	while ((pos = find_tild(*command)) != 0)
-	{
-		*command = replace_tild(info, *command, pos);
-		free(tmp);
-		tmp = *command;
-	}
-	if (!(*command))
-		*command = tmp;
 	command_resolved = ft_strdup(*command);
 	if (0 != command_resolved)
 	{

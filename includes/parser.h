@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/05 17:38:56 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/15 20:49:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int						*get_quote(char *cmd, int *codes);
 int						modif_tree(t_tree *tree);
 t_tree					*parser_local_var(char *cmd, t_tree *node);
 int						is_assignation_localvar(char *cmd);
+
+char					*parser_tild(void *info, char *command);
 
 extern t_parse g_parse[];
 extern t_parse g_parse2[];
