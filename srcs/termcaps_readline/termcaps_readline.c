@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/12 15:03:58 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/15 22:48:01 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char		*getnextline(t_info *info, char quote)
 	cmd = NULL;
 	(void)info;
 	ret = get_next_line(0, &cmd);
+	if (ret <= 0 && quote)
+		ft_fdprint(2, "42sh: Syntax error: unexpected end of file\n");
 	if (cmd && (quote = check_quote(cmd, quote)))
 	{
 		tmp = getnextline(info, quote);
