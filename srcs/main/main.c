@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 21:20:31 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/15 22:33:13 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,6 @@ void				exit_shell(t_info *info)
 	exit(WEXITSTATUS(status));
 }
 
-/*
-static void			ft_glob_errfunc(char const *error)
-{
-	ft_fdprint(2, "42sh: no matches found: %s\n", error);
-}
-*/
-
 void				execute_shell(t_info *info, char **command)
 {
 	char	*command_resolved;
@@ -91,7 +84,7 @@ void				execute_shell(t_info *info, char **command)
 		if (syntax_check(info->cmd, 1) && modif_tree(info->cmd))
 			execution_motor(info, info->cmd, 1);
 		else
-			update_var(info, "?", ft_itoa2(info->status = 1));
+			update_var(info, "?", ft_itoa2(info->status = W_EXITCODE(1, 0)));
 		info->cmd = parser_free_cmd(info->cmd);
 		save_fd(0);
 	}
