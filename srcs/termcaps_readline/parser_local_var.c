@@ -61,7 +61,7 @@ int			is_assignation_localvar(char *cmd)
 			change_state(&d_quote);
 		else if (cmd[i] == '\'')
 			change_state(&quote);
-		if (cmd[i - 1] && cmd[i] == '=' && quote == '0' &&\
+		if (i && cmd[i] == '=' && quote == '0' &&\
 			d_quote == '0' && ft_isalnum(cmd[i - 1]))
 			return (1);
 		i++;

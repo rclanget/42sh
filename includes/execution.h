@@ -34,4 +34,7 @@ int			is_redirection_agreg(char **cmd, int i);
 
 char		*check_dollard_parenthese(char *cmd);
 
+char		*replace_tild(t_info *info, char *command, int pos);
+int			find_tild(char *cmd);
+
 #endif

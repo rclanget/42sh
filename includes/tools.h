@@ -29,5 +29,7 @@ unsigned int	diff_address(const char *s1, const char *s2);
 int				ft_str_isalnum_spe(char *s);
 void			*free_tab(char **tab);
 char			*ft_strrstr_custom(const char *meule_de_foin, const char *aiguille);
+char			*ft_str_replace(const char *string, const char *substr, const\
+ char *replacement, int i);
 
 #endif

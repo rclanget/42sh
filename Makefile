@@ -59,7 +59,7 @@ SRCN_TOOLS		=	ft_strjoinb.c ft_strjoinc.c ft_strndup.c \
 					ft_tabjoin.c ft_tablen.c ft_strjoin_tool.c strsplitcustom.c \
 					clean_backslash.c ft_strerror.c signal.c ft_isalnum_or_dot.c \
 					ft_strdup_spe.c ft_itoa2.c diff_address.c ft_str_isalnum_spe.c \
-					free_tab.c ft_strrstr_custom.c
+					free_tab.c ft_strrstr_custom.c ft_str_replace.c
 
 OBJ_TOOLS		=	$(SRCN_TOOLS:.c=.o)
 SRCS_TOOLS		=	$(addprefix $(SRC_TOOLS),$(SRCN_TOOLS))
@@ -86,7 +86,7 @@ SRCN_TERM		=	ft_getenv.c keyboard_ccp.c keyboard_clear.c \
 					keyboard_ccp_fn.c keyboard_reverse_search.c \
 					parser_history_substitute.c auto_completion.c auto_completion_2.c\
 					auto_completion_3.c auto_completion_4.c termcaps_prompt.c \
-					parser_var.c parser_local_var.c
+					parser_var.c parser_local_var.c parser_tild.c
 OBJ_TERM		=	$(SRCN_TERM:.c=.o)
 SRCS_TERM		=	$(addprefix $(SRC_TERM),$(SRCN_TERM))
 
