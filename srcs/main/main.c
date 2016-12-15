@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 19:01:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/15 19:59:41 by gdeguign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,32 @@ void				exit_shell(t_info *info)
 	exit(WEXITSTATUS(status));
 }
 
+/*
 static void			ft_glob_errfunc(char const *error)
 {
 	ft_fdprint(2, "42sh: no matches found: %s\n", error);
 }
+*/
 
 void				execute_shell(t_info *info, char **command)
 {
 	char	*command_resolved;
+	char	*tmp;
+	int		pos;
+	//char	*new_command;
 
+	pos = -1;
 	*command = check_dollard_parenthese(*command);
-	command_resolved = ft_glob_handler(*command, &ft_glob_errfunc);
+	tmp = *command;
+	while ((pos = find_tild(*command)) != 0)
+	{
+		*command = replace_tild(info, *command, pos);
+		free(tmp);
+		tmp = *command;
+	}
+	if (!(*command))
+		*command = tmp;
+	command_resolved = ft_strdup(*command);
 	if (0 != command_resolved)
 	{
 		save_fd(1);
