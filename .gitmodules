@@ -1,3 +1,4 @@
 [submodule "42ShellTester"]
 	path = 42ShellTester
 	url = https://github.com/we-sh/42ShellTester.git
+	ignore = dirty
