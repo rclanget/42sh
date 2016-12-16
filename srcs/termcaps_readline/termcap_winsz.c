@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/31 19:36:57 by zipo              #+#    #+#             */
-/*   Updated: 2016/11/14 16:12:09 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/14 20:42:27 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ int		termcap_winsz_x(void)
 {
 	struct winsize w;
 
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-	return (w.ws_col);
+	if (-1 != ioctl(STDOUT_FILENO, TIOCGWINSZ, &w))
+		return (w.ws_col);
+	return (0);
 }
 
 int		termcap_winsz_y(void)
 {
 	struct winsize w;
 
-	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-	return (w.ws_row);
+	if (-1 != ioctl(STDOUT_FILENO, TIOCGWINSZ, &w))
+		return (w.ws_row);
+	return (0);
 }
