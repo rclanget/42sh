@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "tools.h"
 
 static int	is_splitable(char *str, int i)
 {
@@ -64,8 +65,12 @@ char		*ft_strrstr_custom(const char *meule_de_foin, const char *aiguille)
 	{
 		if (!quotes[a] &&
 			!ft_strncmp(meule_de_foin + a, aiguille, len_aiguille))
+		{
+			free(quotes);
 			return ((char*)meule_de_foin + a);
+		}
 		a--;
 	}
+	free(quotes);
 	return (NULL);
 }

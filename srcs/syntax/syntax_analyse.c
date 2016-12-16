@@ -30,8 +30,10 @@ int				syntax_comma(t_tree *cmd)
 int				syntax_logical(t_tree *cmd)
 {
 	int	ret;
+
 	ret = syntax_check(cmd->left, 0) && syntax_check(cmd->right, 0);
-	if (ret && (2 == cmd->type) && !cmd->left->type && cmd->left->elem[ft_strlen(cmd->left->elem) - 1] == '&')
+	if (ret && (2 == cmd->type) &&\
+	!cmd->left->type && cmd->left->elem[ft_strlen(cmd->left->elem) - 1] == '&')
 		ret = 0;
 	return (ret);
 }

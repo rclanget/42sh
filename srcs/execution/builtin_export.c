@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 15:28:12 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/14 18:07:28 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/15 17:24:25 by gdeguign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ int			builtin_export(t_info *info, t_tree *cmd)
 
 	tmp = cmd->cmd + 1;
 	if (!tmp || !*tmp)
+	{
 		show_localvar(info);
+		return (0);
+	}
 	while (tmp && *tmp)
 	{
 		if (!ft_strchr(*tmp, '='))
@@ -95,8 +98,7 @@ int			builtin_export(t_info *info, t_tree *cmd)
 		if (ft_isalpha(val[0][0]))
 			env_update_var(info, val[0], val[1]);
 		else
-			ft_fdprint(2, "export: '%s': identifier must begin with a letter\n",
-				val[0]);
+			ft_fdprint(2, "export: '%s': must begin with a letter\n", val[0]);
 		ft_free_them_all(3, &val[0], &val[1], &val);
 		tmp++;
 	}

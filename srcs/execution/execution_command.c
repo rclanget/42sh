@@ -96,7 +96,7 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 	if (!is_builtin(cmd->cmd[0]) && ((access(cmd->cmd[0], X_OK)) != -1 ||
 		lire_hashmap(info->hash, cmd->cmd[0])))
 	{
-		return(execution_hashmap(info, cmd, wait));
+		return (execution_hashmap(info, cmd, wait));
 	}
 	else if (is_builtin(cmd->cmd[0]))
 	{

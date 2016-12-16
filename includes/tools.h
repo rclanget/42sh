@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:55:47 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/13 18:03:20 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/16 13:33:28 by gdeguign         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ char			*ft_itoa2(int n);
 unsigned int	diff_address(const char *s1, const char *s2);
 int				ft_str_isalnum_spe(char *s);
 void			*free_tab(char **tab);
-char			*ft_strrstr_custom(const char *meule_de_foin, const char *aiguille);
-char			*ft_str_replace(const char *string, const char *substr, const\
- char *replacement, int i);
+char			*ft_strrstr_custom(const char *foin, const char *aiguille);
+char			*ft_str_replace(const char *string, const char *substr, \
+const char *replacement, int i);
 
 #endif
