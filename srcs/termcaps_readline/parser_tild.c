@@ -33,7 +33,7 @@ int				find_tild(char *cmd)
 			dquote = !dquote;
 		else if (cmd[i] == '\'')
 			quote = !quote;
-		if (!quote && !dquote && cmd[i] == '~' && (!i || cmd[ i - 1] != '~'))
+		if (!quote && !dquote && cmd[i] == '~' && (!i || cmd[i - 1] != '~'))
 		{
 			if ((i && cmd[i - 1] == '\\')
 				|| (cmd[i + 1] && !ft_strchr("/+- ", cmd[i + 1])))
@@ -45,7 +45,6 @@ int				find_tild(char *cmd)
 	}
 	return (0);
 }
-
 
 char			*replace_tild(t_info *info, char *cmd, int pos)
 {
