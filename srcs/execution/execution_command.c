@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 19:00:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/16 12:11:48 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,30 +74,36 @@ void			execution(t_info *info, t_tree *cmd, char **env)
 	execve(cmd->cmd[0], cmd->cmd, env);
 }
 
-int				execution_command(t_info *info, t_tree *cmd, int wait)
+int				execution_hashmap(t_info *info, t_tree *cmd, int wait)
 {
 	pid_t	pid;
 	char	**env;
 
 	env = NULL;
+	if ((pid = fork()) == -1)
+		exit_shell(info);
+	else if (!pid && !ft_signal(1))
+		execution(info, cmd, env = env_lst_tab(info->env));
+	if (wait)
+		waitpid(pid, &info->status, WUNTRACED);
+	free_env_tab(env);
+	update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
+	return (execution_status(info->status));
+}
+
+int				execution_command(t_info *info, t_tree *cmd, int wait)
+{
 	if (!is_builtin(cmd->cmd[0]) && ((access(cmd->cmd[0], X_OK)) != -1 ||
 		lire_hashmap(info->hash, cmd->cmd[0])))
 	{
-		if ((pid = fork()) == -1)
-			exit_shell(info);
-		else if (!pid && !ft_signal(1))
-			execution(info, cmd, env = env_lst_tab(info->env));
-		if (wait)
-			waitpid(pid, &info->status, WUNTRACED);
-		free_env_tab(env);
-		update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
-		return (execution_status(info->status));
+		return(execution_hashmap(info, cmd, wait));
 	}
 	else if (is_builtin(cmd->cmd[0]))
 	{
-		update_var(info, "?", ft_itoa2(
-			info->status = W_EXITCODE(execution_builtin(info, cmd), 0)));
-		return (info->status);
+		update_var(info, "?", ft_itoa2(info->status =
+			!ft_strcmp(cmd->cmd[0], "exit") ? execution_builtin(info, cmd)
+			: W_EXITCODE(execution_builtin(info, cmd), 0)));
+		return (WEXITSTATUS(info->status));
 	}
 	ft_fdprint(2, "42sh: %s: command not found\n", cmd->cmd[0]);
 	update_var(info, "?", ft_itoa2(info->status = W_EXITCODE(127, 0)));
