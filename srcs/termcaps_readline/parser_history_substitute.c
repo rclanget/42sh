@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 17:18:07 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/09 18:44:14 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/16 20:04:20 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int			get_subsitution(t_info *info, char **cmd, int i)
 			return (-1);
 		}
 		replace_at(cmd, i, len, repl);
+		ft_free_them_all(1, &repl);
 		return (0);
 	}
 	return (-1);
