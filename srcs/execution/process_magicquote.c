@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/25 22:09:32 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/02 00:20:04 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:09:16 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char			*process_magicquote(t_info *info, char *cmd)
 	return (get_file_content());
 }
 
-char			*apply_magicquote(t_info *info, char *str)
+char			*apply_magicquote(t_info *info, char *str, int type)
 {
 	t_word		*words;
 	char		*tmp;
@@ -92,7 +92,7 @@ char			*apply_magicquote(t_info *info, char *str)
 
 	tmp = NULL;
 	tmp2 = NULL;
-	if ((words = get_magicquotelist(str)))
+	if (0 == type && (words = get_magicquotelist(str)))
 	{
 		treat_magicquote(info, words);
 		tmp = make_sentence(words);
@@ -100,5 +100,5 @@ char			*apply_magicquote(t_info *info, char *str)
 		ft_free_them_all(1, &tmp);
 		free_list(words);
 	}
-	return (tmp2);
+	return (type ? ft_strdup(str) : tmp2);
 }

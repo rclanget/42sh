@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:30:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 21:49:14 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:04:41 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_tree		*self_node(t_info *info);
 
 t_word		*get_magicquotelist(char *s);
 char		*make_sentence(t_word *words);
-char		*apply_magicquote(t_info *info, char *str);
+char		*apply_magicquote(t_info *info, char *str, int type);
 char		*process_magicquote(t_info *info, char *cmd);
 t_word		*treat_magicquote(t_info *info, t_word *words);
 

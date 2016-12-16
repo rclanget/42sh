@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/01/26 00:16:21 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 22:48:01 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/16 17:42:56 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,29 @@
 
 #include <unistd.h>
 
-char		check_quote(char *cmd, char quote)
+char		check_quote_parenthese(char *cmd, char *quote)
 {
-	int		i;
+	static int	parenthese;
+	int			i;
 
 	i = 0;
 	while (cmd[i])
 	{
-		if (cmd[i] == '\\' && quote == '\'')
+		if (cmd[i] == '\\' && *quote == '\'')
 			;
 		else if (cmd[i] == '\\' && cmd[i + 1])
 			++i;
-		else if (quote && cmd[i] == quote)
-			quote = 0;
-		else if (!quote && (cmd[i] == '\'' || cmd[i] == '\"'))
-			quote = cmd[i];
+		else if (*quote && cmd[i] == *quote)
+			*quote = 0;
+		else if (!*quote && (cmd[i] == '\'' || cmd[i] == '\"' || cmd[i] == '`'))
+			*quote = cmd[i];
+		else if (!*quote && cmd[i] == '(')
+			++parenthese;
+		else if (!*quote && cmd[i] == ')' && parenthese)
+			--parenthese;
 		++i;
 	}
-	return (quote);
+	return (parenthese);
 }
 
 char		*getnextline(t_info *info, char quote)
@@ -47,9 +52,9 @@ char		*getnextline(t_info *info, char quote)
 	cmd = NULL;
 	(void)info;
 	ret = get_next_line(0, &cmd);
-	if (ret <= 0 && quote)
+	if (ret < 0 && quote)
 		ft_fdprint(2, "42sh: Syntax error: unexpected end of file\n");
-	if (cmd && (quote = check_quote(cmd, quote)))
+	if (cmd && (check_quote_parenthese(cmd, &quote) || quote))
 	{
 		tmp = getnextline(info, quote);
 		tmp2 = ft_strjoin(cmd, "\n");
@@ -71,19 +76,19 @@ char		*getnextlineb(t_info *info)
 	return (ret ? cmd : NULL);
 }
 
-char		*get_currentline(t_info *info, int term, char quote)
+char		*get_currentline(t_info *info, int term, char quote, char parenthese)
 {
 	char	*cmd;
 	char	*tmp;
 	char	*tmp2;
 	char	*tmp3;
 
-	ft_print(!quote ? "%s" : "> ", get_prompt(info));
+	ft_print(!quote && !parenthese ? "%s" : "> ", get_prompt(info));
 	cmd = ((term) ? termcaps_loop(info) : getnextlineb(info));
-	if (cmd && (quote = check_quote(cmd, quote)))
+	if (cmd && ((parenthese = check_quote_parenthese(cmd, &quote)) || quote))
 	{
 		info->term->pos_c = 0;
-		tmp = get_currentline(info, term, quote);
+		tmp = get_currentline(info, term, quote, parenthese);
 		tmp2 = ft_strjoin(cmd, "\n");
 		tmp3 = ft_strjoin(tmp2, tmp);
 		ft_free_them_all(3, &cmd, &tmp, &tmp2);
@@ -101,7 +106,7 @@ char		*termcaps_readline(t_info *info)
 	{
 		termcaps_save(1);
 		term = termcaps_activation(info->term->is_term);
-		str = get_currentline(info, term, 0);
+		str = get_currentline(info, term, 0, 0);
 		termcaps_save(0);
 		return (str);
 	}

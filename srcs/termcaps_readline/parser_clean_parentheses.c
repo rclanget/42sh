@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 16:49:27 by rclanget          #+#    #+#             */
-/*   Updated: 2016/12/13 18:08:48 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:50:58 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,19 @@ int			get_close_parenthese(char *str, int i)
 	int		open_parenthese;
 
 	open_parenthese = 0;
-	while (str[i++])
+	while (str[i])
 	{
 		if (!isquote(str[i]))
 		{
 			if (str[i] == '(')
 				open_parenthese++;
 			else if (str[i] == ')')
-			{
-				if (open_parenthese)
-					open_parenthese--;
-				else
+				if (!--open_parenthese)
 					break ;
-			}
 		}
+		i++;
 	}
 	return (i);
-}
-
-t_tree		*get_new_line(t_tree *node, char *str)
-{
-	char	*tmp;
-	char	*line;
-
-	line = NULL;
-	ft_putstr("> ");
-	get_next_line(1, &line);
-	tmp = ft_strjoin(str, line);
-	ft_free_them_all(2, &line, &str);
-	return (clean_parentheses(node, tmp));
 }
 
 t_tree		*clean_parentheses(t_tree *node, char *str)
@@ -80,15 +64,15 @@ t_tree		*clean_parentheses(t_tree *node, char *str)
 		i = get_close_parenthese(str, i);
 		if (str[i] == ')' && str[i - 1] != '\\')
 		{
-			str_new = ft_memalloc(i);
-			node->elem = ft_memcpy(str_new, str + 1, i - 1);
+			str_new = ft_strndup(str + 1, i - 1);
+			// node->elem = ft_memcpy(str_new, str + 1, i - 1);
+			node->elem = ft_strtrim(str_new);
 			node->type = PARENTHESES_VAL;
-			free(str);
+			// free(str);
+			ft_free_them_all(2, &str, &str_new);
 			node->left = parser_cmd(ft_strtrim(node->elem));
 			return (node);
 		}
-		else if (!str[i])
-			return (get_new_line(node, str));
 	}
 	else
 		node->elem = str;

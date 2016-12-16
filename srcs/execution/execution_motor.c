@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 14:18:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 21:21:22 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/16 18:29:17 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,14 @@ int				execution_motor(t_info *info, t_tree *cmd, int wait)
 
 	cmd->elem = parser_tild(info, cmd->elem);
 	tmp = parse_var(info, ft_strdup(cmd->elem));
-	tmp1 = apply_magicquote(info, tmp);
+	tmp1 = apply_magicquote(info, tmp, cmd->type);
 	cmd->cmd = redirection_agreg(cust_split(tmp1));
 	ft_free_them_all(2, &tmp, &tmp1);
 	if (cmd && cmd->cmd && cmd->cmd[0])
 	{
 		if (!cmd->type)
 			return (execution_command(info, cmd, wait));
-		else
-			return (g_p[cmd->type](info, cmd));
+		return (g_p[cmd->type](info, cmd));
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/23 13:12:01 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 20:49:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/16 12:03:31 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ char					**parse_op_rightfd(char *str, int pos);
 
 void					*parser_free_cmd(t_tree *cmd);
 
+int						get_close_parenthese(char *str, int i);
 t_tree					*clean_parentheses(t_tree *node, char *str);
 
 int						is_operator(char cmd);
