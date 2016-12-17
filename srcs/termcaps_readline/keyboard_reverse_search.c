@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 15:50:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/17 13:07:32 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/17 13:25:13 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void			reverse_search_i(t_info *info)
 	{
 		if ((chr == NL) || handling_key(info, chr, research)
 			|| (chr == CTRL_D && (ret = -1) == -1))
-				break ;
+			break ;
 		research = add_chr(research, (int)chr);
 		find = search_history(info, research);
 		print_research(info, research, find);
