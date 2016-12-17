@@ -6,12 +6,12 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/12/13 18:13:40 by rclanget         ###   ########.fr        #
+#    Updated: 2016/12/17 13:09:29 by rclanget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJ_PATH		=	./obj/
-INC_PATH		=	./includes/ ./libft/includes/ ./libglob/includes/
+INC_PATH		=	./includes/ ./libft/includes/
 NAME			=	./42sh
 CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra
@@ -107,13 +107,12 @@ OBJ_NAME		=	$(SRC_NAME:.c=.o)
 SRC				=	$(addprefix $(SRC_PATH),$(SRC_NAME))
 OBJ				=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 INC				=	$(addprefix -I,$(INC_PATH))
-LDFLAGS			=	-L libglob -lglob -L libft -l ft -l termcap
+LDFLAGS			=	-L libft -l ft -l termcap
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft
-	make -C libglob
 	$(CC) $(OBJ) $(LDFLAGS) -o $@
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
@@ -158,13 +157,11 @@ $(OBJ_PATH)%.o: $(SRC_HISTORY)%.c
 
 clean:
 	make clean -C libft
-	make clean -C libglob
 	rm -fv $(OBJ)
 	@rmdir $(OBJ_PATH) 2> /dev/null || echo "" > /dev/null
 
 fclean: clean
 	make fclean -C libft
-	make fclean -C libglob
 	rm -fv $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/18 16:49:27 by rclanget          #+#    #+#             */
-/*   Updated: 2016/12/16 18:50:58 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/16 23:47:08 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,8 @@ t_tree		*clean_parentheses(t_tree *node, char *str)
 		if (str[i] == ')' && str[i - 1] != '\\')
 		{
 			str_new = ft_strndup(str + 1, i - 1);
-			// node->elem = ft_memcpy(str_new, str + 1, i - 1);
 			node->elem = ft_strtrim(str_new);
 			node->type = PARENTHESES_VAL;
-			// free(str);
 			ft_free_them_all(2, &str, &str_new);
 			node->left = parser_cmd(ft_strtrim(node->elem));
 			return (node);
