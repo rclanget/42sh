@@ -6,11 +6,10 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/15 22:33:13 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/17 13:19:17 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_glob.h"
 #include "libft.h"
 #include "shell.h"
 #include "env.h"
