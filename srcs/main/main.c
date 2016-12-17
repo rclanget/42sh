@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 10:51:51 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/17 13:19:17 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/17 13:28:59 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 #include "builtin_history.h"
 #include "var.h"
 #include "parser.h"
+
+#include "sys/wait.h"
 
 t_info				*init_shell(int ac, char **av, char **env)
 {
