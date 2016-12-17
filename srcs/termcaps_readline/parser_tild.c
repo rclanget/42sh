@@ -6,7 +6,7 @@
 /*   By: gdeguin <gdeguin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/15 21:05:22 by gdeguin           #+#    #+#             */
-/*   Updated: 2016/12/15 21:51:34 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/17 13:54:08 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int				find_tild(char *cmd)
 			dquote = !dquote;
 		else if (cmd[i] == '\'')
 			quote = !quote;
-		if (!quote && !dquote && cmd[i] == '~' && (!i || cmd[i - 1] != '~'))
+		if (!quote && !dquote && cmd[i] == '~' && (!i || cmd[i - 1] == ' '))
 		{
 			if ((i && cmd[i - 1] == '\\')
 				|| (cmd[i + 1] && !ft_strchr("/+- ", cmd[i + 1])))
