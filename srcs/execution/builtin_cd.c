@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/18 18:21:51 by agoomany         ###   ########.fr       */
+/*   Updated: 2016/12/18 19:50:53 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char *g_err_msg[] = {\
 
 #define ERR_MSG g_err_msg
 
-char		*get_cleaned_dest(t_info *info, char *dest)
+char		*get_cleaned_dest(t_info *info, char *dest, int flagl)
 {
 	char		*tmp;
 	t_env		*var;
@@ -43,7 +43,8 @@ char		*get_cleaned_dest(t_info *info, char *dest)
 			tmp = ft_strjoin(var->content, &dest[1]);
 	}
 	else
-		tmp = ft_strdup(dest);
+		tmp = getfullpath(search_env_var(info, "PWD") ?
+			(search_env_var(info, "PWD")->content) : 0, dest, flagl);
 	return (tmp);
 }
 
@@ -59,19 +60,15 @@ int			cd_go_to(t_info *info, char *destination, int flag)
 	{
 		current = search_env_var(info, "PWD") ?
 			ft_strdup(search_env_var(info, "PWD")->content) : 0;
-		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination)) || !(++ret)
+		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination, flag)) || !(++ret)
 			|| access(tmp, F_OK) == -1 || !(++ret) || chdir(tmp) == -1)
 		{
-			free(tmp);
-			free(current);
+			ft_free_them_all(2, &tmp, &current);
 			return (ret);
 		}
-		free(tmp);
 		env_update_var(info, "OLDPWD", current);
-		env_update_var(info, "PWD",
-			tmp = getfullpath(current, destination, flag));
-		free(current);
-		free(tmp);
+		env_update_var(info, "PWD", tmp);
+		ft_free_them_all(2, &tmp, &current);
 	}
 	return (destination ? 0 : 1);
 }

@@ -6,7 +6,7 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/12/17 13:09:29 by rclanget         ###   ########.fr        #
+#    Updated: 2016/12/18 19:08:54 by ulefebvr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					redirection_agreg.c redirection_agreg_fn.c \
 					redirection_dleft_fn.c builtin_export_unset_fn.c \
 					builtin_export.c builtin_unset.c builtin_read.c \
-					builtin_true_false.c process_magicquote_replace.c
+					builtin_true_false.c process_magicquote_replace.c \
+					builtin_cd_fn.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 

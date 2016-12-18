@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 18:16:46 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/18 19:04:43 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/18 19:43:57 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char **treat_tab(char **tab_fullpath)
 	return (tab_fullpath);
 }
 
-char *create_fullpath(char *pwd, char *dest, int flagl)
+char *create_fullpath(char *pwd, char *dest)
 {
 	char **tab_pwd;
 	char **tab_dest;
@@ -71,16 +71,38 @@ char *create_fullpath(char *pwd, char *dest, int flagl)
 	return (fullpath);
 }
 
+char *get_physical_path(char *fullpath)
+{
+	char			*tmp;
+	char			*tmp2;
+
+	if (0 != (tmp = getcwd(NULL, 1048)))
+	{
+		if (-1 != chdir(fullpath) && 0 != (tmp2 = getcwd(NULL, 1048)))
+		{
+			chdir(tmp);
+			ft_memdel((void **)&fullpath);
+			fullpath = tmp2;
+		}
+		ft_memdel((void **)&tmp);
+	}
+	return (fullpath);
+}
+
 char *getfullpath(char *pwd, char *dest, int flagl)
 {
-	char *fullpath;
-	struct stat status;
+	char			*fullpath;
+	struct stat		status;
 
 	if (dest && dest[0] == '/')
 		fullpath = ft_strdup(dest);
 	else
-		fullpath = create_fullpath(pwd, dest, flagl);
+		fullpath = create_fullpath(pwd, dest);
 	if (-1 == stat(fullpath, &status))
 		ft_memdel((void **)&fullpath);
+	if (fullpath && flagl)
+		fullpath = get_physical_path(fullpath);
+
+	ft_fdprint(2, "[%s]\n", fullpath);
 	return (fullpath);
 }
