@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/18 18:09:41 by agoomany         ###   ########.fr       */
+/*   Updated: 2016/12/18 18:21:51 by agoomany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int			cd_go_to(t_info *info, char *destination, int flag)
 	tmp = NULL;
 	if (destination)
 	{
-		current = search_env_var(info, "PWD") ? search_env_var(info, "PWD") : 0;
+		current = search_env_var(info, "PWD") ?
+			ft_strdup(search_env_var(info, "PWD")->content) : 0;
 		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination)) || !(++ret)
 			|| access(tmp, F_OK) == -1 || !(++ret) || chdir(tmp) == -1)
 		{
-			if (tmp)
-				free(tmp);
+			free(tmp);
 			free(current);
 			return (ret);
 		}
