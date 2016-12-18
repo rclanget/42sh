@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/23 17:12:21 by zipo             ###   ########.fr       */
+/*   Updated: 2016/12/18 18:09:41 by agoomany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char		*get_cleaned_dest(t_info *info, char *dest)
 	return (tmp);
 }
 
-int			cd_go_to(t_info *info, char *destination)
+int			cd_go_to(t_info *info, char *destination, int flag)
 {
 	int		ret;
 	char	*tmp;
@@ -57,10 +57,9 @@ int			cd_go_to(t_info *info, char *destination)
 	tmp = NULL;
 	if (destination)
 	{
-		current = getcwd(NULL, 1048);
-		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination))
-			|| !(++ret) || access(tmp, F_OK) == -1
-			|| !(++ret) || chdir(tmp) == -1)
+		current = search_env_var(info, "PWD") ? search_env_var(info, "PWD") : 0;
+		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination)) || !(++ret)
+			|| access(tmp, F_OK) == -1 || !(++ret) || chdir(tmp) == -1)
 		{
 			if (tmp)
 				free(tmp);
@@ -69,7 +68,8 @@ int			cd_go_to(t_info *info, char *destination)
 		}
 		free(tmp);
 		env_update_var(info, "OLDPWD", current);
-		env_update_var(info, "PWD", tmp = getcwd(NULL, 1048));
+		env_update_var(info, "PWD",
+			tmp = getfullpath(current, destination, flag));
 		free(current);
 		free(tmp);
 	}
@@ -106,18 +106,19 @@ int			builtin_cd(t_info *info, t_tree *cmd)
 
 	ret = 0;
 	tmp = NULL;
-	len = ft_tablen(cmd->cmd);
-	if (len == 1)
+	if ((len = ft_tablen(cmd->cmd)) == 1)
 	{
 		if (!(ret = (search_env_var(info, "HOME")) ? 0 : 1))
-			ret = cd_go_to(info, search_env_var(info, "HOME")->content);
+			ret = cd_go_to(info, search_env_var(info, "HOME")->content, 0);
 	}
 	else if (len == 2)
-		ret = cd_go_to(info, cmd->cmd[1]);
+		ret = cd_go_to(info, cmd->cmd[1], 0);
+	else if (len == 3 && !ft_strcmp(cmd->cmd[1], "-P"))
+		ret = cd_go_to(info, cmd->cmd[2], 1);
 	else if (len == 3)
 	{
 		tmp = get_new_from_old(info, cmd->cmd);
-		ret = cd_go_to(info, tmp);
+		ret = cd_go_to(info, tmp, 0);
 		ret = ret > 0 ? 4 : 0;
 		free(tmp);
 	}
