@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 14:55:47 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/16 13:33:28 by gdeguign         ###   ########.fr       */
+/*   Updated: 2016/12/18 19:09:43 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void			*free_tab(char **tab);
 char			*ft_strrstr_custom(const char *foin, const char *aiguille);
 char			*ft_str_replace(const char *string, const char *substr, \
 const char *replacement, int i);
+char			*getfullpath(char *pwd, char *dest, int flagl);
 
 #endif
