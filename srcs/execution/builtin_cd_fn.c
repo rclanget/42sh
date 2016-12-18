@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 18:16:46 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/18 19:43:57 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/18 20:00:20 by ulefebvr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,5 @@ char *getfullpath(char *pwd, char *dest, int flagl)
 		ft_memdel((void **)&fullpath);
 	if (fullpath && flagl)
 		fullpath = get_physical_path(fullpath);
-
-	ft_fdprint(2, "[%s]\n", fullpath);
 	return (fullpath);
 }
