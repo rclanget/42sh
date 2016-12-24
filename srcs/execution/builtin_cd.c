@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/18 19:50:53 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/24 16:25:36 by agoomany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "env.h"
 #include "libft.h"
 #include "tools.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include <stdlib.h>
 
@@ -22,7 +25,8 @@ char *g_err_msg[] = {\
 	"unable to found path variable",\
 	"no such file or directory",\
 	"permission denied",\
-	"string not in pwd"};
+	"string not in pwd",\
+	"not a directory",};
 
 #define ERR_MSG g_err_msg
 
@@ -48,6 +52,18 @@ char		*get_cleaned_dest(t_info *info, char *dest, int flagl)
 	return (tmp);
 }
 
+int					ft_is_not_dir(char *tmp, int ret)
+{
+	struct stat		sb;
+
+	if (stat(tmp, &sb) != -1)
+	{
+		if(!S_ISDIR(sb.st_mode))
+			return (ret + 2);
+	}
+	return (ret);
+}
+
 int			cd_go_to(t_info *info, char *destination, int flag)
 {
 	int		ret;
@@ -58,11 +74,15 @@ int			cd_go_to(t_info *info, char *destination, int flag)
 	tmp = NULL;
 	if (destination)
 	{
+		if (destination[ft_strlen(destination) - 1] == '.' && destination[ft_strlen(destination) - 2] == '/')
+			destination[ft_strlen(destination) - 1] = '\0';
 		current = search_env_var(info, "PWD") ?
 			ft_strdup(search_env_var(info, "PWD")->content) : 0;
 		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination, flag)) || !(++ret)
 			|| access(tmp, F_OK) == -1 || !(++ret) || chdir(tmp) == -1)
 		{
+			if (access(tmp, F_OK) != -1)
+				ret = ft_is_not_dir(tmp, ret);
 			ft_free_them_all(2, &tmp, &current);
 			return (ret);
 		}

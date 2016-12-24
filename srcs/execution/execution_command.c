@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/16 12:11:48 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/24 15:27:49 by agoomany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,28 @@ int				execution_hashmap(t_info *info, t_tree *cmd, int wait)
 	update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
 	return (execution_status(info->status));
 }
+// FCT A METTRE DANS UN AUTRE FICHIER
+#include <stdio.h>
+char			*ft_execution_error_msg(char *cmd)
+{
+	struct stat sb;
+	mode_t		tmp_mode;
 
+	if ((access(cmd, X_OK)) != 0 && (access(cmd, F_OK)) == 0)
+		return (ft_strdup("permission denied"));
+	if(lstat(cmd, &sb) != -1)
+	{
+		tmp_mode = sb.st_mode;
+		if(S_ISLNK(tmp_mode) && stat(cmd, &sb) == -1)
+			return (ft_strdup("too many.*symbolic links"));
+	}
+	return (ft_strdup("command not found"));
+}
+// ! FCT A METTRE DANS UN AUTRE FICHIER
 int				execution_command(t_info *info, t_tree *cmd, int wait)
 {
+	char		*ret_error;
+
 	if (!is_builtin(cmd->cmd[0]) && ((access(cmd->cmd[0], X_OK)) != -1 ||
 		lire_hashmap(info->hash, cmd->cmd[0])))
 	{
@@ -105,7 +124,9 @@ int				execution_command(t_info *info, t_tree *cmd, int wait)
 			: W_EXITCODE(execution_builtin(info, cmd), 0)));
 		return (WEXITSTATUS(info->status));
 	}
-	ft_fdprint(2, "42sh: %s: command not found\n", cmd->cmd[0]);
+	ret_error = ft_execution_error_msg(cmd->cmd[0]);
+	ft_fdprint(2, "42sh: %s: %s\n", cmd->cmd[0], ret_error);
+	free(ret_error);
 	update_var(info, "?", ft_itoa2(info->status = W_EXITCODE(127, 0)));
 	return (execution_status(info->status));
 }
