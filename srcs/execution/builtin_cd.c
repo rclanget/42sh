@@ -6,18 +6,19 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/24 16:25:36 by agoomany         ###   ########.fr       */
+/*   Updated: 2016/12/25 22:19:07 by agoomany         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "error.h"
 #include "env.h"
 #include "libft.h"
 #include "tools.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
+#include <errno.h>
 #include <stdlib.h>
 
 char *g_err_msg[] = {\
@@ -26,7 +27,8 @@ char *g_err_msg[] = {\
 	"no such file or directory",\
 	"permission denied",\
 	"string not in pwd",\
-	"not a directory",};
+	"not a directory",
+	"too many.*symbolic links"};
 
 #define ERR_MSG g_err_msg
 
@@ -51,16 +53,22 @@ char		*get_cleaned_dest(t_info *info, char *dest, int flagl)
 			(search_env_var(info, "PWD")->content) : 0, dest, flagl);
 	return (tmp);
 }
-
-int					ft_is_not_dir(char *tmp, int ret)
+#include <stdio.h>
+int					ft_recup_error(char *tmp, int ret)
 {
 	struct stat		sb;
 
 	if (stat(tmp, &sb) != -1)
 	{
 		if(!S_ISDIR(sb.st_mode))
-			return (ret + 2);
+			return (5);
 	}
+	if (errno == ELOOP)
+		return (6);
+	if (errno == ENOENT)
+		return (2);
+	if (errno == EACCES)
+		return (3);
 	return (ret);
 }
 
@@ -81,8 +89,9 @@ int			cd_go_to(t_info *info, char *destination, int flag)
 		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination, flag)) || !(++ret)
 			|| access(tmp, F_OK) == -1 || !(++ret) || chdir(tmp) == -1)
 		{
-			if (access(tmp, F_OK) != -1)
-				ret = ft_is_not_dir(tmp, ret);
+			if (!tmp)
+				tmp = ft_strdup(destination);
+			ret = ft_recup_error(tmp, ret);
 			ft_free_them_all(2, &tmp, &current);
 			return (ret);
 		}
