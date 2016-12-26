@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/18 18:16:46 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/18 20:00:20 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/26 15:23:28 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 #include <strings.h>
 #include <sys/stat.h>
 
-char **treat_tab(char **tab_fullpath)
+char	**treat_tab(char **tab_fullpath)
 {
-	int i = 0;
-	int dot = 0;
+	int	i;
+	int	dot;
 
+	i = 0;
+	dot = 0;
 	while (tab_fullpath && tab_fullpath[i])
 	{
 		if (!ft_strcmp(tab_fullpath[i], ".")
@@ -45,18 +47,19 @@ char **treat_tab(char **tab_fullpath)
 	return (tab_fullpath);
 }
 
-char *create_fullpath(char *pwd, char *dest)
+char	*create_fullpath(char *pwd, char *dest)
 {
-	char **tab_pwd;
-	char **tab_dest;
-	char **tab_fullpath;
-	char *fullpath;
-	int i;
+	char	**tab_pwd;
+	char	**tab_dest;
+	char	**tab_fullpath;
+	char	*fullpath;
+	int		i;
 
 	i = -1;
 	fullpath = 0;
 	pwd = pwd ? pwd : getcwd(NULL, 1048);
-	fullpath = (char *)ft_memalloc(sizeof(char) * (strlen(pwd) + strlen(dest) + 2));
+	fullpath = (char *)ft_memalloc(
+		sizeof(char) * (strlen(pwd) + strlen(dest) + 2));
 	tab_pwd = ft_strsplit(pwd, '/');
 	tab_dest = ft_strsplit(dest, '/');
 	tab_fullpath = ft_tabjoin(tab_pwd, tab_dest);
@@ -71,10 +74,10 @@ char *create_fullpath(char *pwd, char *dest)
 	return (fullpath);
 }
 
-char *get_physical_path(char *fullpath)
+char	*get_physical_path(char *fullpath)
 {
-	char			*tmp;
-	char			*tmp2;
+	char	*tmp;
+	char	*tmp2;
 
 	if (0 != (tmp = getcwd(NULL, 1048)))
 	{
@@ -89,7 +92,7 @@ char *get_physical_path(char *fullpath)
 	return (fullpath);
 }
 
-char *getfullpath(char *pwd, char *dest, int flagl)
+char	*getfullpath(char *pwd, char *dest, int flagl)
 {
 	char			*fullpath;
 	struct stat		status;

@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/26 15:30:49 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/16 18:04:41 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/26 15:31:42 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ char		**redirection_agreg(char **cmd);
 int			is_redirection_agreg(char **cmd, int i);
 
 char		*check_dollard_parenthese(char *cmd);
+
+char		*ft_execution_error_msg(char *cmd);
 
 #endif
