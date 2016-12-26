@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:41:32 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/02 20:42:07 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/26 14:47:08 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,15 @@ char				*history_add_args(char **cmd)
 {
 	char			*tmp;
 	char			*tmp1;
+	char			*tmp2;
 
 	tmp = NULL;
 	while (cmd && *cmd)
 	{
-		tmp1 = ft_strjoin_custom(tmp, *cmd);
-		ft_free_them_all(1, &tmp);
-		tmp = tmp1;
+		tmp1 = ft_strjoin(tmp, " ");
+		tmp2 = ft_strjoin_custom(tmp1, *cmd);
+		ft_free_them_all(1, &tmp, &tmp1);
+		tmp = tmp2;
 		cmd++;
 	}
 	return (tmp);

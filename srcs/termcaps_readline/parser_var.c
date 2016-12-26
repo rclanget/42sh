@@ -6,7 +6,7 @@
 /*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/22 23:40:27 by zipo              #+#    #+#             */
-/*   Updated: 2016/12/15 22:30:48 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/26 14:31:49 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,13 @@ static int	isquote(char c)
 	static	int dquote = 0;
 	static	int mquote = 0;
 
+	if (!c)
+	{
+		backslash = 0;
+		quote = 0;
+		dquote = 0;
+		mquote = 0;
+	}
 	if (c == '\'' && !backslash && !dquote && !mquote)
 		quote = !quote;
 	else if (c == '\"' && !backslash && !quote && !mquote)
@@ -97,5 +104,6 @@ char		*parse_var(t_info *info, char *cmd)
 			tmp = replace_var(info, tmp, i);
 		i += tmp[i] ? 1 : 0;
 	}
+	isquote(0);
 	return (tmp);
 }
