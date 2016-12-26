@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   clean_backslash.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:55:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/21 15:46:57 by zipo             ###   ########.fr       */
+/*   Updated: 2016/12/26 13:49:54 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		get_len(char *str)
+static int		get_len(char *str, int quote)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	j = 0;
-	while (str[j++])
+	j = -1;
+	while (str[++j])
 	{
 		if (str[j] != '\\')
 			i++;
 		else if (str[j] == '\\' && str[j + 1] == '\\' && ++j)
-			i++;
+			i += quote ? 2 : 1;
 	}
 	return (i);
 }
@@ -38,7 +38,7 @@ char			*clean_backslash(char *str, char quote)
 	j = 0;
 	i = 0;
 	(void)quote;
-	if ((str_new = ft_memalloc(get_len(str) + 1)))
+	if ((str_new = ft_memalloc(get_len(str, quote == '\'') + 1)))
 	{
 		while (str[j])
 		{
