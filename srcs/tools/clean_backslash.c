@@ -6,7 +6,7 @@
 /*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 11:55:39 by rclanget          #+#    #+#             */
-/*   Updated: 2016/12/26 13:49:54 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/26 14:15:12 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int		get_len(char *str, int quote)
 	j = -1;
 	while (str[++j])
 	{
-		if (str[j] != '\\')
+		if (str[j] != '\\' || quote)
 			i++;
 		else if (str[j] == '\\' && str[j + 1] == '\\' && ++j)
 			i += quote ? 2 : 1;
