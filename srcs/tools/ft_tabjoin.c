@@ -25,7 +25,7 @@ char		**ft_tabjoin(char **tab1, char **tab2)
 	if (tab1 && tab2)
 	{
 		i = ft_tablen(tab1) + ft_tablen(tab2);
-		tab = (char **)malloc(sizeof(char *) * i + 1);
+		tab = (char **)malloc(sizeof(char *) * (i + 1));
 		i = -1;
 		while (tab1[++i])
 			tab[i] = tab1[i];
