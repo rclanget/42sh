@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/23 16:35:37 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/24 15:27:49 by agoomany         ###   ########.fr       */
+/*   Updated: 2016/12/26 15:27:50 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,24 +90,7 @@ int				execution_hashmap(t_info *info, t_tree *cmd, int wait)
 	update_var(info, "?", ft_itoa2(WEXITSTATUS(info->status)));
 	return (execution_status(info->status));
 }
-// FCT A METTRE DANS UN AUTRE FICHIER
-#include <stdio.h>
-char			*ft_execution_error_msg(char *cmd)
-{
-	struct stat sb;
-	mode_t		tmp_mode;
 
-	if ((access(cmd, X_OK)) != 0 && (access(cmd, F_OK)) == 0)
-		return (ft_strdup("permission denied"));
-	if(lstat(cmd, &sb) != -1)
-	{
-		tmp_mode = sb.st_mode;
-		if(S_ISLNK(tmp_mode) && stat(cmd, &sb) == -1)
-			return (ft_strdup("too many.*symbolic links"));
-	}
-	return (ft_strdup("command not found"));
-}
-// ! FCT A METTRE DANS UN AUTRE FICHIER
 int				execution_command(t_info *info, t_tree *cmd, int wait)
 {
 	char		*ret_error;

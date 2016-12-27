@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 15:28:54 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/11/14 15:33:50 by ulefebvr         ###   ########.fr       */
+/*   Updated: 2016/12/26 15:12:41 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,23 @@ void		copy_line(t_info *info)
 
 void		paste_line(t_info *info)
 {
-	int			len;
+	int			plen;
 	int			slen;
 	int			p;
-	int			plen;
 	t_termcaps	*term;
+	char		*buf;
 
 	term = info->term;
 	p = term->pos_c;
 	if (term->save_cmd)
 	{
-		len = ft_strlen(term->cmd);
 		plen = ft_strlen(term->prompt);
 		slen = ft_strlen(term->save_cmd);
-		if ((len + slen) < BUFFER_SIZE)
+		if ((ft_strlen(term->cmd) + slen) < BUFFER_SIZE)
 		{
-			ft_memcpy(&term->cmd[p + slen], &term->cmd[p], len - p);
+			buf = ft_strdup(term->cmd);
+			ft_memcpy(&term->cmd[p + slen], buf + p, ft_strlen(term->cmd) - p);
+			free(buf);
 			ft_memcpy(&term->cmd[p], term->save_cmd, slen);
 			move_cursor(term->capa, p, plen, 0);
 			ft_putstr(term->cmd);

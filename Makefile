@@ -6,14 +6,14 @@
 #    By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/03/16 18:39:36 by ulefebvr          #+#    #+#              #
-#    Updated: 2016/12/18 19:08:54 by ulefebvr         ###   ########.fr        #
+#    Updated: 2016/12/26 15:29:01 by rclanget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 OBJ_PATH		=	./obj/
 INC_PATH		=	./includes/ ./libft/includes/
 NAME			=	./42sh
-CC				=	gcc
+CC				= gcc
 CFLAGS			=	-Wall -Werror -Wextra
 
 SRC_ALIAS		=	./srcs/alias/
@@ -46,7 +46,7 @@ SRCN_EXEC		=	builtin_alias.c builtin_setenv.c execution_builtin.c \
 					redirection_dleft_fn.c builtin_export_unset_fn.c \
 					builtin_export.c builtin_unset.c builtin_read.c \
 					builtin_true_false.c process_magicquote_replace.c \
-					builtin_cd_fn.c
+					builtin_cd_fn.c ft_execution_error_msg.c
 OBJ_EXEC		=	$(SRCN_EXEC:.c=.o)
 SRCS_EXEC		=	$(addprefix $(SRC_EXEC),$(SRCN_EXEC))
 

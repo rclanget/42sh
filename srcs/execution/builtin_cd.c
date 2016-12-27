@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/25 22:19:07 by agoomany         ###   ########.fr       */
+/*   Updated: 2016/12/26 15:20:18 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ char		*get_cleaned_dest(t_info *info, char *dest, int flagl)
 			(search_env_var(info, "PWD")->content) : 0, dest, flagl);
 	return (tmp);
 }
-#include <stdio.h>
-int					ft_recup_error(char *tmp, int ret)
+
+int			ft_recup_error(char *tmp, int ret)
 {
 	struct stat		sb;
 
 	if (stat(tmp, &sb) != -1)
 	{
-		if(!S_ISDIR(sb.st_mode))
+		if (!S_ISDIR(sb.st_mode))
 			return (5);
 	}
 	if (errno == ELOOP)
@@ -72,7 +72,7 @@ int					ft_recup_error(char *tmp, int ret)
 	return (ret);
 }
 
-int			cd_go_to(t_info *info, char *destination, int flag)
+int			cd_go_to(t_info *info, char *path, int flag)
 {
 	int		ret;
 	char	*tmp;
@@ -80,26 +80,25 @@ int			cd_go_to(t_info *info, char *destination, int flag)
 
 	ret = 0;
 	tmp = NULL;
-	if (destination)
+	if (!path)
+		return (0);
+	if (path[ft_strlen(path) - 1] == '.' && path[ft_strlen(path) - 2] == '/')
+		path[ft_strlen(path) - 1] = '\0';
+	current = search_env_var(info, "PWD") ?
+		ft_strdup(search_env_var(info, "PWD")->content) : 0;
+	if (!(++ret) || !(tmp = get_cleaned_dest(info, path, flag)) || !(++ret)
+		|| access(tmp, F_OK) == -1 || !(++ret) || chdir(tmp) == -1)
 	{
-		if (destination[ft_strlen(destination) - 1] == '.' && destination[ft_strlen(destination) - 2] == '/')
-			destination[ft_strlen(destination) - 1] = '\0';
-		current = search_env_var(info, "PWD") ?
-			ft_strdup(search_env_var(info, "PWD")->content) : 0;
-		if (!(++ret) || !(tmp = get_cleaned_dest(info, destination, flag)) || !(++ret)
-			|| access(tmp, F_OK) == -1 || !(++ret) || chdir(tmp) == -1)
-		{
-			if (!tmp)
-				tmp = ft_strdup(destination);
-			ret = ft_recup_error(tmp, ret);
-			ft_free_them_all(2, &tmp, &current);
-			return (ret);
-		}
-		env_update_var(info, "OLDPWD", current);
-		env_update_var(info, "PWD", tmp);
+		if (!tmp)
+			tmp = ft_strdup(path);
+		ret = ft_recup_error(tmp, ret);
 		ft_free_them_all(2, &tmp, &current);
+		return (ret);
 	}
-	return (destination ? 0 : 1);
+	env_update_var(info, "OLDPWD", current);
+	env_update_var(info, "PWD", tmp);
+	ft_free_them_all(2, &tmp, &current);
+	return (1);
 }
 
 char		*get_new_from_old(t_info *info, char **cmd)

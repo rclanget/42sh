@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_definition_code_get.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zipo <zipo@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: rclanget <rclanget@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/19 21:59:06 by rclanget          #+#    #+#             */
-/*   Updated: 2016/11/07 21:03:07 by zipo             ###   ########.fr       */
+/*   Updated: 2016/12/26 14:02:35 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	*get_file(char *cmd, int *codes)
 	{
 		if (codes[i] == C_CHEV_R || codes[i] == C_CHEV_L)
 		{
-			if ((value = (codes[i] == C_CHEV_L && codes[i + 1] \
+			if ((value = (codes[i] == C_CHEV_L && cmd[i + 1] \
 				&& codes[i + 1] == C_CHEV_L) ? C_ARG : C_FILE) == C_ARG)
 				i += 1;
 			i++;
