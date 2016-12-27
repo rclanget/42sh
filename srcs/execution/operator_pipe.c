@@ -33,7 +33,7 @@ int				operator_pipe2(t_info *info, t_tree *cmd)
 		dup2(fdp[1], 1);
 		close(fdp[0]);
 		execution_motor(info, cmd->left, 0);
-		wait(0);
+		// wait(0);
 		exit(0);
 	}
 	dup2(fdp[0], 0);
