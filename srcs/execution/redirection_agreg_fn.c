@@ -103,7 +103,7 @@ int			get_left_word(char **cmd, int i, int *size)
 		{
 			n = ft_atoi(tmp);
 			if ((read(n, NULL, 0) < 0) && (n = -1))
-				ft_fdprint(2, "42sh: %d: %s\n", n, strerror(errno));
+				ft_fdprint(2, "42sh: %d: %s\n", n, ft_strerror(errno));
 		}
 	}
 	else if (cmd[i + 1])
@@ -111,7 +111,7 @@ int			get_left_word(char **cmd, int i, int *size)
 		*size = 2;
 		n = ft_atoi(cmd[i + 1]);
 		if ((read(n, NULL, 0) < 0) && (n = -1))
-			ft_fdprint(2, "42sh: %d: %s\n", n, strerror(errno));
+			ft_fdprint(2, "42sh: %d: %s\n", n, ft_strerror(errno));
 	}
 	return (n);
 }

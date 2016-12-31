@@ -59,7 +59,7 @@ char	*create_fullpath(char *pwd, char *dest)
 	fullpath = 0;
 	pwd = pwd ? pwd : getcwd(NULL, 1048);
 	fullpath = (char *)ft_memalloc(
-		sizeof(char) * (strlen(pwd) + strlen(dest) + 2));
+		sizeof(char) * (ft_strlen(pwd) + ft_strlen(dest) + 2));
 	tab_pwd = ft_strsplit(pwd, '/');
 	tab_dest = ft_strsplit(dest, '/');
 	tab_fullpath = ft_tabjoin(tab_pwd, tab_dest);
