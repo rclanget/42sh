@@ -6,7 +6,7 @@
 /*   By: ulefebvr <ulefebvr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/10/17 15:41:41 by ulefebvr          #+#    #+#             */
-/*   Updated: 2016/12/26 15:20:18 by rclanget         ###   ########.fr       */
+/*   Updated: 2016/12/31 13:45:19 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			cd_go_to(t_info *info, char *path, int flag)
 	env_update_var(info, "OLDPWD", current);
 	env_update_var(info, "PWD", tmp);
 	ft_free_them_all(2, &tmp, &current);
-	return (1);
+	return (0);
 }
 
 char		*get_new_from_old(t_info *info, char **cmd)
