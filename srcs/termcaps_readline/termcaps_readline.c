@@ -52,7 +52,9 @@ char		*getnextline(t_info *info, char quote)
 	cmd = NULL;
 	(void)info;
 	ret = get_next_line(0, &cmd);
-	if (ret < 0 && quote)
+	if (ret > 0 && !ft_isascii(cmd[0]))
+		return (NULL);
+	else if (ret < 0 && quote)
 		ft_fdprint(2, "42sh: Syntax error: unexpected end of file\n");
 	if (cmd && (check_quote_parenthese(cmd, &quote) || quote))
 	{
