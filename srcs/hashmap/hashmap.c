@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hashmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdeguign <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: gdeguign <gdeguign@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/14 12:51:22 by gdeguign          #+#    #+#             */
-/*   Updated: 2016/11/14 12:51:55 by gdeguign         ###   ########.fr       */
+/*   Updated: 2017/01/04 16:17:58 by rclanget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,27 @@
 void		ecrire_hashmap(t_hashmap *hashmap, char *key, char *val)
 {
 	char			*tmp;
+	char			*tmp2;
 	unsigned int	hash_value;
 
-	if (!hashmap || !hashmap->map)
-		return ;
-	if (ft_strcmp(key, ".") == 0 || ft_strcmp(key, "..") == 0)
-		return ;
-	hash_value = jenkins_one_at_a_time_hash(key, ft_strlen(key));
-	if (hashmap->size > 4000 || (hashmap->map[hash_value] != NULL))
-		return ;
-	tmp = ft_strjoin("/", key);
-	hashmap->map[hash_value] = ft_strjoin(val, tmp);
-	free(tmp);
-	hashmap->size++;
+	tmp = ft_strjoin(val, "/");
+	tmp2 = ft_strjoin(tmp, key);
+	if ((access(tmp2, X_OK)) != -1)
+	{
+		if (!hashmap || !hashmap->map ||
+			(ft_strcmp(key, ".") == 0 || ft_strcmp(key, "..") == 0))
+			;
+		else
+		{
+			hash_value = jenkins_one_at_a_time_hash(key, ft_strlen(key));
+			if (hashmap->map[hash_value] == NULL)
+			{
+				hashmap->map[hash_value] = ft_strdup(tmp2);
+				hashmap->size++;
+			}
+		}
+	}
+	ft_free_them_all(2, &tmp, &tmp2);
 }
 
 void		liste_fichier(t_hashmap *map, DIR *dir, char *pwd)
@@ -96,7 +104,7 @@ t_hashmap	*pre_creer_hashmap(char *path, t_hashmap *hashmap)
 		hashmap = (t_hashmap*)malloc(sizeof(t_hashmap));
 	hashmap->size = 0;
 	hashmap->map = NULL;
-	hashmap->map = (char**)malloc(h_size * sizeof(char*));
+	hashmap->map = (char**)ft_memalloc((h_size + 1) * sizeof(char*));
 	if (hashmap->map == NULL)
 	{
 		ft_print("%s\n", "echec malloc hashmap");
